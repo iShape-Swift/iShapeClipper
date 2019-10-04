@@ -28,8 +28,8 @@ target 'ClipperUI' do
         end
     end
 
-#    target 'iShapeTests' do
-#        inherit! :search_paths
-#    end
+    target 'ClipperTests' do
+        inherit! :search_paths
+    end
 
 end

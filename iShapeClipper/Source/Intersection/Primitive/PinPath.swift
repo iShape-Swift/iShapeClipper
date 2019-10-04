@@ -19,6 +19,12 @@ struct PinPath {
         self.v1 = PinPoint(pin: v1, type: type)
     }
 
+#if iShapeTest
+    func getTestLength(count: Int) -> Int {
+        return self.getLength(count: count)
+    }
+#endif
+    
     private func getLength(count: Int) -> Int {
         let a = v0.masterMileStone
         let b = v1.masterMileStone
@@ -32,9 +38,8 @@ struct PinPath {
             length += 1
         }
 
-        return length;
+        return length
     }
-
 
     func extract(index: Int, pathCount: Int) -> [PinHandler] {
         let n = pathCount

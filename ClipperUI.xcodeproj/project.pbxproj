@@ -31,8 +31,22 @@
 		547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939E23471E1A003CFA6C /* CoordinateSystemScene.swift */; };
 		547B93BB23472028003CFA6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 547B93B923472028003CFA6C /* Main.storyboard */; };
 		547B93BD234720AF003CFA6C /* SubstractScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B93BC234720AF003CFA6C /* SubstractScene.swift */; };
+		54D6439C2347CF74007BD72A /* ClipperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D6439B2347CF74007BD72A /* ClipperTests.swift */; };
+		54D643A42347D04B007BD72A /* PinPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643A32347D04B007BD72A /* PinPathTests.swift */; };
+		54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643AC2347DBA5007BD72A /* SubtractTests.swift */; };
+		AFC27B03F84927CDF1F38D2D /* Pods_ClipperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50073623AEC7ACCEB4AC2D9 /* Pods_ClipperTests.framework */; };
 		D2E85F5C1D0C2B9708DC3ED3 /* Pods_ClipperUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		54D6439E2347CF74007BD72A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 543DE03123471C6E0044AA8A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 543DE03823471C6E0044AA8A;
+			remoteInfo = ClipperUI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClipperUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,7 +77,15 @@
 		547B939E23471E1A003CFA6C /* CoordinateSystemScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSystemScene.swift; sourceTree = "<group>"; };
 		547B93BA23472028003CFA6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		547B93BC234720AF003CFA6C /* SubstractScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstractScene.swift; sourceTree = "<group>"; };
+		54D643992347CF74007BD72A /* ClipperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54D6439B2347CF74007BD72A /* ClipperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipperTests.swift; sourceTree = "<group>"; };
+		54D6439D2347CF74007BD72A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54D643A32347D04B007BD72A /* PinPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPathTests.swift; sourceTree = "<group>"; };
+		54D643AC2347DBA5007BD72A /* SubtractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractTests.swift; sourceTree = "<group>"; };
+		83064DDFD39B8F271F4852C2 /* Pods-ClipperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperTests.release.xcconfig"; path = "Target Support Files/Pods-ClipperTests/Pods-ClipperTests.release.xcconfig"; sourceTree = "<group>"; };
 		9446CE4D8B8A87E22C59CB22 /* Pods-ClipperUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperUI.debug.xcconfig"; path = "Target Support Files/Pods-ClipperUI/Pods-ClipperUI.debug.xcconfig"; sourceTree = "<group>"; };
+		A50073623AEC7ACCEB4AC2D9 /* Pods_ClipperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClipperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A580EDFF3F4FE1F78673C84F /* Pods-ClipperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperTests.debug.xcconfig"; path = "Target Support Files/Pods-ClipperTests/Pods-ClipperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A919A541BB15964587FB94C9 /* Pods-ClipperUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperUI.release.xcconfig"; path = "Target Support Files/Pods-ClipperUI/Pods-ClipperUI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +98,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54D643962347CF74007BD72A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC27B03F84927CDF1F38D2D /* Pods_ClipperTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -83,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				543DE03B23471C6E0044AA8A /* ClipperUI */,
+				54D6439A2347CF74007BD72A /* ClipperTests */,
 				543DE03A23471C6E0044AA8A /* Products */,
 				5D72F2EDF8BAB7AF9C3242DD /* Pods */,
 				B1FED589118F4C031B40A6E8 /* Frameworks */,
@@ -93,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				543DE03923471C6E0044AA8A /* ClipperUI.app */,
+				54D643992347CF74007BD72A /* ClipperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,11 +218,24 @@
 			path = Polygon;
 			sourceTree = "<group>";
 		};
+		54D6439A2347CF74007BD72A /* ClipperTests */ = {
+			isa = PBXGroup;
+			children = (
+				54D6439B2347CF74007BD72A /* ClipperTests.swift */,
+				54D6439D2347CF74007BD72A /* Info.plist */,
+				54D643A32347D04B007BD72A /* PinPathTests.swift */,
+				54D643AC2347DBA5007BD72A /* SubtractTests.swift */,
+			);
+			path = ClipperTests;
+			sourceTree = "<group>";
+		};
 		5D72F2EDF8BAB7AF9C3242DD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				9446CE4D8B8A87E22C59CB22 /* Pods-ClipperUI.debug.xcconfig */,
 				A919A541BB15964587FB94C9 /* Pods-ClipperUI.release.xcconfig */,
+				A580EDFF3F4FE1F78673C84F /* Pods-ClipperTests.debug.xcconfig */,
+				83064DDFD39B8F271F4852C2 /* Pods-ClipperTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -199,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */,
+				A50073623AEC7ACCEB4AC2D9 /* Pods_ClipperTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -225,6 +271,25 @@
 			productReference = 543DE03923471C6E0044AA8A /* ClipperUI.app */;
 			productType = "com.apple.product-type.application";
 		};
+		54D643982347CF74007BD72A /* ClipperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54D643A22347CF74007BD72A /* Build configuration list for PBXNativeTarget "ClipperTests" */;
+			buildPhases = (
+				CE054896D0FB3FD8A18F9342 /* [CP] Check Pods Manifest.lock */,
+				54D643952347CF74007BD72A /* Sources */,
+				54D643962347CF74007BD72A /* Frameworks */,
+				54D643972347CF74007BD72A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				54D6439F2347CF74007BD72A /* PBXTargetDependency */,
+			);
+			name = ClipperTests;
+			productName = ClipperTests;
+			productReference = 54D643992347CF74007BD72A /* ClipperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -237,6 +302,10 @@
 				TargetAttributes = {
 					543DE03823471C6E0044AA8A = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					54D643982347CF74007BD72A = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 543DE03823471C6E0044AA8A;
 					};
 				};
 			};
@@ -254,6 +323,7 @@
 			projectRoot = "";
 			targets = (
 				543DE03823471C6E0044AA8A /* ClipperUI */,
+				54D643982347CF74007BD72A /* ClipperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -265,6 +335,13 @@
 			files = (
 				543DE04123471C6F0044AA8A /* Assets.xcassets in Resources */,
 				547B93BB23472028003CFA6C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54D643972347CF74007BD72A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +387,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CE054896D0FB3FD8A18F9342 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ClipperTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -342,7 +441,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54D643952347CF74007BD72A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */,
+				54D643A42347D04B007BD72A /* PinPathTests.swift in Sources */,
+				54D6439C2347CF74007BD72A /* ClipperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		54D6439F2347CF74007BD72A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 543DE03823471C6E0044AA8A /* ClipperUI */;
+			targetProxy = 54D6439E2347CF74007BD72A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		547B93B923472028003CFA6C /* Main.storyboard */ = {
@@ -513,6 +630,46 @@
 			};
 			name = Release;
 		};
+		54D643A02347CF74007BD72A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A580EDFF3F4FE1F78673C84F /* Pods-ClipperTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ClipperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WeakTeam.ClipperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ClipperUI.app/Contents/MacOS/ClipperUI";
+			};
+			name = Debug;
+		};
+		54D643A12347CF74007BD72A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83064DDFD39B8F271F4852C2 /* Pods-ClipperTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = ClipperTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = WeakTeam.ClipperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ClipperUI.app/Contents/MacOS/ClipperUI";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -530,6 +687,15 @@
 			buildConfigurations = (
 				543DE04D23471C6F0044AA8A /* Debug */,
 				543DE04E23471C6F0044AA8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54D643A22347CF74007BD72A /* Build configuration list for PBXNativeTarget "ClipperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54D643A02347CF74007BD72A /* Debug */,
+				54D643A12347CF74007BD72A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
