@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		543DE04123471C6F0044AA8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 543DE04023471C6F0044AA8A /* Assets.xcassets */; };
+		547B939F23471E1A003CFA6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B937D23471E1A003CFA6C /* ViewController.swift */; };
+		547B93A023471E1A003CFA6C /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B937F23471E1A003CFA6C /* CGPoint.swift */; };
+		547B93A123471E1A003CFA6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B938023471E1A003CFA6C /* AppDelegate.swift */; };
+		547B93A223471E1A003CFA6C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B938123471E1A003CFA6C /* Colors.swift */; };
+		547B93A323471E1A003CFA6C /* ActiveIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B938323471E1A003CFA6C /* ActiveIndex.swift */; };
+		547B93A423471E1A003CFA6C /* MouseCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B938423471E1A003CFA6C /* MouseCompatible.swift */; };
+		547B93A523471E1A003CFA6C /* SceneNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B938523471E1A003CFA6C /* SceneNavigation.swift */; };
+		547B93AB23471E1A003CFA6C /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B938F23471E1A003CFA6C /* CanvasView.swift */; };
+		547B93AC23471E1A003CFA6C /* ShapeVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939123471E1A003CFA6C /* ShapeVector.swift */; };
+		547B93AD23471E1A003CFA6C /* ShapeTriangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939223471E1A003CFA6C /* ShapeTriangle.swift */; };
+		547B93AE23471E1A003CFA6C /* ShapeCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939323471E1A003CFA6C /* ShapeCircle.swift */; };
+		547B93AF23471E1A003CFA6C /* ShapeVertexPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939523471E1A003CFA6C /* ShapeVertexPolygon.swift */; };
+		547B93B023471E1A003CFA6C /* ShapeLinePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939623471E1A003CFA6C /* ShapeLinePolygon.swift */; };
+		547B93B123471E1A003CFA6C /* ShapeVectorPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939723471E1A003CFA6C /* ShapeVectorPolygon.swift */; };
+		547B93B223471E1A003CFA6C /* ShapeDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939823471E1A003CFA6C /* ShapeDot.swift */; };
+		547B93B323471E1A003CFA6C /* ShapeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939923471E1A003CFA6C /* ShapeLine.swift */; };
+		547B93B423471E1A003CFA6C /* ShapeArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939A23471E1A003CFA6C /* ShapeArea.swift */; };
+		547B93B523471E1A003CFA6C /* ShapeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939B23471E1A003CFA6C /* ShapeText.swift */; };
+		547B93B623471E1A003CFA6C /* ShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939C23471E1A003CFA6C /* ShapeNode.swift */; };
+		547B93B723471E1A003CFA6C /* ShapeCoordinatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939D23471E1A003CFA6C /* ShapeCoordinatSystem.swift */; };
+		547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939E23471E1A003CFA6C /* CoordinateSystemScene.swift */; };
+		547B93BB23472028003CFA6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 547B93B923472028003CFA6C /* Main.storyboard */; };
+		547B93BD234720AF003CFA6C /* SubstractScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B93BC234720AF003CFA6C /* SubstractScene.swift */; };
+		D2E85F5C1D0C2B9708DC3ED3 /* Pods_ClipperUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClipperUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		543DE03923471C6E0044AA8A /* ClipperUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClipperUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		543DE04023471C6F0044AA8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		543DE04823471C6F0044AA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		543DE04923471C6F0044AA8A /* ClipperUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClipperUI.entitlements; sourceTree = "<group>"; };
+		547B937D23471E1A003CFA6C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		547B937F23471E1A003CFA6C /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		547B938023471E1A003CFA6C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		547B938123471E1A003CFA6C /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		547B938323471E1A003CFA6C /* ActiveIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveIndex.swift; sourceTree = "<group>"; };
+		547B938423471E1A003CFA6C /* MouseCompatible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MouseCompatible.swift; sourceTree = "<group>"; };
+		547B938523471E1A003CFA6C /* SceneNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneNavigation.swift; sourceTree = "<group>"; };
+		547B938F23471E1A003CFA6C /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		547B939123471E1A003CFA6C /* ShapeVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeVector.swift; sourceTree = "<group>"; };
+		547B939223471E1A003CFA6C /* ShapeTriangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeTriangle.swift; sourceTree = "<group>"; };
+		547B939323471E1A003CFA6C /* ShapeCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeCircle.swift; sourceTree = "<group>"; };
+		547B939523471E1A003CFA6C /* ShapeVertexPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeVertexPolygon.swift; sourceTree = "<group>"; };
+		547B939623471E1A003CFA6C /* ShapeLinePolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLinePolygon.swift; sourceTree = "<group>"; };
+		547B939723471E1A003CFA6C /* ShapeVectorPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeVectorPolygon.swift; sourceTree = "<group>"; };
+		547B939823471E1A003CFA6C /* ShapeDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeDot.swift; sourceTree = "<group>"; };
+		547B939923471E1A003CFA6C /* ShapeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeLine.swift; sourceTree = "<group>"; };
+		547B939A23471E1A003CFA6C /* ShapeArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeArea.swift; sourceTree = "<group>"; };
+		547B939B23471E1A003CFA6C /* ShapeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeText.swift; sourceTree = "<group>"; };
+		547B939C23471E1A003CFA6C /* ShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeNode.swift; sourceTree = "<group>"; };
+		547B939D23471E1A003CFA6C /* ShapeCoordinatSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeCoordinatSystem.swift; sourceTree = "<group>"; };
+		547B939E23471E1A003CFA6C /* CoordinateSystemScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateSystemScene.swift; sourceTree = "<group>"; };
+		547B93BA23472028003CFA6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		547B93BC234720AF003CFA6C /* SubstractScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstractScene.swift; sourceTree = "<group>"; };
+		9446CE4D8B8A87E22C59CB22 /* Pods-ClipperUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperUI.debug.xcconfig"; path = "Target Support Files/Pods-ClipperUI/Pods-ClipperUI.debug.xcconfig"; sourceTree = "<group>"; };
+		A919A541BB15964587FB94C9 /* Pods-ClipperUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperUI.release.xcconfig"; path = "Target Support Files/Pods-ClipperUI/Pods-ClipperUI.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		543DE03623471C6E0044AA8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2E85F5C1D0C2B9708DC3ED3 /* Pods_ClipperUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		543DE03023471C6E0044AA8A = {
+			isa = PBXGroup;
+			children = (
+				543DE03B23471C6E0044AA8A /* ClipperUI */,
+				543DE03A23471C6E0044AA8A /* Products */,
+				5D72F2EDF8BAB7AF9C3242DD /* Pods */,
+				B1FED589118F4C031B40A6E8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		543DE03A23471C6E0044AA8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				543DE03923471C6E0044AA8A /* ClipperUI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		543DE03B23471C6E0044AA8A /* ClipperUI */ = {
+			isa = PBXGroup;
+			children = (
+				547B93B923472028003CFA6C /* Main.storyboard */,
+				547B937C23471E1A003CFA6C /* Source */,
+				543DE04023471C6F0044AA8A /* Assets.xcassets */,
+				543DE04823471C6F0044AA8A /* Info.plist */,
+				543DE04923471C6F0044AA8A /* ClipperUI.entitlements */,
+			);
+			path = ClipperUI;
+			sourceTree = "<group>";
+		};
+		547B937C23471E1A003CFA6C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				547B937D23471E1A003CFA6C /* ViewController.swift */,
+				547B937E23471E1A003CFA6C /* Extension */,
+				547B938023471E1A003CFA6C /* AppDelegate.swift */,
+				547B938123471E1A003CFA6C /* Colors.swift */,
+				547B938223471E1A003CFA6C /* Scene */,
+				547B938E23471E1A003CFA6C /* UIControls */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		547B937E23471E1A003CFA6C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				547B937F23471E1A003CFA6C /* CGPoint.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		547B938223471E1A003CFA6C /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				547B938323471E1A003CFA6C /* ActiveIndex.swift */,
+				547B938423471E1A003CFA6C /* MouseCompatible.swift */,
+				547B938523471E1A003CFA6C /* SceneNavigation.swift */,
+				547B938623471E1A003CFA6C /* Scene */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		547B938623471E1A003CFA6C /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				547B93BC234720AF003CFA6C /* SubstractScene.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		547B938E23471E1A003CFA6C /* UIControls */ = {
+			isa = PBXGroup;
+			children = (
+				547B938F23471E1A003CFA6C /* CanvasView.swift */,
+				547B939023471E1A003CFA6C /* Shape */,
+				547B939D23471E1A003CFA6C /* ShapeCoordinatSystem.swift */,
+				547B939E23471E1A003CFA6C /* CoordinateSystemScene.swift */,
+			);
+			path = UIControls;
+			sourceTree = "<group>";
+		};
+		547B939023471E1A003CFA6C /* Shape */ = {
+			isa = PBXGroup;
+			children = (
+				547B939123471E1A003CFA6C /* ShapeVector.swift */,
+				547B939223471E1A003CFA6C /* ShapeTriangle.swift */,
+				547B939323471E1A003CFA6C /* ShapeCircle.swift */,
+				547B939423471E1A003CFA6C /* Polygon */,
+				547B939823471E1A003CFA6C /* ShapeDot.swift */,
+				547B939923471E1A003CFA6C /* ShapeLine.swift */,
+				547B939A23471E1A003CFA6C /* ShapeArea.swift */,
+				547B939B23471E1A003CFA6C /* ShapeText.swift */,
+				547B939C23471E1A003CFA6C /* ShapeNode.swift */,
+			);
+			path = Shape;
+			sourceTree = "<group>";
+		};
+		547B939423471E1A003CFA6C /* Polygon */ = {
+			isa = PBXGroup;
+			children = (
+				547B939523471E1A003CFA6C /* ShapeVertexPolygon.swift */,
+				547B939623471E1A003CFA6C /* ShapeLinePolygon.swift */,
+				547B939723471E1A003CFA6C /* ShapeVectorPolygon.swift */,
+			);
+			path = Polygon;
+			sourceTree = "<group>";
+		};
+		5D72F2EDF8BAB7AF9C3242DD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9446CE4D8B8A87E22C59CB22 /* Pods-ClipperUI.debug.xcconfig */,
+				A919A541BB15964587FB94C9 /* Pods-ClipperUI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B1FED589118F4C031B40A6E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		543DE03823471C6E0044AA8A /* ClipperUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 543DE04C23471C6F0044AA8A /* Build configuration list for PBXNativeTarget "ClipperUI" */;
+			buildPhases = (
+				B8B5F8752692ACE4A497C736 /* [CP] Check Pods Manifest.lock */,
+				543DE03523471C6E0044AA8A /* Sources */,
+				543DE03623471C6E0044AA8A /* Frameworks */,
+				543DE03723471C6E0044AA8A /* Resources */,
+				7584B1A9209852CB5806421F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClipperUI;
+			productName = ClipperUI;
+			productReference = 543DE03923471C6E0044AA8A /* ClipperUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		543DE03123471C6E0044AA8A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = iShape;
+				TargetAttributes = {
+					543DE03823471C6E0044AA8A = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = 543DE03423471C6E0044AA8A /* Build configuration list for PBXProject "ClipperUI" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 543DE03023471C6E0044AA8A;
+			productRefGroup = 543DE03A23471C6E0044AA8A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				543DE03823471C6E0044AA8A /* ClipperUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		543DE03723471C6E0044AA8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				543DE04123471C6F0044AA8A /* Assets.xcassets in Resources */,
+				547B93BB23472028003CFA6C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7584B1A9209852CB5806421F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ClipperUI/Pods-ClipperUI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ClipperUI/Pods-ClipperUI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ClipperUI/Pods-ClipperUI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8B5F8752692ACE4A497C736 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ClipperUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		543DE03523471C6E0044AA8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				547B93A123471E1A003CFA6C /* AppDelegate.swift in Sources */,
+				547B93B223471E1A003CFA6C /* ShapeDot.swift in Sources */,
+				547B93B123471E1A003CFA6C /* ShapeVectorPolygon.swift in Sources */,
+				547B93A223471E1A003CFA6C /* Colors.swift in Sources */,
+				547B93AB23471E1A003CFA6C /* CanvasView.swift in Sources */,
+				547B93A523471E1A003CFA6C /* SceneNavigation.swift in Sources */,
+				547B93A023471E1A003CFA6C /* CGPoint.swift in Sources */,
+				547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */,
+				547B939F23471E1A003CFA6C /* ViewController.swift in Sources */,
+				547B93AC23471E1A003CFA6C /* ShapeVector.swift in Sources */,
+				547B93B723471E1A003CFA6C /* ShapeCoordinatSystem.swift in Sources */,
+				547B93B423471E1A003CFA6C /* ShapeArea.swift in Sources */,
+				547B93BD234720AF003CFA6C /* SubstractScene.swift in Sources */,
+				547B93B523471E1A003CFA6C /* ShapeText.swift in Sources */,
+				547B93A323471E1A003CFA6C /* ActiveIndex.swift in Sources */,
+				547B93A423471E1A003CFA6C /* MouseCompatible.swift in Sources */,
+				547B93B023471E1A003CFA6C /* ShapeLinePolygon.swift in Sources */,
+				547B93B623471E1A003CFA6C /* ShapeNode.swift in Sources */,
+				547B93AF23471E1A003CFA6C /* ShapeVertexPolygon.swift in Sources */,
+				547B93B323471E1A003CFA6C /* ShapeLine.swift in Sources */,
+				547B93AD23471E1A003CFA6C /* ShapeTriangle.swift in Sources */,
+				547B93AE23471E1A003CFA6C /* ShapeCircle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		547B93B923472028003CFA6C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				547B93BA23472028003CFA6C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		543DE04A23471C6F0044AA8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		543DE04B23471C6F0044AA8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		543DE04D23471C6F0044AA8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9446CE4D8B8A87E22C59CB22 /* Pods-ClipperUI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ClipperUI/ClipperUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = ClipperUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishape.ClipperUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		543DE04E23471C6F0044AA8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A919A541BB15964587FB94C9 /* Pods-ClipperUI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ClipperUI/ClipperUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = ClipperUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishape.ClipperUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		543DE03423471C6E0044AA8A /* Build configuration list for PBXProject "ClipperUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				543DE04A23471C6F0044AA8A /* Debug */,
+				543DE04B23471C6F0044AA8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		543DE04C23471C6F0044AA8A /* Build configuration list for PBXNativeTarget "ClipperUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				543DE04D23471C6F0044AA8A /* Debug */,
+				543DE04E23471C6F0044AA8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 543DE03123471C6E0044AA8A /* Project object */;
+}
