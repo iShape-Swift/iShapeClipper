@@ -29,7 +29,7 @@ final class ViewController: NSViewController {
 
     private func setupPopUpButton() {
         let popUpButton = canvasView.testList
-        popUpButton.addItems(withTitles: ["Complex Plain", "Complex Delaunay", "Monotone Plain", "Monotone Delaunay", "DelaunayTest"])
+        popUpButton.addItems(withTitles: ["Substract"])
         popUpButton.selectItem(at: 0)
         popUpButton.action = #selector(didPickScene)
         popUpButton.target = self
@@ -41,13 +41,12 @@ final class ViewController: NSViewController {
     }
     
     private func selectScene(index: Int) {
-        /*
         self.scene?.removeFromSuperlayer()
         let newScene: CALayer & MouseCompatible & SceneNavigation
         switch index {
 
         default:
-
+            newScene = SubstractScene()
         }
         
         canvasView.add(shape: newScene)
@@ -58,7 +57,6 @@ final class ViewController: NSViewController {
         }
         
         self.scene = newScene
-        */
     }
     
     override func mouseDown(with event: NSEvent) {

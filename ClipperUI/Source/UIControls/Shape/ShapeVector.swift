@@ -10,10 +10,10 @@ import Cocoa
 
 final class ShapeVector: CALayer {
     
-    init(start: CGPoint, end: CGPoint, tip: CGFloat, lineWidth: CGFloat, strokeColor: CGColor, arrowColor: CGColor) {
+    init(start: CGPoint, end: CGPoint, tip: CGFloat, lineWidth: CGFloat, strokeColor: CGColor, arrowColor: CGColor, dash: [NSNumber]? = nil) {
         super.init()
         
-        let line = ShapeLine(start: start, end: end, lineWidth: lineWidth, strokeColor: strokeColor)
+        let line = ShapeLine(start: start, end: end, lineWidth: lineWidth, strokeColor: strokeColor, dash: dash)
         line.lineCap = .round
         self.addSublayer(line)
         

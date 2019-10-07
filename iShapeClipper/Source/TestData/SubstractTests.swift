@@ -15,8 +15,8 @@ struct SubstractTests {
         let slave: [Point]
     }
     
-    static let count = 39
-    static let active = 38
+    static let count = 41
+    static let active = 0
     
     static func data(index: Int) -> Result {
         
@@ -138,6 +138,12 @@ struct SubstractTests {
         case 38:
             master = SubstractTests.master_38()
             slave = SubstractTests.slave_spiral()
+        case 39:
+            master = SubstractTests.master_26()
+            slave = SubstractTests.slave_39()
+        case 40:
+            master = SubstractTests.master_square()
+            slave = SubstractTests.slave_40()
         default:
             master = SubstractTests.master_square()
             slave = SubstractTests.slave_0()
@@ -748,6 +754,24 @@ struct SubstractTests {
             Point(x: 15, y: 15),
             Point(x: 15, y: -5),
             Point(x: -5, y: -5)
+        ]
+    }
+    
+    private static func slave_39() -> [Point] {
+        return [
+            Point(x:  -5, y:    5),
+            Point(x: -20, y:  -10),
+            Point(x:  15, y:  -10),
+            Point(x:  18, y: 16.5)
+        ]
+    }
+    
+    private static func slave_40() -> [Point] {
+        return [
+            Point(x: -10, y:  10),
+            Point(x: -10, y: -10),
+            Point(x:  10, y: -10),
+            Point(x:  10, y:  10)
         ]
     }
 

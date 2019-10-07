@@ -13,10 +13,14 @@ public struct Subtractor {
     public static func substract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
         var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.Const.in_out)
         
+        guard !navigator.isEqual else {
+            return Solution(shapes: [], disposition: .same)
+        }
+        
         var cursor = navigator.nextSub()
         
         guard cursor.isNotEmpty else {
-            return Solution(shapes: [.empty], disposition: .noIntersections)
+            return Solution(shapes: [], disposition: .notOverlap)
         }
         
         var result = [[IntPoint]]()
@@ -176,9 +180,9 @@ public struct Subtractor {
             for path in result {
                 shapes.append(PlainShape(points: path))
             }
-            solution = Solution(shapes: shapes, disposition: .hasIntersections)
+            solution = Solution(shapes: shapes, disposition: .overlap)
         } else {
-            solution = Solution(shapes: [], disposition: .noIntersections)
+            solution = Solution(shapes: [], disposition: .notOverlap)
         }
         
         return solution

@@ -12,6 +12,9 @@ final class ShapeArea: CAShapeLayer {
     
     init(points: [CGPoint], color: CGColor) {
         super.init()
+        guard !points.isEmpty else {
+            return
+        }
         
         let path = CGMutablePath()
         path.move(to: points[0])

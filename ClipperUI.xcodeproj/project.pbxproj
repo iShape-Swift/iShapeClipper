@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54187D0D2348EE040080AF79 /* CornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187D0C2348EE040080AF79 /* CornerTests.swift */; };
+		54187D0F2348F06D0080AF79 /* PinPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187D0E2348F06D0080AF79 /* PinPathTests.swift */; };
 		543DE04123471C6F0044AA8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 543DE04023471C6F0044AA8A /* Assets.xcassets */; };
 		547B939F23471E1A003CFA6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B937D23471E1A003CFA6C /* ViewController.swift */; };
 		547B93A023471E1A003CFA6C /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B937F23471E1A003CFA6C /* CGPoint.swift */; };
@@ -31,9 +33,10 @@
 		547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B939E23471E1A003CFA6C /* CoordinateSystemScene.swift */; };
 		547B93BB23472028003CFA6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 547B93B923472028003CFA6C /* Main.storyboard */; };
 		547B93BD234720AF003CFA6C /* SubstractScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B93BC234720AF003CFA6C /* SubstractScene.swift */; };
-		54D6439C2347CF74007BD72A /* ClipperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D6439B2347CF74007BD72A /* ClipperTests.swift */; };
-		54D643A42347D04B007BD72A /* PinPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643A32347D04B007BD72A /* PinPathTests.swift */; };
 		54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643AC2347DBA5007BD72A /* SubtractTests.swift */; };
+		54EE5EB1234A0B1900090EA7 /* ShapePinDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EE5EB0234A0B1900090EA7 /* ShapePinDot.swift */; };
+		54EE5EB5234A0BC300090EA7 /* Intersector+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EE5EB4234A0BC300090EA7 /* Intersector+Test.swift */; };
+		54EE5EB7234A0E4400090EA7 /* ShapePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EE5EB6234A0E4400090EA7 /* ShapePath.swift */; };
 		AFC27B03F84927CDF1F38D2D /* Pods_ClipperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50073623AEC7ACCEB4AC2D9 /* Pods_ClipperTests.framework */; };
 		D2E85F5C1D0C2B9708DC3ED3 /* Pods_ClipperUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */; };
 /* End PBXBuildFile section */
@@ -50,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClipperUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54187D0C2348EE040080AF79 /* CornerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerTests.swift; sourceTree = "<group>"; };
+		54187D0E2348F06D0080AF79 /* PinPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPathTests.swift; sourceTree = "<group>"; };
 		543DE03923471C6E0044AA8A /* ClipperUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClipperUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		543DE04023471C6F0044AA8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		543DE04823471C6F0044AA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,10 +83,11 @@
 		547B93BA23472028003CFA6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		547B93BC234720AF003CFA6C /* SubstractScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstractScene.swift; sourceTree = "<group>"; };
 		54D643992347CF74007BD72A /* ClipperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		54D6439B2347CF74007BD72A /* ClipperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipperTests.swift; sourceTree = "<group>"; };
 		54D6439D2347CF74007BD72A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		54D643A32347D04B007BD72A /* PinPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPathTests.swift; sourceTree = "<group>"; };
 		54D643AC2347DBA5007BD72A /* SubtractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractTests.swift; sourceTree = "<group>"; };
+		54EE5EB0234A0B1900090EA7 /* ShapePinDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapePinDot.swift; sourceTree = "<group>"; };
+		54EE5EB4234A0BC300090EA7 /* Intersector+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Intersector+Test.swift"; sourceTree = "<group>"; };
+		54EE5EB6234A0E4400090EA7 /* ShapePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapePath.swift; sourceTree = "<group>"; };
 		83064DDFD39B8F271F4852C2 /* Pods-ClipperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperTests.release.xcconfig"; path = "Target Support Files/Pods-ClipperTests/Pods-ClipperTests.release.xcconfig"; sourceTree = "<group>"; };
 		9446CE4D8B8A87E22C59CB22 /* Pods-ClipperUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClipperUI.debug.xcconfig"; path = "Target Support Files/Pods-ClipperUI/Pods-ClipperUI.debug.xcconfig"; sourceTree = "<group>"; };
 		A50073623AEC7ACCEB4AC2D9 /* Pods_ClipperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClipperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				547B937F23471E1A003CFA6C /* CGPoint.swift */,
+				54EE5EB4234A0BC300090EA7 /* Intersector+Test.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -204,6 +211,8 @@
 				547B939A23471E1A003CFA6C /* ShapeArea.swift */,
 				547B939B23471E1A003CFA6C /* ShapeText.swift */,
 				547B939C23471E1A003CFA6C /* ShapeNode.swift */,
+				54EE5EB0234A0B1900090EA7 /* ShapePinDot.swift */,
+				54EE5EB6234A0E4400090EA7 /* ShapePath.swift */,
 			);
 			path = Shape;
 			sourceTree = "<group>";
@@ -221,10 +230,10 @@
 		54D6439A2347CF74007BD72A /* ClipperTests */ = {
 			isa = PBXGroup;
 			children = (
-				54D6439B2347CF74007BD72A /* ClipperTests.swift */,
 				54D6439D2347CF74007BD72A /* Info.plist */,
-				54D643A32347D04B007BD72A /* PinPathTests.swift */,
 				54D643AC2347DBA5007BD72A /* SubtractTests.swift */,
+				54187D0C2348EE040080AF79 /* CornerTests.swift */,
+				54187D0E2348F06D0080AF79 /* PinPathTests.swift */,
 			);
 			path = ClipperTests;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 				547B93A223471E1A003CFA6C /* Colors.swift in Sources */,
 				547B93AB23471E1A003CFA6C /* CanvasView.swift in Sources */,
 				547B93A523471E1A003CFA6C /* SceneNavigation.swift in Sources */,
+				54EE5EB1234A0B1900090EA7 /* ShapePinDot.swift in Sources */,
 				547B93A023471E1A003CFA6C /* CGPoint.swift in Sources */,
 				547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */,
 				547B939F23471E1A003CFA6C /* ViewController.swift in Sources */,
@@ -435,8 +445,10 @@
 				547B93B023471E1A003CFA6C /* ShapeLinePolygon.swift in Sources */,
 				547B93B623471E1A003CFA6C /* ShapeNode.swift in Sources */,
 				547B93AF23471E1A003CFA6C /* ShapeVertexPolygon.swift in Sources */,
+				54EE5EB7234A0E4400090EA7 /* ShapePath.swift in Sources */,
 				547B93B323471E1A003CFA6C /* ShapeLine.swift in Sources */,
 				547B93AD23471E1A003CFA6C /* ShapeTriangle.swift in Sources */,
+				54EE5EB5234A0BC300090EA7 /* Intersector+Test.swift in Sources */,
 				547B93AE23471E1A003CFA6C /* ShapeCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,9 +457,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54187D0F2348F06D0080AF79 /* PinPathTests.swift in Sources */,
 				54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */,
-				54D643A42347D04B007BD72A /* PinPathTests.swift in Sources */,
-				54D6439C2347CF74007BD72A /* ClipperTests.swift in Sources */,
+				54187D0D2348EE040080AF79 /* CornerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

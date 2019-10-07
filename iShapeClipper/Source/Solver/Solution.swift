@@ -10,9 +10,10 @@ import iGeometry
 public struct Solution {
     
     public enum Disposition {
-        case noIntersections
-        case hasIntersections
-        case slaveInsideMaster
+        case notOverlap
+        case overlap
+        case same
+        case hole
     }
 
     public let shapes: [PlainShape]

@@ -14,9 +14,9 @@ struct PinSequence {
     private let masterCount: Int
     
     init(pinPointArray: [PinPoint], pinPathArray: [PinPath], masterCount: Int) {
-        self.pinPointArray = pinPointArray;
-        self.pinPathArray = pinPathArray;
-        self.masterCount = masterCount;
+        self.pinPointArray = pinPointArray
+        self.pinPathArray = pinPathArray
+        self.masterCount = masterCount
         self.handlerArray = [PinHandler]()
         self.handlerArray.reserveCapacity(pinPathArray.count + pinPointArray.count)
     }
@@ -151,9 +151,11 @@ struct PinSequence {
 
 
     mutating private func compact() {
-        var paths = Array<PinPath>(repeating: .empty, count: self.pinPathArray.count)
-        var points = Array<PinPoint>(repeating: .empty, count: self.pinPathArray.count)
-        var handlers = Array<PinHandler>()
+        var paths = [PinPath]()
+        var points = [PinPoint]()
+        var handlers = [PinHandler]()
+        paths.reserveCapacity(self.pinPathArray.count)
+        points.reserveCapacity(self.pinPointArray.count)
 
         let n = self.handlerArray.count
         for i in 0..<n {
