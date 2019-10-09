@@ -6,19 +6,6 @@
 //
 
 import iGeometry
-    /*
- 
- 1 in
- 2 in-out
- 3 in-0
- 4 0-in
- 
--1 out
--2 out-in
--3 out-0
--4 0-out
- 
-*/
 
 public struct PinPoint {
     
@@ -51,35 +38,36 @@ public struct PinPoint {
         }
     }
     
-    enum Const {
-        static let null = 0 // can be ignored
+    enum PinType: Int {
+        case inside     = 1
+        case in_out     = 2
+        case in_null    = 3
+        case null_in    = 4
 
-        static let inside = 1
-        static let in_out = 2
-        static let in_null = 3
-        static let null_in = 4
-
-        static let outside = -1
-        static let out_in = -2
-        static let out_null = -3
-        static let null_out = -4
+        case null       = 0        // can be ignored
+        
+        case outside    = -1
+        case out_in     = -2
+        case out_null   = -3
+        case null_out   = -4
     }
+    
 
-    static let empty = PinPoint(point: .zero, type: 0, masterMileStone: .zero, slaveMileStone: .zero)
+    static let empty = PinPoint(point: .zero, type: .null, masterMileStone: .zero, slaveMileStone: .zero)
 
     var point: IntPoint
-    let type: Int   // 1 - in, -1 - out, 2 in-out, -2 out-in
+    let type: PinType   // 1 - in, -1 - out, 2 in-out, -2 out-in
     var masterMileStone: PathMileStone
     var slaveMileStone: PathMileStone
 
-    init(point: IntPoint, type: Int, masterMileStone: PathMileStone, slaveMileStone: PathMileStone) {
+    init(point: IntPoint, type: PinType, masterMileStone: PathMileStone, slaveMileStone: PathMileStone) {
         self.point = point;
         self.type = type;
-        self.masterMileStone = masterMileStone;
-        self.slaveMileStone = slaveMileStone;
+        self.masterMileStone = masterMileStone
+        self.slaveMileStone = slaveMileStone
     }
 
-    init(pin: PinPoint, type: Int) {
+    init(pin: PinPoint, type: PinType) {
         self.point = pin.point
         self.type = type
         self.masterMileStone = pin.masterMileStone
@@ -87,8 +75,8 @@ public struct PinPoint {
     }
     
     static func buildSimple(def: Def) -> PinPoint {
-        let isCCW = PinPoint.isCCW(a: def.ms1, b: def.pt, c: def.sl1);
-        let type = isCCW ? -1 : 1;
+        let isCCW = PinPoint.isCCW(a: def.ms1, b: def.pt, c: def.sl1)
+        let type: PinType = isCCW ? .outside : .inside
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
@@ -97,11 +85,11 @@ public struct PinPoint {
         let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl0);
         let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1);
 
-        let type: Int
+        let type: PinType
         if isCCW0 == isCCW1 {
-            type = isCCW0 ? -2 : 2
+            type = isCCW0 ? .out_in : .in_out
         } else {
-            type = isCCW0 ? -1 : 1
+            type = isCCW0 ? .outside : .inside
         }
 
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
@@ -112,11 +100,11 @@ public struct PinPoint {
         let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms0, c: def.sl1);
         let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1);
 
-        let type: Int
+        let type: PinType
         if isCCW0 == isCCW1 {
-            type = isCCW0 ? -2 : 2;
+            type = isCCW0 ? .out_in : .in_out
         } else {
-            type = isCCW0 ? -1 : 1;
+            type = isCCW0 ? .outside : .inside
         }
 
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
@@ -129,13 +117,13 @@ public struct PinPoint {
         let isSl0 = corner.isBetween(p: def.sl0, clockwise: true)
         let isSl1 = corner.isBetween(p: def.sl1, clockwise: true)
 
-        let type: Int
+        let type: PinType
         if isSl0 && isSl1 {
-            type = 2
+            type = .in_out
         } else if !isSl0 && !isSl1 {
-            type = -2
+            type = .out_in
         } else {
-            type = isSl0 ? 1 : -1
+            type = isSl0 ? .inside : .outside
         }
 
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)

@@ -8,9 +8,7 @@
 import iGeometry
 
 struct PinPathBuilder {
-    
-    
-    
+
     struct Result {
         enum PathType {
             case noEdges
@@ -121,8 +119,7 @@ struct PinPathBuilder {
 
     private func createPath(edges: [PinEdge], master: [IntPoint], slave: [IntPoint]) -> [PinPath] {
         let n = edges.count
-        let emptyPin = PinPoint(point: .zero, type: 0, masterMileStone: .zero, slaveMileStone: .zero)
-        var pathList = Array<PinPath>.init(repeating: .init(v0: emptyPin, v1: emptyPin, type: 0), count: n)
+        var pathList = Array<PinPath>(repeating: .empty, count: n)
         for i in 0..<n {
             let edge = edges[i]
             let type = getType(edge: edge, master: master, slave: slave)
@@ -133,48 +130,49 @@ struct PinPathBuilder {
         return pathList
     }
 
-    private func getType(edge: PinEdge, master: [IntPoint], slave: [IntPoint]) -> Int {
+    private func getType(edge: PinEdge, master: [IntPoint], slave: [IntPoint]) -> PinPoint.PinType {
         let type0 = getStartDisposition(vertex: edge.v0, master: master, slave: slave, iterposition: edge.interposition)
         let type1 = getEndDisposition(vertex: edge.v1, master: master, slave: slave, iterposition: edge.interposition)
 
-        if type0 == PinPoint.Const.null || type1 == PinPoint.Const.null {
-            if type0 > 0 || type1 > 0 {
-                return PinPoint.Const.inside
+        if type0 == .null || type1 == .null {
+            if type0.rawValue > 0 || type1.rawValue > 0 {
+                return .inside
             }
 
-            if type0 < 0 || type1 < 0 {
-                return PinPoint.Const.outside
+            if type0.rawValue < 0 || type1.rawValue < 0 {
+                return .outside
             }
 
-            return PinPoint.Const.null
+            return .null
         }
 
 
-        if type0 == PinPoint.Const.in_null && type1 == PinPoint.Const.null_in ||
-            type1 == PinPoint.Const.in_null && type0 == PinPoint.Const.null_in {
-            return PinPoint.Const.inside
+        if type0 == .in_null && type1 == .null_in ||
+            type1 == .in_null && type0 == .null_in {
+            return .inside
         }
 
-        if type0 == PinPoint.Const.out_null && type1 == PinPoint.Const.null_out ||
-            type1 == PinPoint.Const.out_null && type0 == PinPoint.Const.null_out {
-            return PinPoint.Const.outside
+        if type0 == .out_null && type1 == .null_out ||
+            type1 == .out_null && type0 == .null_out {
+            return .outside
         }
 
-        if type0 == PinPoint.Const.out_null && type1 == PinPoint.Const.null_in ||
-            type1 == PinPoint.Const.out_null && type0 == PinPoint.Const.null_in {
-            return PinPoint.Const.out_in
+        if type0 == .out_null && type1 == .null_in ||
+            type1 == .out_null && type0 == .null_in {
+            return .out_in
         }
 
-        if type0 == PinPoint.Const.in_null && type1 == PinPoint.Const.null_out ||
-            type1 == PinPoint.Const.in_null && type0 == PinPoint.Const.null_out {
-            return PinPoint.Const.in_out
+        if type0 == .in_null && type1 == .null_out ||
+            type1 == .in_null && type0 == .null_out {
+            return .in_out
         }
 
-        // TODO assert fail
-        return 0
+        assertionFailure("impossible case")
+        
+        return .null
     }
 
-    private func getStartDisposition(vertex: PinPoint, master: [IntPoint], slave: [IntPoint], iterposition: Int) -> Int {
+    private func getStartDisposition(vertex: PinPoint, master: [IntPoint], slave: [IntPoint], iterposition: Int) -> PinPoint.PinType {
         let corner = PinPathBuilder.buildMasterCorner(vertex: vertex, master: master, iGeom: iGeom)
 
         let si = vertex.slaveMileStone.index
@@ -187,7 +185,7 @@ struct PinPathBuilder {
             s = vertex.slaveMileStone.offset != 0 ? slave[si] : slave[(si - 1 + sn) % sn]
         }
 
-        let type: Int
+        let type: PinPoint.PinType
 
         if corner.isOnBorder(p: s) {
             let  slaveCorner = PinPathBuilder.buildSlaveCorner(vertex: vertex, slave: slave, iGeom: iGeom)
@@ -205,17 +203,17 @@ struct PinPathBuilder {
             let isBetween = slaveCorner.isBetween(p: m, clockwise: true)
 
             if iterposition == 1 {
-                type = isBetween ? PinPoint.Const.in_null : PinPoint.Const.out_null
+                type = isBetween ? .in_null : .out_null
             } else {
-                type = isBetween ? PinPoint.Const.null_out : PinPoint.Const.null_in
+                type = isBetween ? .null_out : .null_in
             }
         } else {
             let isBetween = corner.isBetween(p: s, clockwise: true)
 
             if iterposition == 1 {
-                type = isBetween ? PinPoint.Const.in_null : PinPoint.Const.out_null
+                type = isBetween ? .in_null : .out_null
             } else {
-                type = isBetween ? PinPoint.Const.null_out : PinPoint.Const.null_in
+                type = isBetween ? .null_out : .null_in
             }
         }
 
@@ -223,7 +221,7 @@ struct PinPathBuilder {
     }
 
 
-    private func getEndDisposition(vertex: PinPoint, master: [IntPoint], slave: [IntPoint], iterposition: Int) -> Int {
+    private func getEndDisposition(vertex: PinPoint, master: [IntPoint], slave: [IntPoint], iterposition: Int) -> PinPoint.PinType {
         let i = vertex.slaveMileStone.index
         let n = slave.count
         let s: IntPoint
@@ -237,17 +235,17 @@ struct PinPathBuilder {
         let corner = PinPathBuilder.buildMasterCorner(vertex: vertex, master: master, iGeom: iGeom)
 
         if corner.isOnBorder(p: s) {
-            return PinPoint.Const.null
+            return .null
         }
 
         let isBetween = corner.isBetween(p: s, clockwise: true)
 
-        let type: Int
+        let type: PinPoint.PinType
 
         if iterposition == 1 {
-            type = isBetween ? PinPoint.Const.null_out : PinPoint.Const.null_in
+            type = isBetween ? .null_out : .null_in
         } else {
-            type = isBetween ? PinPoint.Const.in_null : PinPoint.Const.out_null
+            type = isBetween ? .in_null : .out_null
         }
 
         return type;

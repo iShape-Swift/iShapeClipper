@@ -9,7 +9,7 @@ import iGeometry
 
 struct Intersector {
     
-    internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: Int) -> PinNavigator {
+    internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: PinPoint.PinType) -> PinNavigator {
         let posMatrix = Intersector.createPossibilityMatrix(master: iMaster, slave: iSlave)
         
         let masterIndices = posMatrix.masterIndices

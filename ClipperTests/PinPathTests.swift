@@ -31,7 +31,7 @@ final class PinPathTests: XCTestCase {
         slave.append(Point(x: -5, y: 10))
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -80,7 +80,7 @@ final class PinPathTests: XCTestCase {
         
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -126,7 +126,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -172,7 +172,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -219,7 +219,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -264,7 +264,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -310,7 +310,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -356,7 +356,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -404,7 +404,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -452,7 +452,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -499,7 +499,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -546,7 +546,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -593,7 +593,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -639,7 +639,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -685,7 +685,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -731,7 +731,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -780,7 +780,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let sequence = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let sequence = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(sequence.pinPathArray.count, 1)
         XCTAssertEqual(sequence.pinPointArray.count, 0)
@@ -829,7 +829,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -878,7 +878,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -927,7 +927,7 @@ final class PinPathTests: XCTestCase {
         slave.append(pt1)
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
         XCTAssertEqual(result.pinPathArray.count, 1)
         XCTAssertEqual(result.pinPointArray.count, 0)
@@ -978,7 +978,7 @@ final class PinPathTests: XCTestCase {
         
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         let path = result.pinPathArray
         
         XCTAssertEqual(path.count, 4)
@@ -1028,7 +1028,7 @@ final class PinPathTests: XCTestCase {
         
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         let path = result.pinPathArray
         
         XCTAssertEqual(path.count, 4)
@@ -1075,7 +1075,7 @@ final class PinPathTests: XCTestCase {
         
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         let path = result.pinPathArray
         
         XCTAssertEqual(path.count, 4)
@@ -1112,7 +1112,7 @@ final class PinPathTests: XCTestCase {
         
         let iSlave = iGeom.int(points: slave)
         
-        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: PinPoint.Const.null)
+        let result = Intersector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         let path = result.pinPathArray
         
         XCTAssertEqual(path.count, 1)

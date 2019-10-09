@@ -118,8 +118,8 @@ struct PinEdge {
             slaveMileStone1 = minSlStone
         }
 
-        self.v0 = PinPoint(point: pnt0, type: 0, masterMileStone: masterMileStone0, slaveMileStone: slaveMileStone0)
-        self.v1 = PinPoint(point: pnt1, type: 0, masterMileStone: masterMileStone1, slaveMileStone: slaveMileStone1)
+        self.v0 = PinPoint(point: pnt0, type: .null, masterMileStone: masterMileStone0, slaveMileStone: slaveMileStone0)
+        self.v1 = PinPoint(point: pnt1, type: .null, masterMileStone: masterMileStone1, slaveMileStone: slaveMileStone1)
         self.interposition = isDirectMaster == isDirectSlave ? 1 : -1
     }
 }

@@ -79,7 +79,7 @@ final class SubstractScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let result = Intersector.getPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: 0)
+        let result = Intersector.getPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         let points = result.points
         let paths = result.path
         for edgePath in paths {

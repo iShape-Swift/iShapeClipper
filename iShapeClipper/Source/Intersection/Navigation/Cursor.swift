@@ -7,9 +7,9 @@
 
 struct Cursor: Equatable {
 
-    static let empty = Cursor(type: 0, index: -1)
+    static let empty = Cursor(type: .null, index: -1)
 
-    let type: Int
+    let type: PinPoint.PinType
     let index: Int
 
     var isNotEmpty: Bool { index >= 0 }

@@ -11,7 +11,7 @@ public struct Subtractor {
     
 
     public static func substract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
-        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.Const.in_out)
+        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
         
         guard !navigator.isEqual else {
             return Solution(shapes: [], disposition: .same)
@@ -196,7 +196,7 @@ fileprivate extension PinNavigator {
     mutating func nextSub() -> Cursor {
         var cursor = self.next()
         
-        while cursor.isNotEmpty && cursor.type != PinPoint.Const.inside && cursor.type != PinPoint.Const.out_in {
+        while cursor.isNotEmpty && cursor.type != .inside && cursor.type != .out_in {
             self.mark(cursor: cursor)
             cursor = self.next()
         }
@@ -215,7 +215,7 @@ fileprivate extension PinNavigator {
         var prev = cursor
         var cursor = self.nextSlave(cursor: cursor)
         
-        while start != cursor && stop != cursor && cursor.type == PinPoint.Const.out_in {
+        while start != cursor && stop != cursor && cursor.type == .out_in {
             let nextMaster = self.nextMaster(cursor: cursor)
             
             if nextMaster == start {

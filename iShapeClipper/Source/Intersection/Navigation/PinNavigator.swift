@@ -10,8 +10,8 @@ import iGeometry
 struct PinNavigator {
     
     struct PinNode {
-        static let empty = PinNode(isPinPath: 0, masterIndex: 0, slaveIndex: 0, marker: 0, index: 0)
-        var isPinPath: Int      // 0 - false, 1 - true
+        static let empty = PinNode(isPinPath: false, masterIndex: 0, slaveIndex: 0, marker: 0, index: 0)
+        var isPinPath: Bool     // 0 - false, 1 - true
         var masterIndex: Int    // index in master path array
         var slaveIndex: Int     // index in slave path array
         var marker: Int         // 0 - present, 1 - removed
@@ -67,8 +67,8 @@ struct PinNavigator {
         repeat {
             let node = nodeArray[i]
             if node.marker == 0 {
-                let type: Int
-                if node.isPinPath == 0 {
+                let type: PinPoint.PinType
+                if !node.isPinPath {
                     let pin = pinPointArray[node.index]
                     type = pin.type
                 } else {
@@ -101,7 +101,7 @@ struct PinNavigator {
         let index = slavePath[nextSlaveIndex]
         let nextNode = nodeArray[index]
 
-        if nextNode.isPinPath == 0 {
+        if !nextNode.isPinPath {
             let pin = pinPointArray[nextNode.index]
             return Cursor(type: pin.type, index: index)
         }
@@ -119,7 +119,7 @@ struct PinNavigator {
         let index = nextMasterIndex
         let nextNode = nodeArray[index]
 
-        if nextNode.isPinPath == 0 {
+        if !nextNode.isPinPath {
             let pin = pinPointArray[nextNode.index]
             return Cursor(type: pin.type, index: index)
         }
@@ -130,7 +130,7 @@ struct PinNavigator {
 
     func masterStartStone(cursor: Cursor) -> PathMileStone {
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if node.isPinPath == false {
             let pin = pinPointArray[node.index]
             return pin.masterMileStone
         }
@@ -142,7 +142,7 @@ struct PinNavigator {
 
     func masterEndStone(cursor: Cursor) -> PathMileStone {
         let node = nodeArray[cursor.index];
-        if node.isPinPath == 0 {
+        if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.masterMileStone
         }
@@ -153,7 +153,7 @@ struct PinNavigator {
 
     func masterStartPoint(cursor: Cursor) -> IntPoint {
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.point
         }
@@ -165,7 +165,7 @@ struct PinNavigator {
 
     func masterEndPoint(cursor: Cursor) -> IntPoint{
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if node.isPinPath == false {
             let pin = pinPointArray[node.index]
             return pin.point
         }
@@ -177,7 +177,7 @@ struct PinNavigator {
 
     func slaveStartStone(cursor: Cursor) -> PathMileStone {
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.slaveMileStone
         }
@@ -189,7 +189,7 @@ struct PinNavigator {
 
     func slaveStartPoint(cursor: Cursor) -> IntPoint {
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.point
         }
@@ -201,7 +201,7 @@ struct PinNavigator {
 
     func slaveEndStone(cursor: Cursor) -> PathMileStone {
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.slaveMileStone
         }
@@ -213,7 +213,7 @@ struct PinNavigator {
 
     func slaveEndPoint(cursor: Cursor) -> IntPoint {
         let node = nodeArray[cursor.index]
-        if node.isPinPath == 0 {
+        if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.point
         }

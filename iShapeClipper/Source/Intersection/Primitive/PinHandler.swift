@@ -7,15 +7,17 @@
 
 struct PinHandler: Equatable {
     
+    static let empty = PinHandler(pinPoint: .empty, index: 0)
+    
     var masterSortFactor: PathMileStone
 
-    let isPinPath: Int  // 0 - false, 1 - true
-    let index: Int      // index in outside array
-    let type: Int       // PinType
+    let isPinPath: Bool
+    let index: Int                      // index in outside array
+    let type: PinPoint.PinType          // PinType
 
-    var marker: Int     // 0 - present, 1 - removed
+    var marker: Int                     // 0 - present, 1 - removed
 
-    init(sortFactor: PathMileStone, index: Int, isPinPath: Int, type: Int) {
+    init(sortFactor: PathMileStone, index: Int, isPinPath: Bool, type: PinPoint.PinType) {
         self.index = index
         self.isPinPath = isPinPath
         self.masterSortFactor = sortFactor
@@ -24,7 +26,7 @@ struct PinHandler: Equatable {
     }
 
 
-    init(sortFactor: PathMileStone, index: Int, isPinPath: Int, marker: Int, type: Int) {
+    init(sortFactor: PathMileStone, index: Int, isPinPath: Bool, marker: Int, type: PinPoint.PinType) {
         self.index = index
         self.isPinPath = isPinPath
         self.masterSortFactor = sortFactor
@@ -34,7 +36,7 @@ struct PinHandler: Equatable {
 
     init(pinPoint: PinPoint, index: Int) {
         self.index = index
-        self.isPinPath = 0
+        self.isPinPath = false
         self.type = pinPoint.type
         self.masterSortFactor = pinPoint.masterMileStone
         self.marker = 0

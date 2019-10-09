@@ -9,12 +9,12 @@ import iGeometry
 
 struct PinPath {
     
-    static let empty = PinPath(v0: .empty, v1: .empty, type: 0)
+    static let empty = PinPath(v0: .empty, v1: .empty, type: .null)
     
     let v0: PinPoint
     let v1: PinPoint
 
-    init(v0: PinPoint, v1: PinPoint, type: Int) {
+    init(v0: PinPoint, v1: PinPoint, type: PinPoint.PinType) {
         self.v0 = PinPoint(pin: v0, type: type)
         self.v1 = PinPoint(pin: v1, type: type)
     }
@@ -44,8 +44,8 @@ struct PinPath {
     func extract(index: Int, pathCount: Int) -> [PinHandler] {
         let n = pathCount
 
-        let firstHandler = PinHandler(sortFactor: v0.masterMileStone, index: index, isPinPath: 1, marker: 0, type: v0.type)
-        let lastHandler = PinHandler(sortFactor: v1.masterMileStone, index: index, isPinPath: 1, marker: 1, type: v0.type)
+        let firstHandler = PinHandler(sortFactor: v0.masterMileStone, index: index, isPinPath: true, marker: 0, type: v0.type)
+        let lastHandler = PinHandler(sortFactor: v1.masterMileStone, index: index, isPinPath: true, marker: 1, type: v0.type)
 
         let length = getLength(count: n)
 
@@ -56,12 +56,12 @@ struct PinPath {
         if length == 2 {
             let middleIndex = (v0.masterMileStone.index + 1) % n;
             let middleSortFactor = PathMileStone(index: middleIndex, offset: 0)
-            let middle = PinHandler(sortFactor: middleSortFactor, index: index, isPinPath: 1, marker: 1, type: v0.type)
+            let middle = PinHandler(sortFactor: middleSortFactor, index: index, isPinPath: true, marker: 1, type: v0.type)
             return [firstHandler, middle, lastHandler]
         }
 
 
-        var handlers = [PinHandler].init(repeating: .init(pinPoint: .init(point: .zero, type: 0, masterMileStone: .zero, slaveMileStone: .zero), index: 0), count: length + 1)
+        var handlers = Array<PinHandler>(repeating: .empty, count: length + 1)
         var j = 0
         handlers[j] = firstHandler
         j += 1
@@ -75,12 +75,12 @@ struct PinPath {
         }
 
         while i != endIndex {
-            handlers[j] = PinHandler(sortFactor: PathMileStone(index: i), index: index, isPinPath: 1, marker: 1, type: v0.type)
+            handlers[j] = PinHandler(sortFactor: PathMileStone(index: i), index: index, isPinPath: true, marker: 1, type: v0.type)
             j += 1
             i = (i + 1) % n
         }
 
-        handlers[j] = PinHandler(sortFactor: PathMileStone(index: endIndex), index: index, isPinPath: 1, marker: 1, type: v0.type)
+        handlers[j] = PinHandler(sortFactor: PathMileStone(index: endIndex), index: index, isPinPath: true, marker: 1, type: v0.type)
         j += 1
         handlers[j] = lastHandler
         j += 1

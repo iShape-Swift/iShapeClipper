@@ -22,7 +22,7 @@ struct PinSequence {
     }
 
 
-    mutating func convert(exclusionPinType: Int) -> PinNavigator {
+    mutating func convert(exclusionPinType: PinPoint.PinType) -> PinNavigator {
         var i = 0
         while i < pinPathArray.count {
             let path = pinPathArray[i]
@@ -106,7 +106,7 @@ struct PinSequence {
     }
 
 
-    mutating private func cleanDoubles(exclusionPinType: Int) {
+    mutating private func cleanDoubles(exclusionPinType: PinPoint.PinType) {
         var i = 1
         var prevIndex = 0
         var prev = handlerArray[prevIndex]
@@ -118,7 +118,7 @@ struct PinSequence {
                 prevIndex = i
             } else {
                 isCompactRequired = true
-                if handler.isPinPath == 0 {
+                if !handler.isPinPath {
                     handler.marker = 1
                     handlerArray[i] = handler
                 } else {
@@ -162,17 +162,17 @@ struct PinSequence {
             let pinHandler = handlerArray[i]
             if pinHandler.marker == 0 {
                 let index = pinHandler.index
-                if pinHandler.isPinPath == 1 {
+                if pinHandler.isPinPath {
                     let path = self.pinPathArray[index]
                     paths.append(path)
 
-                    let handler = PinHandler(sortFactor: pinHandler.masterSortFactor, index: paths.count - 1, isPinPath: 1, type: pinHandler.type)
+                    let handler = PinHandler(sortFactor: pinHandler.masterSortFactor, index: paths.count - 1, isPinPath: true, type: pinHandler.type)
                     handlers.append(handler)
                 } else {
                     let pin = self.pinPointArray[index]
                     points.append(pin)
 
-                    let handler = PinHandler(sortFactor: pinHandler.masterSortFactor, index: points.count - 1, isPinPath: 0, type: pinHandler.type)
+                    let handler = PinHandler(sortFactor: pinHandler.masterSortFactor, index: points.count - 1, isPinPath: false, type: pinHandler.type)
                     handlers.append(handler)
                 }
             }
@@ -191,7 +191,7 @@ struct PinSequence {
         for j in 0..<n {
             let handler = handlerArray[j]
             let index = handler.index
-            if handler.isPinPath == 0 {
+            if !handler.isPinPath {
                 let point = self.pinPointArray[index]
                 iStones[j] = IndexMileStone(index: j, stone: point.slaveMileStone)
             } else {
