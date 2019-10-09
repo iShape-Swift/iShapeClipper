@@ -9,6 +9,19 @@ import iGeometry
 
 struct PinPathBuilder {
     
+    
+    
+    struct Result {
+        enum PathType {
+            case noEdges
+            case hasEdges
+            case equal
+        }
+        
+        let pathType: PathType
+        let pinPath: [PinPath]
+    }
+    
     private var pinEdges: [PinEdge]
     private let iGeom: IntGeom
     
@@ -17,10 +30,10 @@ struct PinPathBuilder {
         self.iGeom = iGeom
     }
 
-    mutating func build(master: [IntPoint], slave: [IntPoint]) -> [PinPath] {
+    mutating func build(master: [IntPoint], slave: [IntPoint]) -> Result {
         let n = pinEdges.count
         if n == 0 {
-            return []
+            return Result(pathType: .noEdges, pinPath: [])
         }
 
         sort()
@@ -55,6 +68,10 @@ struct PinPathBuilder {
             i = j
         } while i < n
 
+        if n == master.count && mergedEdges.count == 1 && mergedEdges[0].v0.point == mergedEdges[0].v1.point {
+            return Result(pathType: .equal, pinPath: [])
+        }
+        
         if mergedEdges.count > 1 {
             let first = mergedEdges[0]
             let last = mergedEdges[mergedEdges.count - 1]
@@ -67,7 +84,7 @@ struct PinPathBuilder {
 
         let pathList = createPath(edges: mergedEdges, master: master, slave: slave)
 
-        return pathList;
+        return Result(pathType: .hasEdges, pinPath: pathList)
     }
 
     private mutating func sort() {

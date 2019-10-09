@@ -224,10 +224,14 @@ struct Intersector {
         var builder = PinPathBuilder(pinEdges: pinEdges, iGeom: iGeom)
         
         // build pin paths from edges
-        let pinPaths = builder.build(master: iMaster, slave: iSlave)
+        let result = builder.build(master: iMaster, slave: iSlave)
+        
+        guard result.pathType != .equal else {
+            return PinNavigator()
+        }
         
         // combine pin points and paths
-        var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: pinPaths, masterCount: iMaster.count)
+        var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: result.pinPath, masterCount: iMaster.count)
         
         // remove doubles and organize data
         let navigator = sequence.convert(exclusionPinType: exclusionPinType)
@@ -346,17 +350,4 @@ struct Intersector {
 
         return minP
     }
-    /*
-    private func isEqual(iMaster: [IntPoint], iSlave: [IntPoint]) -> Bool {
-        let n = iMaster.count
-        var m0 = iMaster[0]
-        for i in 1..<n {
-            let m1 = iMaster[i]
-            for j in 1..<n {
-                var s = iSlave[j]
-                if s
-            }
-        }
-    }
-    */
 }
