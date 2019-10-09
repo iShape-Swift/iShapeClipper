@@ -122,9 +122,9 @@ final class SubstractScene: CoordinateSystemScene {
     
     
     func showPage(index: Int) {
-        let result = SubstractTests.data(index: index)
-        self.master = result.master
-        self.slave = result.slave
+        let data = SubstractTests.data[index]
+        self.master = data[0]
+        self.slave = data[1]
         self.update()
     }
     
@@ -199,14 +199,14 @@ extension SubstractScene: MouseCompatible {
 
 extension SubstractScene: SceneNavigation {
     func next() {
-        let n = SubstractTests.count
+        let n = SubstractTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
         UserDefaults.standard.set(pageIndex, forKey: "substract")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = SubstractTests.count
+        let n = SubstractTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         UserDefaults.standard.set(pageIndex, forKey: "substract")
         self.showPage(index: self.pageIndex)
