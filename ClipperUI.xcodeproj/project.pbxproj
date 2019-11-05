@@ -34,6 +34,8 @@
 		547B93BB23472028003CFA6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 547B93B923472028003CFA6C /* Main.storyboard */; };
 		547B93BD234720AF003CFA6C /* SubstractScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B93BC234720AF003CFA6C /* SubstractScene.swift */; };
 		54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643AC2347DBA5007BD72A /* SubtractTests.swift */; };
+		54DA470A236D91C6007FB21A /* UnionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA4709236D91C6007FB21A /* UnionScene.swift */; };
+		54DA471823708982007FB21A /* PolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA471723708982007FB21A /* PolygonScene.swift */; };
 		54EE5EB1234A0B1900090EA7 /* ShapePinDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EE5EB0234A0B1900090EA7 /* ShapePinDot.swift */; };
 		54EE5EB5234A0BC300090EA7 /* Intersector+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EE5EB4234A0BC300090EA7 /* Intersector+Test.swift */; };
 		54EE5EB7234A0E4400090EA7 /* ShapePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EE5EB6234A0E4400090EA7 /* ShapePath.swift */; };
@@ -85,6 +87,8 @@
 		54D643992347CF74007BD72A /* ClipperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D6439D2347CF74007BD72A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54D643AC2347DBA5007BD72A /* SubtractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractTests.swift; sourceTree = "<group>"; };
+		54DA4709236D91C6007FB21A /* UnionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionScene.swift; sourceTree = "<group>"; };
+		54DA471723708982007FB21A /* PolygonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonScene.swift; sourceTree = "<group>"; };
 		54EE5EB0234A0B1900090EA7 /* ShapePinDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapePinDot.swift; sourceTree = "<group>"; };
 		54EE5EB4234A0BC300090EA7 /* Intersector+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Intersector+Test.swift"; sourceTree = "<group>"; };
 		54EE5EB6234A0E4400090EA7 /* ShapePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapePath.swift; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				547B93BC234720AF003CFA6C /* SubstractScene.swift */,
+				54DA4709236D91C6007FB21A /* UnionScene.swift */,
+				54DA471723708982007FB21A /* PolygonScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -306,7 +312,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = iShape;
 				TargetAttributes = {
 					543DE03823471C6E0044AA8A = {
@@ -435,6 +441,7 @@
 				547B93A023471E1A003CFA6C /* CGPoint.swift in Sources */,
 				547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */,
 				547B939F23471E1A003CFA6C /* ViewController.swift in Sources */,
+				54DA470A236D91C6007FB21A /* UnionScene.swift in Sources */,
 				547B93AC23471E1A003CFA6C /* ShapeVector.swift in Sources */,
 				547B93B723471E1A003CFA6C /* ShapeCoordinatSystem.swift in Sources */,
 				547B93B423471E1A003CFA6C /* ShapeArea.swift in Sources */,
@@ -446,6 +453,7 @@
 				547B93B623471E1A003CFA6C /* ShapeNode.swift in Sources */,
 				547B93AF23471E1A003CFA6C /* ShapeVertexPolygon.swift in Sources */,
 				54EE5EB7234A0E4400090EA7 /* ShapePath.swift in Sources */,
+				54DA471823708982007FB21A /* PolygonScene.swift in Sources */,
 				547B93B323471E1A003CFA6C /* ShapeLine.swift in Sources */,
 				547B93AD23471E1A003CFA6C /* ShapeTriangle.swift in Sources */,
 				54EE5EB5234A0BC300090EA7 /* Intersector+Test.swift in Sources */,
@@ -539,6 +547,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DiShapeTest";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -604,6 +613,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ClipperUI/ClipperUI.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -626,6 +636,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ClipperUI/ClipperUI.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";

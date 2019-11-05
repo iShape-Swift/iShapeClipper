@@ -22,7 +22,7 @@ struct PinSequence {
     }
 
 
-    mutating func convert(exclusionPinType: PinPoint.PinType) -> PinNavigator {
+    mutating func convert(exclusionPinType: PinPoint.PinType, hasExclusion: Bool) -> PinNavigator {
         var i = 0
         while i < pinPathArray.count {
             let path = pinPathArray[i]
@@ -39,16 +39,18 @@ struct PinSequence {
             handlerArray.append(PinHandler(pinPoint: pinPointArray[i], index: i))
             i += 1
         }
+        
+        let hasContacts = hasExclusion || !handlerArray.isEmpty
 
         if handlerArray.count == 0 {
-            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [])
+            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
 
         self.sortMaster()
         self.cleanDoubles(exclusionPinType: exclusionPinType)
 
         if handlerArray.count == 0 {
-            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [])
+            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
 
         let slavePath = self.buildSlavePath()
@@ -71,7 +73,7 @@ struct PinSequence {
             nodes[slaveIndex] = node
         }
 
-        return PinNavigator(slavePath: slavePath, pinPathArray: pinPathArray, pinPointArray: pinPointArray, nodeArray: nodes)
+        return PinNavigator(slavePath: slavePath, pinPathArray: pinPathArray, pinPointArray: pinPointArray, nodeArray: nodes, hasContacts: hasContacts)
     }
 
     private mutating func sortMaster() {

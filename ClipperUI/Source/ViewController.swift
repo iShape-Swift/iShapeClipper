@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+@testable import iShapeClipper
 
 final class ViewController: NSViewController {
 
@@ -28,25 +29,31 @@ final class ViewController: NSViewController {
     }
 
     private func setupPopUpButton() {
+        let index: Int = UserDefaults.standard.integer(forKey: "screen")
         let popUpButton = canvasView.testList
-        popUpButton.addItems(withTitles: ["Substract"])
-        popUpButton.selectItem(at: 0)
+        popUpButton.addItems(withTitles: ["Substract", "Union", "Polygon"])
+        popUpButton.selectItem(at: index)
         popUpButton.action = #selector(didPickScene)
         popUpButton.target = self
-        self.selectScene(index: 0)
+        self.selectScene(index: index)
     }
     
     @objc private func didPickScene(sender: NSPopUpButton) {
-        self.selectScene(index: sender.indexOfSelectedItem)
+        let index = sender.indexOfSelectedItem
+        UserDefaults.standard.set(index, forKey: "screen")
+        self.selectScene(index: index)
     }
     
     private func selectScene(index: Int) {
         self.scene?.removeFromSuperlayer()
         let newScene: CALayer & MouseCompatible & SceneNavigation
         switch index {
-
-        default:
+        case 0:
             newScene = SubstractScene()
+        case 1:
+            newScene = UnionScene()
+        default:
+            newScene = PolygonScene()
         }
         
         canvasView.add(shape: newScene)

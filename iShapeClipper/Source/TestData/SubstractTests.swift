@@ -19,9 +19,9 @@ struct SubstractTests {
             ],
             [
                 Point(x: -5.0, y: -15.0),
-                Point(x: 5.0, y: -15.0),
+                Point(x: -5.0, y: 0.0),
                 Point(x: 5.0, y: 0.0),
-                Point(x: -5.0, y: 0.0)
+                Point(x: 5.0, y: -15.0)
             ]
         ],
         [

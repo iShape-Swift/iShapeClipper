@@ -18,8 +18,8 @@ struct AdjacencyMatrix {
     }
     
     mutating func addMate(master: Int, slave: Int) {
-        self.slaveIndices.append(slave);
-        self.masterIndices.append(master);
+        self.slaveIndices.append(slave)
+        self.masterIndices.append(master)
     }
 }
 

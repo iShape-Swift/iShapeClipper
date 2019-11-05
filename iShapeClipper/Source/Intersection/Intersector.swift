@@ -27,6 +27,8 @@ struct Intersector {
         let msLastIx = iMaster.count - 1
         let slLastIx = iSlave.count - 1
         
+        var hasExclusion = false
+        
         while i < n {
             let msIx0 = masterIndices[i]
             let msIx1 = msIx0 < msLastIx ? msIx0 + 1 : 0
@@ -138,12 +140,16 @@ struct Intersector {
                             let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
                             if (pinPoint.type != exclusionPinType) {
                                 pinPoints.append(pinPoint)
+                            } else {
+                                hasExclusion = true
                             }
                         } else if isSlEnd {
                             // pin point is on master
                             let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
                             if (pinPoint.type != exclusionPinType) {
                                 pinPoints.append(pinPoint)
+                            } else {
+                                hasExclusion = true
                             }
                         }
                         continue
@@ -166,7 +172,6 @@ struct Intersector {
                 case .common_end:
                     break
                 }
-                
                 
                 // only 0, 2, 3 cases are possible here
                 
@@ -206,6 +211,8 @@ struct Intersector {
                     let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
                     if pinPoint.type != exclusionPinType {
                         pinPoints.append(pinPoint)
+                    } else {
+                        hasExclusion = true
                     }
                 }
                 
@@ -234,7 +241,7 @@ struct Intersector {
         var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: result.pinPath, masterCount: iMaster.count)
         
         // remove doubles and organize data
-        let navigator = sequence.convert(exclusionPinType: exclusionPinType)
+        let navigator = sequence.convert(exclusionPinType: exclusionPinType, hasExclusion: hasExclusion)
         
         return navigator
     }
@@ -304,7 +311,7 @@ struct Intersector {
         
         let cx = round(x * invert_divider)
         let cy = round(y * invert_divider)
-
+        
         return IntPoint(x: Int64(cx), y: Int64(cy))
     }
     
@@ -347,7 +354,7 @@ struct Intersector {
             minP = b1
             minL = dl
         }
-
+        
         return minP
     }
 }

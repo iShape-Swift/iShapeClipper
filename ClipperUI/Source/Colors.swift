@@ -23,6 +23,7 @@ struct Colors {
     static let lightBlue = NSColor(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0).cgColor
     static let blue = NSColor(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0).cgColor
     static let darkBlue = NSColor(red: 0.3, green: 0.3, blue: 1.0, alpha: 1.0).cgColor
+    static let alphaBlue = NSColor(red: 0.3, green: 0.3, blue: 1.0, alpha: 0.5).cgColor
     
     static let darkGreen = NSColor(red: 0.3, green: 0.7, blue: 0.3, alpha: 1.0).cgColor
     

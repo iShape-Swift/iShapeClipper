@@ -1,8 +1,8 @@
 //
-//  SubstractScene.swift
+//  UnionScene.swift
 //  ClipperUI
 //
-//  Created by Nail Sharipov on 04/10/2019.
+//  Created by Nail Sharipov on 02.11.2019.
 //  Copyright © 2019 iShape. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class SubstractScene: CoordinateSystemScene {
+final class UnionScene: CoordinateSystemScene {
 
     private var master: [Point] = []
     private var slave: [Point] = []
 
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "substract")
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "merge")
     
     private var activeIndex: Int?
     private var isSlave: Bool = false
@@ -61,16 +61,26 @@ final class SubstractScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let solution = Subtractor.substract(master: iMaster, slave: iSlave, iGeom: iGeom)
+        let solution = Solver.union(master: iMaster, slave: iSlave, iGeom: iGeom)
 
-        switch solution.disposition {
+        switch solution.nature {
         case .notOverlap:
-            let points = master.toCGPoints()
-            self.addSublayer(ShapeArea(points: points, color: Colors.master_second))
+            self.addSublayer(ShapeArea(points: master.toCGPoints(), color: Colors.alphaBlue))
+            self.addSublayer(ShapeArea(points: slave.toCGPoints(), color: Colors.alphaBlue))
         default:
-            for points in solution.pathList.pathes {
-                let points = iGeom.float(points: points).toCGPoints()
-                self.addSublayer(ShapeArea(points: points, color: Colors.master_second))
+            for layout in solution.pathList.layouts {
+                if layout.isClockWise {
+                    let path = solution.pathList.getPath(layout: layout)
+                    let points = iGeom.float(points: path).toCGPoints()
+                    self.addSublayer(ShapeArea(points: points, color: Colors.solution))
+                }
+            }
+            for layout in solution.pathList.layouts {
+                if !layout.isClockWise {
+                    let path = solution.pathList.getPath(layout: layout)
+                    let points = iGeom.float(points: path).toCGPoints()
+                    self.addSublayer(ShapeArea(points: points, color: Colors.blue))
+                }
             }
         }
     }
@@ -117,13 +127,13 @@ final class SubstractScene: CoordinateSystemScene {
         
         let points = slave.toCGPoints()
 
-        self.addSublayer(ShapeArea(points: points, color: Colors.slave_second))
+        //self.addSublayer(ShapeArea(points: points, color: Colors.slave_second))
         self.addSublayer(ShapeVectorPolygon(points: points, shift: 0, tip: 1, lineWidth: 0.25, color: Colors.slave, indexShift: 2, data: data))
     }
     
     
     func showPage(index: Int) {
-        let data = SubstractTests.data[index]
+        let data = UnionTests.data[index]
         self.master = data[0]
         self.slave = data[1]
         self.update()
@@ -132,7 +142,7 @@ final class SubstractScene: CoordinateSystemScene {
 }
 
 
-extension SubstractScene: MouseCompatible {
+extension UnionScene: MouseCompatible {
     
     private func findNearest(point: Point, points: [Point]) -> Int? {
         var i = 0
@@ -198,18 +208,18 @@ extension SubstractScene: MouseCompatible {
     }
 }
 
-extension SubstractScene: SceneNavigation {
+extension UnionScene: SceneNavigation {
     func next() {
-        let n = SubstractTests.data.count
+        let n = UnionTests.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: "substract")
+        UserDefaults.standard.set(pageIndex, forKey: "merge")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = SubstractTests.data.count
+        let n = UnionTests.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: "substract")
+        UserDefaults.standard.set(pageIndex, forKey: "merge")
         self.showPage(index: self.pageIndex)
     }
     
