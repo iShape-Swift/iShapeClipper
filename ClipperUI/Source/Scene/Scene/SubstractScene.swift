@@ -61,9 +61,9 @@ final class SubstractScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let solution = Subtractor.substract(master: iMaster, slave: iSlave, iGeom: iGeom)
+        let solution = Solver.substract(master: iMaster, slave: iSlave, iGeom: iGeom)
 
-        switch solution.disposition {
+        switch solution.nature {
         case .notOverlap:
             let points = master.toCGPoints()
             self.addSublayer(ShapeArea(points: points, color: Colors.master_second))
@@ -123,7 +123,7 @@ final class SubstractScene: CoordinateSystemScene {
     
     
     func showPage(index: Int) {
-        let data = SubstractTests.data[index]
+        let data = SubtractTestData.data[index]
         self.master = data[0]
         self.slave = data[1]
         self.update()
@@ -200,14 +200,14 @@ extension SubstractScene: MouseCompatible {
 
 extension SubstractScene: SceneNavigation {
     func next() {
-        let n = SubstractTests.data.count
+        let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
         UserDefaults.standard.set(pageIndex, forKey: "substract")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = SubstractTests.data.count
+        let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         UserDefaults.standard.set(pageIndex, forKey: "substract")
         self.showPage(index: self.pageIndex)

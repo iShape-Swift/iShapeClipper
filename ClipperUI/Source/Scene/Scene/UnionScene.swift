@@ -133,7 +133,7 @@ final class UnionScene: CoordinateSystemScene {
     
     
     func showPage(index: Int) {
-        let data = UnionTests.data[index]
+        let data = UnionTestData.data[index]
         self.master = data[0]
         self.slave = data[1]
         self.update()
@@ -210,14 +210,14 @@ extension UnionScene: MouseCompatible {
 
 extension UnionScene: SceneNavigation {
     func next() {
-        let n = UnionTests.data.count
+        let n = UnionTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
         UserDefaults.standard.set(pageIndex, forKey: "merge")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = UnionTests.data.count
+        let n = UnionTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
         UserDefaults.standard.set(pageIndex, forKey: "merge")
         self.showPage(index: self.pageIndex)

@@ -9,18 +9,18 @@ import iGeometry
 
 public struct SubstractSolution {
     
-    public enum Disposition {
+    public enum Nature {
         case notOverlap
         case overlap
-        case same
+        case empty
         case hole
     }
 
     public let pathList: PlainPathList
-    public let disposition: Disposition
+    public let nature: Nature
 
-    init(pathList: PlainPathList, disposition: Disposition) {
+    init(pathList: PlainPathList, disposition: Nature) {
         self.pathList = pathList
-        self.disposition = disposition
+        self.nature = disposition
     }
 }
