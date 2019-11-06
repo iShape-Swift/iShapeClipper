@@ -83,7 +83,6 @@ struct PinPath {
         handlers[j] = PinHandler(sortFactor: PathMileStone(index: endIndex), index: index, isPinPath: true, marker: 1, type: v0.type)
         j += 1
         handlers[j] = lastHandler
-        j += 1
 
         return handlers
     }

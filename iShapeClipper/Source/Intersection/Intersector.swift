@@ -64,7 +64,7 @@ struct Intersector {
                 case .not_cross:
                     continue
                 case .pure:
-                    let point = Intersector.cross(a0: ms0, a1: ms1, b0: sl0, b1: sl1, iGeom: iGeom)
+                    let point = Intersector.cross(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
                     // simple intersection and most common case
                     
                     let pinPointDef = PinPoint.Def(
@@ -85,7 +85,7 @@ struct Intersector {
                 case .edge_cross:
                     // one of the end is lying on others edge
                     
-                    let point = endCross(a0: ms0, a1: ms1, b0: sl0, b1: sl1, iGeom: iGeom)
+                    let point = endCross(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
                     
                     let isMsEnd = ms0 == point || ms1 == point
                     let isSlEnd = sl0 == point || sl1 == point
@@ -291,7 +291,7 @@ struct Intersector {
     }
     
     
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, iGeom: IntGeom) -> IntPoint {
+    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
         let dyA = a0.y - a1.y
@@ -315,8 +315,8 @@ struct Intersector {
         return IntPoint(x: Int64(cx), y: Int64(cy))
     }
     
-    private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, iGeom: IntGeom) -> IntPoint {
-        let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1, iGeom: iGeom)
+    private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
+        let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1)
         
         if a0 == p || a1 == p || b0 == p || b1 == p {
             return p
