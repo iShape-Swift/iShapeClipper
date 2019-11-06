@@ -811,6 +811,36 @@ struct UnionTestData {
                 Point(x: 10.0, y: -5.0),
                 Point(x: -10.0, y: -5.0)
             ]
+        ],
+        // 41
+        [
+            [
+                Point(x: -10.0, y: 10.0),
+                Point(x: 10.0, y: 10.0),
+                Point(x: 10.0, y: -10.0),
+                Point(x: -10.0, y: -10.0)
+            ],
+            [
+                Point(x: -5.0, y: 5.0),
+                Point(x: 5.0, y: 5.0),
+                Point(x: 5.0, y: -5.0),
+                Point(x: -5.0, y: -5.0)
+            ]
+        ],
+        // 42
+        [
+            [
+                Point(x: -5.0, y: 5.0),
+                Point(x: 5.0, y: 5.0),
+                Point(x: 5.0, y: -5.0),
+                Point(x: -5.0, y: -5.0)
+            ],
+            [
+                Point(x: -10.0, y: 10.0),
+                Point(x: 10.0, y: 10.0),
+                Point(x: 10.0, y: -10.0),
+                Point(x: -10.0, y: -10.0)
+            ]
         ]
     ]
 }
