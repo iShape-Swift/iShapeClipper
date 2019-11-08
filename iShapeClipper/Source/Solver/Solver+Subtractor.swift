@@ -9,17 +9,17 @@ import iGeometry
 
 public extension Solver {
 
-    static func substract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubstractSolution {
+    static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
         var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
         
         guard !navigator.isEqual else {
-            return SubstractSolution(pathList: PlainPathList(), disposition: .empty)
+            return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
         }
         
         var cursor = navigator.nextSub()
         
         guard cursor.isNotEmpty else {
-            return SubstractSolution(pathList: PlainPathList(), disposition: .notOverlap)
+            return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
         }
         
         var pathList = PlainPathList()
@@ -172,12 +172,12 @@ public extension Solver {
             cursor = navigator.nextSub()
         }
         
-        let solution: SubstractSolution
+        let solution: SubtractSolution
 
         if pathList.layouts.count > 0 {
-            solution = SubstractSolution(pathList: pathList, disposition: .overlap)
+            solution = SubtractSolution(pathList: pathList, disposition: .overlap)
         } else {
-            solution = SubstractSolution(pathList: pathList, disposition: .notOverlap)
+            solution = SubtractSolution(pathList: pathList, disposition: .notOverlap)
         }
         return solution
     }
@@ -234,8 +234,8 @@ fileprivate extension PinNavigator {
     
     private mutating func isCanSkip(prev: Cursor, cursor: Cursor, nextSlave: Cursor) -> Bool {
         var nextMaster = cursor
-        var isFoundMaster = false
-        var isFoundStart = false
+        var isFoundMaster: Bool
+        var isFoundStart: Bool
         repeat {
             nextMaster = self.nextMaster(cursor: nextMaster)
             isFoundMaster = nextMaster == nextSlave

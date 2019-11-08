@@ -49,7 +49,7 @@ final class ViewController: NSViewController {
         let newScene: CALayer & MouseCompatible & SceneNavigation
         switch index {
         case 0:
-            newScene = SubstractScene()
+            newScene = SubtractScene()
         case 1:
             newScene = UnionScene()
         default:

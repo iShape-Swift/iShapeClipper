@@ -1,5 +1,5 @@
 //
-//  SubstractScene.swift
+//  SubtractScene.swift
 //  ClipperUI
 //
 //  Created by Nail Sharipov on 04/10/2019.
@@ -10,12 +10,12 @@ import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class SubstractScene: CoordinateSystemScene {
+final class SubtractScene: CoordinateSystemScene {
 
     private var master: [Point] = []
     private var slave: [Point] = []
 
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "substract")
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "subtract")
     
     private var activeIndex: Int?
     private var isSlave: Bool = false
@@ -61,7 +61,7 @@ final class SubstractScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let solution = Solver.substract(master: iMaster, slave: iSlave, iGeom: iGeom)
+        let solution = Solver.subtract(master: iMaster, slave: iSlave, iGeom: iGeom)
 
         switch solution.nature {
         case .notOverlap:
@@ -132,7 +132,7 @@ final class SubstractScene: CoordinateSystemScene {
 }
 
 
-extension SubstractScene: MouseCompatible {
+extension SubtractScene: MouseCompatible {
     
     private func findNearest(point: Point, points: [Point]) -> Int? {
         var i = 0
@@ -198,18 +198,18 @@ extension SubstractScene: MouseCompatible {
     }
 }
 
-extension SubstractScene: SceneNavigation {
+extension SubtractScene: SceneNavigation {
     func next() {
         let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: "substract")
+        UserDefaults.standard.set(pageIndex, forKey: "subtract")
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: "substract")
+        UserDefaults.standard.set(pageIndex, forKey: "subtract")
         self.showPage(index: self.pageIndex)
     }
     

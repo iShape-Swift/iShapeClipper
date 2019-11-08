@@ -20,7 +20,7 @@ final class SubtractTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -46,7 +46,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -68,7 +68,7 @@ final class SubtractTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -90,7 +90,7 @@ final class SubtractTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -113,7 +113,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -135,7 +135,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -157,7 +157,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -188,7 +188,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -222,7 +222,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -257,7 +257,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -290,7 +290,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -323,7 +323,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -354,7 +354,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -380,7 +380,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .notOverlap)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -393,7 +393,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 4)
@@ -442,7 +442,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 3)
@@ -485,7 +485,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -522,7 +522,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -549,7 +549,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -575,7 +575,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -602,7 +602,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -625,7 +625,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -654,7 +654,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -688,7 +688,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -722,7 +722,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -756,7 +756,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -785,7 +785,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -818,7 +818,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -835,7 +835,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -858,7 +858,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -884,7 +884,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -910,7 +910,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -949,7 +949,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -968,7 +968,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1001,7 +1001,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1033,7 +1033,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1059,7 +1059,7 @@ final class SubtractTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 5)
@@ -1123,7 +1123,7 @@ final class SubtractTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1153,7 +1153,7 @@ final class SubtractTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.substract(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
 
         XCTAssertEqual(solution.nature, .empty)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
