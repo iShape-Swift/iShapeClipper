@@ -7,7 +7,7 @@
 
 import iGeometry
 
-public struct SubstractSolution {
+public struct SubtractSolution {
     
     public enum Nature {
         case notOverlap

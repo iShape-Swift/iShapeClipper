@@ -45,19 +45,16 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v1.masterMileStone.index, 0)
         XCTAssertEqual(path.v1.masterMileStone.offset, z.sqrDistance(point: path.v1.point))
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 1)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
 
         XCTAssertEqual(path.v0.point, iGeom.int(point: Point(x: -5, y: 10)))
         XCTAssertEqual(path.v1.point, iGeom.int(point: Point(x: 5, y: 10)))
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 1)
-        
         
         let points = iGeom.float(points: path.extract(points: iMaster))
         XCTAssertEqual(points.count, 2)
