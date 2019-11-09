@@ -1014,11 +1014,13 @@ final class PinPathTests: XCTestCase {
         slave.append(Point(x: 5, y: 10))
         slave.append(Point(x: 0, y: 5))
         slave.append(Point(x: -5, y: 10))
+        
         slave.append(Point(x: -10, y: 10))
         slave.append(Point(x: -10, y: 5))
         slave.append(Point(x: -5, y: 0))
         slave.append(Point(x: -10, y: -5))
         slave.append(Point(x: -10, y: -10))
+        
         slave.append(Point(x: -5, y: -10))
         slave.append(Point(x: 0, y: -5))
         slave.append(Point(x: 5, y: -10))
