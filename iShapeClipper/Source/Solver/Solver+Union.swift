@@ -15,7 +15,7 @@ public extension Solver {
         guard !navigator.isEqual else {
             var pathList = PlainPathList()
             pathList.append(path: master, isClockWise: true)
-            return UnionSolution(pathList: PlainPathList(), nature: .overlap)
+            return UnionSolution(pathList: pathList, nature: .overlap)
         }
         
         var cursor = navigator.nextUnion()
@@ -131,46 +131,46 @@ public extension Solver {
                 let inMasterStart = navigator.masterStartStone(cursor: cursor)
                 
                 
-                let isOutMsterNotOverflow: Bool
+                let isOutMasterNotOverflow: Bool
                 let outMasterIndex: Int
                 if outMasterEnd.index + 1 < masterCount {
                     outMasterIndex = outMasterEnd.index + 1
-                    isOutMsterNotOverflow = true
+                    isOutMasterNotOverflow = true
                 } else {
                     outMasterIndex = 0
-                    isOutMsterNotOverflow = false
+                    isOutMasterNotOverflow = false
                 }
                 
                 
-                let isInMsterNotOverflow: Bool
+                let isInMasterNotOverflow: Bool
                 let inMasterIndex: Int
                 if inMasterStart.offset != 0 {
                     inMasterIndex = inMasterStart.index
-                    isInMsterNotOverflow = true
+                    isInMasterNotOverflow = true
                 } else {
                     if inMasterStart.index != 0 {
                         inMasterIndex = inMasterStart.index - 1
-                        isInMsterNotOverflow = true
+                        isInMasterNotOverflow = true
                     } else {
                         inMasterIndex = masterCount - 1
-                        isInMsterNotOverflow = false
+                        isInMasterNotOverflow = false
                     }
                 }
                 
                 
                 if PathMileStone.moreOrEqual(a: outMasterEnd, b: inMasterStart) {
                     // a > b
-                    if isOutMsterNotOverflow {
+                    if isOutMasterNotOverflow {
                         let sliceA = master[outMasterIndex...masterLastIndex]
                         path.append(contentsOf: sliceA)
                     }
-                    if isInMsterNotOverflow {
+                    if isInMasterNotOverflow {
                         let sliceB = master[0...inMasterIndex]
                         path.append(contentsOf: sliceB)
                     }
                 } else {
                     // a < b
-                    if isInMsterNotOverflow && isOutMsterNotOverflow && outMasterIndex <= inMasterIndex {
+                    if isInMasterNotOverflow && isOutMasterNotOverflow && outMasterIndex <= inMasterIndex {
                         let slice = master[outMasterIndex...inMasterIndex]
                         path.append(contentsOf: slice)
                     }
