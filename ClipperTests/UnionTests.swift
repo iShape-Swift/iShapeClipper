@@ -28,14 +28,14 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: -10.0),
-            Point(x: 5.0, y: -15.0),
-            Point(x: -5.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0)
+            Point(x: 5, y: -10),
+            Point(x: 5, y: -15),
+            Point(x: -5, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -54,14 +54,14 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -5.0, y: 10.0),
-            Point(x: -5.0, y: 15.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -5.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0)
+            Point(x: -5, y: 10),
+            Point(x: -5, y: 15),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -5, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -80,13 +80,13 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -5.0, y: 10.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -5.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0)
+            Point(x: -5, y: 10),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -5, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -105,12 +105,12 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -5.0, y: 10.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0)
+            Point(x: -5, y: 10),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -129,11 +129,11 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -152,12 +152,12 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 0.0),
-            Point(x: -20.0, y: 10.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 0.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 0),
+            Point(x: -20, y: 10),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: 0, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -176,15 +176,15 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: 10.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: -2.5),
-            Point(x: -15.0, y: 0.0),
-            Point(x: -10.0, y: 2.5),
-            Point(x: -10.0, y: 10.0)
+            Point(x: 5, y: 10),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: 5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: -2.5),
+            Point(x: -15, y: 0),
+            Point(x: -10, y: 2.5),
+            Point(x: -10, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -203,16 +203,16 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 0.0, y: -10.0),
-            Point(x: 0.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: -5.0),
-            Point(x: -15.0, y: 0.0),
-            Point(x: -10.0, y: 0.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0)
+            Point(x: 0, y: -10),
+            Point(x: 0, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: -5),
+            Point(x: -15, y: 0),
+            Point(x: -10, y: 0),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -231,10 +231,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -253,10 +253,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -275,10 +275,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -297,12 +297,12 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 0.0, y: -10.0),
-            Point(x: -30.0, y: -10.0),
-            Point(x: -10.0, y: 0.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0)
+            Point(x: 0, y: -10),
+            Point(x: -30, y: -10),
+            Point(x: -10, y: 0),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -321,10 +321,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -343,13 +343,13 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: -10.0),
-            Point(x: 0.0, y: -15.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0)
+            Point(x: 5, y: -10),
+            Point(x: 0, y: -15),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -368,10 +368,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -390,13 +390,13 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 0.0, y: 10.0),
-            Point(x: 5.0, y: 10.0),
-            Point(x: 5.0, y: 0.0),
-            Point(x: 10.0, y: 0.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0)
+            Point(x: 0, y: 10),
+            Point(x: 5, y: 10),
+            Point(x: 5, y: 0),
+            Point(x: 10, y: 0),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -415,17 +415,17 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -5.0, y: -5.0),
-            Point(x: -10.0, y: -5.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -5.0),
-            Point(x: 5.0, y: -5.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: -5.0, y: 5.0),
-            Point(x: -5.0, y: 0.0),
-            Point(x: 5.0, y: 0.0),
-            Point(x: 0.0, y: -5.0)
+            Point(x: -5, y: -5),
+            Point(x: -10, y: -5),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: 5, y: 5),
+            Point(x: -5, y: 5),
+            Point(x: -5, y: 0),
+            Point(x: 5, y: 0),
+            Point(x: 0, y: -5)
         ]
         
         XCTAssertEqual(path, sample)
@@ -448,41 +448,41 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: -5.0, y: 10.0),
-            Point(x: -5.0, y: 15.0),
-            Point(x: -10.0, y: 15.0),
-            Point(x: -10.0, y: -5.0),
-            Point(x: 5.0, y: -5.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: 0.0, y: 5.0),
-            Point(x: 0.0, y: 0.0),
-            Point(x: -5.0, y: 0.0),
-            Point(x: -5.0, y: 5.0),
-            Point(x: -7.5, y: 5.0),
-            Point(x: -7.5, y: 10.0)
+            Point(x: -5, y: 10),
+            Point(x: -5, y: 15),
+            Point(x: -10, y: 15),
+            Point(x: -10, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: 5, y: 5),
+            Point(x: 0, y: 5),
+            Point(x: 0, y: 0),
+            Point(x: -5, y: 0),
+            Point(x: -5, y: 5),
+            Point(x: -7.5, y: 5),
+            Point(x: -7.5, y: 10)
         ]
         
         let sample1 = [
-            Point(x: 5.0, y: 10.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 12.5, y: 10.0),
-            Point(x: 12.5, y: 5.0),
-            Point(x: 10.0, y: 5.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 0.0, y: 20.0),
-            Point(x: 0.0, y: 10.0)
+            Point(x: 5, y: 10),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: -15),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: 10),
+            Point(x: 12.5, y: 10),
+            Point(x: 12.5, y: 5),
+            Point(x: 10, y: 5),
+            Point(x: 10, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 20),
+            Point(x: 0, y: 20),
+            Point(x: 0, y: 10)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -506,37 +506,37 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: -5.0, y: 2.5),
-            Point(x: -5.0, y: 15.0),
-            Point(x: -10.0, y: 15.0),
-            Point(x: -10.0, y: -5.0),
-            Point(x: 5.0, y: -5.0),
-            Point(x: 5.0, y: -2.5),
+            Point(x: -5, y: 2.5),
+            Point(x: -5, y: 15),
+            Point(x: -10, y: 15),
+            Point(x: -10, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: 5, y: -2.5),
             Point(x: -7.5, y: -2.5),
             Point(x: -7.5, y: 2.5)
         ]
         
         let sample1 = [
-            Point(x: 5.0, y: 2.5),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: 2.5),
+            Point(x: 5, y: 2.5),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: -15),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: 2.5),
             Point(x: 12.5, y: 2.5),
             Point(x: 12.5, y: -2.5),
-            Point(x: 10.0, y: -2.5),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 0.0, y: 20.0),
-            Point(x: 0.0, y: 2.5)
+            Point(x: 10, y: -2.5),
+            Point(x: 10, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 20),
+            Point(x: 0, y: 20),
+            Point(x: 0, y: 2.5)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -557,10 +557,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -580,10 +580,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -603,13 +603,13 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 10.0, y: 5.0),
-            Point(x: 15.0, y: 5.0),
-            Point(x: 10.0, y: -5.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0)
+            Point(x: 10, y: 5),
+            Point(x: 15, y: 5),
+            Point(x: 10, y: -5),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -632,21 +632,21 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: 5.0, y: 0.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: 0.0, y: 5.0),
-            Point(x: 0.0, y: 0.0)
+            Point(x: 5, y: 0),
+            Point(x: 5, y: 5),
+            Point(x: 0, y: 5),
+            Point(x: 0, y: 0)
         ]
         
         let sample1 = [
-            Point(x: 0.0, y: -5.0),
-            Point(x: 0.0, y: -10.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: 5.0, y: -10.0),
-            Point(x: 5.0, y: -5.0)
+            Point(x: 0, y: -5),
+            Point(x: 0, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: 5, y: -10),
+            Point(x: 5, y: -5)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -666,16 +666,16 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: -5.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: -10.0, y: 5.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: 5.0, y: 10.0),
-            Point(x: 5.0, y: 15.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -15.0, y: -15.0),
-            Point(x: -15.0, y: -5.0)
+            Point(x: 5, y: -5),
+            Point(x: 5, y: 5),
+            Point(x: -10, y: 5),
+            Point(x: -10, y: 10),
+            Point(x: 5, y: 10),
+            Point(x: 5, y: 15),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5)
         ]
         
         XCTAssertEqual(path, sample)
@@ -694,14 +694,14 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: -5.0),
-            Point(x: -5.0, y: 5.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: 5.0, y: 15.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -15.0, y: -15.0),
-            Point(x: -15.0, y: -5.0)
+            Point(x: 5, y: -5),
+            Point(x: -5, y: 5),
+            Point(x: 5, y: 5),
+            Point(x: 5, y: 15),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5)
         ]
         
         XCTAssertEqual(path, sample)
@@ -720,17 +720,17 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 15.0, y: 5.0),
-            Point(x: 25.0, y: 0.0),
-            Point(x: 15.0, y: -2.5),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -15.0, y: -15.0),
-            Point(x: -15.0, y: -5.0),
-            Point(x: 5.0, y: -5.0),
-            Point(x: -5.0, y: 5.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: 5.0, y: 15.0),
-            Point(x: 15.0, y: 15.0)
+            Point(x: 15, y: 5),
+            Point(x: 25, y: 0),
+            Point(x: 15, y: -2.5),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: -5, y: 5),
+            Point(x: 5, y: 5),
+            Point(x: 5, y: 15),
+            Point(x: 15, y: 15)
         ]
         
         XCTAssertEqual(path, sample)
@@ -749,12 +749,12 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: 15.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -15.0, y: -15.0),
-            Point(x: -15.0, y: -5.0),
-            Point(x: 5.0, y: -5.0)
+            Point(x: 5, y: 15),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5),
+            Point(x: 5, y: -5)
         ]
         
         XCTAssertEqual(path, sample)
@@ -773,14 +773,14 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: -5.0),
-            Point(x: -10.0, y: 0.0),
-            Point(x: 5.0, y: 0.0),
-            Point(x: 5.0, y: 15.0),
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -15.0, y: -15.0),
-            Point(x: -15.0, y: -5.0)
+            Point(x: -10, y: -5),
+            Point(x: -10, y: 0),
+            Point(x: 5, y: 0),
+            Point(x: 5, y: 15),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5)
         ]
         
         XCTAssertEqual(path, sample)
@@ -803,29 +803,29 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: -10.0, y: 0.0),
-            Point(x: -15.0, y: 0.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: 5.0, y: -10.0),
-            Point(x: 5.0, y: 10.0),
-            Point(x: -5.0, y: 10.0),
-            Point(x: -5.0, y: 5.0),
-            Point(x: 0.0, y: 5.0),
-            Point(x: 0.0, y: 0.0),
-            Point(x: -5.0, y: 0.0),
-            Point(x: -5.0, y: -5.0),
-            Point(x: -10.0, y: -5.0)
+            Point(x: -10, y: 0),
+            Point(x: -15, y: 0),
+            Point(x: -15, y: -10),
+            Point(x: 5, y: -10),
+            Point(x: 5, y: 10),
+            Point(x: -5, y: 10),
+            Point(x: -5, y: 5),
+            Point(x: 0, y: 5),
+            Point(x: 0, y: 0),
+            Point(x: -5, y: 0),
+            Point(x: -5, y: -5),
+            Point(x: -10, y: -5)
         ]
         
         let sample1 = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: -20.0, y: 10.0),
-            Point(x: -20.0, y: 20.0),
-            Point(x: 10.0, y: 20.0),
-            Point(x: 10.0, y: -15.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: -20.0, y: 5.0),
-            Point(x: -10.0, y: 5.0)
+            Point(x: -10, y: 10),
+            Point(x: -20, y: 10),
+            Point(x: -20, y: 20),
+            Point(x: 10, y: 20),
+            Point(x: 10, y: -15),
+            Point(x: -20, y: -15),
+            Point(x: -20, y: 5),
+            Point(x: -10, y: 5)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -849,26 +849,26 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: -15.0, y: 10.0),
-            Point(x: -20.0, y: 10.0),
-            Point(x: -20.0, y: 20.0),
-            Point(x: 10.0, y: 20.0),
-            Point(x: 10.0, y: -15.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: -20.0, y: 5.0),
-            Point(x: -16.296299, y: 5.0)
+            Point(x: -15, y: 10),
+            Point(x: -20, y: 10),
+            Point(x: -20, y: 20),
+            Point(x: 10, y: 20),
+            Point(x: 10, y: -15),
+            Point(x: -20, y: -15),
+            Point(x: -20, y: 5),
+            Point(x: -16.296299, y: 5)
         ]
         
         let sample1 = [
-            Point(x: -11.6189995, y: 5.0),
-            Point(x: 0.0, y: 5.0),
-            Point(x: 0.0, y: 0.0),
-            Point(x: -15.0, y: 0.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: 5.0, y: -10.0),
-            Point(x: 5.0, y: 10.0),
-            Point(x: -8.125, y: 10.0),
-            Point(x: -10.0, y: 7.0)
+            Point(x: -11.6189995, y: 5),
+            Point(x: 0, y: 5),
+            Point(x: 0, y: 0),
+            Point(x: -15, y: 0),
+            Point(x: -15, y: -10),
+            Point(x: 5, y: -10),
+            Point(x: 5, y: 10),
+            Point(x: -8.125, y: 10),
+            Point(x: -10, y: 7)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -892,25 +892,25 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: 0.0, y: 5.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: 5.0, y: 0.0),
-            Point(x: -10.0, y: 0.0),
-            Point(x: -10.0, y: -10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 0.0, y: 10.0)
+            Point(x: 0, y: 5),
+            Point(x: 5, y: 5),
+            Point(x: 5, y: 0),
+            Point(x: -10, y: 0),
+            Point(x: -10, y: -10),
+            Point(x: 10, y: -10),
+            Point(x: 10, y: 10),
+            Point(x: 0, y: 10)
         ]
         
         let sample1 = [
-            Point(x: -5.0, y: 10.0),
-            Point(x: -15.0, y: 10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: -15.0, y: -15.0),
-            Point(x: -15.0, y: 5.0),
-            Point(x: -5.0, y: 5.0)
+            Point(x: -5, y: 10),
+            Point(x: -15, y: 10),
+            Point(x: -15, y: 20),
+            Point(x: 15, y: 20),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: 5),
+            Point(x: -5, y: 5)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -930,22 +930,22 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: 15.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 0.0, y: 20.0),
-            Point(x: 0.0, y: 15.0)
+            Point(x: 5, y: 15),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: -15),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 20),
+            Point(x: 0, y: 20),
+            Point(x: 0, y: 15)
         ]
         
         XCTAssertEqual(path, sample)
@@ -964,22 +964,22 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: 15.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 0.0, y: 20.0),
-            Point(x: 0.0, y: 15.0)
+            Point(x: 5, y: 15),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: -15),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 20),
+            Point(x: 0, y: 20),
+            Point(x: 0, y: 15)
         ]
         
         XCTAssertEqual(path, sample)
@@ -1002,23 +1002,23 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: 5.0, y: 20.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: 20.0)
+            Point(x: 5, y: 20),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: 20)
         ]
         
         let sample1 = [
-            Point(x: 7.0, y: -15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: 7.0, y: -10.0)
+            Point(x: 7, y: -15),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: -10),
+            Point(x: 7, y: -10)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -1043,29 +1043,29 @@ final class UnionTests: XCTestCase {
         let path2 = iGeom.float(points: pathes[2])
         
         let sample0 = [
-            Point(x: 5.0, y: 20.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: 20.0)
+            Point(x: 5, y: 20),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: 20)
         ]
         
         let sample1 = [
-            Point(x: 4.9167, y: -5.0),
-            Point(x: 5.0, y: -5.0),
-            Point(x: 5.0, y: -4.0)
+            Point(x: 4.9167, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: 5, y: -4)
         ]
         
         let sample2 = [
-            Point(x: 4.0833, y: -15.0),
-            Point(x: 15.0, y: -15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: 4.5, y: -10.0)
+            Point(x: 4.0833, y: -15),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: -10),
+            Point(x: 4.5, y: -10)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -1090,34 +1090,34 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: -4.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 0.0, y: 20.0),
-            Point(x: 0.0, y: 0.0),
-            Point(x: -5.0, y: 0.0),
-            Point(x: -5.0, y: 15.0),
-            Point(x: -10.0, y: 15.0),
-            Point(x: -10.0, y: -5.0),
-            Point(x: 5.0, y: -5.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: -14.0),
-            Point(x: -16.8, y: -14.0)
+            Point(x: -4, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 20),
+            Point(x: 0, y: 20),
+            Point(x: 0, y: 0),
+            Point(x: -5, y: 0),
+            Point(x: -5, y: 15),
+            Point(x: -10, y: 15),
+            Point(x: -10, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: -14),
+            Point(x: -16.8, y: -14)
         ]
         
         let sample1 = [
-            Point(x: -10.0, y: -14.0),
-            Point(x: 15.0, y: -14.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: -5.625),
-            Point(x: 12.0, y: -5.0),
-            Point(x: 15.0, y: -9.0)
+            Point(x: -10, y: -14),
+            Point(x: 15, y: -14),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: -5.625),
+            Point(x: 12, y: -5),
+            Point(x: 15, y: -9)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -1137,17 +1137,17 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: 0.0),
-            Point(x: 10.0, y: 0.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -5.0, y: 5.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: -5.0, y: 10.0),
-            Point(x: -5.0, y: 15.0),
-            Point(x: 0.0, y: 15.0),
-            Point(x: 0.0, y: 10.0),
-            Point(x: 5.0, y: 10.0)
+            Point(x: 5, y: 0),
+            Point(x: 10, y: 0),
+            Point(x: 10, y: -10),
+            Point(x: -5, y: -10),
+            Point(x: -5, y: 5),
+            Point(x: -10, y: 10),
+            Point(x: -5, y: 10),
+            Point(x: -5, y: 15),
+            Point(x: 0, y: 15),
+            Point(x: 0, y: 10),
+            Point(x: 5, y: 10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -1170,20 +1170,20 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: 5.0, y: 0.0),
-            Point(x: 10.0, y: 0.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -5.0, y: 15.0),
-            Point(x: 0.0, y: 15.0),
-            Point(x: 0.0, y: 10.0),
-            Point(x: 5.0, y: 10.0)
+            Point(x: 5, y: 0),
+            Point(x: 10, y: 0),
+            Point(x: 10, y: -10),
+            Point(x: -5, y: -10),
+            Point(x: -5, y: 15),
+            Point(x: 0, y: 15),
+            Point(x: 0, y: 10),
+            Point(x: 5, y: 10)
         ]
         
         let sample1 = [
-            Point(x: 0.0, y: 8.0),
-            Point(x: 0.0, y: 4.0),
-            Point(x: 2.0, y: 6.0)
+            Point(x: 0, y: 8),
+            Point(x: 0, y: 4),
+            Point(x: 2, y: 6)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -1210,48 +1210,48 @@ final class UnionTests: XCTestCase {
         let path4 = iGeom.float(points: pathes[4])
         
         let sample0 = [
-            Point(x: -5.0, y: 0.0),
-            Point(x: -5.0, y: 10.0),
-            Point(x: -10.0, y: 10.0),
-            Point(x: -10.0, y: -5.0),
-            Point(x: -5.0, y: -5.0)
+            Point(x: -5, y: 0),
+            Point(x: -5, y: 10),
+            Point(x: -10, y: 10),
+            Point(x: -10, y: -5),
+            Point(x: -5, y: -5)
         ]
         
         let sample1 = [
-            Point(x: 5.0, y: 0.0),
-            Point(x: 5.0, y: 10.0),
-            Point(x: 0.0, y: 10.0),
-            Point(x: 0.0, y: 0.0)
+            Point(x: 5, y: 0),
+            Point(x: 5, y: 10),
+            Point(x: 0, y: 10),
+            Point(x: 0, y: 0)
         ]
         
         let sample2 = [
-            Point(x: 15.0, y: -10.0),
-            Point(x: 15.0, y: -5.0),
-            Point(x: 10.0, y: -5.0),
-            Point(x: 10.0, y: -10.0)
+            Point(x: 15, y: -10),
+            Point(x: 15, y: -5),
+            Point(x: 10, y: -5),
+            Point(x: 10, y: -10)
         ]
         
         let sample3 = [
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 20.0),
-            Point(x: 0.0, y: 20.0),
-            Point(x: 0.0, y: 15.0),
-            Point(x: 5.0, y: 15.0),
-            Point(x: 5.0, y: 25.0),
-            Point(x: -20.0, y: 25.0),
-            Point(x: -20.0, y: -15.0),
-            Point(x: -15.0, y: -15.0)
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 20),
+            Point(x: 0, y: 20),
+            Point(x: 0, y: 15),
+            Point(x: 5, y: 15),
+            Point(x: 5, y: 25),
+            Point(x: -20, y: 25),
+            Point(x: -20, y: -15),
+            Point(x: -15, y: -15)
         ]
         
         let sample4 = [
-            Point(x: 15.0, y: 15.0),
-            Point(x: 15.0, y: 20.0),
-            Point(x: 20.0, y: 20.0),
-            Point(x: 20.0, y: -20.0),
-            Point(x: -25.0, y: -20.0),
-            Point(x: -25.0, y: 30.0),
-            Point(x: 10.0, y: 30.0),
-            Point(x: 10.0, y: 15.0)
+            Point(x: 15, y: 15),
+            Point(x: 15, y: 20),
+            Point(x: 20, y: 20),
+            Point(x: 20, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: -25, y: 30),
+            Point(x: 10, y: 30),
+            Point(x: 10, y: 15)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -1278,21 +1278,21 @@ final class UnionTests: XCTestCase {
         let path1 = iGeom.float(points: pathes[1])
         
         let sample0 = [
-            Point(x: 5.0, y: -5.0),
-            Point(x: -5.0, y: -5.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 10.0),
-            Point(x: 15.0, y: 10.0),
-            Point(x: 15.0, y: -10.0),
-            Point(x: 5.0, y: -10.0)
+            Point(x: 5, y: -5),
+            Point(x: -5, y: -5),
+            Point(x: -5, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 10),
+            Point(x: 15, y: 10),
+            Point(x: 15, y: -10),
+            Point(x: 5, y: -10)
         ]
         
         let sample1 = [
-            Point(x: -5.0, y: 0.0),
-            Point(x: 5.0, y: 0.0),
-            Point(x: 5.0, y: 5.0),
-            Point(x: -5.0, y: 5.0)
+            Point(x: -5, y: 0),
+            Point(x: 5, y: 0),
+            Point(x: 5, y: 5),
+            Point(x: -5, y: 5)
         ]
         
         XCTAssertEqual(path0, sample0)
@@ -1312,14 +1312,14 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: 5.0, y: -5.0),
-            Point(x: -5.0, y: -5.0),
-            Point(x: -5.0, y: -10.0),
-            Point(x: -15.0, y: -10.0),
-            Point(x: -15.0, y: 10.0),
-            Point(x: 15.0, y: 10.0),
-            Point(x: 15.0, y: -10.0),
-            Point(x: 5.0, y: -10.0)
+            Point(x: 5, y: -5),
+            Point(x: -5, y: -5),
+            Point(x: -5, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: 10),
+            Point(x: 15, y: 10),
+            Point(x: 15, y: -10),
+            Point(x: 5, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -1338,10 +1338,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
@@ -1360,10 +1360,10 @@ final class UnionTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
+            Point(x: -10, y: 10),
+            Point(x: 10, y: 10),
+            Point(x: 10, y: -10),
+            Point(x: -10, y: -10)
         ]
         
         XCTAssertEqual(path, sample)
