@@ -1,8 +1,8 @@
 //
-//  UnionScene.swift
+//  IntersectScene.swift
 //  ClipperUI
 //
-//  Created by Nail Sharipov on 02.11.2019.
+//  Created by Nail Sharipov on 17.11.2019.
 //  Copyright © 2019 iShape. All rights reserved.
 //
 
@@ -10,14 +10,15 @@ import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class UnionScene: CoordinateSystemScene {
+final class IntersectScene: CoordinateSystemScene {
 
     private static let indexKey = String(describing: IntersectScene.self)
-    
     private var master: [Point] = []
     private var slave: [Point] = []
+    
 
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: UnionScene.indexKey)
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: IntersectScene.indexKey)
+//    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
     private var isSlave: Bool = false
@@ -63,27 +64,16 @@ final class UnionScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let solution = Solver.union(master: iMaster, slave: iSlave, iGeom: iGeom)
+        let solution = Solver.intersect(master: iMaster, slave: iSlave, iGeom: iGeom)
 
         switch solution.nature {
+        case .overlap, .hole, .empty:
+            for points in solution.pathList.pathes {
+                let points = iGeom.float(points: points).toCGPoints()
+                self.addSublayer(ShapeArea(points: points, color: Colors.solution_second))
+            }
         case .notOverlap:
-            self.addSublayer(ShapeArea(points: master.toCGPoints(), color: Colors.alphaBlue))
-            self.addSublayer(ShapeArea(points: slave.toCGPoints(), color: Colors.alphaBlue))
-        default:
-            for layout in solution.pathList.layouts {
-                if layout.isClockWise {
-                    let path = solution.pathList.getPath(layout: layout)
-                    let points = iGeom.float(points: path).toCGPoints()
-                    self.addSublayer(ShapeArea(points: points, color: Colors.solution))
-                }
-            }
-            for layout in solution.pathList.layouts {
-                if !layout.isClockWise {
-                    let path = solution.pathList.getPath(layout: layout)
-                    let points = iGeom.float(points: path).toCGPoints()
-                    self.addSublayer(ShapeArea(points: points, color: Colors.blue))
-                }
-            }
+            break
         }
     }
     
@@ -129,13 +119,13 @@ final class UnionScene: CoordinateSystemScene {
         
         let points = slave.toCGPoints()
 
-        //self.addSublayer(ShapeArea(points: points, color: Colors.slave_second))
+        self.addSublayer(ShapeArea(points: points, color: Colors.slave_second))
         self.addSublayer(ShapeVectorPolygon(points: points, shift: 0, tip: 1, lineWidth: 0.25, color: Colors.slave, indexShift: 2, data: data))
     }
     
     
     func showPage(index: Int) {
-        let data = UnionTestData.data[index]
+        let data = SubtractTestData.data[index]
         self.master = data[0]
         self.slave = data[1]
         self.update()
@@ -144,7 +134,7 @@ final class UnionScene: CoordinateSystemScene {
 }
 
 
-extension UnionScene: MouseCompatible {
+extension IntersectScene: MouseCompatible {
     
     private func findNearest(point: Point, points: [Point]) -> Int? {
         var i = 0
@@ -210,18 +200,19 @@ extension UnionScene: MouseCompatible {
     }
 }
 
-extension UnionScene: SceneNavigation {
+extension IntersectScene: SceneNavigation {
+    
     func next() {
-        let n = UnionTestData.data.count
+        let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: UnionScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: IntersectScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = UnionTestData.data.count
+        let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: UnionScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: IntersectScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     

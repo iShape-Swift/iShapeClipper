@@ -7,21 +7,13 @@
 
 import iGeometry
 
-public extension Solver {
+extension Solver {
 
-    static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
-        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+    static func subtract(cursor aCursor: Cursor, navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var navigator = aNavigator
         
-        guard !navigator.isEqual else {
-            return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
-        }
-        
-        var cursor = navigator.nextSub()
-        
-        guard cursor.isNotEmpty else {
-            return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
-        }
-        
+        var cursor = aCursor
+
         var pathList = PlainPathList()
         
         let masterCount = master.count
@@ -169,25 +161,18 @@ public extension Solver {
             
             pathList.append(path: path, isClockWise: true)
             
-            cursor = navigator.nextSub()
+            cursor = navigator.nextSubtract()
         }
-        
-        let solution: SubtractSolution
 
-        if pathList.layouts.count > 0 {
-            solution = SubtractSolution(pathList: pathList, disposition: .overlap)
-        } else {
-            solution = SubtractSolution(pathList: pathList, disposition: .notOverlap)
-        }
-        return solution
+        return pathList
     }
     
 }
 
 
-fileprivate extension PinNavigator {
+extension PinNavigator {
     
-    mutating func nextSub() -> Cursor {
+    mutating func nextSubtract() -> Cursor {
         var cursor = self.next()
         
         while cursor.isNotEmpty && cursor.type != .inside && cursor.type != .out_in {
@@ -197,7 +182,7 @@ fileprivate extension PinNavigator {
         
         return cursor
     }
-    
+
 }
 
 

@@ -12,10 +12,12 @@ import iGeometry
 
 final class SubtractScene: CoordinateSystemScene {
 
+    private static let indexKey = String(describing: IntersectScene.self)
+    
     private var master: [Point] = []
     private var slave: [Point] = []
-
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: "subtract")
+    
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: SubtractScene.indexKey)
     
     private var activeIndex: Int?
     private var isSlave: Bool = false
@@ -202,14 +204,14 @@ extension SubtractScene: SceneNavigation {
     func next() {
         let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: "subtract")
+        UserDefaults.standard.set(pageIndex, forKey: SubtractScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = SubtractTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: "subtract")
+        UserDefaults.standard.set(pageIndex, forKey: SubtractScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     

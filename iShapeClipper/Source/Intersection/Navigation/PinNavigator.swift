@@ -130,6 +130,23 @@ struct PinNavigator {
         let path = pinPathArray[nextNode.index]
         return Cursor(type: path.v0.type, index: index)
     }
+    
+    func prevMaster(cursor: Cursor) -> Cursor {
+        let node = nodeArray[cursor.index]
+
+        let n = nodeArray.count
+        let prevMasterIndex = (node.masterIndex - 1 + n) % n
+        let index = prevMasterIndex
+        let prevNode = nodeArray[index]
+
+        if !prevNode.isPinPath {
+            let pin = pinPointArray[prevNode.index]
+            return Cursor(type: pin.type, index: index)
+        }
+
+        let path = pinPathArray[prevNode.index]
+        return Cursor(type: path.v0.type, index: index)
+    }
 
     func masterStartStone(cursor: Cursor) -> PathMileStone {
         let node = nodeArray[cursor.index]
