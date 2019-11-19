@@ -14,7 +14,7 @@ final class SubtractTests: XCTestCase {
     
     private let iGeom = IntGeom.defGeom
     
-    func test_0() {
+    func test_00() {
         let data = SubtractTestData.data[0]
         
         let master = iGeom.int(points: data[0])
@@ -40,7 +40,7 @@ final class SubtractTests: XCTestCase {
         XCTAssertEqual(path, sample)
     }
     
-    func test_1() {
+    func test_01() {
         let data = SubtractTestData.data[1]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -62,7 +62,7 @@ final class SubtractTests: XCTestCase {
     }
     
     
-    func test_2() {
+    func test_02() {
         let data = SubtractTestData.data[2]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -84,7 +84,7 @@ final class SubtractTests: XCTestCase {
     }
 
     
-    func test_3() {
+    func test_03() {
         let data = SubtractTestData.data[3]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -106,7 +106,7 @@ final class SubtractTests: XCTestCase {
     }
     
     
-    func test_4() {
+    func test_04() {
         let data = SubtractTestData.data[4]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -128,7 +128,7 @@ final class SubtractTests: XCTestCase {
     }
     
     
-    func test_5() {
+    func test_05() {
         let data = SubtractTestData.data[5]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -150,7 +150,7 @@ final class SubtractTests: XCTestCase {
     }
 
     
-    func test_6() {
+    func test_06() {
         let data = SubtractTestData.data[6]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -181,7 +181,7 @@ final class SubtractTests: XCTestCase {
     }
     
     
-    func test_7() {
+    func test_07() {
         let data = SubtractTestData.data[7]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -215,7 +215,7 @@ final class SubtractTests: XCTestCase {
     }
     
     
-    func test_8() {
+    func test_08() {
         let data = SubtractTestData.data[8]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
@@ -250,7 +250,7 @@ final class SubtractTests: XCTestCase {
     
     
     
-    func test_9() {
+    func test_09() {
         let data = SubtractTestData.data[9]
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])

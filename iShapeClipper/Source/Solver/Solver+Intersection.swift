@@ -105,7 +105,7 @@ extension Solver {
                 // out-in master path
                 
                 let outMasterEnd = navigator.masterEndStone(cursor: outCursor)
-                let inMasterStart = navigator.masterStartStone(cursor: cursor)
+                let inMasterStart = navigator.masterEndStone(cursor: cursor)
 
                 let isOutMasterEndNotOverflow: Bool
                 let outMasterEndIndex: Int
