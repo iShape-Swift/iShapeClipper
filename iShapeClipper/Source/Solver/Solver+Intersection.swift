@@ -32,7 +32,7 @@ extension Solver {
             repeat {
                 // in-out slave path
                 
-                let outCursor = navigator.nextSlaveOut(cursor: cursor, stop: start)
+                let outCursor = navigator.nextSlaveOut(cursor: cursor)
                 
                 let inSlaveStart = navigator.slaveStartStone(cursor: cursor)
                 
@@ -50,39 +50,11 @@ extension Solver {
                 let startPoint = navigator.slaveStartPoint(cursor: cursor)
                 path.append(startPoint)
                 
-                let isInSlaveNotOverflow: Bool
-                let inSlaveIndex: Int
-                if inSlaveStart.index + 1 < slaveCount {
-                    isInSlaveNotOverflow = true
-                    inSlaveIndex = inSlaveStart.index + 1
-                } else {
-                    isInSlaveNotOverflow = false
-                    inSlaveIndex = 0
-                }
-                
-                
-                let isOutSlaveNotOverflow: Bool
-                let outSlaveIndex: Int
-                
-                if outSlaveEnd.offset != 0 {
-                    isOutSlaveNotOverflow = true
-                    outSlaveIndex = outSlaveEnd.index
-                } else {
-                    if outSlaveEnd.index != 0 {
-                        isOutSlaveNotOverflow = true
-                        outSlaveIndex = outSlaveEnd.index - 1
-                    } else {
-                        isOutSlaveNotOverflow = false
-                        outSlaveIndex = slaveCount - 1
-                    }
-                }
                 
                 if PathMileStone.moreOrEqual(a: inSlaveStart, b: outSlaveEnd) {
                     // a > b
-                    if isInSlaveNotOverflow {
-                        let sliceA = slave[inSlaveIndex...slaveLastIndex]
-                        path.append(contentsOf: sliceA)
-                    }
+                    let sliceA = slave[inSlaveIndex...slaveLastIndex]
+                    path.append(contentsOf: sliceA)
                     
                     if isOutSlaveNotOverflow {
                         let sliceB = slave[0...outSlaveIndex]
@@ -191,32 +163,16 @@ extension Solver {
 
 fileprivate extension PinNavigator {
     
-    mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
+    mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
         let start = cursor
+
+        var next = self.nextSlave(cursor: cursor)
         
-        var prev = cursor
-        var cursor = self.nextSlave(cursor: cursor)
-        
-        while start != cursor && stop != cursor && cursor.type == .out_in {
-            let nextMaster = self.nextMaster(cursor: cursor)
-            
-            if nextMaster == start {
-                return cursor
-            }
-            
-            let nextSlave = self.nextSlave(cursor: cursor)
-            
-            let isCanSkip = self.isCanSkip(prev: prev, cursor: cursor, nextSlave: nextSlave)
-            if !isCanSkip {
-                return cursor
-            }
-            
-            self.mark(cursor: cursor)
-            prev = cursor
-            cursor = nextSlave
+        while start != next && cursor.type == .out_in {
+            self.mark(cursor: next)
+            next = self.nextSlave(cursor: next)
         }
-        
-        
+
         return cursor
     }
 
