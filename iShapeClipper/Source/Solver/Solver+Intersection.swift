@@ -38,10 +38,10 @@ extension Solver {
                     return pathList
                 }
                 
-                let inSlaveStart = navigator.slaveStartStone(cursor: cursor)
+                let inSlaveStart = navigator.slaveEndStone(cursor: cursor)
                 let outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
                 
-                let startPoint = navigator.slaveStartPoint(cursor: cursor)
+                let startPoint = navigator.slaveEndPoint(cursor: cursor)
                 path.append(startPoint)
                 
                 let isInSlaveStartNotOverflow: Bool
@@ -114,7 +114,7 @@ extension Solver {
                     isOutMasterEndNotOverflow = true
                     outMasterEndIndex = outMasterEnd.index
                 } else {
-                    if inMasterStart.index != 0 {
+                    if outMasterEnd.index != 0 {
                         isOutMasterEndNotOverflow = true
                         outMasterEndIndex = outMasterEnd.index - 1
                     } else {
@@ -135,11 +135,11 @@ extension Solver {
                 }
 
                 if PathMileStone.moreOrEqual(a: inMasterStart, b: outMasterEnd) {
-                    if isInMasterStartNotOverflow {
+                    if isOutMasterEndNotOverflow {
                         let sliceB = master[0...outMasterEndIndex].reversed()
                         path.append(contentsOf: sliceB)
                     }
-                    if isOutMasterEndNotOverflow {
+                    if isInMasterStartNotOverflow {
                         let sliceA = master[inMasterStartIndex...masterLastIndex].reversed()
                         path.append(contentsOf: sliceA)
                     }
