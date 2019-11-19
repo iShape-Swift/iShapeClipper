@@ -54,6 +54,11 @@ struct PinNavigator {
         self.isEqual = true
         self.hasContacts = false
     }
+    
+    
+    func isPath(cursor: Cursor) -> Bool {
+        return nodeArray[cursor.index].isPinPath
+    }
 
     func next(cursor: Cursor) -> Cursor {
         return next(index: cursor.index)

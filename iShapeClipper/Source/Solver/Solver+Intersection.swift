@@ -92,8 +92,10 @@ extension Solver {
                    break
                 }
                 
-                let endPoint = navigator.slaveEndPoint(cursor: outCursor)
-                path.append(endPoint)
+                if !navigator.isPath(cursor: outCursor) {
+                    let endPoint = navigator.slaveEndPoint(cursor: outCursor)
+                    path.append(endPoint)
+                }
 
                 cursor = navigator.prevMasterOut(cursor: outCursor)
                 if cursor == outCursor {

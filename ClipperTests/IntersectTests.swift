@@ -493,7 +493,7 @@ final class IntersectTests: XCTestCase {
         XCTAssertEqual(path, sample)
     }
     
-    
+
     func test_21() {
         let data = SubtractTestData.data[21]
         let master = iGeom.int(points: data[0])
@@ -509,8 +509,7 @@ final class IntersectTests: XCTestCase {
         let sample = [
             Point(x: 10.0, y: 5.0),
             Point(x: 0.0, y: 5.0),
-            Point(x: 10.0, y: 0.0),
-            Point(x: 10.0, y: -5.0)
+            Point(x: 10.0, y: 0.0)
         ]
         
         XCTAssertEqual(path, sample)
@@ -596,28 +595,17 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
         
-        let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        let sample0 = [
-            Point(x: 15, y: 5),
-            Point(x: 5, y: 5),
-            Point(x: 5, y: 15),
-            Point(x: 15, y: 15)
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            Point(x: 15.0, y: 5.0),
+            Point(x: 5.0, y: 5.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: 15.0, y: -2.5)
         ]
         
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
-            Point(x: 5, y: -5),
-            Point(x: 15, y: -2.5),
-            Point(x: 15, y: -15),
-            Point(x: -15, y: -15),
-            Point(x: -15, y: -5)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
+        XCTAssertEqual(path, sample)
     }
     
     
@@ -630,28 +618,17 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
         
-        let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        let sample0 = [
-            Point(x: 15, y: 5),
-            Point(x: 5, y: 15),
-            Point(x: 15, y: 15)
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            Point(x: 5.0, y: 15.0),
+            Point(x: 5.0, y: -10.0),
+            Point(x: 15.0, y: -10.0),
+            Point(x: 15.0, y: 5.0)
         ]
         
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
-            Point(x: 5, y: -5),
-            Point(x: 5, y: -10),
-            Point(x: 15, y: -10),
-            Point(x: 15, y: -15),
-            Point(x: -15, y: -15),
-            Point(x: -15, y: -5)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
+        XCTAssertEqual(path, sample)
     }
     
     
@@ -668,16 +645,12 @@ final class IntersectTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10, y: -5),
-            Point(x: -10, y: -10),
-            Point(x: 5, y: -5),
-            Point(x: 10, y: 0),
-            Point(x: 5, y: 0),
-            Point(x: 5, y: 15),
-            Point(x: 15, y: 15),
-            Point(x: 15, y: -15),
-            Point(x: -15, y: -15),
-            Point(x: -15, y: -5)
+            Point(x: -10.0, y: -5.0),
+            Point(x: -10.0, y: -10.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: 10.0, y: 0.0),
+            Point(x: 5.0, y: 0.0),
+            Point(x: 5.0, y: -5.0)
         ]
         
         XCTAssertEqual(path, sample)
@@ -697,20 +670,20 @@ final class IntersectTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: -10, y: 0),
-            Point(x: -5, y: 0),
-            Point(x: -5, y: -5),
-            Point(x: -10, y: -5)
+            Point(x: -10.0, y: 0.0),
+            Point(x: -5.0, y: 0.0),
+            Point(x: -5.0, y: 5.0),
+            Point(x: -10.0, y: 5.0)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: -10, y: 10),
-            Point(x: -5, y: 10),
-            Point(x: -5, y: 5),
-            Point(x: -10, y: 5)
+            Point(x: -10.0, y: 10.0),
+            Point(x: -5.0, y: 10.0),
+            Point(x: -5.0, y: 15.0),
+            Point(x: -10.0, y: 15.0)
         ]
         
         XCTAssertEqual(path1, sample1)
@@ -726,11 +699,25 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        XCTAssertEqual(solution.pathList.layouts.count, 2)
         
-        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let path0 = iGeom.float(points: solution.pathList.pathes[0])
+        let sample0 = [
+            Point(x: -15.0, y: 10.0),
+            Point(x: -8.125, y: 10.0),
+            Point(x: -5.0, y: 15.0)
+        ]
         
-        XCTAssertEqual(path.count, 5)
+        XCTAssertEqual(path0, sample0)
+        
+        let path1 = iGeom.float(points: solution.pathList.pathes[1])
+        let sample1 = [
+            Point(x: -11.6189995, y: 5.0),
+            Point(x: -16.296299, y: 5.0),
+            Point(x: -18.5, y: -3.5)
+        ]
+        
+        XCTAssertEqual(path1, sample1)
     }
     
     
@@ -743,17 +730,27 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        XCTAssertEqual(solution.pathList.layouts.count, 2)
         
-        let path = iGeom.float(points: solution.pathList.pathes[0])
-        let sample = [
-            Point(x: 0, y: 5),
-            Point(x: -5, y: 5),
-            Point(x: -5, y: 10),
-            Point(x: 0, y: 10)
+        let path0 = iGeom.float(points: solution.pathList.pathes[0])
+        let sample0 = [
+            Point(x: 0.0, y: 5.0),
+            Point(x: -5.0, y: 5.0),
+            Point(x: -5.0, y: 3.0),
+            Point(x: 0.0, y: 3.0)
         ]
         
-        XCTAssertEqual(path, sample)
+        XCTAssertEqual(path0, sample0)
+        
+        let path1 = iGeom.float(points: solution.pathList.pathes[1])
+        let sample1 = [
+            Point(x: -5.0, y: 10.0),
+            Point(x: 0.0, y: 10.0),
+            Point(x: 0.0, y: 15.0),
+            Point(x: -5.0, y: 15.0)
+        ]
+        
+        XCTAssertEqual(path1, sample1)
     }
     
     
@@ -770,14 +767,18 @@ final class IntersectTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10, y: 15),
-            Point(x: -5, y: 15),
-            Point(x: -5, y: 0),
-            Point(x: 0, y: 0),
-            Point(x: 0, y: 15),
-            Point(x: 5, y: 15),
-            Point(x: 5, y: -5),
-            Point(x: -10, y: -5)
+            Point(x: -5.0, y: 15.0),
+            Point(x: -5.0, y: 0.0),
+            Point(x: 0.0, y: 0.0),
+            Point(x: 0.0, y: 15.0),
+            Point(x: -10.0, y: 15.0),
+            Point(x: -11.0, y: -5.0),
+            Point(x: 10.0, y: -10.0),
+            Point(x: 10.0, y: 15.0),
+            Point(x: 5.0, y: 15.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: -10.0, y: -5.0),
+            Point(x: -10.0, y: 15.0)
         ]
         
         XCTAssertEqual(path, sample)
@@ -796,14 +797,18 @@ final class IntersectTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10, y: 15),
-            Point(x: -5, y: 15),
-            Point(x: -5, y: 0),
-            Point(x: 0, y: 0),
-            Point(x: 0, y: 15),
-            Point(x: 5, y: 15),
-            Point(x: 5, y: -5),
-            Point(x: -10, y: -5)
+            Point(x: -5.0, y: 15.0),
+            Point(x: -5.0, y: 0.0),
+            Point(x: 0.0, y: 0.0),
+            Point(x: 0.0, y: 15.0),
+            Point(x: -10.0, y: 15.0),
+            Point(x: -14.0, y: -4.0),
+            Point(x: 10.0, y: -10.0),
+            Point(x: 10.0, y: 15.0),
+            Point(x: 5.0, y: 15.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: -10.0, y: -5.0),
+            Point(x: -10.0, y: 15.0)
         ]
         
         XCTAssertEqual(path, sample)
@@ -822,26 +827,30 @@ final class IntersectTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: -15, y: 20),
-            Point(x: -15, y: -10),
-            Point(x: 7, y: -10),
-            Point(x: 7, y: -15),
-            Point(x: -20, y: -15),
-            Point(x: -20, y: 20)
+            Point(x: 0.0, y: 20.0),
+            Point(x: -15.0, y: 20.0),
+            Point(x: -15.0, y: -10.0),
+            Point(x: 7.0, y: -10.0),
+            Point(x: 7.0, y: 20.0),
+            Point(x: 5.0, y: 20.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: -10.0, y: -5.0),
+            Point(x: -10.0, y: 15.0),
+            Point(x: -5.0, y: 15.0),
+            Point(x: -5.0, y: 0.0),
+            Point(x: 0.0, y: 0.0)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 5, y: 20),
-            Point(x: 5, y: -5),
-            Point(x: -10, y: -5),
-            Point(x: -10, y: 15),
-            Point(x: -5, y: 15),
-            Point(x: -5, y: 0),
-            Point(x: 0, y: 0),
-            Point(x: 0, y: 20)
+            Point(x: 7.0, y: -15.0),
+            Point(x: -20.0, y: -15.0),
+            Point(x: -20.0, y: 20.0),
+            Point(x: -23.0, y: 20.0),
+            Point(x: -20.0, y: -15.0),
+            Point(x: 7.0, y: -16.0)
         ]
         
         XCTAssertEqual(path1, sample1)
@@ -857,13 +866,44 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
+        XCTAssertEqual(solution.pathList.layouts.count, 3)
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        XCTAssertEqual(path0.count, 6)
+        let sample0 = [
+            Point(x: 0.0, y: 20.0),
+            Point(x: -15.0, y: 20.0),
+            Point(x: -15.0, y: -10.0),
+            Point(x: 4.5, y: -10.0),
+            Point(x: 4.9167, y: -5.0),
+            Point(x: -10.0, y: -5.0),
+            Point(x: -10.0, y: 15.0),
+            Point(x: -5.0, y: 15.0),
+            Point(x: -5.0, y: 0.0),
+            Point(x: 0.0, y: 0.0)
+        ]
+        
+        XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        XCTAssertEqual(path1.count, 9)
+        let sample1 = [
+            Point(x: 5.0, y: 20.0),
+            Point(x: 5.0, y: -4.0),
+            Point(x: 7.0, y: 20.0)
+        ]
+        
+        XCTAssertEqual(path1, sample1)
+        
+        let path2 = iGeom.float(points: solution.pathList.pathes[2])
+        let sample2 = [
+            Point(x: 4.0833, y: -15.0),
+            Point(x: -20.0, y: -15.0),
+            Point(x: -20.0, y: 20.0),
+            Point(x: -23.0, y: 20.0),
+            Point(x: -20.0, y: -15.0),
+            Point(x: 4.0, y: -16.0)
+        ]
+        
+        XCTAssertEqual(path2, sample2)
     }
     
     
@@ -880,20 +920,19 @@ final class IntersectTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: -4, y: -10),
-            Point(x: 10, y: -10),
-            Point(x: -10, y: -14),
-            Point(x: -16.8, y: -14)
+            Point(x: -4.0, y: -10.0),
+            Point(x: 10.0, y: -10.0),
+            Point(x: 10.0, y: -5.625)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 10, y: -10),
-            Point(x: 10, y: -5.625),
-            Point(x: 12, y: -5),
-            Point(x: 15, y: -9)
+            Point(x: -10.0, y: -14.0),
+            Point(x: -16.8, y: -14.0),
+            Point(x: -20.0, y: -15.0),
+            Point(x: -15.0, y: -15.0)
         ]
         
         XCTAssertEqual(path1, sample1)
@@ -909,26 +948,19 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
         
-        let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        let sample0 = [
-            Point(x: 5, y: 0),
-            Point(x: 0, y: 0),
-            Point(x: 0, y: 10),
-            Point(x: 5, y: 10)
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            Point(x: 5.0, y: 0.0),
+            Point(x: 0.0, y: 0.0),
+            Point(x: 0.0, y: 10.0),
+            Point(x: -5.0, y: 10.0),
+            Point(x: -5.0, y: 5.0),
+            Point(x: 5.0, y: -5.0)
         ]
         
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
-            Point(x: -5, y: 10),
-            Point(x: -5, y: 5),
-            Point(x: -10, y: 10)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
+        XCTAssertEqual(path, sample)
     }
     
     
@@ -941,21 +973,27 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        XCTAssertEqual(solution.pathList.layouts.count, 2)
         
-        let path = iGeom.float(points: solution.pathList.pathes[0])
-        let sample = [
-            Point(x: 5, y: 0),
-            Point(x: 0, y: 0),
-            Point(x: 0, y: 4),
-            Point(x: 2, y: 6),
-            Point(x: 0, y: 8),
-            Point(x: 0, y: 10),
-            Point(x: 5, y: 10)
+        let path0 = iGeom.float(points: solution.pathList.pathes[0])
+        let sample0 = [
+            Point(x: 5.0, y: 0.0),
+            Point(x: 0.0, y: 0.0),
+            Point(x: 0.0, y: 4.0),
+            Point(x: -2.0, y: 2.0),
+            Point(x: 5.0, y: -5.0)
         ]
         
-        XCTAssertEqual(path, sample)
+        XCTAssertEqual(path0, sample0)
         
+        let path1 = iGeom.float(points: solution.pathList.pathes[1])
+        let sample1 = [
+            Point(x: 0.0, y: 8.0),
+            Point(x: 0.0, y: 10.0),
+            Point(x: -2.0, y: 10.0)
+        ]
+        
+        XCTAssertEqual(path1, sample1)
     }
     
     func test_38() {
@@ -967,59 +1005,36 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 5)
+        XCTAssertEqual(solution.pathList.layouts.count, 2)
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: 5, y: 0),
-            Point(x: 5, y: -5),
-            Point(x: -5, y: -5),
-            Point(x: -5, y: 0)
+            Point(x: 5.0, y: 0.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: 10.0, y: -5.0),
+            Point(x: 10.0, y: 15.0),
+            Point(x: 5.0, y: 15.0),
+            Point(x: 5.0, y: 10.0),
+            Point(x: 10.0, y: 10.0),
+            Point(x: 10.0, y: 0.0)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 10, y: 0),
-            Point(x: 10, y: 15),
-            Point(x: 15, y: 15),
-            Point(x: 15, y: -5),
-            Point(x: 10, y: -5)
+            Point(x: 0.0, y: 10.0),
+            Point(x: 0.0, y: 15.0),
+            Point(x: -15.0, y: 15.0),
+            Point(x: -15.0, y: -10.0),
+            Point(x: -10.0, y: -10.0),
+            Point(x: -10.0, y: -5.0),
+            Point(x: -10.0, y: 15.0),
+            Point(x: -5.0, y: 15.0),
+            Point(x: -5.0, y: 10.0)
         ]
         
         XCTAssertEqual(path1, sample1)
-        
-        let path2 = iGeom.float(points: solution.pathList.pathes[2])
-        let sample2 = [
-            Point(x: 0, y: 10),
-            Point(x: 0, y: 15),
-            Point(x: 5, y: 15),
-            Point(x: 5, y: 10)
-        ]
-        
-        XCTAssertEqual(path2, sample2)
-        
-        let path3 = iGeom.float(points: solution.pathList.pathes[3])
-        let sample3 = [
-            Point(x: -10, y: 10),
-            Point(x: -10, y: 15),
-            Point(x: -5, y: 15),
-            Point(x: -5, y: 10)
-        ]
-        
-        XCTAssertEqual(path3, sample3)
-        
-        let path4 = iGeom.float(points: solution.pathList.pathes[4])
-        let sample4 = [
-            Point(x: -15, y: -10),
-            Point(x: 10, y: -10),
-            Point(x: 15, y: -10),
-            Point(x: 15, y: -15),
-            Point(x: -15, y: -15)
-        ]
-        
-        XCTAssertEqual(path4, sample4)
     }
     
     
@@ -1031,26 +1046,19 @@ final class IntersectTests: XCTestCase {
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
         
-        let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        let sample0 = [
-            Point(x: 15, y: 15),
-            Point(x: 5, y: 10),
-            Point(x: 5, y: 15)
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            Point(x: 15.0, y: 15.0),
+            Point(x: 5.0, y: 10.0),
+            Point(x: 5.0, y: -5.0),
+            Point(x: -15.0, y: -5.0),
+            Point(x: -15.0, y: -10.0),
+            Point(x: 15.0, y: -10.0)
         ]
         
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
-            Point(x: -15, y: -10),
-            Point(x: 15, y: -10),
-            Point(x: 15, y: -15),
-            Point(x: -15, y: -15)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
+        XCTAssertEqual(path, sample)
     }
     
     func test_40() {
