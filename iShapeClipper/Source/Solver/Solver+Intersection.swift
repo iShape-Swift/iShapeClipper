@@ -32,45 +32,60 @@ extension Solver {
             repeat {
                 // in-out slave path
                 
-                let outCursor = navigator.nextSlaveOut(cursor: cursor)
+                let outCursor = navigator.nextSlaveOut(cursor: cursor, stop: start)
                 
                 let inSlaveStart = navigator.slaveStartStone(cursor: cursor)
-                
-                let outSlaveEnd: PathMileStone
-                
-                let isOutInStart = outCursor == start && path.count > 0
-                
-                if !isOutInStart {
-                    outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
-                } else {
-                    // possible if we start with out-in
-                    outSlaveEnd = navigator.slaveStartStone(cursor: outCursor)
-                }
+                let outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
                 
                 let startPoint = navigator.slaveStartPoint(cursor: cursor)
                 path.append(startPoint)
                 
+                let isInSlaveStartNotOverflow: Bool
+                let inSlaveStartIndex: Int
+                if inSlaveStart.index + 1 < slaveCount {
+                    isInSlaveStartNotOverflow = true
+                    inSlaveStartIndex = inSlaveStart.index + 1
+                } else {
+                    isInSlaveStartNotOverflow = false
+                    inSlaveStartIndex = 0
+                }
+
+                let isOutSlaveEndNotOverflow: Bool
+                let outSlaveEndIndex: Int
+                
+                if outSlaveEnd.offset != 0 {
+                    isOutSlaveEndNotOverflow = true
+                    outSlaveEndIndex = outSlaveEnd.index
+                } else {
+                    if outSlaveEnd.index != 0 {
+                        isOutSlaveEndNotOverflow = true
+                        outSlaveEndIndex = outSlaveEnd.index - 1
+                    } else {
+                        isOutSlaveEndNotOverflow = false
+                        outSlaveEndIndex = slaveCount - 1
+                    }
+                }
                 
                 if PathMileStone.moreOrEqual(a: inSlaveStart, b: outSlaveEnd) {
                     // a > b
-                    let sliceA = slave[inSlaveIndex...slaveLastIndex]
-                    path.append(contentsOf: sliceA)
-                    
-                    if isOutSlaveNotOverflow {
-                        let sliceB = slave[0...outSlaveIndex]
+                    if isInSlaveStartNotOverflow {
+                        let sliceA = slave[inSlaveStartIndex...slaveLastIndex]
+                        path.append(contentsOf: sliceA)
+                    }
+                    if isOutSlaveEndNotOverflow {
+                        let sliceB = slave[0...outSlaveEndIndex]
                         path.append(contentsOf: sliceB)
                     }
                 } else {
                     // a < b
-                    if isInSlaveNotOverflow && isOutSlaveNotOverflow && inSlaveIndex <= outSlaveIndex {
-                        let slice = slave[inSlaveIndex...outSlaveIndex]
+                    if isInSlaveStartNotOverflow && isOutSlaveEndNotOverflow && inSlaveStartIndex <= outSlaveEndIndex {
+                        let slice = slave[inSlaveStartIndex...outSlaveEndIndex]
                         path.append(contentsOf: slice)
                     }
                 }
                 
-                if isOutInStart {
-                    // possible if we start with out-in
-                    break
+                if outCursor == start {
+                   break
                 }
                 
                 let endPoint = navigator.slaveEndPoint(cursor: outCursor)
@@ -87,69 +102,50 @@ extension Solver {
                 
                 let outMasterEnd = navigator.masterEndStone(cursor: outCursor)
                 let inMasterStart = navigator.masterStartStone(cursor: cursor)
+
+                let isOutMasterEndNotOverflow: Bool
+                let outMasterEndIndex: Int
                 
-                let outMasterEndIndex = outMasterEnd.index
-                let inMasterStartIndex = inMasterStart.index
-                
-                if PathMileStone.moreOrEqual(a: inMasterStart, b: outMasterEnd) {
-                    let sliceA = master[inMasterStartIndex...masterLastIndex].reversed()
-                    path.append(contentsOf: sliceA)
-                    let sliceB = master[0...outMasterEndIndex].reversed()
-                    path.append(contentsOf: sliceB)
+                if outMasterEnd.offset != 0 {
+                    isOutMasterEndNotOverflow = true
+                    outMasterEndIndex = outMasterEnd.index
                 } else {
-                    if outMasterEndIndex > inMasterStartIndex {
+                    if inMasterStart.index != 0 {
+                        isOutMasterEndNotOverflow = true
+                        outMasterEndIndex = outMasterEnd.index - 1
+                    } else {
+                        isOutMasterEndNotOverflow = false
+                        outMasterEndIndex = masterCount - 1
+                    }
+                }
+                
+                let isInMasterStartNotOverflow: Bool
+                let inMasterStartIndex: Int
+                
+                if inMasterStart.index + 1 < masterCount {
+                    isInMasterStartNotOverflow = true
+                    inMasterStartIndex = inMasterStart.index + 1
+                } else {
+                    isInMasterStartNotOverflow = false
+                    inMasterStartIndex = 0
+                }
+
+                if PathMileStone.moreOrEqual(a: inMasterStart, b: outMasterEnd) {
+                    if isOutMasterEndNotOverflow {
+                        let sliceA = master[inMasterStartIndex...masterLastIndex].reversed()
+                        path.append(contentsOf: sliceA)
+                    }
+                    if isInMasterStartNotOverflow {
+                        let sliceB = master[0...outMasterEndIndex].reversed()
+                        path.append(contentsOf: sliceB)
+                    }
+                } else {
+                    if isOutMasterEndNotOverflow && isInMasterStartNotOverflow && inMasterStartIndex <= outMasterEndIndex {
                         let slice = master[inMasterStartIndex...outMasterEndIndex].reversed()
                         path.append(contentsOf: slice)
                     }
                 }
-                
-                /*
-                
-                let isOutMasterNotOverflow: Bool
-                let outMasterIndex: Int
-                if outMasterStart.index + 1 < masterCount {
-                    outMasterIndex = outMasterStart.index + 1
-                    isOutMasterNotOverflow = true
-                } else {
-                    outMasterIndex = 0
-                    isOutMasterNotOverflow = false
-                }
-                
-                
-                let isInMasterNotOverflow: Bool
-                let inMasterIndex: Int
-                if inMasterEnd.offset != 0 {
-                    inMasterIndex = inMasterEnd.index
-                    isInMasterNotOverflow = true
-                } else {
-                    if inMasterEnd.index != 0 {
-                        inMasterIndex = inMasterEnd.index - 1
-                        isInMasterNotOverflow = true
-                    } else {
-                        inMasterIndex = masterCount - 1
-                        isInMasterNotOverflow = false
-                    }
-                }
-                
-                
-                if PathMileStone.moreOrEqual(a: inMasterEnd, b: outMasterStart) {
-                    // a > b
-                    if isOutMasterNotOverflow {
-                        let sliceA = master[outMasterIndex...masterLastIndex].reversed()
-                        path.append(contentsOf: sliceA)
-                    }
-                    if isInMasterNotOverflow {
-                        let sliceB = master[0...inMasterIndex].reversed()
-                        path.append(contentsOf: sliceB)
-                    }
-                } else {
-                    // a < b
-                    if isInMasterNotOverflow && isOutMasterNotOverflow && outMasterIndex <= inMasterIndex {
-                        let slice = master[outMasterIndex...inMasterIndex].reversed()
-                        path.append(contentsOf: slice)
-                    }
-                }
- */
+
             } while cursor != start
             
             pathList.append(path: path, isClockWise: false)
@@ -163,17 +159,17 @@ extension Solver {
 
 fileprivate extension PinNavigator {
     
-    mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
+    mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
         let start = cursor
 
         var next = self.nextSlave(cursor: cursor)
         
-        while start != next && cursor.type == .out_in {
+        while start != next && next.type == .out_in && next != stop {
             self.mark(cursor: next)
             next = self.nextSlave(cursor: next)
         }
 
-        return cursor
+        return next
     }
 
     
@@ -182,7 +178,7 @@ fileprivate extension PinNavigator {
         
         var prev = self.prevMaster(cursor: cursor)
         
-        while start != prev && cursor.type == .out_in {
+        while start != prev && prev.type == .out_in {
             self.mark(cursor: prev)
             prev = self.prevMaster(cursor: prev)
         }
@@ -204,3 +200,4 @@ fileprivate extension PinNavigator {
         return isFoundMaster
     }
 }
+
