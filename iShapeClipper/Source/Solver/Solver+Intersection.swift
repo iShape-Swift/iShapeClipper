@@ -9,7 +9,7 @@ import iGeometry
 
 extension Solver {
 
-    static func intersect(cursor aCursor: Cursor, navigator aNavigator: PinNavigator,  master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+    static func intersect(cursor aCursor: Cursor, navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
         var navigator = aNavigator
         
         var cursor = aCursor
@@ -33,6 +33,10 @@ extension Solver {
                 // in-out slave path
                 
                 let outCursor = navigator.nextSlaveOut(cursor: cursor, stop: start)
+                if outCursor == cursor && cursor == start {
+                    pathList.append(path: slave, isClockWise: false)
+                    return pathList
+                }
                 
                 let inSlaveStart = navigator.slaveStartStone(cursor: cursor)
                 let outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
@@ -131,13 +135,13 @@ extension Solver {
                 }
 
                 if PathMileStone.moreOrEqual(a: inMasterStart, b: outMasterEnd) {
-                    if isOutMasterEndNotOverflow {
-                        let sliceA = master[inMasterStartIndex...masterLastIndex].reversed()
-                        path.append(contentsOf: sliceA)
-                    }
                     if isInMasterStartNotOverflow {
                         let sliceB = master[0...outMasterEndIndex].reversed()
                         path.append(contentsOf: sliceB)
+                    }
+                    if isOutMasterEndNotOverflow {
+                        let sliceA = master[inMasterStartIndex...masterLastIndex].reversed()
+                        path.append(contentsOf: sliceA)
                     }
                 } else {
                     if isOutMasterEndNotOverflow && isInMasterStartNotOverflow && inMasterStartIndex <= outMasterEndIndex {
