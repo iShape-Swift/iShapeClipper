@@ -54,11 +54,6 @@ struct PinNavigator {
         self.isEqual = true
         self.hasContacts = false
     }
-    
-    
-    func isPath(cursor: Cursor) -> Bool {
-        return nodeArray[cursor.index].isPinPath
-    }
 
     func next(cursor: Cursor) -> Cursor {
         return next(index: cursor.index)
@@ -195,8 +190,8 @@ struct PinNavigator {
             return pin.point
         }
 
-        let path = pinPathArray[node.index];
-        return path.v1.point;
+        let path = pinPathArray[node.index]
+        return path.v1.point
     }
 
 

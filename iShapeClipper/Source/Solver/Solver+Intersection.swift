@@ -39,7 +39,7 @@ extension Solver {
                 }
                 
                 let inSlaveStart = navigator.slaveEndStone(cursor: cursor)
-                let outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
+                let outSlaveEnd = navigator.slaveStartStone(cursor: outCursor)
                 
                 let startPoint = navigator.slaveEndPoint(cursor: cursor)
                 path.append(startPoint)
@@ -92,15 +92,30 @@ extension Solver {
                    break
                 }
                 
-                if !navigator.isPath(cursor: outCursor) {
-                    let endPoint = navigator.slaveEndPoint(cursor: outCursor)
+                if navigator.isPath(cursor: outCursor) {
+                    let nextSlaveIndex = outSlaveEndIndex + 1 < slaveCount ? outSlaveEndIndex + 1 : 0
+                    let nextSlavePoint = slave[nextSlaveIndex]
+                    let slaveStart = navigator.slaveStartPoint(cursor: outCursor)
+                    let isSameDirection = slaveStart == nextSlavePoint
+                    print(isSameDirection)
+                }
+                
+                
+                
+                
+  /*
+                
+                let lastPoint = path[path.count - 1]
+                if lastPoint != endPoint {
                     path.append(endPoint)
                 }
-
+*/
+                // TODO если совпадает с мастером то добавляем, если не совпадает то не добавляем
+                
+                
+                
                 cursor = navigator.prevMasterOut(cursor: outCursor)
-                if cursor == outCursor {
-                    break
-                }
+
                 
                 navigator.mark(cursor: cursor)
                 
@@ -108,6 +123,9 @@ extension Solver {
                 
                 let outMasterEnd = navigator.masterEndStone(cursor: outCursor)
                 let inMasterStart = navigator.masterEndStone(cursor: cursor)
+                
+                let endPoint = navigator.masterEndPoint(cursor: outCursor)
+                path.append(endPoint)
 
                 let isOutMasterEndNotOverflow: Bool
                 let outMasterEndIndex: Int
@@ -120,6 +138,7 @@ extension Solver {
                         isOutMasterEndNotOverflow = true
                         outMasterEndIndex = outMasterEnd.index - 1
                     } else {
+                        // TODO no case
                         isOutMasterEndNotOverflow = false
                         outMasterEndIndex = masterCount - 1
                     }
@@ -164,6 +183,10 @@ extension Solver {
 }
 
 fileprivate extension PinNavigator {
+    
+    func isPath(cursor: Cursor) -> Bool {
+        return nodeArray[cursor.index].isPinPath
+    }
     
     mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
         let start = cursor
