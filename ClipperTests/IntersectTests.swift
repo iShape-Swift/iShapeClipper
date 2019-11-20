@@ -1071,5 +1071,69 @@ final class IntersectTests: XCTestCase {
         XCTAssertEqual(solution.nature, .empty)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
+    
+    func test_41() {
+        let data = SubtractTestData.data[41]
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+
+        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            iGeometry.Point(x: -5.0, y: 5.0),
+            iGeometry.Point(x: -5.0, y: -5.0),
+            iGeometry.Point(x: 5.0, y: -5.0),
+            iGeometry.Point(x: 10.0, y: -5.0),
+            iGeometry.Point(x: 10.0, y: 5.0)
+        ]
+        
+        XCTAssertEqual(path, sample)
+    }
+    
+    func test_42() {
+        let data = SubtractTestData.data[42]
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+
+        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            iGeometry.Point(x: -5.0, y: 5.0),
+            iGeometry.Point(x: -5.0, y: -5.0),
+            iGeometry.Point(x: 10.0, y: -5.0),
+            iGeometry.Point(x: 10.0, y: 0.0),
+            iGeometry.Point(x: 10.0, y: 5.0)
+        ]
+        
+        XCTAssertEqual(path, sample)
+    }
+    
+    func test_43() {
+        let data = SubtractTestData.data[43]
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+
+        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        
+        let path = iGeom.float(points: solution.pathList.pathes[0])
+        let sample = [
+            iGeometry.Point(x: 10.0, y: 5.0),
+            iGeometry.Point(x: 0.0, y: 5.0),
+            iGeometry.Point(x: 10.0, y: 0.0)
+        ]
+        
+        XCTAssertEqual(path, sample)
+    }
 }
 
