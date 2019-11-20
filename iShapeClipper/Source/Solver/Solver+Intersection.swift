@@ -91,41 +91,18 @@ extension Solver {
                 if outCursor == start {
                    break
                 }
-                
-                if navigator.isPath(cursor: outCursor) {
-                    let nextSlaveIndex = outSlaveEndIndex + 1 < slaveCount ? outSlaveEndIndex + 1 : 0
-                    let nextSlavePoint = slave[nextSlaveIndex]
-                    let slaveStart = navigator.slaveStartPoint(cursor: outCursor)
-                    let isSameDirection = slaveStart == nextSlavePoint
-                    print(isSameDirection)
-                }
-                
-                
-                
-                
-  /*
-                
-                let lastPoint = path[path.count - 1]
-                if lastPoint != endPoint {
-                    path.append(endPoint)
-                }
-*/
-                // TODO если совпадает с мастером то добавляем, если не совпадает то не добавляем
-                
-                
-                
+
+                let endPoint = navigator.slaveStartPoint(cursor: outCursor)
+                path.append(endPoint)
+
                 cursor = navigator.prevMasterOut(cursor: outCursor)
 
-                
                 navigator.mark(cursor: cursor)
                 
                 // out-in master path
                 
-                let outMasterEnd = navigator.masterEndStone(cursor: outCursor)
+                let outMasterEnd = navigator.masterStartStone(cursor: outCursor)
                 let inMasterStart = navigator.masterEndStone(cursor: cursor)
-                
-                let endPoint = navigator.masterEndPoint(cursor: outCursor)
-                path.append(endPoint)
 
                 let isOutMasterEndNotOverflow: Bool
                 let outMasterEndIndex: Int
@@ -183,11 +160,7 @@ extension Solver {
 }
 
 fileprivate extension PinNavigator {
-    
-    func isPath(cursor: Cursor) -> Bool {
-        return nodeArray[cursor.index].isPinPath
-    }
-    
+
     mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
         let start = cursor
 
