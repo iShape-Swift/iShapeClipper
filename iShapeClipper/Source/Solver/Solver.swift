@@ -23,7 +23,7 @@ public struct Solver {
         }
         
         let restPathList = Solver.subtract(cursor: cursor, navigator: navigator, master: master, slave: slave)
-        let bitePathList = Solver.intersect(cursor: cursor, navigator: navigator, master: master, slave: slave)
+        let bitePathList = Solver.intersect(navigator: navigator, master: master, slave: slave)
 
         if restPathList.layouts.count > 0 {
             return CutSolution(restPathList: restPathList, bitePathList: bitePathList, disposition: .overlap)
@@ -67,7 +67,7 @@ public struct Solver {
             return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
         }
         
-        let pathList = Solver.intersect(cursor: cursor, navigator: navigator, master: master, slave: slave)
+        let pathList = Solver.intersect(navigator: navigator, master: master, slave: slave)
         
         if pathList.layouts.count > 0 {
             return SubtractSolution(pathList: pathList, disposition: .overlap)

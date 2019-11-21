@@ -9,10 +9,10 @@ import iGeometry
 
 extension Solver {
 
-    static func intersect(cursor aCursor: Cursor, navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
-        var navigator = aNavigator
+    static func intersect(navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var subNavigator = SubtractNavigator(navigator: aNavigator)
         
-        var cursor = aCursor
+        var cursor = subNavigator.next()
 
         var pathList = PlainPathList()
         
@@ -24,24 +24,22 @@ extension Solver {
         
         while cursor.isNotEmpty {
             
-            navigator.mark(cursor: cursor)
-            
             var path = [IntPoint]()
             let start = cursor
             
             repeat {
                 // in-out slave path
                 
-                let outCursor = navigator.nextSlaveOut(cursor: cursor, stop: start)
+                let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor, stop: start)
                 if outCursor == cursor && cursor == start {
                     pathList.append(path: slave, isClockWise: false)
                     return pathList
                 }
                 
-                let inSlaveStart = navigator.slaveEndStone(cursor: cursor)
-                let outSlaveEnd = navigator.slaveStartStone(cursor: outCursor)
+                let inSlaveStart = subNavigator.navigator.slaveEndStone(cursor: cursor)
+                let outSlaveEnd = subNavigator.navigator.slaveStartStone(cursor: outCursor)
                 
-                let startPoint = navigator.slaveEndPoint(cursor: cursor)
+                let startPoint = subNavigator.navigator.slaveEndPoint(cursor: cursor)
                 path.append(startPoint)
                 
                 let isInSlaveStartNotOverflow: Bool
@@ -92,17 +90,17 @@ extension Solver {
                    break
                 }
 
-                let endPoint = navigator.slaveStartPoint(cursor: outCursor)
+                let endPoint = subNavigator.navigator.slaveStartPoint(cursor: outCursor)
                 path.append(endPoint)
 
-                cursor = navigator.prevMasterOut(cursor: outCursor)
+                cursor = subNavigator.navigator.prevMasterOut(cursor: outCursor)
 
-                navigator.mark(cursor: cursor)
+                subNavigator.navigator.mark(cursor: cursor)
                 
                 // out-in master path
                 
-                let outMasterEnd = navigator.masterStartStone(cursor: outCursor)
-                let inMasterStart = navigator.masterEndStone(cursor: cursor)
+                let outMasterEnd = subNavigator.navigator.masterStartStone(cursor: outCursor)
+                let inMasterStart = subNavigator.navigator.masterEndStone(cursor: cursor)
 
                 let isOutMasterEndNotOverflow: Bool
                 let outMasterEndIndex: Int
@@ -152,7 +150,7 @@ extension Solver {
             
             pathList.append(path: path, isClockWise: false)
             
-            cursor = navigator.nextSubtract()
+            cursor = subNavigator.next()
         }
 
         return pathList
@@ -200,6 +198,33 @@ fileprivate extension PinNavigator {
         
         
         return isFoundMaster
+    }
+    
+    func nextCursorIndices() -> [Int] {
+        let n = self.nodeArray.count
+        var cursors = Array<Cursor>(repeating: .empty, count: n)
+        for i in 0..<n {
+            let node = self.nodeArray[i]
+            let type: PinPoint.PinType
+            if !node.isPinPath {
+                let pin = pinPointArray[node.index]
+                type = pin.type
+            } else {
+                let path = pinPathArray[node.index]
+                type = path.v0.type
+            }
+            cursors[i] = Cursor(type: type, index: i)
+        }
+        
+        cursors.sort(by: { a, b in
+            return a.type == .inside && b.type != .inside
+        })
+        
+        var result = Array<Int>(repeating: 0, count: n)
+        for i in 0..<n {
+            result[i] = cursors[i].index
+        }
+        return result
     }
 }
 
