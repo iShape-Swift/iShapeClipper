@@ -13,9 +13,13 @@ extension Solver {
         var subNavigator = SubtractNavigator(navigator: aNavigator)
         
         var cursor = subNavigator.next()
-
         var pathList = PlainPathList()
-        
+
+        guard cursor.isNotEmpty && cursor.type == .inside else {
+            pathList.append(path: slave, isClockWise: false)
+            return pathList
+        }
+
         let masterCount = master.count
         let masterLastIndex = masterCount - 1
         
@@ -30,12 +34,10 @@ extension Solver {
             repeat {
                 // in-out slave path
                 
-                let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor, stop: start)
-                if outCursor == cursor && cursor == start {
-                    pathList.append(path: slave, isClockWise: false)
-                    return pathList
-                }
-                
+                //let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor, stop: start)
+                let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor)
+                subNavigator.navigator.mark(cursor: outCursor)
+
                 let inSlaveStart = subNavigator.navigator.slaveEndStone(cursor: cursor)
                 let outSlaveEnd = subNavigator.navigator.slaveStartStone(cursor: outCursor)
                 
@@ -93,7 +95,8 @@ extension Solver {
                 let endPoint = subNavigator.navigator.slaveStartPoint(cursor: outCursor)
                 path.append(endPoint)
 
-                cursor = subNavigator.navigator.prevMasterOut(cursor: outCursor)
+                //cursor = subNavigator.navigator.prevMasterOut(cursor: outCursor)
+                cursor = subNavigator.navigator.prevMaster(cursor: outCursor)
 
                 subNavigator.navigator.mark(cursor: cursor)
                 
@@ -159,16 +162,16 @@ extension Solver {
 
 fileprivate extension PinNavigator {
 
-    mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
+    mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
         let start = cursor
 
         var next = self.nextSlave(cursor: cursor)
-        
-        while start != next && next.type == .out_in && next != stop {
+
+        while start != next && next.type == .out_in {
             self.mark(cursor: next)
             next = self.nextSlave(cursor: next)
         }
-
+ 
         return next
     }
 

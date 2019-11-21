@@ -40,8 +40,6 @@ struct SubtractNavigator {
         cursors.sort(by: { a, b in
             return a.type == .inside && b.type != .inside
         })
-        
-        
 
         return cursors
     }
