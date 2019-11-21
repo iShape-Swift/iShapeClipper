@@ -85,15 +85,10 @@ extension Solver {
                         path.append(contentsOf: slice)
                     }
                 }
-                
-                if outCursor == start {
-                   break
-                }
 
                 let endPoint = subNavigator.navigator.slaveStartPoint(cursor: outCursor)
                 path.append(endPoint)
 
-                //cursor = subNavigator.navigator.prevMasterOut(cursor: outCursor)
                 cursor = subNavigator.navigator.prevMaster(cursor: outCursor)
 
                 subNavigator.navigator.mark(cursor: cursor)
@@ -114,7 +109,6 @@ extension Solver {
                         isOutMasterEndNotOverflow = true
                         outMasterEndIndex = outMasterEnd.index - 1
                     } else {
-                        // TODO no case
                         isOutMasterEndNotOverflow = false
                         outMasterEndIndex = masterCount - 1
                     }
@@ -193,61 +187,6 @@ fileprivate extension PinNavigator {
         }
 
         return next
-    }
-
-    
-    mutating func prevMasterOut(cursor: Cursor) -> Cursor {
-        let start = cursor
-        
-        var prev = self.prevMaster(cursor: cursor)
-        
-        while start != prev && prev.type == .out_in {
-            self.mark(cursor: prev)
-            prev = self.prevMaster(cursor: prev)
-        }
-
-        return prev
-    }
-    
-    private mutating func isCanSkip(prev: Cursor, cursor: Cursor, nextSlave: Cursor) -> Bool {
-        var nextMaster = cursor
-        var isFoundMaster: Bool
-        var isFoundStart: Bool
-        repeat {
-            nextMaster = self.nextMaster(cursor: nextMaster)
-            isFoundMaster = nextMaster == nextSlave
-            isFoundStart = nextMaster == prev
-        } while !(isFoundMaster || isFoundStart)
-        
-        
-        return isFoundMaster
-    }
-    
-    func nextCursorIndices() -> [Int] {
-        let n = self.nodeArray.count
-        var cursors = Array<Cursor>(repeating: .empty, count: n)
-        for i in 0..<n {
-            let node = self.nodeArray[i]
-            let type: PinPoint.PinType
-            if !node.isPinPath {
-                let pin = pinPointArray[node.index]
-                type = pin.type
-            } else {
-                let path = pinPathArray[node.index]
-                type = path.v0.type
-            }
-            cursors[i] = Cursor(type: type, index: i)
-        }
-        
-        cursors.sort(by: { a, b in
-            return a.type == .inside && b.type != .inside
-        })
-        
-        var result = Array<Int>(repeating: 0, count: n)
-        for i in 0..<n {
-            result[i] = cursors[i].index
-        }
-        return result
     }
 }
 
