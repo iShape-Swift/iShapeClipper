@@ -33,10 +33,8 @@ extension Solver {
             
             repeat {
                 // in-out slave path
-                
-                //let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor, stop: start)
+
                 let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor)
-                subNavigator.navigator.mark(cursor: outCursor)
 
                 let inSlaveStart = subNavigator.navigator.slaveEndStone(cursor: cursor)
                 let outSlaveEnd = subNavigator.navigator.slaveStartStone(cursor: outCursor)
@@ -163,15 +161,37 @@ extension Solver {
 fileprivate extension PinNavigator {
 
     mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
+        // keep in mind Test 27
         let start = cursor
 
         var next = self.nextSlave(cursor: cursor)
 
-        while start != next && next.type == .out_in {
+        while start != next {
+            if next.type == .outside {
+                break
+            }
+            
+            // only .out_in is possible here
+            
+            let nextNext = self.nextSlave(cursor: next)
+
+            // try to find next cursor going by master
+            var masterCursor = start
+            
+            repeat {
+                masterCursor = self.nextMaster(cursor: masterCursor)
+            } while masterCursor != next && masterCursor != nextNext
+            
+            if masterCursor == next {
+                return next
+            }
+
+            // it's inner cursor skip them
             self.mark(cursor: next)
-            next = self.nextSlave(cursor: next)
+
+            next = nextNext
         }
- 
+
         return next
     }
 
