@@ -37,6 +37,5 @@ final class ShapePinDot: CAShapeLayer {
     override init(layer: Any) {
         super.init(layer: layer)
     }
-    
-    
+
 }
