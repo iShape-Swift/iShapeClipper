@@ -32,7 +32,7 @@ struct SubtractNavigator {
                 let path = navigator.pinPathArray[node.index]
                 type = path.v0.type
             }
-            if type == .inside || type == .in_out {
+            if type == .inside || type == .out_in {
                 cursors.append(Cursor(type: type, index: i))
             }
         }
@@ -47,19 +47,12 @@ struct SubtractNavigator {
     }
     
     mutating func next() -> Cursor {
-        if nextIndex < nextCursors.count {
-            var next = self.nextCursors[nextIndex]
-            if next.type == .inside {
-                self.nextIndex += 1
+        while nextIndex < nextCursors.count {
+            let next = self.nextCursors[nextIndex]
+            let node = self.navigator.nodeArray[next.index]
+            self.nextIndex += 1
+            if node.marker != 1 {
                 return next
-            }
-            while nextIndex < nextCursors.count {
-                next = self.nextCursors[nextIndex]
-                let node = self.navigator.nodeArray[next.index]
-                self.nextIndex += 1
-                if node.marker != 1 {
-                    return next
-                }
             }
         }
         
