@@ -1,2 +1,2 @@
 # iShapeClipper
-Polygons Merge and Subtract manipulations
+Union, Subtract and Intersect operators between polygons
