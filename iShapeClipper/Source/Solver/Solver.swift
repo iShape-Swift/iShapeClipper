@@ -121,17 +121,12 @@ public struct Solver {
         }
         
         let pathList = Solver.union(navigator: unionNavigator, master: master, slave: slave)
-        
-        let solution: UnionSolution
-        
+
         if pathList.layouts.count > 0 {
             return UnionSolution(pathList: pathList, nature: .overlap)
         } else {
-            solution = UnionSolution(pathList: PlainPathList(), nature: .notOverlap)
+            return UnionSolution(pathList: PlainPathList(), nature: .notOverlap)
         }
-
-        return solution
-        
     }
     
 }
