@@ -23,15 +23,13 @@ extension Solver {
         
         while cursor.isNotEmpty {
             
-            subNavigator.navigator.mark(cursor: cursor)
-            
             var path = [IntPoint]()
             let start = cursor
             
             repeat {
                 // in-out slave path
                 
-                let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor, stop: start)
+                let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor)
                 
                 let inSlaveStart = subNavigator.navigator.slaveStartStone(cursor: cursor)
                 let outSlaveEnd = subNavigator.navigator.slaveEndStone(cursor: outCursor)
@@ -95,7 +93,6 @@ extension Solver {
                 let outMasterEnd = subNavigator.navigator.masterEndStone(cursor: outCursor)
                 let inMasterStart = subNavigator.navigator.masterStartStone(cursor: cursor)
                 
-                
                 let isOutMasterNotOverflow: Bool
                 let outMasterIndex: Int
                 if outMasterEnd.index + 1 < masterCount {
@@ -150,14 +147,14 @@ extension Solver {
 }
 
 fileprivate extension PinNavigator {
-    
-    mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
+
+    mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
         let start: Cursor = cursor
         
         var prev = cursor
         var cursor = self.nextSlave(cursor: cursor)
         
-        while start != cursor && stop != cursor && cursor.type == .out_in {
+        while start != cursor && cursor.type == .out_in {
             let nextMaster = self.nextMaster(cursor: cursor)
             
             if nextMaster == start {

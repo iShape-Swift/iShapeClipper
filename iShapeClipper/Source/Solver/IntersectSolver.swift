@@ -155,7 +155,7 @@ extension Solver {
 fileprivate extension PinNavigator {
 
     mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
-        // keep in mind Test 27
+        // keep in mind Test 11, 27
         let start = cursor
 
         var next = self.nextSlave(cursor: cursor)
@@ -180,7 +180,7 @@ fileprivate extension PinNavigator {
                 return next
             }
 
-            // it's inner cursor skip them
+            // it's inner cursor skip it
             self.mark(cursor: next)
 
             next = nextNext
@@ -189,4 +189,3 @@ fileprivate extension PinNavigator {
         return next
     }
 }
-

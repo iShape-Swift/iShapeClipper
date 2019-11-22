@@ -173,15 +173,15 @@ struct SubtractTestData {
         // 11
         [
             [
-                Point(x: -10.0, y: 10.0),
-                Point(x: 10.0, y: 10.0),
-                Point(x: 10.0, y: -10.0),
-                Point(x: -10.0, y: -10.0)
+                Point(x: 0.0, y: 10.0),
+                Point(x: 20.0, y: 10.0),
+                Point(x: 20.0, y: -10.0),
+                Point(x: 0.0, y: -10.0)
             ],
             [
-                Point(x: -30.0, y: -10.0),
-                Point(x: 0.0, y: -10.0),
-                Point(x: 10.0, y: 10.0)
+                Point(x: -20.0, y: -10.0),
+                Point(x: 10.0, y: -10.0),
+                Point(x: 20.0, y: 10.0)
             ]
         ],
         // 12
