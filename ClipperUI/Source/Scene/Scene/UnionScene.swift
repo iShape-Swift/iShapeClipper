@@ -18,6 +18,7 @@ final class UnionScene: CoordinateSystemScene {
     private var slave: [Point] = []
 
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: UnionScene.indexKey)
+//    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
     private var isSlave: Bool = false

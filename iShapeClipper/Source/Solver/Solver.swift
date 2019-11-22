@@ -83,7 +83,7 @@ public struct Solver {
     }
 
     public static func union(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> UnionSolution {
-        var navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
 
         guard !navigator.isEqual else {
             var pathList = PlainPathList()
@@ -91,7 +91,9 @@ public struct Solver {
             return UnionSolution(pathList: pathList, nature: .overlap)
         }
         
-        let cursor = navigator.nextUnion()
+        let unionNavigator = UnionNavigator(navigator: navigator)
+        
+        let cursor = unionNavigator.first()
 
         guard cursor.isNotEmpty else {
             var pathList = PlainPathList()
@@ -118,7 +120,7 @@ public struct Solver {
             }
         }
         
-        let pathList = Solver.union(cursor: cursor, navigator: navigator, master: master, slave: slave)
+        let pathList = Solver.union(navigator: unionNavigator, master: master, slave: slave)
         
         let solution: UnionSolution
         

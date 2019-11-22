@@ -9,10 +9,9 @@ import iGeometry
 
 extension Solver {
     
-    static func union(cursor aCursor: Cursor, navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
-        var navigator = aNavigator
-        var cursor = aCursor
-        
+    static func union(navigator aNavigator: UnionNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var unionNavigator = aNavigator
+
         var pathList = PlainPathList()
         
         let masterCount = master.count
@@ -21,23 +20,23 @@ extension Solver {
         let slaveCount = slave.count
         let slaveLastIndex = slaveCount - 1
         
+        var cursor = unionNavigator.next()
+        
         while cursor.isNotEmpty {
-            
-            navigator.mark(cursor: cursor)
-            
+
             var path = [IntPoint]()
+            
             let start = cursor
             
             repeat {
                 // in-out slave path
                 
-                let outCursor = navigator.nextSlaveOut(cursor: cursor, stop: start)
+                let outCursor = unionNavigator.navigator.nextSlaveOut(cursor: cursor)
                 
-                let inSlaveStart = navigator.slaveStartStone(cursor: cursor)
+                let inSlaveStart = unionNavigator.navigator.slaveStartStone(cursor: cursor)
+                let outSlaveEnd = unionNavigator.navigator.slaveEndStone(cursor: outCursor)
                 
-                let outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
-                
-                let startPoint = navigator.slaveStartPoint(cursor: cursor)
+                let startPoint = unionNavigator.navigator.slaveStartPoint(cursor: cursor)
                 path.append(startPoint)
                 
                 let isInSlaveNotOverflow: Bool
@@ -85,18 +84,17 @@ extension Solver {
                         path.append(contentsOf: slice)
                     }
                 }
-
                 
-                let endPoint = navigator.slaveEndPoint(cursor: outCursor)
+                let endPoint = unionNavigator.navigator.slaveEndPoint(cursor: outCursor)
                 path.append(endPoint)
                 
-                cursor = navigator.nextMaster(cursor: outCursor)
-                navigator.mark(cursor: cursor)
+                cursor = unionNavigator.navigator.nextMaster(cursor: outCursor)
+                unionNavigator.navigator.mark(cursor: cursor)
                 
                 // out-in master path
                 
-                let outMasterEnd = navigator.masterEndStone(cursor: outCursor)
-                let inMasterStart = navigator.masterStartStone(cursor: cursor)
+                let outMasterEnd = unionNavigator.navigator.masterEndStone(cursor: outCursor)
+                let inMasterStart = unionNavigator.navigator.masterStartStone(cursor: cursor)
                 
                 
                 let isOutMasterNotOverflow: Bool
@@ -125,7 +123,6 @@ extension Solver {
                     }
                 }
                 
-                
                 if PathMileStone.moreOrEqual(a: outMasterEnd, b: inMasterStart) {
                     // a > b
                     if isOutMasterNotOverflow {
@@ -148,7 +145,7 @@ extension Solver {
             let isClockWise = path.isClockWise
             pathList.append(path: path, isClockWise: isClockWise)
             
-            cursor = navigator.nextUnion()
+            cursor = unionNavigator.next()
         }
 
         return pathList
@@ -156,65 +153,45 @@ extension Solver {
        
 }
 
-
-extension PinNavigator {
-    
-    mutating func nextUnion() -> Cursor {
-        var cursor = self.next()
-        
-        while cursor.isNotEmpty && cursor.type != PinPoint.PinType.outside && cursor.type != PinPoint.PinType.in_out {
-            self.mark(cursor: cursor)
-            cursor = self.next()
-        }
-        
-        return cursor
-    }
-}
-
-
 fileprivate extension PinNavigator {
     
-    mutating func nextSlaveOut(cursor: Cursor, stop: Cursor) -> Cursor {
-        let start: Cursor = cursor
+    mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
+        // keep in mind Test 11, 27
+        let start = cursor
+
+        var next = self.nextSlave(cursor: cursor)
         
-        var prev = cursor
-        var cursor = self.nextSlave(cursor: cursor)
-        
-        while start != cursor && stop != cursor && cursor.type == PinPoint.PinType.in_out {
-            let nextMaster = self.nextMaster(cursor: cursor)
-            
-            if nextMaster == start {
-                return cursor
-            }
-            
-            let nextSlave = self.nextSlave(cursor: cursor)
-            
-            let isCanSkip = self.isCanSkip(prev: prev, cursor: cursor, nextSlave: nextSlave)
-            if !isCanSkip {
-                return cursor
-            }
-            
-            self.mark(cursor: cursor)
-            prev = cursor
-            cursor = nextSlave
+        if start.type == .in_out {
+            return next
         }
-        
-        
-        return cursor
-    }
-    
-    private mutating func isCanSkip(prev: Cursor, cursor: Cursor, nextSlave: Cursor) -> Bool {
-        var nextMaster = cursor
-        var isFoundMaster = false
-        var isFoundStart = false
-        repeat {
-            nextMaster = self.nextMaster(cursor: nextMaster)
-            isFoundMaster = nextMaster == nextSlave
-            isFoundStart = nextMaster == prev
-        } while !(isFoundMaster || isFoundStart)
-        
-        
-        return isFoundMaster
+
+        while start != next {
+            if next.type == .inside {
+                break
+            }
+            
+            // only .in_out is possible here
+            
+            let nextNext = self.nextSlave(cursor: next)
+
+            // try to find next cursor going by master
+            var masterCursor = start
+            
+            repeat {
+                masterCursor = self.nextMaster(cursor: masterCursor)
+            } while masterCursor != next && masterCursor != nextNext
+            
+            if masterCursor != next {
+                return next
+            }
+            
+            // it's inner cursor, skip it
+            self.mark(cursor: next)
+
+            next = nextNext
+        }
+
+        return next
     }
 }
 
