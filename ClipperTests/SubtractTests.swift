@@ -329,18 +329,18 @@ final class SubtractTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: 0, y: -10),
-            Point(x: 10, y: 10),
-            Point(x: 10, y: -10)
+            Point(x: 10, y: -10),
+            Point(x: 20, y: 10),
+            Point(x: 20, y: -10)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 10, y: 10),
-            Point(x: -10, y: 0),
-            Point(x: -10, y: 10)
+            Point(x: 20, y: 10),
+            Point(x: 0, y: 0),
+            Point(x: 0, y: 10)
         ]
         
         XCTAssertEqual(path1, sample1)

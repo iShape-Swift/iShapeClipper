@@ -278,10 +278,10 @@ final class IntersectTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
-            Point(x: -10.0, y: -10.0),
             Point(x: 0.0, y: -10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: -10.0, y: 0.0)
+            Point(x: 10.0, y: -10.0),
+            Point(x: 20.0, y: 10.0),
+            Point(x: 0.0, y: 0.0)
         ]
         
         XCTAssertEqual(path, sample)
