@@ -10,20 +10,22 @@ import iGeometry
 public struct Solver {
     
     public static func cut(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> CutSolution {
-        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
         
         guard !navigator.isEqual else {
             return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), disposition: .empty)
         }
+
+        let subNavigator = SubtractNavigator(navigator: navigator)
         
-        let cursor = navigator.nextSubtract()
+        let cursor = subNavigator.first()
         
         guard cursor.isNotEmpty else {
             return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), disposition: .empty)
         }
-        
-        let restPathList = Solver.subtract(cursor: cursor, navigator: navigator, master: master, slave: slave)
-        let bitePathList = Solver.intersect(navigator: navigator, master: master, slave: slave)
+
+        let restPathList = Solver.subtract(navigator: subNavigator, master: master, slave: slave)
+        let bitePathList = Solver.intersect(navigator: subNavigator, master: master, slave: slave)
 
         if restPathList.layouts.count > 0 {
             return CutSolution(restPathList: restPathList, bitePathList: bitePathList, disposition: .overlap)
@@ -33,19 +35,21 @@ public struct Solver {
     }
     
     public static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
-        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
             return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
         }
     
-        let cursor = navigator.nextSubtract()
+        let subNavigator = SubtractNavigator(navigator: navigator)
+        
+        let cursor = subNavigator.first()
     
         guard cursor.isNotEmpty else {
             return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
         }
         
-        let pathList = Solver.subtract(cursor: cursor, navigator: navigator, master: master, slave: slave)
+        let pathList = Solver.subtract(navigator: subNavigator, master: master, slave: slave)
         
         if pathList.layouts.count > 0 {
             return SubtractSolution(pathList: pathList, disposition: .overlap)
@@ -55,19 +59,21 @@ public struct Solver {
     }
     
     public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
-        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
             return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
         }
     
-        let cursor = navigator.nextSubtract()
+        let subNavigator = SubtractNavigator(navigator: navigator)
+        
+        let cursor = subNavigator.first()
     
         guard cursor.isNotEmpty else {
             return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
         }
         
-        let pathList = Solver.intersect(navigator: navigator, master: master, slave: slave)
+        let pathList = Solver.intersect(navigator: subNavigator, master: master, slave: slave)
         
         if pathList.layouts.count > 0 {
             return SubtractSolution(pathList: pathList, disposition: .overlap)

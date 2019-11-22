@@ -9,8 +9,8 @@ import iGeometry
 
 extension Solver {
 
-    static func intersect(navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
-        var subNavigator = SubtractNavigator(navigator: aNavigator)
+    static func intersect(navigator aSubNavigator: SubtractNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var subNavigator = aSubNavigator
         
         var cursor = subNavigator.next()
         var pathList = PlainPathList()

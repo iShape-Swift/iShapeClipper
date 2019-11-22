@@ -57,4 +57,12 @@ struct SubtractNavigator {
         return .empty
     }
     
+    func first() -> Cursor {
+        if nextCursors.count > 0 {
+            return self.nextCursors[0]
+        }
+        
+        return .empty
+    }
+    
 }

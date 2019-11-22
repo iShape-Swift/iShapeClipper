@@ -329,18 +329,18 @@ final class SubtractTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
+            Point(x: 0, y: -10),
             Point(x: 10, y: 10),
-            Point(x: -10, y: 0),
-            Point(x: -10, y: 10)
+            Point(x: 10, y: -10)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 0, y: -10),
             Point(x: 10, y: 10),
-            Point(x: 10, y: -10)
+            Point(x: -10, y: 0),
+            Point(x: -10, y: 10)
         ]
         
         XCTAssertEqual(path1, sample1)
@@ -698,21 +698,21 @@ final class SubtractTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: 15, y: 5),
-            Point(x: 5, y: 5),
-            Point(x: 5, y: 15),
-            Point(x: 15, y: 15)
+            Point(x: 5, y: -5),
+            Point(x: 15, y: -5),
+            Point(x: 15, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5)
         ]
         
         XCTAssertEqual(path0, sample0)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 5, y: -5),
-            Point(x: 15, y: -5),
-            Point(x: 15, y: -15),
-            Point(x: -15, y: -15),
-            Point(x: -15, y: -5)
+            Point(x: 15, y: 5),
+            Point(x: 5, y: 5),
+            Point(x: 5, y: 15),
+            Point(x: 15, y: 15)
         ]
         
         XCTAssertEqual(path1, sample1)
@@ -902,14 +902,14 @@ final class SubtractTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
+            Point(x: 5, y: 15),
+            Point(x: 5, y: -5),
+            Point(x: -10, y: -5),
             Point(x: -10, y: 15),
             Point(x: -5, y: 15),
             Point(x: -5, y: 0),
             Point(x: 0, y: 0),
-            Point(x: 0, y: 15),
-            Point(x: 5, y: 15),
-            Point(x: 5, y: -5),
-            Point(x: -10, y: -5)
+            Point(x: 0, y: 15)
         ]
         
         XCTAssertEqual(path, sample)
@@ -928,14 +928,14 @@ final class SubtractTests: XCTestCase {
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
         let sample = [
+            Point(x: 5, y: 15),
+            Point(x: 5, y: -5),
+            Point(x: -10, y: -5),
             Point(x: -10, y: 15),
             Point(x: -5, y: 15),
             Point(x: -5, y: 0),
             Point(x: 0, y: 0),
-            Point(x: 0, y: 15),
-            Point(x: 5, y: 15),
-            Point(x: 5, y: -5),
-            Point(x: -10, y: -5)
+            Point(x: 0, y: 15)
         ]
         
         XCTAssertEqual(path, sample)
@@ -954,18 +954,6 @@ final class SubtractTests: XCTestCase {
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
         let sample0 = [
-            Point(x: -15, y: 20),
-            Point(x: -15, y: -10),
-            Point(x: 7, y: -10),
-            Point(x: 7, y: -15),
-            Point(x: -20, y: -15),
-            Point(x: -20, y: 20)
-        ]
-        
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
             Point(x: 5, y: 20),
             Point(x: 5, y: -5),
             Point(x: -10, y: -5),
@@ -974,6 +962,18 @@ final class SubtractTests: XCTestCase {
             Point(x: -5, y: 0),
             Point(x: 0, y: 0),
             Point(x: 0, y: 20)
+        ]
+        
+        XCTAssertEqual(path0, sample0)
+        
+        let path1 = iGeom.float(points: solution.pathList.pathes[1])
+        let sample1 = [
+            Point(x: 7, y: -15),
+            Point(x: -20, y: -15),
+            Point(x: -20, y: 20),
+            Point(x: -15, y: 20),
+            Point(x: -15, y: -10),
+            Point(x: 7, y: -10)
         ]
         
         XCTAssertEqual(path1, sample1)
@@ -992,10 +992,10 @@ final class SubtractTests: XCTestCase {
         XCTAssertEqual(solution.pathList.layouts.count, 2)
         
         let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        XCTAssertEqual(path0.count, 6)
+        XCTAssertEqual(path0.count, 9)
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        XCTAssertEqual(path1.count, 9)
+        XCTAssertEqual(path1.count, 6)
     }
     
     
@@ -1113,42 +1113,41 @@ final class SubtractTests: XCTestCase {
         
         let path1 = iGeom.float(points: solution.pathList.pathes[1])
         let sample1 = [
-            Point(x: 10, y: 0),
-            Point(x: 10, y: 15),
-            Point(x: 15, y: 15),
-            Point(x: 15, y: -5),
-            Point(x: 10, y: -5)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
-        
-        let path2 = iGeom.float(points: solution.pathList.pathes[2])
-        let sample2 = [
             Point(x: 0, y: 10),
             Point(x: 0, y: 15),
             Point(x: 5, y: 15),
             Point(x: 5, y: 10)
         ]
         
-        XCTAssertEqual(path2, sample2)
+        XCTAssertEqual(path1, sample1)
         
-        let path3 = iGeom.float(points: solution.pathList.pathes[3])
-        let sample3 = [
+        let path2 = iGeom.float(points: solution.pathList.pathes[2])
+        let sample2 = [
             Point(x: -10, y: 10),
             Point(x: -10, y: 15),
             Point(x: -5, y: 15),
             Point(x: -5, y: 10)
         ]
         
-        XCTAssertEqual(path3, sample3)
+        XCTAssertEqual(path2, sample2)
         
-        let path4 = iGeom.float(points: solution.pathList.pathes[4])
-        let sample4 = [
+        let path3 = iGeom.float(points: solution.pathList.pathes[3])
+        let sample3 = [
             Point(x: -15, y: -10),
             Point(x: 10, y: -10),
             Point(x: 15, y: -10),
             Point(x: 15, y: -15),
             Point(x: -15, y: -15)
+        ]
+        
+        XCTAssertEqual(path3, sample3)
+        
+        let path4 = iGeom.float(points: solution.pathList.pathes[4])
+        let sample4 = [
+            Point(x: 10, y: -5),
+            Point(x: 10, y: 15),
+            Point(x: 15, y: 15),
+            Point(x: 15, y: -5)
         ]
         
         XCTAssertEqual(path4, sample4)

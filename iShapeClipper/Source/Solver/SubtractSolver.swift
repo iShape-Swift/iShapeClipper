@@ -9,11 +9,10 @@ import iGeometry
 
 extension Solver {
 
-    static func subtract(cursor aCursor: Cursor, navigator aNavigator: PinNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
-        var navigator = aNavigator
+    static func subtract(navigator aSubNavigator: SubtractNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var subNavigator = aSubNavigator
         
-        var cursor = aCursor
-
+        var cursor = subNavigator.next()
         var pathList = PlainPathList()
         
         let masterCount = master.count
@@ -24,7 +23,7 @@ extension Solver {
         
         while cursor.isNotEmpty {
             
-            navigator.mark(cursor: cursor)
+            subNavigator.navigator.mark(cursor: cursor)
             
             var path = [IntPoint]()
             let start = cursor
@@ -32,22 +31,12 @@ extension Solver {
             repeat {
                 // in-out slave path
                 
-                let outCursor = navigator.nextSlaveOut(cursor: cursor, stop: start)
+                let outCursor = subNavigator.navigator.nextSlaveOut(cursor: cursor, stop: start)
                 
-                let inSlaveStart = navigator.slaveStartStone(cursor: cursor)
+                let inSlaveStart = subNavigator.navigator.slaveStartStone(cursor: cursor)
+                let outSlaveEnd = subNavigator.navigator.slaveEndStone(cursor: outCursor)
                 
-                let outSlaveEnd: PathMileStone
-                
-                let isOutInStart = outCursor == start && path.count > 0
-                
-                if !isOutInStart {
-                    outSlaveEnd = navigator.slaveEndStone(cursor: outCursor)
-                } else {
-                    // possible if we start with out-in
-                    outSlaveEnd = navigator.slaveStartStone(cursor: outCursor)
-                }
-                
-                let startPoint = navigator.slaveStartPoint(cursor: cursor)
+                let startPoint = subNavigator.navigator.slaveStartPoint(cursor: cursor)
                 path.append(startPoint)
                 
                 let isInSlaveNotOverflow: Bool
@@ -59,7 +48,6 @@ extension Solver {
                     isInSlaveNotOverflow = false
                     inSlaveIndex = 0
                 }
-                
                 
                 let isOutSlaveNotOverflow: Bool
                 let outSlaveIndex: Int
@@ -96,21 +84,16 @@ extension Solver {
                     }
                 }
                 
-                if isOutInStart {
-                    // possible if we start with out-in
-                    break
-                }
-                
-                let endPoint = navigator.slaveEndPoint(cursor: outCursor)
+                let endPoint = subNavigator.navigator.slaveEndPoint(cursor: outCursor)
                 path.append(endPoint)
                 
-                cursor = navigator.nextMaster(cursor: outCursor)
-                navigator.mark(cursor: cursor)
+                cursor = subNavigator.navigator.nextMaster(cursor: outCursor)
+                subNavigator.navigator.mark(cursor: cursor)
                 
                 // out-in master path
                 
-                let outMasterEnd = navigator.masterEndStone(cursor: outCursor)
-                let inMasterStart = navigator.masterStartStone(cursor: cursor)
+                let outMasterEnd = subNavigator.navigator.masterEndStone(cursor: outCursor)
+                let inMasterStart = subNavigator.navigator.masterStartStone(cursor: cursor)
                 
                 
                 let isOutMasterNotOverflow: Bool
@@ -122,7 +105,6 @@ extension Solver {
                     outMasterIndex = 0
                     isOutMasterNotOverflow = false
                 }
-                
                 
                 let isInMasterNotOverflow: Bool
                 let inMasterIndex: Int
@@ -138,7 +120,6 @@ extension Solver {
                         isInMasterNotOverflow = false
                     }
                 }
-                
                 
                 if PathMileStone.moreOrEqual(a: outMasterEnd, b: inMasterStart) {
                     // a > b
@@ -161,30 +142,12 @@ extension Solver {
             
             pathList.append(path: path, isClockWise: true)
             
-            cursor = navigator.nextSubtract()
+            cursor = subNavigator.next()
         }
 
         return pathList
     }
-    
 }
-
-
-extension PinNavigator {
-    
-    mutating func nextSubtract() -> Cursor {
-        var cursor = self.next()
-        
-        while cursor.isNotEmpty && cursor.type != .inside && cursor.type != .out_in {
-            self.mark(cursor: cursor)
-            cursor = self.next()
-        }
-        
-        return cursor
-    }
-
-}
-
 
 fileprivate extension PinNavigator {
     
@@ -212,8 +175,7 @@ fileprivate extension PinNavigator {
             prev = cursor
             cursor = nextSlave
         }
-        
-        
+
         return cursor
     }
     
