@@ -1,5 +1,5 @@
 //
-//  Solver+Subtractor.swift
+//  SubtractSolver.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 04/10/2019.

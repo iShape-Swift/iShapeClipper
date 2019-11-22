@@ -1,5 +1,5 @@
 //
-//  Solver+Intersection.swift
+//  IntersectSolver.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 17.11.2019.
