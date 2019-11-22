@@ -10,7 +10,7 @@ import iGeometry
 public struct Solver {
     
     public static func cut(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> CutSolution {
-        let navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
         
         guard !navigator.isEqual else {
             return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), disposition: .empty)
@@ -35,7 +35,7 @@ public struct Solver {
     }
     
     public static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
-        let navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
             return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
@@ -59,7 +59,7 @@ public struct Solver {
     }
     
     public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
-        let navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
             return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
@@ -83,7 +83,7 @@ public struct Solver {
     }
 
     public static func union(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> UnionSolution {
-        var navigator = Intersector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
+        var navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
 
         guard !navigator.isEqual else {
             var pathList = PlainPathList()

@@ -76,7 +76,7 @@ struct PinPathBuilder {
 
             if first.v0.masterMileStone == last.v1.masterMileStone {
                 mergedEdges[0] = PinEdge(v0: last.v0, v1: first.v1, interposition: first.interposition)
-                mergedEdges.removeLast();
+                mergedEdges.removeLast()
             }
         }
 
@@ -95,25 +95,25 @@ struct PinPathBuilder {
         var m = n
 
         repeat {
-            isNotSorted = false;
-            var a = pinEdges[0];
-            var i = 1;
-            while (i < m) {
-                let b = pinEdges[i];
-                if (PathMileStone.compare(a: a.v0.masterMileStone, b: b.v0.masterMileStone)) {
-                    pinEdges[i - 1] = b;
-                    isNotSorted = true;
+            isNotSorted = false
+            var a = pinEdges[0]
+            var i = 1
+            while i < m {
+                let b = pinEdges[i]
+                if PathMileStone.compare(a: a.v0.masterMileStone, b: b.v0.masterMileStone) {
+                    pinEdges[i - 1] = b
+                    isNotSorted = true
                 } else {
-                    pinEdges[i - 1] = a;
-                    a = b;
+                    pinEdges[i - 1] = a
+                    a = b
                 }
 
-                i += 1;
+                i += 1
             }
 
-            m -= 1;
-            pinEdges[m] = a;
-        } while (isNotSorted);
+            m -= 1
+            pinEdges[m] = a
+        } while isNotSorted
     }
 
 
@@ -248,7 +248,7 @@ struct PinPathBuilder {
             type = isBetween ? .in_null : .out_null
         }
 
-        return type;
+        return type
     }
 
 

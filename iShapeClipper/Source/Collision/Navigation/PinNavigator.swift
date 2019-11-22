@@ -161,7 +161,7 @@ struct PinNavigator {
 
 
     func masterEndStone(cursor: Cursor) -> PathMileStone {
-        let node = nodeArray[cursor.index];
+        let node = nodeArray[cursor.index]
         if !node.isPinPath {
             let pin = pinPointArray[node.index]
             return pin.masterMileStone
@@ -203,7 +203,7 @@ struct PinNavigator {
         }
 
         let path = pinPathArray[node.index]
-        return path.v0.slaveMileStone;
+        return path.v0.slaveMileStone
     }
 
 

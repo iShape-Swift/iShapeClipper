@@ -8,16 +8,60 @@
 
 /* Begin PBXBuildFile section */
 		541CED8323471A5800DB43C5 /* iShapeClipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 541CED8123471A5800DB43C5 /* iShapeClipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		547B93C123472180003CFA6C /* SubstractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B93C023472180003CFA6C /* SubstractTests.swift */; };
-		547B93C723472791003CFA6C /* Corner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B93C623472791003CFA6C /* Corner.swift */; };
+		543F1C172387BA96001C9C07 /* UnionTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1BFA2387BA96001C9C07 /* UnionTestData.swift */; };
+		543F1C182387BA96001C9C07 /* SubtractTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1BFB2387BA96001C9C07 /* SubtractTestData.swift */; };
+		543F1C192387BA96001C9C07 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1BFD2387BA96001C9C07 /* Solution.swift */; };
+		543F1C1A2387BA96001C9C07 /* SubtractNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1BFE2387BA96001C9C07 /* SubtractNavigator.swift */; };
+		543F1C1B2387BA96001C9C07 /* Solver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1BFF2387BA96001C9C07 /* Solver.swift */; };
+		543F1C1C2387BA96001C9C07 /* IntersectSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C002387BA96001C9C07 /* IntersectSolver.swift */; };
+		543F1C1D2387BA96001C9C07 /* UnionSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C012387BA96001C9C07 /* UnionSolver.swift */; };
+		543F1C1E2387BA96001C9C07 /* SubtractSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C022387BA96001C9C07 /* SubtractSolver.swift */; };
+		543F1C1F2387BA96001C9C07 /* PinPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C042387BA96001C9C07 /* PinPathBuilder.swift */; };
+		543F1C202387BA96001C9C07 /* AdjacencyMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C052387BA96001C9C07 /* AdjacencyMatrix.swift */; };
+		543F1C212387BA96001C9C07 /* CrossResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C062387BA96001C9C07 /* CrossResolver.swift */; };
+		543F1C222387BA96001C9C07 /* PinPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C082387BA96001C9C07 /* PinPath.swift */; };
+		543F1C232387BA96001C9C07 /* PinPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C092387BA96001C9C07 /* PinPoint.swift */; };
+		543F1C242387BA96001C9C07 /* PinSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C0A2387BA96001C9C07 /* PinSequence.swift */; };
+		543F1C252387BA96001C9C07 /* IndexMileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C0B2387BA96001C9C07 /* IndexMileStone.swift */; };
+		543F1C262387BA96001C9C07 /* PinEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C0C2387BA96001C9C07 /* PinEdge.swift */; };
+		543F1C272387BA96001C9C07 /* PathMileStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C0D2387BA96001C9C07 /* PathMileStone.swift */; };
+		543F1C282387BA96001C9C07 /* PinPath+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C0E2387BA96001C9C07 /* PinPath+Test.swift */; };
+		543F1C292387BA96001C9C07 /* PinHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C0F2387BA96001C9C07 /* PinHandler.swift */; };
+		543F1C2A2387BA96001C9C07 /* PinNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C112387BA96001C9C07 /* PinNavigator.swift */; };
+		543F1C2B2387BA96001C9C07 /* Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C122387BA96001C9C07 /* Cursor.swift */; };
+		543F1C2C2387BA96001C9C07 /* CrossDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C132387BA96001C9C07 /* CrossDetector.swift */; };
+		543F1C2D2387BA96001C9C07 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C152387BA96001C9C07 /* Rect.swift */; };
+		543F1C2E2387BA96001C9C07 /* Corner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1C162387BA96001C9C07 /* Corner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		541CED7E23471A5800DB43C5 /* iShapeClipper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeClipper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		541CED8123471A5800DB43C5 /* iShapeClipper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iShapeClipper.h; sourceTree = "<group>"; };
 		541CED8223471A5800DB43C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		547B93C023472180003CFA6C /* SubstractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstractTests.swift; sourceTree = "<group>"; };
-		547B93C623472791003CFA6C /* Corner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corner.swift; sourceTree = "<group>"; };
+		543F1BFA2387BA96001C9C07 /* UnionTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnionTestData.swift; sourceTree = "<group>"; };
+		543F1BFB2387BA96001C9C07 /* SubtractTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtractTestData.swift; sourceTree = "<group>"; };
+		543F1BFD2387BA96001C9C07 /* Solution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
+		543F1BFE2387BA96001C9C07 /* SubtractNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtractNavigator.swift; sourceTree = "<group>"; };
+		543F1BFF2387BA96001C9C07 /* Solver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solver.swift; sourceTree = "<group>"; };
+		543F1C002387BA96001C9C07 /* IntersectSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntersectSolver.swift; sourceTree = "<group>"; };
+		543F1C012387BA96001C9C07 /* UnionSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnionSolver.swift; sourceTree = "<group>"; };
+		543F1C022387BA96001C9C07 /* SubtractSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtractSolver.swift; sourceTree = "<group>"; };
+		543F1C042387BA96001C9C07 /* PinPathBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPathBuilder.swift; sourceTree = "<group>"; };
+		543F1C052387BA96001C9C07 /* AdjacencyMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjacencyMatrix.swift; sourceTree = "<group>"; };
+		543F1C062387BA96001C9C07 /* CrossResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossResolver.swift; sourceTree = "<group>"; };
+		543F1C082387BA96001C9C07 /* PinPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPath.swift; sourceTree = "<group>"; };
+		543F1C092387BA96001C9C07 /* PinPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPoint.swift; sourceTree = "<group>"; };
+		543F1C0A2387BA96001C9C07 /* PinSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinSequence.swift; sourceTree = "<group>"; };
+		543F1C0B2387BA96001C9C07 /* IndexMileStone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexMileStone.swift; sourceTree = "<group>"; };
+		543F1C0C2387BA96001C9C07 /* PinEdge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinEdge.swift; sourceTree = "<group>"; };
+		543F1C0D2387BA96001C9C07 /* PathMileStone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathMileStone.swift; sourceTree = "<group>"; };
+		543F1C0E2387BA96001C9C07 /* PinPath+Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PinPath+Test.swift"; sourceTree = "<group>"; };
+		543F1C0F2387BA96001C9C07 /* PinHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinHandler.swift; sourceTree = "<group>"; };
+		543F1C112387BA96001C9C07 /* PinNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinNavigator.swift; sourceTree = "<group>"; };
+		543F1C122387BA96001C9C07 /* Cursor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cursor.swift; sourceTree = "<group>"; };
+		543F1C132387BA96001C9C07 /* CrossDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDetector.swift; sourceTree = "<group>"; };
+		543F1C152387BA96001C9C07 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
+		543F1C162387BA96001C9C07 /* Corner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Corner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,42 +94,88 @@
 		541CED8023471A5800DB43C5 /* iShapeClipper */ = {
 			isa = PBXGroup;
 			children = (
-				547B93BE234720D2003CFA6C /* Source */,
+				543F1BF82387BA96001C9C07 /* Source */,
 				541CED8123471A5800DB43C5 /* iShapeClipper.h */,
 				541CED8223471A5800DB43C5 /* Info.plist */,
 			);
 			path = iShapeClipper;
 			sourceTree = "<group>";
 		};
-		547B93BE234720D2003CFA6C /* Source */ = {
+		543F1BF82387BA96001C9C07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				547B93C5234726F8003CFA6C /* Geom */,
-				547B93C2234726CD003CFA6C /* Support */,
-				547B93BF23472168003CFA6C /* TestData */,
+				543F1BF92387BA96001C9C07 /* TestData */,
+				543F1BFC2387BA96001C9C07 /* Solver */,
+				543F1C032387BA96001C9C07 /* Collision */,
+				543F1C142387BA96001C9C07 /* Geom */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		547B93BF23472168003CFA6C /* TestData */ = {
+		543F1BF92387BA96001C9C07 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
-				547B93C023472180003CFA6C /* SubstractTests.swift */,
+				543F1BFA2387BA96001C9C07 /* UnionTestData.swift */,
+				543F1BFB2387BA96001C9C07 /* SubtractTestData.swift */,
 			);
 			path = TestData;
 			sourceTree = "<group>";
 		};
-		547B93C2234726CD003CFA6C /* Support */ = {
+		543F1BFC2387BA96001C9C07 /* Solver */ = {
 			isa = PBXGroup;
 			children = (
+				543F1BFD2387BA96001C9C07 /* Solution.swift */,
+				543F1BFE2387BA96001C9C07 /* SubtractNavigator.swift */,
+				543F1BFF2387BA96001C9C07 /* Solver.swift */,
+				543F1C002387BA96001C9C07 /* IntersectSolver.swift */,
+				543F1C012387BA96001C9C07 /* UnionSolver.swift */,
+				543F1C022387BA96001C9C07 /* SubtractSolver.swift */,
 			);
-			path = Support;
+			path = Solver;
 			sourceTree = "<group>";
 		};
-		547B93C5234726F8003CFA6C /* Geom */ = {
+		543F1C032387BA96001C9C07 /* Collision */ = {
 			isa = PBXGroup;
 			children = (
-				547B93C623472791003CFA6C /* Corner.swift */,
+				543F1C042387BA96001C9C07 /* PinPathBuilder.swift */,
+				543F1C052387BA96001C9C07 /* AdjacencyMatrix.swift */,
+				543F1C062387BA96001C9C07 /* CrossResolver.swift */,
+				543F1C072387BA96001C9C07 /* Primitive */,
+				543F1C102387BA96001C9C07 /* Navigation */,
+				543F1C132387BA96001C9C07 /* CrossDetector.swift */,
+			);
+			path = Collision;
+			sourceTree = "<group>";
+		};
+		543F1C072387BA96001C9C07 /* Primitive */ = {
+			isa = PBXGroup;
+			children = (
+				543F1C082387BA96001C9C07 /* PinPath.swift */,
+				543F1C092387BA96001C9C07 /* PinPoint.swift */,
+				543F1C0A2387BA96001C9C07 /* PinSequence.swift */,
+				543F1C0B2387BA96001C9C07 /* IndexMileStone.swift */,
+				543F1C0C2387BA96001C9C07 /* PinEdge.swift */,
+				543F1C0D2387BA96001C9C07 /* PathMileStone.swift */,
+				543F1C0E2387BA96001C9C07 /* PinPath+Test.swift */,
+				543F1C0F2387BA96001C9C07 /* PinHandler.swift */,
+			);
+			path = Primitive;
+			sourceTree = "<group>";
+		};
+		543F1C102387BA96001C9C07 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				543F1C112387BA96001C9C07 /* PinNavigator.swift */,
+				543F1C122387BA96001C9C07 /* Cursor.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		543F1C142387BA96001C9C07 /* Geom */ = {
+			isa = PBXGroup;
+			children = (
+				543F1C152387BA96001C9C07 /* Rect.swift */,
+				543F1C162387BA96001C9C07 /* Corner.swift */,
 			);
 			path = Geom;
 			sourceTree = "<group>";
@@ -170,8 +260,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				547B93C723472791003CFA6C /* Corner.swift in Sources */,
-				547B93C123472180003CFA6C /* SubstractTests.swift in Sources */,
+				543F1C242387BA96001C9C07 /* PinSequence.swift in Sources */,
+				543F1C1B2387BA96001C9C07 /* Solver.swift in Sources */,
+				543F1C2B2387BA96001C9C07 /* Cursor.swift in Sources */,
+				543F1C202387BA96001C9C07 /* AdjacencyMatrix.swift in Sources */,
+				543F1C2A2387BA96001C9C07 /* PinNavigator.swift in Sources */,
+				543F1C172387BA96001C9C07 /* UnionTestData.swift in Sources */,
+				543F1C262387BA96001C9C07 /* PinEdge.swift in Sources */,
+				543F1C292387BA96001C9C07 /* PinHandler.swift in Sources */,
+				543F1C1E2387BA96001C9C07 /* SubtractSolver.swift in Sources */,
+				543F1C222387BA96001C9C07 /* PinPath.swift in Sources */,
+				543F1C1A2387BA96001C9C07 /* SubtractNavigator.swift in Sources */,
+				543F1C182387BA96001C9C07 /* SubtractTestData.swift in Sources */,
+				543F1C272387BA96001C9C07 /* PathMileStone.swift in Sources */,
+				543F1C282387BA96001C9C07 /* PinPath+Test.swift in Sources */,
+				543F1C232387BA96001C9C07 /* PinPoint.swift in Sources */,
+				543F1C1C2387BA96001C9C07 /* IntersectSolver.swift in Sources */,
+				543F1C2E2387BA96001C9C07 /* Corner.swift in Sources */,
+				543F1C2C2387BA96001C9C07 /* CrossDetector.swift in Sources */,
+				543F1C252387BA96001C9C07 /* IndexMileStone.swift in Sources */,
+				543F1C192387BA96001C9C07 /* Solution.swift in Sources */,
+				543F1C212387BA96001C9C07 /* CrossResolver.swift in Sources */,
+				543F1C1D2387BA96001C9C07 /* UnionSolver.swift in Sources */,
+				543F1C1F2387BA96001C9C07 /* PinPathBuilder.swift in Sources */,
+				543F1C2D2387BA96001C9C07 /* Rect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

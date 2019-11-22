@@ -31,21 +31,21 @@ struct CrossResolver {
 
             if t0 != t1 && t2 != t3 {
                 if d0 != 0 && d1 != 0 && d2 != 0 && d3 != 0 {
-                    return CrossType.pure;
+                    return CrossType.pure
                 }
 
-                return CrossType.edge_cross;
+                return CrossType.edge_cross
             }
 
             // TODO check corner case
             if a0 != b0 && a0 != b1 {
-                return CrossType.not_cross;
+                return CrossType.not_cross
             }
 
-            return CrossType.common_end;
+            return CrossType.common_end
         }
 
-        return CrossType.same_line;
+        return CrossType.same_line
     }
 
     private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Int {

@@ -54,7 +54,7 @@ struct PinPath {
         }
 
         if length == 2 {
-            let middleIndex = (v0.masterMileStone.index + 1) % n;
+            let middleIndex = (v0.masterMileStone.index + 1) % n
             let middleSortFactor = PathMileStone(index: middleIndex, offset: 0)
             let middle = PinHandler(sortFactor: middleSortFactor, index: index, isPinPath: true, marker: 1, type: v0.type)
             return [firstHandler, middle, lastHandler]

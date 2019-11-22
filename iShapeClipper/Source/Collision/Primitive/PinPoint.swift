@@ -61,8 +61,8 @@ public struct PinPoint {
     var slaveMileStone: PathMileStone
 
     init(point: IntPoint, type: PinType, masterMileStone: PathMileStone, slaveMileStone: PathMileStone) {
-        self.point = point;
-        self.type = type;
+        self.point = point
+        self.type = type
         self.masterMileStone = masterMileStone
         self.slaveMileStone = slaveMileStone
     }
@@ -82,8 +82,8 @@ public struct PinPoint {
 
 
     static func buildOnMaster(def: Def) -> PinPoint {
-        let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl0);
-        let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1);
+        let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl0)
+        let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1)
 
         let type: PinType
         if isCCW0 == isCCW1 {
@@ -97,8 +97,8 @@ public struct PinPoint {
 
 
     static func buildOnSlave(def: Def) -> PinPoint {
-        let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms0, c: def.sl1);
-        let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1);
+        let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms0, c: def.sl1)
+        let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1)
 
         let type: PinType
         if isCCW0 == isCCW1 {

@@ -231,7 +231,7 @@ struct PinSequence {
         var indexArray = Array<Int>(repeating: 0, count: n)
 
         for j in 0..<n {
-            indexArray[j] = iStones[j].index;
+            indexArray[j] = iStones[j].index
         }
 
         return indexArray

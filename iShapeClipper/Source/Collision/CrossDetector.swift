@@ -1,5 +1,5 @@
 //
-//  Intersector.swift
+//  CrossDetector.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 04/10/2019.
@@ -7,10 +7,10 @@
 
 import iGeometry
 
-struct Intersector {
+struct CrossDetector {
     
     internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: PinPoint.PinType) -> PinNavigator {
-        let posMatrix = Intersector.createPossibilityMatrix(master: iMaster, slave: iSlave)
+        let posMatrix = CrossDetector.createPossibilityMatrix(master: iMaster, slave: iSlave)
         
         let masterIndices = posMatrix.masterIndices
         let slaveIndices = posMatrix.slaveIndices
@@ -64,7 +64,7 @@ struct Intersector {
                 case .not_cross:
                     continue
                 case .pure:
-                    let point = Intersector.cross(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
+                    let point = CrossDetector.cross(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
                     // simple intersection and most common case
                     
                     let pinPointDef = PinPoint.Def(
