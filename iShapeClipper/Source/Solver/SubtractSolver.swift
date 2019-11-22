@@ -149,53 +149,14 @@ extension Solver {
 fileprivate extension PinNavigator {
 
     mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
-        let start: Cursor = cursor
-        
-        var prev = cursor
-        var cursor = self.nextSlave(cursor: cursor)
-        
-        while start != cursor && cursor.type == .out_in {
-            let nextMaster = self.nextMaster(cursor: cursor)
-            
-            if nextMaster == start {
-                return cursor
-            }
-            
-            let nextSlave = self.nextSlave(cursor: cursor)
-            
-            let isCanSkip = self.isCanSkip(prev: prev, cursor: cursor, nextSlave: nextSlave)
-            if !isCanSkip {
-                return cursor
-            }
-            
-            self.mark(cursor: cursor)
-            prev = cursor
-            cursor = nextSlave
-        }
-
-        return cursor
-    }
-    
-    private mutating func isCanSkip(prev: Cursor, cursor: Cursor, nextSlave: Cursor) -> Bool {
-        var nextMaster = cursor
-        var isFoundMaster: Bool
-        var isFoundStart: Bool
-        repeat {
-            nextMaster = self.nextMaster(cursor: nextMaster)
-            isFoundMaster = nextMaster == nextSlave
-            isFoundStart = nextMaster == prev
-        } while !(isFoundMaster || isFoundStart)
-        
-        
-        return isFoundMaster
-    }
-    
-/*
-    mutating func nextSlaveOut(cursor: Cursor) -> Cursor {
-        // keep in mind Test 27
+        // keep in mind Test 11, 27
         let start = cursor
 
         var next = self.nextSlave(cursor: cursor)
+        
+        if start.type == .out_in {
+            return next
+        }
 
         while start != next {
             if next.type == .outside {
@@ -213,11 +174,11 @@ fileprivate extension PinNavigator {
                 masterCursor = self.nextMaster(cursor: masterCursor)
             } while masterCursor != next && masterCursor != nextNext
             
-            if masterCursor == next {
+            if masterCursor != next {
                 return next
             }
-
-            // it's inner cursor skip them
+            
+            // it's inner cursor, skip it
             self.mark(cursor: next)
 
             next = nextNext
@@ -225,5 +186,5 @@ fileprivate extension PinNavigator {
 
         return next
     }
-    */
+
 }
