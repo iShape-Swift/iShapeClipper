@@ -35,9 +35,9 @@ public struct SubtractSolution {
     public let pathList: PlainPathList
     public let nature: Nature
 
-    init(pathList: PlainPathList, disposition: Nature) {
+    init(pathList: PlainPathList, nature: Nature) {
         self.pathList = pathList
-        self.nature = disposition
+        self.nature = nature
     }
 }
 
@@ -47,9 +47,9 @@ public struct CutSolution {
     public let bitePathList: PlainPathList
     public let nature: SubtractSolution.Nature
 
-    init(restPathList: PlainPathList, bitePathList: PlainPathList, disposition: SubtractSolution.Nature) {
+    init(restPathList: PlainPathList, bitePathList: PlainPathList, nature: SubtractSolution.Nature) {
         self.restPathList = restPathList
         self.bitePathList = bitePathList
-        self.nature = disposition
+        self.nature = nature
     }
 }

@@ -13,7 +13,7 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
         
         guard !navigator.isEqual else {
-            return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), disposition: .empty)
+            return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), nature: .empty)
         }
 
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
@@ -21,16 +21,16 @@ public struct Solver {
         let cursor = filterNavigator.first()
         
         guard cursor.isNotEmpty else {
-            return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), disposition: .empty)
+            return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), nature: .empty)
         }
 
         let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
         let bitePathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
 
         if restPathList.layouts.count > 0 {
-            return CutSolution(restPathList: restPathList, bitePathList: bitePathList, disposition: .overlap)
+            return CutSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
         } else {
-            return CutSolution(restPathList: restPathList, bitePathList: bitePathList, disposition: .notOverlap)
+            return CutSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .notOverlap)
         }
     }
     
@@ -38,7 +38,7 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
-            return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
+            return SubtractSolution(pathList: PlainPathList(), nature: .empty)
         }
     
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
@@ -46,15 +46,15 @@ public struct Solver {
         let cursor = filterNavigator.first()
     
         guard cursor.isNotEmpty else {
-            return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
+            return SubtractSolution(pathList: PlainPathList(), nature: .notOverlap)
         }
         
         let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
         
         if pathList.layouts.count > 0 {
-            return SubtractSolution(pathList: pathList, disposition: .overlap)
+            return SubtractSolution(pathList: pathList, nature: .overlap)
         } else {
-            return SubtractSolution(pathList: pathList, disposition: .notOverlap)
+            return SubtractSolution(pathList: pathList, nature: .notOverlap)
         }
     }
     
@@ -62,7 +62,7 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
-            return SubtractSolution(pathList: PlainPathList(), disposition: .empty)
+            return SubtractSolution(pathList: PlainPathList(), nature: .empty)
         }
     
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
@@ -70,15 +70,15 @@ public struct Solver {
         let cursor = filterNavigator.first()
     
         guard cursor.isNotEmpty else {
-            return SubtractSolution(pathList: PlainPathList(), disposition: .notOverlap)
+            return SubtractSolution(pathList: PlainPathList(), nature: .notOverlap)
         }
         
         let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
         
         if pathList.layouts.count > 0 {
-            return SubtractSolution(pathList: pathList, disposition: .overlap)
+            return SubtractSolution(pathList: pathList, nature: .overlap)
         } else {
-            return SubtractSolution(pathList: pathList, disposition: .notOverlap)
+            return SubtractSolution(pathList: pathList, nature: .notOverlap)
         }
     }
 
