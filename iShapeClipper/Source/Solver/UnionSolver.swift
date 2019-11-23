@@ -9,8 +9,8 @@ import iGeometry
 
 extension Solver {
     
-    static func union(navigator aNavigator: UnionNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
-        var unionNavigator = aNavigator
+    static func union(navigator aNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var filterNavigator = aNavigator
 
         var pathList = PlainPathList()
         
@@ -20,7 +20,7 @@ extension Solver {
         let slaveCount = slave.count
         let slaveLastIndex = slaveCount - 1
         
-        var cursor = unionNavigator.next()
+        var cursor = filterNavigator.next()
         
         while cursor.isNotEmpty {
 
@@ -31,12 +31,12 @@ extension Solver {
             repeat {
                 // in-out slave path
                 
-                let outCursor = unionNavigator.navigator.nextSlaveOut(cursor: cursor)
+                let outCursor = filterNavigator.navigator.nextSlaveOut(cursor: cursor)
                 
-                let inSlaveStart = unionNavigator.navigator.slaveStartStone(cursor: cursor)
-                let outSlaveEnd = unionNavigator.navigator.slaveEndStone(cursor: outCursor)
+                let inSlaveStart = filterNavigator.navigator.slaveStartStone(cursor: cursor)
+                let outSlaveEnd = filterNavigator.navigator.slaveEndStone(cursor: outCursor)
                 
-                let startPoint = unionNavigator.navigator.slaveStartPoint(cursor: cursor)
+                let startPoint = filterNavigator.navigator.slaveStartPoint(cursor: cursor)
                 path.append(startPoint)
                 
                 let isInSlaveNotOverflow: Bool
@@ -85,16 +85,16 @@ extension Solver {
                     }
                 }
                 
-                let endPoint = unionNavigator.navigator.slaveEndPoint(cursor: outCursor)
+                let endPoint = filterNavigator.navigator.slaveEndPoint(cursor: outCursor)
                 path.append(endPoint)
                 
-                cursor = unionNavigator.navigator.nextMaster(cursor: outCursor)
-                unionNavigator.navigator.mark(cursor: cursor)
+                cursor = filterNavigator.navigator.nextMaster(cursor: outCursor)
+                filterNavigator.navigator.mark(cursor: cursor)
                 
                 // out-in master path
                 
-                let outMasterEnd = unionNavigator.navigator.masterEndStone(cursor: outCursor)
-                let inMasterStart = unionNavigator.navigator.masterStartStone(cursor: cursor)
+                let outMasterEnd = filterNavigator.navigator.masterEndStone(cursor: outCursor)
+                let inMasterStart = filterNavigator.navigator.masterStartStone(cursor: cursor)
                 
                 
                 let isOutMasterNotOverflow: Bool
@@ -145,7 +145,7 @@ extension Solver {
             let isClockWise = path.isClockWise
             pathList.append(path: path, isClockWise: isClockWise)
             
-            cursor = unionNavigator.next()
+            cursor = filterNavigator.next()
         }
 
         return pathList

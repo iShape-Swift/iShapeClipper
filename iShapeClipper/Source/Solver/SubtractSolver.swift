@@ -9,8 +9,8 @@ import iGeometry
 
 extension Solver {
 
-    static func subtract(navigator aSubNavigator: SubtractNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
-        var subNavigator = aSubNavigator
+    static func subtract(navigator aFilterNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+        var subNavigator = aFilterNavigator
         
         var cursor = subNavigator.next()
         var pathList = PlainPathList()

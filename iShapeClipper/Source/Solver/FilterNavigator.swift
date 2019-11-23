@@ -1,24 +1,24 @@
 //
-//  SubtractNavigator.swift
+//  FilterNavigator.swift
 //  iGeometry
 //
-//  Created by Nail Sharipov on 21.11.2019.
+//  Created by Nail Sharipov on 22.11.2019.
 //
 
 import Foundation
 
-struct SubtractNavigator {
+struct FilterNavigator {
     
     var navigator: PinNavigator
     var nextCursors: [Cursor]
     private var nextIndex: Int = 0
     
-    init(navigator: PinNavigator) {
+    init(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) {
         self.navigator = navigator
-        self.nextCursors = SubtractNavigator.nextCursors(navigator: navigator)
+        self.nextCursors = FilterNavigator.nextCursors(navigator: navigator, primary: primary, secondary: secondary)
     }
     
-    private static func nextCursors(navigator: PinNavigator) -> [Cursor] {
+    private static func nextCursors(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) -> [Cursor] {
         let n = navigator.nodeArray.count
         var cursors = Array<Cursor>()
         cursors.reserveCapacity(n)
@@ -32,13 +32,13 @@ struct SubtractNavigator {
                 let path = navigator.pinPathArray[node.index]
                 type = path.v0.type
             }
-            if type == .inside || type == .out_in {
+            if type == primary || type == secondary {
                 cursors.append(Cursor(type: type, index: i))
             }
         }
         
         cursors.sort(by: { a, b in
-            return a.type == .inside && b.type != .inside
+            return a.type == primary && b.type != primary
         })
 
         return cursors
