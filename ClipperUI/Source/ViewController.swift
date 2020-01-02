@@ -31,7 +31,7 @@ final class ViewController: NSViewController {
     private func setupPopUpButton() {
         let index: Int = UserDefaults.standard.integer(forKey: "screen")
         let popUpButton = canvasView.testList
-        popUpButton.addItems(withTitles: ["Substract", "Intersect", "Union", "Polygon"])
+        popUpButton.addItems(withTitles: ["Substract", "Intersect", "Union", "Polygon", "InnerPoint", "Hole", "Cut"])
         popUpButton.selectItem(at: index)
         popUpButton.action = #selector(didPickScene)
         popUpButton.target = self
@@ -54,8 +54,14 @@ final class ViewController: NSViewController {
             newScene = IntersectScene()
         case 2:
             newScene = UnionScene()
-        default:
+        case 3:
             newScene = PolygonScene()
+        case 4:
+            newScene = InnerPointScene()
+        case 5:
+            newScene = HoleScene()
+        default:
+            newScene = CutScene()
         }
         
         canvasView.add(shape: newScene)

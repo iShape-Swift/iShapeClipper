@@ -9,14 +9,14 @@ import iGeometry
 
 extension Solver {
 
-    static func intersect(navigator aFilterNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+    static func intersect(navigator aFilterNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainShape {
         var filterNavigator = aFilterNavigator
         
         var cursor = filterNavigator.next()
-        var pathList = PlainPathList()
+        var pathList = PlainShape.empty
 
         guard cursor.isNotEmpty && cursor.type == .inside else {
-            pathList.append(path: slave, isClockWise: false)
+            pathList.add(path: slave, isClockWise: false)
             return pathList
         }
 
@@ -143,7 +143,7 @@ extension Solver {
 
             } while cursor != start
             
-            pathList.append(path: path, isClockWise: false)
+            pathList.add(path: path, isClockWise: false)
             
             cursor = filterNavigator.next()
         }

@@ -13,7 +13,7 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
         
         guard !navigator.isEqual else {
-            return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), nature: .empty)
+            return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
         }
 
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
@@ -21,7 +21,13 @@ public struct Solver {
         let cursor = filterNavigator.first()
         
         guard cursor.isNotEmpty else {
-            return CutSolution(restPathList: PlainPathList(), bitePathList: PlainPathList(), nature: .empty)
+            if master.isContain(hole: slave, isClockWise: false) {
+                return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .hole)
+            } else {
+                return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
+            }
+            
+            
         }
 
         let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
@@ -38,7 +44,7 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
-            return SubtractSolution(pathList: PlainPathList(), nature: .empty)
+            return SubtractSolution(pathList: .empty, nature: .empty)
         }
     
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
@@ -46,7 +52,11 @@ public struct Solver {
         let cursor = filterNavigator.first()
     
         guard cursor.isNotEmpty else {
-            return SubtractSolution(pathList: PlainPathList(), nature: .notOverlap)
+            if master.isContain(hole: slave, isClockWise: false) {
+                return SubtractSolution(pathList: .empty, nature: .hole)
+            } else {
+                return SubtractSolution(pathList: .empty, nature: .notOverlap)
+            }
         }
         
         let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
@@ -62,7 +72,7 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
     
         guard !navigator.isEqual else {
-            return SubtractSolution(pathList: PlainPathList(), nature: .empty)
+            return SubtractSolution(pathList: .empty, nature: .empty)
         }
     
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
@@ -70,7 +80,7 @@ public struct Solver {
         let cursor = filterNavigator.first()
     
         guard cursor.isNotEmpty else {
-            return SubtractSolution(pathList: PlainPathList(), nature: .notOverlap)
+            return SubtractSolution(pathList: .empty, nature: .notOverlap)
         }
         
         let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
@@ -86,8 +96,8 @@ public struct Solver {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
 
         guard !navigator.isEqual else {
-            var pathList = PlainPathList()
-            pathList.append(path: master, isClockWise: true)
+            var pathList = PlainShape.empty
+            pathList.add(path: master, isClockWise: true)
             return UnionSolution(pathList: pathList, nature: .overlap)
         }
         
@@ -96,23 +106,23 @@ public struct Solver {
         let cursor = filterNavigator.first()
 
         guard cursor.isNotEmpty else {
-            var pathList = PlainPathList()
+            var pathList = PlainShape.empty
             if navigator.hasContacts {
                 if master.isOverlap(points: slave) {
-                    pathList.append(path: master, isClockWise: true)
+                    pathList.add(path: master, isClockWise: true)
                     return UnionSolution(pathList: pathList, nature: .overlap)
                 } else if slave.isOverlap(points: slave) {
-                    pathList.append(path: slave, isClockWise: true)
+                    pathList.add(path: slave, isClockWise: true)
                     return UnionSolution(pathList: pathList, nature: .overlap)
                 } else {
                     return UnionSolution(pathList: pathList, nature: .notOverlap)
                 }
             } else {
                 if master.isContain(point: slave.any) {
-                    pathList.append(path: master, isClockWise: true)
+                    pathList.add(path: master, isClockWise: true)
                     return UnionSolution(pathList: pathList, nature: .overlap)
                 } else if slave.isContain(point: master.any) {
-                    pathList.append(path: slave, isClockWise: true)
+                    pathList.add(path: slave, isClockWise: true)
                     return UnionSolution(pathList: pathList, nature: .overlap)
                 } else {
                     return UnionSolution(pathList: pathList, nature: .notOverlap)
@@ -125,47 +135,9 @@ public struct Solver {
         if pathList.layouts.count > 0 {
             return UnionSolution(pathList: pathList, nature: .overlap)
         } else {
-            return UnionSolution(pathList: PlainPathList(), nature: .notOverlap)
+            return UnionSolution(pathList: .empty, nature: .notOverlap)
         }
     }
     
 }
 
-private extension Array where Element == IntPoint {
-    
-    var any: IntPoint {
-        let a = self[0]
-        let b = self[1]
-        return IntPoint(x: (a.x + b.x) >> 1, y: (a.y + b.y) >> 1)
-    }
-    
-    func isContain(point: IntPoint) -> Bool {
-        let n = self.count
-        var isContain = false
-        var p2 = self[n - 1]
-        for i in 0..<n {
-            let p1 = self[i]
-            if ((p1.y > point.y) != (p2.y > point.y)) && point.x < ((p2.x - p1.x) * (point.y - p1.y) / (p2.y - p1.y) + p1.x) {
-                isContain = !isContain
-            }
-            p2 = p1
-        }
-
-        return isContain
-    }
-    
-    func isOverlap(points: [IntPoint]) -> Bool {
-        let n = points.count
-        var a = points[n - 1]
-        for i in 0..<n {
-            let b = points[i]
-            let c = IntPoint(x: (a.x + b.x) >> 1, y: (a.y + b.y) >> 1)
-            if self.isContain(point: c) {
-                return true
-            }
-            a = b
-        }
-
-        return false
-    }
-}

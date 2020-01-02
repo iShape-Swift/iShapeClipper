@@ -1,8 +1,8 @@
 //
-//  PolygonScene.swift
+//  InnerPointScene.swift
 //  ClipperUI
 //
-//  Created by Nail Sharipov on 04.11.2019.
+//  Created by Nail Sharipov on 28.12.2019.
 //  Copyright © 2019 iShape. All rights reserved.
 //
 
@@ -10,24 +10,13 @@ import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class PolygonScene: CoordinateSystemScene {
-    
-    /*
-    private var points: [Point] = [
-        Point(x: -10, y: -10),        // A
-        Point(x: 10, y: -10),         // B
-        Point(x: 10, y: 10),          // C
-        Point(x: -10, y: 10),         // D
-        Point(x: 0, y: 0)             // P
-    ]
-    */
-    
+final class InnerPointScene: CoordinateSystemScene {
+
     private var points: [Point] = [
         Point(x: 0, y: -10),         // A
-        Point(x: -10, y: 0),         // B
+        Point(x: 5, y: 0),         // B
         Point(x: 0, y: 10),          // C
-        Point(x: 10, y: 0),          // D
-        Point(x: 0, y: -15)            // P
+        Point(x: 10, y: 0)          // D
     ]
     
     private var activeIndex: Int?
@@ -63,34 +52,21 @@ final class PolygonScene: CoordinateSystemScene {
     }
     
     private func addShapes() {
-        
-        let polygon = Array(points[0..<points.count - 1])
         let iGeom = IntGeom.defGeom
-        let iPolygon = iGeom.int(points: polygon)
+        let iPolygon = iGeom.int(points: points)
+        
+        let point = iGeom.float(point: iPolygon.anyInside(isClockWise: true))
 
-        let point = points[points.count - 1]
-        let iPoint = iGeom.int(point: point)
+        let dot = ShapeDot(position: point.toCGPoint, radius: 1.0, color: Colors.red)
         
-        let result = iPolygon.isContain(point: iPoint)
-        
-        let color: CGColor
-        if result {
-            color = Colors.red
-        } else {
-            color = Colors.blue
-        }
-        
-        
-        let dot = ShapeDot(position: point.toCGPoint, radius: 1.0, color: color)
-        
-        self.addSublayer(ShapeLinePolygon(points: polygon.toCGPoints(), lineWidth: 0.2, color: Colors.darkGray))
+        self.addSublayer(ShapeLinePolygon(points: points.toCGPoints(), lineWidth: 0.2, color: Colors.darkGray))
         self.addSublayer(dot)
     }
     
 }
 
 
-extension PolygonScene: MouseCompatible {
+extension InnerPointScene: MouseCompatible {
     
     private func findNearest(point: Point, points: [Point]) -> Int? {
         var i = 0   // skip O point
@@ -142,7 +118,7 @@ extension PolygonScene: MouseCompatible {
 }
 
 
-extension PolygonScene: SceneNavigation {
+extension InnerPointScene: SceneNavigation {
     func next() {
         
     }

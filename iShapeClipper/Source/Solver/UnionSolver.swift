@@ -9,10 +9,10 @@ import iGeometry
 
 extension Solver {
     
-    static func union(navigator aNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+    static func union(navigator aNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainShape {
         var filterNavigator = aNavigator
 
-        var pathList = PlainPathList()
+        var pathList = PlainShape.empty
         
         let masterCount = master.count
         let masterLastIndex = masterCount - 1
@@ -143,7 +143,7 @@ extension Solver {
             } while cursor != start
             
             let isClockWise = path.isClockWise
-            pathList.append(path: path, isClockWise: isClockWise)
+            pathList.add(path: path, isClockWise: isClockWise)
             
             cursor = filterNavigator.next()
         }

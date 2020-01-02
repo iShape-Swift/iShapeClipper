@@ -12,7 +12,7 @@ import iGeometry
 
 final class SubtractScene: CoordinateSystemScene {
 
-    private static let indexKey = String(describing: IntersectScene.self)
+    private static let indexKey = String(describing: SubtractScene.self)
     
     private var master: [Point] = []
     private var slave: [Point] = []

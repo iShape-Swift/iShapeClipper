@@ -14,10 +14,10 @@ public struct UnionSolution {
         case overlap
     }
 
-    public let pathList: PlainPathList
+    public let pathList: PlainShape
     public let nature: Nature
 
-    init(pathList: PlainPathList, nature: Nature) {
+    init(pathList: PlainShape, nature: Nature) {
         self.pathList = pathList
         self.nature = nature
     }
@@ -32,10 +32,10 @@ public struct SubtractSolution {
         case hole
     }
 
-    public let pathList: PlainPathList
+    public let pathList: PlainShape
     public let nature: Nature
 
-    init(pathList: PlainPathList, nature: Nature) {
+    init(pathList: PlainShape, nature: Nature) {
         self.pathList = pathList
         self.nature = nature
     }
@@ -43,11 +43,11 @@ public struct SubtractSolution {
 
 public struct CutSolution {
 
-    public let restPathList: PlainPathList
-    public let bitePathList: PlainPathList
+    public let restPathList: PlainShape
+    public let bitePathList: PlainShape
     public let nature: SubtractSolution.Nature
 
-    init(restPathList: PlainPathList, bitePathList: PlainPathList, nature: SubtractSolution.Nature) {
+    init(restPathList: PlainShape, bitePathList: PlainShape, nature: SubtractSolution.Nature) {
         self.restPathList = restPathList
         self.bitePathList = bitePathList
         self.nature = nature

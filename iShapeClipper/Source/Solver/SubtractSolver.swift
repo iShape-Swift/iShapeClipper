@@ -9,11 +9,11 @@ import iGeometry
 
 extension Solver {
 
-    static func subtract(navigator aFilterNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainPathList {
+    static func subtract(navigator aFilterNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainShape {
         var subNavigator = aFilterNavigator
         
         var cursor = subNavigator.next()
-        var pathList = PlainPathList()
+        var pathList = PlainShape.empty
         
         let masterCount = master.count
         let masterLastIndex = masterCount - 1
@@ -137,7 +137,7 @@ extension Solver {
                 }
             } while cursor != start
             
-            pathList.append(path: path, isClockWise: true)
+            pathList.add(path: path, isClockWise: true)
             
             cursor = subNavigator.next()
         }

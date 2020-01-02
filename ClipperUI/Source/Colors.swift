@@ -28,6 +28,7 @@ struct Colors {
     static let darkGreen = NSColor(red: 0.3, green: 0.7, blue: 0.3, alpha: 1.0).cgColor
     
     static let red = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+    static let darkRed = NSColor(red: 0.3, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
     static let yellow = NSColor(red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0).cgColor
     
     static let orange = NSColor(red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0).cgColor
@@ -42,6 +43,9 @@ struct Colors {
     static let solution_border = NSColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.2).cgColor
     static let solution_second = NSColor(red: 0.0, green: 0.8, blue: 1.0, alpha: 0.5).cgColor
     static let solution_second_border = NSColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.2).cgColor
+    
+    static let solution_third = NSColor(red: 0.0, green: 0.8, blue: 1.0, alpha: 1.0).cgColor
+    static let solution_third_border = NSColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0).cgColor
     
     static let into = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
     static let out = NSColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0).cgColor

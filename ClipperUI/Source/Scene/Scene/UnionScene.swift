@@ -12,7 +12,7 @@ import iGeometry
 
 final class UnionScene: CoordinateSystemScene {
 
-    private static let indexKey = String(describing: IntersectScene.self)
+    private static let indexKey = String(describing: UnionScene.self)
     
     private var master: [Point] = []
     private var slave: [Point] = []
@@ -73,14 +73,14 @@ final class UnionScene: CoordinateSystemScene {
         default:
             for layout in solution.pathList.layouts {
                 if layout.isClockWise {
-                    let path = solution.pathList.getPath(layout: layout)
+                    let path = solution.pathList.get(layout: layout)
                     let points = iGeom.float(points: path).toCGPoints()
                     self.addSublayer(ShapeArea(points: points, color: Colors.solution))
                 }
             }
             for layout in solution.pathList.layouts {
                 if !layout.isClockWise {
-                    let path = solution.pathList.getPath(layout: layout)
+                    let path = solution.pathList.get(layout: layout)
                     let points = iGeom.float(points: path).toCGPoints()
                     self.addSublayer(ShapeArea(points: points, color: Colors.blue))
                 }
