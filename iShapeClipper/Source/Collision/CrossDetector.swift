@@ -45,26 +45,28 @@ struct CrossDetector {
                 let sl0 = iSlave[slIx0]
                 let sl1 = iSlave[slIx1]
                 
-                let intersectionTest = CrossResolver.defineType(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
+                var point: IntPoint = .zero
+                let intersectionTest = CrossResolver.defineType(a0: ms0, a1: ms1, b0: sl0, b1: sl1, cross: &point)
                 
-                // -1, 1 are the most possible cases (more then 99%)
-                // -1 - no intersections
-                //  1 - simple intersection with no overlaps
+                // .not_cross, .pure are the most possible cases (more then 99%)
                 
+                // .not_cross - no intersections
+                // .pure - simple intersection with no overlaps
+
+                // .same_line, .edge_cross are very specific, but still possible cases
                 
-                // 0, 2 are very specific, but still possible cases
-                // 0 - same line
-                // 2 - one of the end is lying on others edge
+                // .same_line - same line
+                // .edge_cross - one of the end is lying on others edge
                 
                 // case when one on of slave ends is overlapped by on of the master ends
                 // can conflict with possible edge case
+                
                 j += 1
                 
                 switch intersectionTest {
                 case .not_cross:
                     continue
                 case .pure:
-                    let point = CrossDetector.cross(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
                     // simple intersection and most common case
                     
                     let pinPointDef = PinPoint.Def(
@@ -84,8 +86,6 @@ struct CrossDetector {
                     
                 case .edge_cross:
                     // one of the end is lying on others edge
-                    
-                    let point = endCross(a0: ms0, a1: ms1, b0: sl0, b1: sl1)
                     
                     let isMsEnd = ms0 == point || ms1 == point
                     let isSlEnd = sl0 == point || sl1 == point
@@ -288,73 +288,5 @@ struct CrossDetector {
         }
         
         return posMatrix
-    }
-    
-    
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
-        let dxA = a0.x - a1.x
-        let dyB = b0.y - b1.y
-        let dyA = a0.y - a1.y
-        let dxB = b0.x - b1.x
-        
-        let divider = dxA * dyB - dyA * dxB
-        
-        assert(divider != 0)
-        
-        let xyA = Double(a0.x * a1.y - a0.y * a1.x)
-        let xyB = Double(b0.x * b1.y - b0.y * b1.x)
-        
-        let invert_divider: Double = 1.0 / Double(divider)
-        
-        let x = xyA * Double(b0.x - b1.x) - Double(a0.x - a1.x) * xyB
-        let y = xyA * Double(b0.y - b1.y) - Double(a0.y - a1.y) * xyB
-        
-        let cx = round(x * invert_divider)
-        let cy = round(y * invert_divider)
-        
-        return IntPoint(x: Int64(cx), y: Int64(cy))
-    }
-    
-    private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
-        let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1)
-        
-        if a0 == p || a1 == p || b0 == p || b1 == p {
-            return p
-        }
-        
-        var dx = a0.x - p.x
-        var dy = a0.y - p.y
-        var dl = dx * dx + dy * dy
-        var minP = a0
-        var minL = dl
-        
-        dx = a1.x - p.x
-        dy = a1.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = a1
-            minL = dl
-        }
-        
-        dx = b0.x - p.x
-        dy = b0.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = b0
-            minL = dl
-        }
-        
-        dx = b1.x - p.x
-        dy = b1.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = b1
-            minL = dl
-        }
-        
-        return minP
     }
 }
