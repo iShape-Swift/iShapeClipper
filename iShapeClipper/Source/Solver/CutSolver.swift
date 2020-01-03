@@ -32,7 +32,6 @@ public extension PlainShape {
             return SolutionResult(isInteract: true, mainList: .empty, bitList: .empty)
         case .hole:
             return self.holeCase(cutPath: path, iGeom: iGeom)
-//            return SolutionResult(isInteract: true, mainList: .empty, bitList: .empty)
         case .overlap:
 //            return PlainShape.overlapCase(cutHullSolution: cutHullSolution, path: path, iGeom: iGeom)
             return SolutionResult(isInteract: true, mainList: .empty, bitList: .empty)
@@ -92,31 +91,23 @@ public extension PlainShape {
         }
         
         guard !islands.layouts.isEmpty else {
-            if notInteractedHoles.isEmpty {
-                // + одна дыра
-                var mainShape = self
-                mainShape.add(hole: cutPath)
-                let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
-                return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
-            } else {
-                var mainShape = PlainShape(points: self.get(index: 0))
-                mainShape.add(hole: superHole)
-                for j in 0..<notInteractedHoles.count {
-                    let index = notInteractedHoles[j]
-                    let hole = self.get(index: index)
-                    mainShape.add(hole: hole)
-                }
-                // тут ошибка bitList не учитывает пересечения с дырами
-                let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
-                return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
+            var mainShape = PlainShape(points: self.get(index: 0))
+            mainShape.add(hole: superHole)
+            for j in 0..<notInteractedHoles.count {
+                let index = notInteractedHoles[j]
+                let hole = self.get(index: index)
+                mainShape.add(hole: hole)
             }
+            // тут ошибка bitList не учитывает пересечения с дырами
+            let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
+            return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
         }
         
 
         
         guard !notInteractedHoles.isEmpty else {
-            var mainShape = self
-            mainShape.add(hole: cutPath)
+            var mainShape = PlainShape(points: self.get(index: 0))
+            mainShape.add(hole: superHole)
             
             let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
             return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)

@@ -57,7 +57,6 @@ struct PinSequence {
 
         let n = slavePath.count
 
-        //var nodes = Array<PinNode>(repeating: PinNode(isPinPath: 0), count: n)
         var nodes = Array<PinNavigator.PinNode>(repeating: .empty, count: n)
         for j in 0..<n {
             var node = nodes[j]
