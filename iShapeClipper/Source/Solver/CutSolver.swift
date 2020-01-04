@@ -102,17 +102,7 @@ public extension PlainShape {
             let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
             return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
         }
-        
 
-        
-        guard !notInteractedHoles.isEmpty else {
-            var mainShape = PlainShape(points: self.get(index: 0))
-            mainShape.add(hole: superHole)
-            
-            let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
-            return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
-        }
-        
         // вычитаем из внутрениних островков дыры, которые не пересеклись
         
         var result = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count,
