@@ -19,62 +19,9 @@ struct CutTestData {
     
     
     static let data: [TestData] = [
-        /*
-        // 0
-        TestData(
-            shape: PlainShape(
-                iShape: IntShape(
-                    hull: [
-                        Point(x: 10.0, y: -15.0),
-                        Point(x: -5.0, y: -15.0),
-                        Point(x: -5.0, y: 10.0),
-                        Point(x: 10.0, y: 10.0)
-                    ].int,
-                    holes: [
-                        [
-                            Point(x: 0.0, y: -10.0),
-                            Point(x: 0.0, y: -5.0),
-                            Point(x: 5.0, y: -5.0),
-                            Point(x: 5.0, y: -10.0)
-                        ].int
-                    ]
-            )
-        ),
-            path: [
-                Point(x: 0.0, y: 0.0),
-                Point(x: -10.0, y: 0.0),
-                Point(x: -10.0, y: 5.0),
-                Point(x: 0.0, y: 5.0)
-            ].int
-        ),
-        // 1
-        TestData(
-            shape: PlainShape(
-                iShape: IntShape(
-                    hull: [
-                        Point(x: 10.0, y: -15.0),
-                        Point(x: -5.0, y: -15.0),
-                        Point(x: -5.0, y: 10.0),
-                        Point(x: 10.0, y: 10.0)
-                    ].int,
-                    holes: [
-                        [
-                            Point(x: 0.0, y: -10.0),
-                            Point(x: 0.0, y: -5.0),
-                            Point(x: 5.0, y: -5.0),
-                            Point(x: 5.0, y: -10.0)
-                        ].int
-                    ]
-            )
-        ),
-            path: [
-                Point(x: 15.0, y: 0.0),
-                Point(x: -10.0, y: 0.0),
-                Point(x: -10.0, y: 5.0),
-                Point(x: 15.0, y: 5.0)
-            ].int
-        ),
-        */
+        
+        // hole case
+        
         // 0
         TestData(
             shape: PlainShape(
@@ -263,6 +210,63 @@ struct CutTestData {
                 Point(x: 0, y: -35),
                 Point(x: 20, y: -35),
                 Point(x: 20, y: 25),
+            ].int
+        ),
+        
+        // overlap case
+
+        // 5
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: 10.0, y: -15.0),
+                        Point(x: -5.0, y: -15.0),
+                        Point(x: -5.0, y: 10.0),
+                        Point(x: 10.0, y: 10.0)
+                    ].int,
+                    holes: [
+                        [
+                            Point(x: 5.0, y: -10.0),
+                            Point(x: 5.0, y: -5.0),
+                            Point(x: 0.0, y: -5.0),
+                            Point(x: 0.0, y: -10.0)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: 0.0, y: 5.0),
+                Point(x: -10.0, y: 5.0),
+                Point(x: -10.0, y: 0.0),
+                Point(x: 0.0, y: 0.0)
+            ].int
+        ),
+        // 6
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: 10.0, y: -15.0),
+                        Point(x: -5.0, y: -15.0),
+                        Point(x: -5.0, y: 10.0),
+                        Point(x: 10.0, y: 10.0)
+                    ].int,
+                    holes: [
+                        [
+                            Point(x: 5.0, y: -10.0),
+                            Point(x: 5.0, y: -5.0),
+                            Point(x: 0.0, y: -5.0),
+                            Point(x: 0.0, y: -10.0)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: 15.0, y: 5.0),
+                Point(x: -10.0, y: 5.0),
+                Point(x: -10.0, y: 0.0),
+                Point(x: 15.0, y: 0.0)
             ].int
         )
     ]

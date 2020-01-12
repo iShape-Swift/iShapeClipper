@@ -29,6 +29,8 @@ struct CrossDetector {
         
         var hasExclusion = false
         
+        var extremePointIndices = [Int]()
+        
         while i < n {
             let msIx0 = masterIndices[i]
             let msIx1 = msIx0 < msLastIx ? msIx0 + 1 : 0
@@ -135,23 +137,48 @@ struct CrossDetector {
                             slaveMileStone: PathMileStone(index: slaveEdge, offset: slaveOffset)
                         )
                         
+                        
+                        let pinPoint: PinPoint
+                        if isMsEnd {
+                            // pin point is on slave
+                            pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
+                        } else {
+                            // pin point is on master
+                            pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
+                        }
+                        extremePointIndices.append(pinPoints.count)
+                        pinPoints.append(pinPoint)
+                        
+                        
+                        // TODO exclusion
+                        /*
                         if isMsEnd {
                             // pin point is on slave
                             let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
-                            if (pinPoint.type != exclusionPinType) {
+                            
+                            
+                            if pinPoint.type != exclusionPinType {
                                 pinPoints.append(pinPoint)
                             } else {
                                 hasExclusion = true
                             }
+                            
                         } else if isSlEnd {
                             // pin point is on master
                             let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
-                            if (pinPoint.type != exclusionPinType) {
+                            extremePointIndices.append(pinPoints.count)
+                            pinPoints.append(pinPoint)
+                            
+                            // TODO exclusion
+                            
+                            if pinPoint.type != exclusionPinType {
                                 pinPoints.append(pinPoint)
                             } else {
                                 hasExclusion = true
                             }
+                            
                         }
+                        */
                         continue
                     }
                     
@@ -173,7 +200,11 @@ struct CrossDetector {
                     break
                 }
                 
+                // TODO check edge_cross && common_end 2, 3
+                
                 // only 0, 2, 3 cases are possible here
+                
+//                assert(intersectionTest != .edge_cross, "impossible")
                 
                 // lets ignore case for second end (it just add double)
                 let isFirstPointCross = ms0 == sl0 || ms0 == sl1
@@ -227,6 +258,10 @@ struct CrossDetector {
             }
         }
         
+        if !extremePointIndices.isEmpty {
+            CrossDetector.excludeExtremePoints(pinPoints: &pinPoints, pinEdges: &pinEdges, indices: extremePointIndices, masterCount: masterCount, slaveCount: slaveCount)
+        }
+        
         // merge all edges
         var builder = PinPathBuilder(pinEdges: pinEdges, iGeom: iGeom)
         
@@ -245,7 +280,6 @@ struct CrossDetector {
         
         return navigator
     }
-    
     
     private static func createPossibilityMatrix(master: [IntPoint], slave: [IntPoint]) -> AdjacencyMatrix {
         var slaveBoxArea = Rect.empty
@@ -289,4 +323,17 @@ struct CrossDetector {
         
         return posMatrix
     }
+    
+    // Cause float precision there are some cases when non parallel lines give parallel edges
+    // PinPathTests 24, 25, 26, 27
+    private static func excludeExtremePoints(pinPoints: inout [PinPoint], pinEdges: inout[PinEdge], indices: [Int], masterCount: Int, slaveCount: Int) {
+        // pinPoints is very small array ~ [1...10] points
+
+        // find all pins with the same slave and master index
+
+        let n = pinPoints.count
+        var removePoints = [Int]()
+
+    }
+    
 }

@@ -236,4 +236,3 @@ struct PinSequence {
         return indexArray
     }
 }
-

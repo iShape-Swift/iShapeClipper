@@ -1120,5 +1120,133 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(points_0, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10)])
     }
     
+    func test_24() {
+        let iMaster = [
+            IntPoint(x: -2, y: 2),
+            IntPoint(x: 2, y: 2),
+            IntPoint(x: 2, y: -2),
+            IntPoint(x: -2, y: -2)
+        ]
+        
+        let iSlave = [
+            IntPoint(x: -4, y: 7),
+            IntPoint(x: -4, y: -7),
+            IntPoint(x: 3, y: -7),
+            IntPoint(x: 1, y: 7)
+        ]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
+        let path = result.pinPathArray
+        
+        XCTAssertEqual(path.count, 2)
+        
+        let points_0 = iGeom.float(points: path[0].extract(points: iMaster))
+        XCTAssertEqual(points_0, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10)])
+    }
+    
+    func test_25() {
+        let iMaster = [
+            IntPoint(x: -2, y: 2),
+            IntPoint(x: 2, y: 2),
+            IntPoint(x: 2, y: -2),
+            IntPoint(x: -2, y: -2)
+        ]
+        
+        let iSlave = [
+            IntPoint(x: -4, y: 7),
+            IntPoint(x: -4, y: -7),
+            IntPoint(x: 1, y: -7),
+            IntPoint(x: 3, y: 7)
+        ]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
+        let path = result.pinPathArray
+        
+        XCTAssertEqual(path.count, 2)
+        
+        let points_0 = iGeom.float(points: path[0].extract(points: iMaster))
+        XCTAssertEqual(points_0, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10)])
+    }
+    
+    func test_26() {
+        let iMaster = [
+            IntPoint(x: -2, y: 2),
+            IntPoint(x: 2, y: 2),
+            IntPoint(x: 2, y: 0),
+            IntPoint(x: -2, y: 0)
+        ]
+        
+        let iSlave = [
+            IntPoint(x: -4, y: 7),
+            IntPoint(x: -4, y: -7),
+            IntPoint(x: 3, y: -7),
+            IntPoint(x: 1, y: 7)
+        ]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
+        let path = result.pinPathArray
+        
+        XCTAssertEqual(path.count, 2)
+        
+        let points_0 = iGeom.float(points: path[0].extract(points: iMaster))
+        XCTAssertEqual(points_0, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10)])
+    }
+    
+    func test_27() {
+        let iMaster = [
+            IntPoint(x: -2, y: 2),
+            IntPoint(x: 2, y: 2),
+            IntPoint(x: 2, y: 0),
+            IntPoint(x: -2, y: 0)
+        ]
+        
+        let iSlave = [
+            IntPoint(x: -4, y: 4),
+            IntPoint(x: -4, y: -4),
+            IntPoint(x: 7, y: -4),
+            IntPoint(x: 0, y: 4)
+        ]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
+
+        let paths = result.pinPathArray
+        XCTAssertEqual(paths.count, 0)
+        
+        let points = result.pinPointArray
+        XCTAssertEqual(points.count, 1)
+        
+        
+        XCTAssertEqual(IntPoint(x: 2, y: 2), points[0].point)
+        XCTAssertEqual(PinPoint.PinType.in_out, points[0].type)
+    }
+    
+    func test_28() {
+        let iMaster = [
+            IntPoint(x: -2, y: 2),
+            IntPoint(x: 2, y: 2),
+            IntPoint(x: 2, y: 0),
+            IntPoint(x: -2, y: 0)
+        ]
+        
+        let iSlave = [
+            IntPoint(x: 0, y: 4),
+            IntPoint(x: 7, y: -4),
+            IntPoint(x: -4, y: -4),
+            IntPoint(x: -4, y: 4),
+        ]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
+
+        let paths = result.pinPathArray
+        XCTAssertEqual(paths.count, 0)
+        
+        let points = result.pinPointArray
+        XCTAssertEqual(points.count, 1)
+        
+        
+        XCTAssertEqual(IntPoint(x: 2, y: 2), points[0].point)
+        XCTAssertEqual(PinPoint.PinType.in_out, points[0].type)
+    }
+    
     
 }

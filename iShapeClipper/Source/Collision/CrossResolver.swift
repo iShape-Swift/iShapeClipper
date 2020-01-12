@@ -17,6 +17,7 @@ enum CrossType: Int {
 
 struct CrossResolver {
 
+    /*
     static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> CrossType {
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
@@ -47,30 +48,45 @@ struct CrossResolver {
 
         return CrossType.same_line
     }
+    */
     
     static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> CrossType {
+        if a0 == b0 || a0 == b1 {
+            cross = a0
+            return .common_end
+        }
+
+        if a1 == b0 || a1 == b1 {
+            cross = a1
+            return .common_end
+        }
+        
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
         let d2 = CrossResolver.isCCW(a: a0, b: a1, c: b0)
         let d3 = CrossResolver.isCCW(a: a0, b: a1, c: b1)
 
         if (d0 != 0 || d1 != 0 || d2 != 0 || d3 != 0) {
-            let t0 = d0 < 0
-            let t1 = d1 < 0
-            let t2 = d2 < 0
-            let t3 = d3 < 0
+            let t0 = d0 <= 0
+            let t1 = d1 <= 0
+            let t2 = d2 <= 0
+            let t3 = d3 <= 0
 
             if t0 != t1 && t2 != t3 {
                 if d0 != 0 && d1 != 0 && d2 != 0 && d3 != 0 {
                     cross = CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1)
                     if a0 == cross || a1 == cross || b0 == cross || b1 == cross {
+                        // still possible
+                        // check .common_end
                         return .edge_cross
                     } else {
                         return .pure
                     }
                 }
                 
+                // TODO isItPossible
                 cross = CrossResolver.endCross(a0: a0, a1: a1, b0: b0, b1: b1)
+                
                 return .edge_cross
             }
             
@@ -81,6 +97,8 @@ struct CrossResolver {
                 return .not_cross
             }
 
+            assertionFailure("impossible")
+            // check ifPossible
             return .common_end
         }
 
