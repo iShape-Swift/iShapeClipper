@@ -17,6 +17,7 @@ enum CrossType: Int {
 
 struct CrossResolver {
 
+    /*
     static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> CrossType {
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
@@ -47,7 +48,7 @@ struct CrossResolver {
 
         return CrossType.same_line
     }
-    
+
     static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> CrossType {
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
@@ -88,7 +89,36 @@ struct CrossResolver {
         
         return .same_line
     }
-
+    */
+    
+    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross c: inout IntPoint) -> CrossType {
+        guard CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1, cross: &c) else {
+            return .same_line
+        }
+        
+        let isContain =
+        (c.x >= a0.x && c.x <= a1.x || c.x <= a0.x && c.x >= a1.x) &&
+        (c.y >= a0.y && c.y <= a1.y || c.y <= a0.y && c.y >= a1.y) &&
+        (c.x >= b0.x && c.x <= b1.x || c.x <= b0.x && c.x >= b1.x) &&
+        (c.y >= b0.y && c.y <= b1.y || c.y <= b0.y && c.y >= b1.y)
+        
+        guard isContain else {
+            return .not_cross
+        }
+        
+        let isA = a0 == c || a1 == c
+        let isB = b0 == c || b1 == c
+        
+        if isA || isB {
+            if isA && isB {
+                return .common_end
+            } else {
+                return .edge_cross
+            }
+        }
+        return .pure
+    }
+    
     private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Int {
         let m0 = (c.y - a.y) * (b.x - a.x)
         let m1 = (b.y - a.y) * (c.x - a.x)
@@ -104,7 +134,7 @@ struct CrossResolver {
         return 0
     }
 
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
+    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> Int {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
         let dyA = a0.y - a1.y
@@ -112,20 +142,29 @@ struct CrossResolver {
         
         let divider = dxA * dyB - dyA * dxB
         
-        let xyA = Double(a0.x * a1.y - a0.y * a1.x)
-        let xyB = Double(b0.x * b1.y - b0.y * b1.x)
-        
-        let invert_divider: Double = 1.0 / Double(divider)
-        
-        let x = xyA * Double(b0.x - b1.x) - Double(a0.x - a1.x) * xyB
-        let y = xyA * Double(b0.y - b1.y) - Double(a0.y - a1.y) * xyB
-        
-        let cx = round(x * invert_divider)
-        let cy = round(y * invert_divider)
-        
-        return IntPoint(x: Int64(cx), y: Int64(cy))
+        if divider != 0 {
+            let xyA = Double(a0.x * a1.y - a0.y * a1.x)
+            let xyB = Double(b0.x * b1.y - b0.y * b1.x)
+            
+            let invert_divider: Double = 1.0 / Double(divider)
+            
+            let x = xyA * Double(b0.x - b1.x) - Double(a0.x - a1.x) * xyB
+            let y = xyA * Double(b0.y - b1.y) - Double(a0.y - a1.y) * xyB
+            
+            let cx = round(x * invert_divider)
+            let cy = round(y * invert_divider)
+            
+            cross = IntPoint(x: Int64(cx), y: Int64(cy))
+            return 0
+        } else {
+            
+            
+            
+            return false
+        }
     }
     
+    /*
     private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
         let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1)
         
@@ -168,4 +207,5 @@ struct CrossResolver {
         
         return minP
     }
+    */
 }
