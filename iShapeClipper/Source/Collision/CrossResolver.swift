@@ -48,7 +48,89 @@ struct CrossResolver {
 
         return CrossType.same_line
     }
+*/
+    
+    private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Int {
+        let m0 = (c.y - a.y) * (b.x - a.x)
+        let m1 = (b.y - a.y) * (c.x - a.x)
 
+        if m0 < m1 {
+            return -1
+        }
+        
+        if m0 > m1 {
+            return 1
+        }
+
+        return 0
+    }
+    
+    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
+        let dxA = a0.x - a1.x
+        let dyB = b0.y - b1.y
+        let dyA = a0.y - a1.y
+        let dxB = b0.x - b1.x
+        
+        let divider = dxA * dyB - dyA * dxB
+        
+        let xyA = Double(a0.x * a1.y - a0.y * a1.x)
+        let xyB = Double(b0.x * b1.y - b0.y * b1.x)
+        
+        let invert_divider: Double = 1.0 / Double(divider)
+        
+        let x = xyA * Double(b0.x - b1.x) - Double(a0.x - a1.x) * xyB
+        let y = xyA * Double(b0.y - b1.y) - Double(a0.y - a1.y) * xyB
+        
+        let cx = round(x * invert_divider)
+        let cy = round(y * invert_divider)
+        
+        return IntPoint(x: Int64(cx), y: Int64(cy))
+    }
+
+    
+    private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
+           let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1)
+           
+           if a0 == p || a1 == p || b0 == p || b1 == p {
+               return p
+           }
+           
+           var dx = a0.x - p.x
+           var dy = a0.y - p.y
+           var dl = dx * dx + dy * dy
+           var minP = a0
+           var minL = dl
+           
+           dx = a1.x - p.x
+           dy = a1.y - p.y
+           dl = dx * dx + dy * dy
+           
+           if minL > dl {
+               minP = a1
+               minL = dl
+           }
+           
+           dx = b0.x - p.x
+           dy = b0.y - p.y
+           dl = dx * dx + dy * dy
+           
+           if minL > dl {
+               minP = b0
+               minL = dl
+           }
+           
+           dx = b1.x - p.x
+           dy = b1.y - p.y
+           dl = dx * dx + dy * dy
+           
+           if minL > dl {
+               minP = b1
+               minL = dl
+           }
+           
+           return minP
+       }
+    
     static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> CrossType {
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
@@ -89,7 +171,7 @@ struct CrossResolver {
         
         return .same_line
     }
-    */
+    /*
     
     static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross c: inout IntPoint) -> CrossType {
         guard CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1, cross: &c) else {
@@ -118,23 +200,8 @@ struct CrossResolver {
         }
         return .pure
     }
-    
-    private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Int {
-        let m0 = (c.y - a.y) * (b.x - a.x)
-        let m1 = (b.y - a.y) * (c.x - a.x)
 
-        if m0 < m1 {
-            return -1
-        }
-        
-        if m0 > m1 {
-            return 1
-        }
-
-        return 0
-    }
-
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> Int {
+    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> Bool {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
         let dyA = a0.y - a1.y
@@ -155,57 +222,13 @@ struct CrossResolver {
             let cy = round(y * invert_divider)
             
             cross = IntPoint(x: Int64(cx), y: Int64(cy))
-            return 0
+            return true
         } else {
             
             
             
-            return false
+            return true
         }
     }
-    
-    /*
-    private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
-        let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1)
-        
-        if a0 == p || a1 == p || b0 == p || b1 == p {
-            return p
-        }
-        
-        var dx = a0.x - p.x
-        var dy = a0.y - p.y
-        var dl = dx * dx + dy * dy
-        var minP = a0
-        var minL = dl
-        
-        dx = a1.x - p.x
-        dy = a1.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = a1
-            minL = dl
-        }
-        
-        dx = b0.x - p.x
-        dy = b0.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = b0
-            minL = dl
-        }
-        
-        dx = b1.x - p.x
-        dy = b1.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = b1
-            minL = dl
-        }
-        
-        return minP
-    }
-    */
+*/
 }
