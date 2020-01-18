@@ -64,7 +64,37 @@ final class SegmentScene: CoordinateSystemScene {
         var iCross = IntPoint.zero
         let crossType = CrossResolver.defineType(a0: iPoints[0], a1: iPoints[1], b0: iPoints[2], b1: iPoints[3], cross: &iCross)
         
-        if crossType != .not_cross {
+        
+        switch crossType {
+            
+        case .not_cross:
+            print("not_cross")
+        case .same_line:
+            print("same_line")
+        case .pure:
+            print("pure")
+        case .end_a0:
+            print("end_a0")
+        case .end_a1:
+            print("end_a1")
+        case .end_b0:
+            print("end_b0")
+        case .end_b1:
+            print("end_b1")
+        case .end_a0_b0:
+            print("end_a0_b0")
+        case .end_a0_b1:
+            print("end_a0_b1")
+        case .end_a1_b0:
+            print("end_a1_b0")
+        case .end_a1_b1:
+            print("end_a1_b1")
+        }
+        
+        switch crossType {
+        case .same_line, .not_cross:
+            break
+        default:
             let cross = IntGeom.defGeom.float(point: iCross)
             self.addSublayer(ShapeDot(position: cross.toCGPoint, radius: 1.0, color: Colors.red))
         }
