@@ -76,46 +76,84 @@ struct CrossDetector {
                     pinCTypes.append(crossType)
 
                     continue
+                case .end_a0:
+                    let prevMs = (msIx0 - 1 + masterCount) % masterCount
+                    let nextMs = msIx1
                     
-                case .end_a0, .end_a1, .end_b0, .end_b1:
-                    // one of the end is lying on others edge
-                    let isMsEnd: Bool = crossType == .end_a0 || crossType == .end_a1
-                    let isSlEnd: Bool = crossType == .end_b0 || crossType == .end_b1
+                    let prevSl = slIx0
+                    let nextSl = slIx1
                     
-                    // skip case when on of the slave end is equal to one of the master end
+                    let masterEdge = msIx0
+                    let masterOffset: Int64 = 0
                     
-                    var prevMs = msIx0
-                    var nextMs = msIx1
-                    
-                    var prevSl = slIx0
-                    var nextSl = slIx1
-                    
-                    var masterEdge = msIx0
-                    var masterOffset: Int64 = 0
-                    
-                    var slaveEdge = slIx0
-                    var slaveOffset: Int64 = 0
-                    
-                    if isMsEnd {
-                        if ms0 == point {
-                            prevMs = (msIx0 - 1 + masterCount) % masterCount
-                        } else {
-                            nextMs = (msIx1 + 1) % masterCount
-                            masterEdge = msIx1
-                        }
-                        slaveOffset = sl0.sqrDistance(point: point)
+                    let slaveEdge = slIx0
+                    let slaveOffset = sl0.sqrDistance(point: point)
+
+                    let pinPointDef = PinPoint.Def(
+                        pt: point,
+                        ms0: iMaster[prevMs],
+                        ms1: iMaster[nextMs],
+                        sl0: iSlave[prevSl],
+                        sl1: iSlave[nextSl],
+                        masterMileStone: PathMileStone(index: masterEdge, offset: masterOffset),
+                        slaveMileStone: PathMileStone(index: slaveEdge, offset: slaveOffset)
+                    )
+
+                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef, iGeom: iGeom)
+                    if (pinPoint.type != exclusionPinType) {
+                        pinPoints.append(pinPoint)
+                        pinCTypes.append(crossType)
+                        endsCount += 1
+                    } else {
+                        hasExclusion = true
                     }
+
+                    continue
+                case .end_a1:
+                    let prevMs = msIx0
+                    let nextMs = (msIx1 + 1) % masterCount
                     
-                    if isSlEnd {
-                        if sl0 == point {
-                            prevSl = (slIx0 - 1 + slaveCount) % slaveCount
-                        } else {
-                            slaveEdge = slIx1
-                            nextSl = (slIx1 + 1) % slaveCount
-                        }
-                        
-                        masterOffset = ms0.sqrDistance(point: point)
+                    let prevSl = slIx0
+                    let nextSl = slIx1
+                    
+                    let masterEdge = msIx1
+                    let masterOffset: Int64 = 0
+                    
+                    let slaveEdge = slIx0
+                    let slaveOffset = sl0.sqrDistance(point: point)
+
+                    let pinPointDef = PinPoint.Def(
+                        pt: point,
+                        ms0: iMaster[prevMs],
+                        ms1: iMaster[nextMs],
+                        sl0: iSlave[prevSl],
+                        sl1: iSlave[nextSl],
+                        masterMileStone: PathMileStone(index: masterEdge, offset: masterOffset),
+                        slaveMileStone: PathMileStone(index: slaveEdge, offset: slaveOffset)
+                    )
+
+                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef, iGeom: iGeom)
+                    if (pinPoint.type != exclusionPinType) {
+                        pinPoints.append(pinPoint)
+                        pinCTypes.append(crossType)
+                        endsCount += 1
+                    } else {
+                        hasExclusion = true
                     }
+
+                    continue
+                case .end_b0:
+                    let prevMs = msIx0
+                    let nextMs = msIx1
+                    
+                    let prevSl = (slIx0 - 1 + slaveCount) % slaveCount
+                    let nextSl = slIx1
+                    
+                    let masterEdge = msIx0
+                    let masterOffset = ms0.sqrDistance(point: point)
+                    
+                    let slaveEdge = slIx0
+                    let slaveOffset: Int64 = 0
                     
                     let pinPointDef = PinPoint.Def(
                         pt: point,
@@ -127,26 +165,45 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slaveEdge, offset: slaveOffset)
                     )
                     
-                    if isMsEnd {
-                        // pin point is on slave
-                        let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
-                        if (pinPoint.type != exclusionPinType) {
-                            pinPoints.append(pinPoint)
-                            pinCTypes.append(crossType)
-                            endsCount += 1
-                        } else {
-                            hasExclusion = true
-                        }
-                    } else if isSlEnd {
-                        // pin point is on master
-                        let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
-                        if (pinPoint.type != exclusionPinType) {
-                            pinPoints.append(pinPoint)
-                            pinCTypes.append(crossType)
-                            endsCount += 1
-                        } else {
-                            hasExclusion = true
-                        }
+                    let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
+                    if (pinPoint.type != exclusionPinType) {
+                        pinPoints.append(pinPoint)
+                        pinCTypes.append(crossType)
+                        endsCount += 1
+                    } else {
+                        hasExclusion = true
+                    }
+                    continue
+                case .end_b1:
+                    let prevMs = msIx0
+                    let nextMs = msIx1
+                    
+                    let prevSl = slIx0
+                    let nextSl = (slIx1 + 1) % slaveCount
+                    
+                    let masterEdge = msIx0
+                    let masterOffset = ms0.sqrDistance(point: point)
+                    
+                    let slaveEdge = slIx1
+                    let slaveOffset: Int64 = 0
+                    
+                    let pinPointDef = PinPoint.Def(
+                        pt: point,
+                        ms0: iMaster[prevMs],
+                        ms1: iMaster[nextMs],
+                        sl0: iSlave[prevSl],
+                        sl1: iSlave[nextSl],
+                        masterMileStone: PathMileStone(index: masterEdge, offset: masterOffset),
+                        slaveMileStone: PathMileStone(index: slaveEdge, offset: slaveOffset)
+                    )
+                    
+                    let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
+                    if (pinPoint.type != exclusionPinType) {
+                        pinPoints.append(pinPoint)
+                        pinCTypes.append(crossType)
+                        endsCount += 1
+                    } else {
+                        hasExclusion = true
                     }
                     continue
                 case .same_line:
