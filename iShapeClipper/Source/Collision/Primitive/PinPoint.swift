@@ -38,6 +38,8 @@ public struct PinPoint {
         }
     }
     
+    // slave behavior over master path
+    
     enum PinType: Int {
         case inside     = 1
         case in_out     = 2
@@ -95,16 +97,21 @@ public struct PinPoint {
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
+    static func buildOnSlave(def: Def, iGeom: IntGeom) -> PinPoint {
+        // TODO try to find more simple implementation, like buildOnMaster
+        
+        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1, iGeom: iGeom)
 
-    static func buildOnSlave(def: Def) -> PinPoint {
-        let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms0, c: def.sl1)
-        let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1)
+        let isSl0 = corner.isBetween(p: def.sl0, clockwise: true)
+        let isSl1 = corner.isBetween(p: def.sl1, clockwise: true)
 
         let type: PinType
-        if isCCW0 == isCCW1 {
-            type = isCCW0 ? .out_in : .in_out
+        if isSl0 && isSl1 {
+            type = .in_out
+        } else if !isSl0 && !isSl1 {
+            type = .out_in
         } else {
-            type = isCCW0 ? .outside : .inside
+            type = isSl0 ? .inside : .outside
         }
 
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)

@@ -11,101 +11,17 @@ enum CrossType: Int {
     case not_cross      = -1    // no intersections
     case same_line      =  0    // same line
     case pure           =  1    // simple intersection with no overlaps
-    case edge_cross     =  2    // one of the end is lying on others edge
-    case common_end     =  3    // first master end is equal to one of slave ends
+    case end_a0         =  4
+    case end_a1         =  5
+    case end_b0         =  6
+    case end_b1         =  7
+    case end_a0_b0      =  8
+    case end_a0_b1      =  9
+    case end_a1_b0      =  10
+    case end_a1_b1      =  11
 }
 
 struct CrossResolver {
-
-    /*
-    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> CrossType {
-        let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
-        let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
-        let d2 = CrossResolver.isCCW(a: a0, b: a1, c: b0)
-        let d3 = CrossResolver.isCCW(a: a0, b: a1, c: b1)
-
-        if (d0 != 0 || d1 != 0 || d2 != 0 || d3 != 0) {
-            let t0 = d0 < 0
-            let t1 = d1 < 0
-            let t2 = d2 < 0
-            let t3 = d3 < 0
-
-            if t0 != t1 && t2 != t3 {
-                if d0 != 0 && d1 != 0 && d2 != 0 && d3 != 0 {
-                    return CrossType.pure
-                }
-
-                return CrossType.edge_cross
-            }
-
-            // TODO check corner case
-            if a0 != b0 && a0 != b1 {
-                return CrossType.not_cross
-            }
-
-            return CrossType.common_end
-        }
-
-        return CrossType.same_line
-    }
-    */
-    
-    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> CrossType {
-        if a0 == b0 || a0 == b1 {
-            cross = a0
-            return .common_end
-        }
-
-        if a1 == b0 || a1 == b1 {
-            cross = a1
-            return .common_end
-        }
-        
-        let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
-        let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
-        let d2 = CrossResolver.isCCW(a: a0, b: a1, c: b0)
-        let d3 = CrossResolver.isCCW(a: a0, b: a1, c: b1)
-
-        if (d0 != 0 || d1 != 0 || d2 != 0 || d3 != 0) {
-            let t0 = d0 <= 0
-            let t1 = d1 <= 0
-            let t2 = d2 <= 0
-            let t3 = d3 <= 0
-
-            if t0 != t1 && t2 != t3 {
-                if d0 != 0 && d1 != 0 && d2 != 0 && d3 != 0 {
-                    cross = CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1)
-                    if a0 == cross || a1 == cross || b0 == cross || b1 == cross {
-                        // still possible
-                        // check .common_end
-                        return .edge_cross
-                    } else {
-                        return .pure
-                    }
-                }
-                
-                // TODO isItPossible
-                cross = CrossResolver.endCross(a0: a0, a1: a1, b0: b0, b1: b1)
-                
-                return .edge_cross
-            }
-            
-            cross = .empty
-
-            // TODO check corner case
-            if a0 != b0 && a0 != b1 {
-                return .not_cross
-            }
-
-            assertionFailure("impossible")
-            // check ifPossible
-            return .common_end
-        }
-
-        cross = .empty
-        
-        return .same_line
-    }
 
     private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Int {
         let m0 = (c.y - a.y) * (b.x - a.x)
@@ -121,7 +37,7 @@ struct CrossResolver {
 
         return 0
     }
-
+    
     private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
@@ -143,47 +59,85 @@ struct CrossResolver {
         
         return IntPoint(x: Int64(cx), y: Int64(cy))
     }
-    
-    private static func endCross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
-        let p = self.cross(a0: a0, a1: a1, b0: b0, b1: b1)
-        
-        if a0 == p || a1 == p || b0 == p || b1 == p {
-            return p
+
+    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> CrossType {
+        let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
+        let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
+        let d2 = CrossResolver.isCCW(a: a0, b: a1, c: b0)
+        let d3 = CrossResolver.isCCW(a: a0, b: a1, c: b1)
+
+        if d0 == 0 || d1 == 0 || d2 == 0 || d3 == 0 {
+            if d0 == 0 && d1 == 0 && d2 == 0 && d3 == 0 {
+                return .same_line
+            }
+            if d0 == 0 {
+                cross = a0
+                if d2 == 0 || d3 == 0 {
+                    if d2 == 0 {
+                        return .end_a0_b0
+                    } else {
+                        return .end_a0_b1
+                    }
+                } else if d2 != d3 {
+                    return .end_a0
+                } else {
+                    return .not_cross
+                }
+            }
+            if d1 == 0 {
+                cross = a1
+                if d2 == 0 || d3 == 0 {
+                    if d2 == 0 {
+                        return .end_a1_b0
+                    } else {
+                        return .end_a1_b1
+                    }
+                } else if d2 != d3 {
+                    return .end_a1
+                } else {
+                    return .not_cross
+                }
+            }
+            if d0 != d1 {
+                if d2 == 0 {
+                    cross = b0
+                    return .end_b0
+                } else {
+                    cross = b1
+                    return .end_b1
+                }
+            } else {
+                return .not_cross
+            }
+        } else if d0 != d1 && d2 != d3 {
+            cross = CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1)
+            // still can be ends (watch case union 44)
+            let isA0 = a0 == cross
+            let isA1 = a1 == cross
+            let isB0 = b0 == cross
+            let isB1 = b1 == cross
+            
+            if !(isA0 || isA1 || isB0 || isB1) {
+                return .pure
+            } else if isA0 && isB0 {
+                return .end_a0_b0
+            } else if isA0 && isB1 {
+                return .end_a0_b1
+            } else if isA1 && isB0 {
+                return .end_a1_b0
+            } else if isA1 && isB1 {
+                return .end_a1_b1
+            } else if isA0 {
+                return .end_a0
+            } else if isA1 {
+                return .end_a1
+            } else if isB0 {
+                return .end_b0
+            } else {
+                return .end_b1
+            }
+        } else {
+            return .not_cross
         }
-        
-        var dx = a0.x - p.x
-        var dy = a0.y - p.y
-        var dl = dx * dx + dy * dy
-        var minP = a0
-        var minL = dl
-        
-        dx = a1.x - p.x
-        dy = a1.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = a1
-            minL = dl
-        }
-        
-        dx = b0.x - p.x
-        dy = b0.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = b0
-            minL = dl
-        }
-        
-        dx = b1.x - p.x
-        dy = b1.y - p.y
-        dl = dx * dx + dy * dy
-        
-        if minL > dl {
-            minP = b1
-            minL = dl
-        }
-        
-        return minP
     }
 }
