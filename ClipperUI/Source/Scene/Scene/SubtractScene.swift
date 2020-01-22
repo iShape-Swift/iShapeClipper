@@ -53,7 +53,7 @@ final class SubtractScene: CoordinateSystemScene {
     }
     
     private func addShapes() {
-//        self.addSolution()
+        self.addSolution()
         self.addMaster()
         self.addSlave()
         self.addPins()

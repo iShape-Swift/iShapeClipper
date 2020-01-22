@@ -136,7 +136,6 @@ public struct PinPoint {
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
-
     private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
         let m0 = (c.y - a.y) * (b.x - a.x)
         let m1 = (b.y - a.y) * (c.x - a.x)
