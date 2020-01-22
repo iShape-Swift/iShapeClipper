@@ -111,7 +111,31 @@ struct CrossResolver {
             }
         } else if d0 != d1 && d2 != d3 {
             cross = CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1)
-            return .pure
+            // still can be ends (watch case union 44)
+            let isA0 = a0 == cross
+            let isA1 = a1 == cross
+            let isB0 = b0 == cross
+            let isB1 = b1 == cross
+            
+            if !(isA0 || isA1 || isB0 || isB1) {
+                return .pure
+            } else if isA0 && isB0 {
+                return .end_a0_b0
+            } else if isA0 && isB1 {
+                return .end_a0_b1
+            } else if isA1 && isB0 {
+                return .end_a1_b0
+            } else if isA1 && isB1 {
+                return .end_a1_b1
+            } else if isA0 {
+                return .end_a0
+            } else if isA1 {
+                return .end_a1
+            } else if isB0 {
+                return .end_b0
+            } else {
+                return .end_b1
+            }
         } else {
             return .not_cross
         }
