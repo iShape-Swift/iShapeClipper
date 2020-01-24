@@ -42,14 +42,14 @@ struct PinSequence {
         
         let hasContacts = hasExclusion || !handlerArray.isEmpty
 
-        if handlerArray.count == 0 {
+        if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
 
         self.sortMaster()
         self.cleanDoubles(exclusionPinType: exclusionPinType)
 
-        if handlerArray.count == 0 {
+        if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
 

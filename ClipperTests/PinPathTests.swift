@@ -1187,7 +1187,7 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(result.pinPathArray.count, 0)
         XCTAssertEqual(result.pinPointArray.count, 1)
         let point = result.pinPointArray[0].point
-        XCTAssertEqual(point, IntPoint(x: 2, y: -2))
+        XCTAssertEqual(point, IntPoint(x: 2, y: 2))
     }
     
     func test_27() {
