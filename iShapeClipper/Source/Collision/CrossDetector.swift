@@ -424,7 +424,7 @@ struct CrossDetector {
         }
     }
     
-    private static func findZEdges(pinPoints: inout [PinPoint]) -> [PinEdge] {
+    private static func findZEdges(pinPoints: inout [PinPoint], masterCount mCnt: Int) -> [PinEdge] {
         pinPoints.sort(by: { PathMileStone.compare(a: $0.masterMileStone, b: $1.masterMileStone) })
         
         var a = pinPoints[0]
@@ -433,8 +433,18 @@ struct CrossDetector {
         while i < pinPoints.count {
             let b = pinPoints[i]
             
-            if 
+            let aMi = a.masterMileStone.index
+            let bMi = b.masterMileStone.index
+            let isNextEnd = b.masterMileStone.offset == 0
             
+            let isSameMaster = aMi == bMi || (isNextEnd && (aMi - 1 + mCnt) % mCnt == aMi)
+            
+            if isSameMaster {
+                
+                
+                
+                
+            }
             
         }
 
