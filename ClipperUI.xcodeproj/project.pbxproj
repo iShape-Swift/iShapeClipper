@@ -10,6 +10,7 @@
 		54187D0D2348EE040080AF79 /* CornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187D0C2348EE040080AF79 /* CornerTests.swift */; };
 		54187D0F2348F06D0080AF79 /* PinPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187D0E2348F06D0080AF79 /* PinPathTests.swift */; };
 		543DE04123471C6F0044AA8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 543DE04023471C6F0044AA8A /* Assets.xcassets */; };
+		54587ED923DB70AC009CC036 /* PinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54587ED823DB70AC009CC036 /* PinScene.swift */; };
 		545B581123840CFB00918A8D /* IntersectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545B581023840CFB00918A8D /* IntersectTests.swift */; };
 		5464856E23CE44DA00EE9D1C /* SegmentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5464856D23CE44DA00EE9D1C /* SegmentScene.swift */; };
 		546B75B12381B25300902F08 /* IntersectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546B75B02381B25300902F08 /* IntersectScene.swift */; };
@@ -69,6 +70,7 @@
 		543DE04023471C6F0044AA8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		543DE04823471C6F0044AA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		543DE04923471C6F0044AA8A /* ClipperUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ClipperUI.entitlements; sourceTree = "<group>"; };
+		54587ED823DB70AC009CC036 /* PinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinScene.swift; sourceTree = "<group>"; };
 		545B581023840CFB00918A8D /* IntersectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectTests.swift; sourceTree = "<group>"; };
 		5464856D23CE44DA00EE9D1C /* SegmentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentScene.swift; sourceTree = "<group>"; };
 		546B75B02381B25300902F08 /* IntersectScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectScene.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				54B5EBBB23B7130300B2CC95 /* InnerPointScene.swift */,
 				54B5EBBD23B77F7900B2CC95 /* HoleScene.swift */,
 				5464856D23CE44DA00EE9D1C /* SegmentScene.swift */,
+				54587ED823DB70AC009CC036 /* PinScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				546B75B12381B25300902F08 /* IntersectScene.swift in Sources */,
 				547B93B123471E1A003CFA6C /* ShapeVectorPolygon.swift in Sources */,
 				547B93A223471E1A003CFA6C /* Colors.swift in Sources */,
+				54587ED923DB70AC009CC036 /* PinScene.swift in Sources */,
 				5464856E23CE44DA00EE9D1C /* SegmentScene.swift in Sources */,
 				547B93AB23471E1A003CFA6C /* CanvasView.swift in Sources */,
 				547B93A523471E1A003CFA6C /* SceneNavigation.swift in Sources */,
