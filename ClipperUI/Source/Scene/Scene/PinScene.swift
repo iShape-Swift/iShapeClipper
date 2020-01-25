@@ -18,7 +18,6 @@ final class PinScene: CoordinateSystemScene {
     
 
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: PinScene.indexKey)
-//    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
     private var isSlave: Bool = false
@@ -106,7 +105,7 @@ final class PinScene: CoordinateSystemScene {
     
     
     func showPage(index: Int) {
-        let data = SubtractTestData.data[index]
+        let data = PinTestData.data[index]
         self.master = data[0]
         self.slave = data[1]
         self.update()

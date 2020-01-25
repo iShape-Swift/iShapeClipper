@@ -43,15 +43,11 @@ public struct PinPoint {
     enum PinType: Int {
         case inside     = 1
         case in_out     = 2
-        case in_null    = 3
-        case null_in    = 4
 
         case null       = 0        // can be ignored
         
         case outside    = -1
         case out_in     = -2
-        case out_null   = -3
-        case null_out   = -4
     }
     
 
@@ -117,7 +113,6 @@ public struct PinPoint {
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
-
     static func buildOnCross(def: Def, iGeom: IntGeom) -> PinPoint {
         let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1, iGeom: iGeom)
 
@@ -141,5 +136,12 @@ public struct PinPoint {
         let m1 = (b.y - a.y) * (c.x - a.x)
 
         return m0 < m1
+    }
+}
+
+extension PinPoint: Equatable {
+
+    public static func == (lhs: PinPoint, rhs: PinPoint) -> Bool {
+        return lhs.masterMileStone == rhs.masterMileStone && lhs.slaveMileStone == rhs.slaveMileStone
     }
 }

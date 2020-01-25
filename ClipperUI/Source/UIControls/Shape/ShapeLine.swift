@@ -21,6 +21,7 @@ final class ShapeLine: CAShapeLayer {
         self.fillColor = nil
         self.opacity = 1.0
         self.strokeColor = strokeColor
+        self.lineCap = .round
         self.lineWidth = lineWidth
         self.lineDashPattern = dash
         

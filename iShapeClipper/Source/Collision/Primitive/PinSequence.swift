@@ -47,11 +47,13 @@ struct PinSequence {
         }
 
         self.sortMaster()
+        /*
         self.cleanDoubles(exclusionPinType: exclusionPinType)
 
         if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
+        */
 
         let slavePath = self.buildSlavePath()
 
@@ -149,7 +151,6 @@ struct PinSequence {
             self.compact()
         }
     }
-
 
     mutating private func compact() {
         var paths = [PinPath]()

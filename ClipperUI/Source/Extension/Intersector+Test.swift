@@ -40,10 +40,6 @@ struct IntersectorResult {
         case .outside: return [Colors.out, Colors.out]
         case .inside: return [Colors.into, Colors.into]
         case .in_out: return [Colors.into, Colors.out]
-        case .in_null: return [Colors.into, Colors.black]
-        case .out_null: return [Colors.out, Colors.black]
-        case .null_in: return [Colors.black, Colors.into]
-        case .null_out: return [Colors.black, Colors.out]
         case .null: return [Colors.black, Colors.black]
         }
     }

@@ -18,6 +18,12 @@ struct PinPath {
         self.v0 = PinPoint(pin: v0, type: type)
         self.v1 = PinPoint(pin: v1, type: type)
     }
+    
+    init(edge: PinEdge) {
+        let type = edge.type
+        self.v0 = PinPoint(pin: edge.v0, type: type)
+        self.v1 = PinPoint(pin: edge.v0, type: type)
+    }
 
 #if iShapeTest
     func getTestLength(count: Int) -> Int {

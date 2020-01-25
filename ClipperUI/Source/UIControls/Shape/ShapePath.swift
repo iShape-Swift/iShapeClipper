@@ -24,12 +24,15 @@ final class ShapePath: CALayer {
             return
         }
         var start = points[0]
-        for i in 1...lastIndex {
-            let end = points[i]
-            self.addSublayer(ShapeVector(start: start, end: end, tip: tip, lineWidth: lineWidth, strokeColor: color, arrowColor: arrowColor, dash: dash))
-            start = end
+        if lastIndex > 1 {
+            for i in 1..<lastIndex {
+                let end = points[i]
+                self.addSublayer(ShapeLine(start: start, end: end, lineWidth: lineWidth, strokeColor: color, dash: dash))
+                start = end
+            }
         }
-
+        self.addSublayer(ShapeVector(start: start, end: points[lastIndex], tip: tip, lineWidth: lineWidth, strokeColor: color, arrowColor: arrowColor, dash: dash))
+        
         if showIndeces != .none {
             let font = NSFont.systemFont(ofSize: 32)
             if !showLast {
