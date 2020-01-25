@@ -21,7 +21,7 @@ struct PinSequence {
         self.handlerArray.reserveCapacity(pinPathArray.count + pinPointArray.count)
     }
 
-    mutating func convert(exclusionPinType: PinPoint.PinType, hasExclusion: Bool) -> PinNavigator {
+    mutating func convert(hasExclusion: Bool) -> PinNavigator {
         var i = 0
         while i < pinPathArray.count {
             let path = pinPathArray[i]
@@ -47,8 +47,9 @@ struct PinSequence {
 
         self.sortMaster()
         
-        // TODO remove if all test pass
-        self.cleanDoubles(exclusionPinType: exclusionPinType)
+        if self.pinPathArray.count > 0 {
+            self.compact()
+        }
 
         if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
@@ -107,50 +108,6 @@ struct PinSequence {
         } while isNotSorted
     }
 
-
-    mutating private func cleanDoubles(exclusionPinType: PinPoint.PinType) {
-        var i = 1
-        var prevIndex = 0
-        var prev = handlerArray[prevIndex]
-        var isCompactRequired = pinPathArray.count > 0
-        while i < handlerArray.count {
-            var handler = handlerArray[i]
-            if handler != prev {
-                prev = handler
-                prevIndex = i
-            } else {
-                isCompactRequired = true
-                if !handler.isPinPath {
-                    handler.marker = 1
-                    handlerArray[i] = handler
-                } else {
-                    prev.marker = 1
-                    handlerArray[prevIndex] = prev
-                    prev = handler
-                    prevIndex = i
-                }
-            }
-
-            i += 1
-        }
-
-        i = 0
-        while i < handlerArray.count {
-            var handler = handlerArray[i]
-            if handler.marker == 0 && handler.type == exclusionPinType {
-                handler.marker = 1
-                handlerArray[i] = handler
-                isCompactRequired = true
-            }
-
-            i += 1
-        }
-
-        if isCompactRequired {
-            self.compact()
-        }
-    }
-
     mutating private func compact() {
         var paths = [PinPath]()
         var points = [PinPoint]()
@@ -200,7 +157,6 @@ struct PinSequence {
                 iStones[j] = IndexMileStone(index: j, stone: path.v0.slaveMileStone)
             }
         }
-
 
         var isNotSorted: Bool
 

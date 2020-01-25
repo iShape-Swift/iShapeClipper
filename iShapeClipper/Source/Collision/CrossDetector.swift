@@ -278,7 +278,7 @@ struct CrossDetector {
         var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: pinPaths, masterCount: iMaster.count)
         
         // remove doubles and organize data
-        let navigator = sequence.convert(exclusionPinType: exclusionPinType, hasExclusion: hasExclusion)
+        let navigator = sequence.convert(hasExclusion: hasExclusion)
         
         return navigator
     }
