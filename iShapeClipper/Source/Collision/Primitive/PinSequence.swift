@@ -21,7 +21,6 @@ struct PinSequence {
         self.handlerArray.reserveCapacity(pinPathArray.count + pinPointArray.count)
     }
 
-
     mutating func convert(exclusionPinType: PinPoint.PinType, hasExclusion: Bool) -> PinNavigator {
         var i = 0
         while i < pinPathArray.count {
@@ -47,13 +46,13 @@ struct PinSequence {
         }
 
         self.sortMaster()
-        /*
+        
+        // TODO remove if all test pass
         self.cleanDoubles(exclusionPinType: exclusionPinType)
 
         if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
-        */
 
         let slavePath = self.buildSlavePath()
 

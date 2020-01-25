@@ -8,21 +8,14 @@
 import iGeometry
 
 struct PinPath {
-    
-    static let empty = PinPath(v0: .empty, v1: .empty, type: .null)
-    
+
     let v0: PinPoint
     let v1: PinPoint
 
-    init(v0: PinPoint, v1: PinPoint, type: PinPoint.PinType) {
-        self.v0 = PinPoint(pin: v0, type: type)
-        self.v1 = PinPoint(pin: v1, type: type)
-    }
-    
     init(edge: PinEdge) {
         let type = edge.type
         self.v0 = PinPoint(pin: edge.v0, type: type)
-        self.v1 = PinPoint(pin: edge.v0, type: type)
+        self.v1 = PinPoint(pin: edge.v1, type: type)
     }
 
 #if iShapeTest

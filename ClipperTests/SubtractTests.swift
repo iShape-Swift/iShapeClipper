@@ -1287,7 +1287,7 @@ final class SubtractTests: XCTestCase {
         XCTAssertEqual(path, sample)
     }
     
-    
+    /*
     func test_100() {
         let master = [
             IntPoint(x: -2, y: 2),
@@ -1318,4 +1318,5 @@ final class SubtractTests: XCTestCase {
         
         XCTAssertEqual(path, sample)
     }
+ */
 }

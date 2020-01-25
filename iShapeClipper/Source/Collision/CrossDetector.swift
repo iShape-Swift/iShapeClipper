@@ -24,8 +24,7 @@ struct CrossDetector {
         
         var pinPoints = [PinPoint]()
         var pinInfoList = [PinInfo]()
-        var pinEdges = [PinEdge]()
-        
+
         let masterCount = iMaster.count
         let slaveCount = iSlave.count
         
@@ -61,7 +60,7 @@ struct CrossDetector {
                 j += 1
                 
                 switch crossType {
-                case .not_cross:
+                case .not_cross, .same_line:
                     continue
                 case .pure:
                     // simple intersection and most common case
@@ -80,8 +79,6 @@ struct CrossDetector {
                     
                     pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
-
-                    continue
                 case .end_a0:
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
@@ -103,8 +100,6 @@ struct CrossDetector {
                     pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
-
-                    continue
                 case .end_a1:
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
@@ -126,8 +121,6 @@ struct CrossDetector {
                     pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
-
-                    continue
                 case .end_b0:
                     let prevMs = msIx0
                     let nextMs = msIx1
@@ -149,7 +142,6 @@ struct CrossDetector {
                     pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
-                    continue
                 case .end_b1:
                     let prevMs = msIx0
                     let nextMs = msIx1
@@ -171,10 +163,6 @@ struct CrossDetector {
                     pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
-                    
-                    continue
-                case .same_line:
-                    continue
                 case .end_a0_b0:
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
@@ -217,7 +205,6 @@ struct CrossDetector {
                     pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
-                
                 case .end_a1_b0:
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
@@ -266,27 +253,32 @@ struct CrossDetector {
             i = j
         }
         
-        if iMaster.count == iSlave.count && iMaster.count == pinEdges.count && iMaster == iSlave {
-            return PinNavigator()
-        }
-
+        var pinPaths: [PinPath]
+        var hasExclusion = false
         if endsCount > 0 {
-            let edges = CrossDetector.organize(pinPoints: &pinPoints, masterCount: masterCount, slaveCount: slaveCount)
-            if edges.count > 0 {
-                pinEdges.append(contentsOf: edges)
+            pinPaths = CrossDetector.organize(pinPoints: &pinPoints, masterCount: masterCount, slaveCount: slaveCount)
+            
+            if !pinPaths.isEmpty {
+                hasExclusion = CrossDetector.removeExclusion(pinPaths: &pinPaths, exclusion: exclusionPinType)
             }
+            
+            if iMaster.count == iSlave.count && iMaster.count == pinPaths.count && iMaster == iSlave {
+                return PinNavigator()
+            }
+        } else {
+            pinPaths = []
         }
-
-        var pinPath = [PinPath]()
-        for edge in pinEdges {
-            pinPath.append(PinPath(v0: edge.v0, v1: edge.v1, type: edge.type))
+        
+        if !pinPoints.isEmpty {
+            let pinExclusion = CrossDetector.removeExclusion(pinPoints: &pinPoints, exclusion: exclusionPinType)
+            hasExclusion = pinExclusion || hasExclusion
         }
 
         // combine pin points and paths
-        var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: pinPath, masterCount: iMaster.count)
+        var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: pinPaths, masterCount: iMaster.count)
         
         // remove doubles and organize data
-        let navigator = sequence.convert(exclusionPinType: exclusionPinType, hasExclusion: false)
+        let navigator = sequence.convert(exclusionPinType: exclusionPinType, hasExclusion: hasExclusion)
         
         return navigator
     }
@@ -315,19 +307,15 @@ struct CrossDetector {
         for i in 0...lastMasterIndex {
             let master_0 = master[i]
             let master_1 = master[i != lastMasterIndex ? i + 1 : 0]
-            
-            let isIntersectionImpossible = slaveBoxArea.isNotIntersecting(a: master_0, b: master_1)
-            
-            if isIntersectionImpossible {
-                continue
-            }
-            
-            let segmentRect = Rect(a: master_0, b: master_1)
-            for j in 0...lastSlaveIndex {
-                let isIntersectionPossible = slaveSegmentsBoxAreas[j].isIntersecting(rect: segmentRect)
-                
-                if isIntersectionPossible {
-                    posMatrix.addMate(master: i, slave: j)
+
+            if !slaveBoxArea.isNotIntersecting(a: master_0, b: master_1) {
+                let segmentRect = Rect(a: master_0, b: master_1)
+                for j in 0...lastSlaveIndex {
+                    let isIntersectionPossible = slaveSegmentsBoxAreas[j].isIntersecting(rect: segmentRect)
+                    
+                    if isIntersectionPossible {
+                        posMatrix.addMate(master: i, slave: j)
+                    }
                 }
             }
         }
@@ -335,7 +323,7 @@ struct CrossDetector {
         return posMatrix
     }
 
-    private static func organize(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinEdge] {
+    private static func organize(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinPath] {
         pinPoints.sort(by: { a, b in
             if a.masterMileStone.index != b.masterMileStone.index {
                 return a.masterMileStone.index < b.masterMileStone.index
@@ -360,7 +348,7 @@ struct CrossDetector {
         var removeIndex = [Int]()
         while i < n {
             let b = pinPoints[i]
-            if a.masterMileStone == b.masterMileStone && a.slaveMileStone == b.slaveMileStone {
+            if a == b {
                 removeIndex.append(i)
             }
             a = b
@@ -376,7 +364,7 @@ struct CrossDetector {
         }
     }
     
-    private static func findEdges(pinPoints: inout [PinPoint], masterCount mCnt: Int, slaveCount sCnt: Int) -> [PinEdge] {
+    private static func findEdges(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinPath] {
         var edges = [PinEdge]()
         let n = pinPoints.count
         
@@ -401,31 +389,23 @@ struct CrossDetector {
             let aMi = a.masterMileStone.index
             let bMi = b.masterMileStone.index
 
-            let isSameMaster = aMi == bMi || (b.masterMileStone.offset == 0 && (aMi + 1) % mCnt == bMi)
+            let isSameMaster = aMi == bMi || (b.masterMileStone.offset == 0 && (aMi + 1) % masterCount == bMi)
             
-            if isSameMaster {
-                let isSameSlave = CrossDetector.same(a: a.slaveMileStone, b: b.slaveMileStone, module: sCnt)
-                
-                if isSameSlave {
-                    if isPrevEdge {
-                        var prevEdge = edges[edges.count - 1]
-                        prevEdge.v1 = b
-                        edges[edges.count - 1] = prevEdge
-                    } else {
-                        let isDirect = CrossDetector.isDirect(a: a.slaveMileStone, b: b.slaveMileStone, module: sCnt)
-                        edges.append(PinEdge(v0: a, v1: b, isDirect: isDirect))
-                    }
-                    removeMark[i] = true
-                    removeMark[j] = true
-                    isPrevEdge = true
-                    a = b
-                    j = i
-                    i += 1
-                    continue
+            if isSameMaster && CrossDetector.same(a: a.slaveMileStone, b: b.slaveMileStone, module: slaveCount) {
+                if isPrevEdge {
+                    var prevEdge = edges[edges.count - 1]
+                    prevEdge.v1 = b
+                    edges[edges.count - 1] = prevEdge
+                } else {
+                    let isDirect = CrossDetector.isDirect(a: a.slaveMileStone, b: b.slaveMileStone, module: slaveCount)
+                    edges.append(PinEdge(v0: a, v1: b, isDirect: isDirect))
                 }
+                removeMark[i] = true
+                removeMark[j] = true
+                isPrevEdge = true
+            } else {
+                isPrevEdge = false
             }
-            
-            isPrevEdge = false
             a = b
             j = i
             i += 1
@@ -449,9 +429,16 @@ struct CrossDetector {
                     edges.removeLast()
                 }
             }
+            
+            var pinPaths = Array<PinPath>()
+            pinPaths.reserveCapacity(edges.count)
+            for i in 0..<edges.count {
+                pinPaths.append(PinPath(edge: edges[i]))
+            }
+            return pinPaths
+        } else {
+            return []
         }
-
-        return edges
     }
 
     private static func same(a: PathMileStone, b: PathMileStone, module: Int) -> Bool {
@@ -475,4 +462,33 @@ struct CrossDetector {
         
         return b.offset == 0 && (a.index + 1) % module == b.index
     }
+    
+    private static func removeExclusion(pinPoints: inout [PinPoint], exclusion: PinPoint.PinType) -> Bool {
+        var i = pinPoints.count - 1
+        var result = false
+        repeat {
+            let pin = pinPoints[i]
+            if pin.type == exclusion {
+                pinPoints.remove(at: i)
+                result = true
+            }
+            i -= 1
+        } while i >= 0
+        return result
+    }
+    
+    private static func removeExclusion(pinPaths: inout [PinPath], exclusion: PinPoint.PinType) -> Bool {
+        var i = pinPaths.count - 1
+        var result = false
+        repeat {
+            let path = pinPaths[i]
+            if path.v0.type == exclusion {
+                pinPaths.remove(at: i)
+                result = true
+            }
+            i -= 1
+        } while i >= 0
+        return result
+    }
+    
 }

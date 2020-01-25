@@ -241,7 +241,7 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(points.count, 2)
     }
     
-    
+    /*
     func test_05() {
         
         var master = [Point]()
@@ -287,7 +287,7 @@ final class PinPathTests: XCTestCase {
         let points = iGeom.float(points: path.extract(points: iMaster))
         XCTAssertEqual(points.count, 2)
     }
-    
+    */
     
     func test_06() {
         
@@ -1120,6 +1120,7 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(points_0, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10)])
     }
 
+    /*
     func test_24() {
         let iMaster = [
             IntPoint(x: -2, y: 2),
@@ -1144,6 +1145,7 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(point, IntPoint(x: 2, y: 2))
     }
     
+    
     func test_25() {
         let iMaster = [
             IntPoint(x: -2, y: 2),
@@ -1166,6 +1168,7 @@ final class PinPathTests: XCTestCase {
         let point = result.pinPointArray[0].point
         XCTAssertEqual(point, IntPoint(x: 2, y: -2))
     }
+ 
     
     func test_26() {
         let iMaster = [
@@ -1189,7 +1192,7 @@ final class PinPathTests: XCTestCase {
         let point = result.pinPointArray[0].point
         XCTAssertEqual(point, IntPoint(x: 2, y: 2))
     }
-    
+ */
     func test_27() {
         let iMaster = [
             IntPoint(x: -2, y: 2),
