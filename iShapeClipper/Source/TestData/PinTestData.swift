@@ -205,6 +205,21 @@ struct PinTestData {
                 Point(x: 10.0 - IntGeom.defGeom.float(int: 1), y: 30.0),
                 Point(x: 10.0 + IntGeom.defGeom.float(int: 1), y: -30.0)
             ]
+        ],
+        // 101
+        [
+            [
+                Point(x: -10.0, y: 10.0),
+                Point(x: 10.0, y: 10.0),
+                Point(x: 10.0, y: -10.0),
+                Point(x: -10.0, y: -10.0)
+            ],
+            [
+                Point(x: -15.0, y: -30.0),
+                Point(x: -15.0, y: 30.0),
+                Point(x: 10.0 - IntGeom.defGeom.float(int: 1), y: 30.0),
+                Point(x: 10.0 + IntGeom.defGeom.float(int: 1), y: -30.0)
+            ]
         ]
     ]
 }
