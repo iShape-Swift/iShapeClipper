@@ -15,21 +15,9 @@ final class PinPathTests: XCTestCase {
     private let iGeom = IntGeom.defGeom
     
     func test_00() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-
-        let iMaster = iGeom.int(points: master)
-        
-        var slave = [Point]()
-        
-        slave.append(Point(x: 0, y: 0))
-        slave.append(Point(x: 5, y: 10))
-        slave.append(Point(x: -5, y: 10))
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[0]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -62,20 +50,9 @@ final class PinPathTests: XCTestCase {
     
     
     func test_01() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        let iMaster = iGeom.int(points: master)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(Point(x: -10, y: 5))
-        slave.append(Point(x: -10, y: -5))
-        
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[1]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -84,11 +61,9 @@ final class PinPathTests: XCTestCase {
         
         let path = result.pinPathArray[0]
         
-        
         XCTAssertEqual(path.v0.masterMileStone.index, 3)
         XCTAssertEqual(path.v1.masterMileStone.index, 3)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
@@ -106,22 +81,9 @@ final class PinPathTests: XCTestCase {
     
     
     func test_02() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: -5, y: -10)
-        let pt1 = Point(x: 5, y: -10)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(pt0)
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[2]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -129,21 +91,18 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(result.pinPointArray.count, 0)
         
         let path = result.pinPathArray[0]
-        
-        
+
         XCTAssertEqual(path.v0.masterMileStone.index, 2)
         XCTAssertEqual(path.v1.masterMileStone.index, 2)
-        
-        
-        XCTAssertEqual(path.v0.slaveMileStone.index, 2)
+
+        XCTAssertEqual(path.v0.slaveMileStone.index, 1)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
-        XCTAssertEqual(path.v1.slaveMileStone.index, 1)
+        XCTAssertEqual(path.v1.slaveMileStone.index, 2)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+        XCTAssertEqual(path.v0.point, iSlave[1])
+        XCTAssertEqual(path.v1.point, iSlave[2])
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 1)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
@@ -152,22 +111,9 @@ final class PinPathTests: XCTestCase {
     
     
     func test_03() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 10, y: -5)
-        let pt1 = Point(x: 10, y: 5)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(pt0)
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[3]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -175,21 +121,18 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(result.pinPointArray.count, 0)
         
         let path = result.pinPathArray[0]
-        
-        
+
         XCTAssertEqual(path.v0.masterMileStone.index, 1)
         XCTAssertEqual(path.v1.masterMileStone.index, 1)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 1)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+        XCTAssertEqual(path.v0.point, iSlave[2])
+        XCTAssertEqual(path.v1.point, iSlave[1])
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 1)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
@@ -198,23 +141,9 @@ final class PinPathTests: XCTestCase {
     
     
     func test_04() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 10, y: 10)
-        let pt1 = Point(x: -10, y: 10)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(pt0)
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[4]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -225,8 +154,7 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 0)
         XCTAssertEqual(path.v1.masterMileStone.index, 1)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
@@ -234,30 +162,17 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
         
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+        XCTAssertEqual(path.v0.point, iSlave[2])
+        XCTAssertEqual(path.v1.point, iSlave[1])
         
         let points = iGeom.float(points: path.extract(points: iMaster))
         XCTAssertEqual(points.count, 2)
     }
 
     func test_05() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        let iMaster = iGeom.int(points: master)
-
-        let pt0 = Point(x: -10, y: 10)
-        let pt1 = Point(x: -10, y: -10)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(pt0)
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[5]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -265,12 +180,10 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(result.pinPointArray.count, 0)
         
         let path = result.pinPathArray[0]
-        
-        
+
         XCTAssertEqual(path.v0.masterMileStone.index, 3)
         XCTAssertEqual(path.v1.masterMileStone.index, 0)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
@@ -278,8 +191,8 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
         
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+        XCTAssertEqual(path.v0.point, iSlave[2])
+        XCTAssertEqual(path.v1.point, iSlave[1])
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 1)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
@@ -287,22 +200,9 @@ final class PinPathTests: XCTestCase {
     }
     
     func test_06() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: -10, y: -10)
-        let pt1 = Point(x: 10, y: -10)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(pt0)
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[6]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -322,9 +222,8 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v1.slaveMileStone.index, 1)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+        XCTAssertEqual(path.v0.point, iSlave[2])
+        XCTAssertEqual(path.v1.point, iSlave[1])
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 1)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
@@ -333,22 +232,9 @@ final class PinPathTests: XCTestCase {
     
     
     func test_07() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 10, y: -10)
-        let pt1 = Point(x: 10, y: 10)
-        
-        var slave = [Point]()
-        slave.append(Point(x: 0, y: 0))
-        slave.append(pt0)
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[7]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -356,21 +242,18 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(result.pinPointArray.count, 0)
         
         let path = result.pinPathArray[0]
-        
-        
+                
         XCTAssertEqual(path.v0.masterMileStone.index, 1)
         XCTAssertEqual(path.v1.masterMileStone.index, 2)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 1)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+        XCTAssertEqual(path.v0.point, iSlave[2])
+        XCTAssertEqual(path.v1.point, iSlave[1])
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 1)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
@@ -378,25 +261,9 @@ final class PinPathTests: XCTestCase {
     }
     
     func test_08() {
-        
-        var master = [Point]()
-        
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 10, y: 5)
-        let pt1 = Point(x: -10, y: 5)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: 10, y: 10))
-        slave.append(Point(x: -10, y: 10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[8]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -407,44 +274,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 3)
         XCTAssertEqual(path.v1.masterMileStone.index, 1)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 3)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 3)
-        
 
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: -10, y: 10), Point(x: 10, y: 10), pt0])
+        XCTAssertEqual(points, [Point(x: -10, y: 5), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: 5)])
     }
     
     
     func test_09() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: -5, y: 10)
-        let pt1 = Point(x: -5, y: -10)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: -10, y: 10))
-        slave.append(Point(x: -10, y: -10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[9]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -462,36 +309,18 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 3)
-        
+
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: -10, y: -10), Point(x: -10, y: 10), pt0])
+        XCTAssertEqual(points, [Point(x: -5, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: -5, y: 10)])
     }
     
     
     func test_10() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: -10, y: -5)
-        let pt1 = Point(x: 10, y: -5)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: -10, y: -10))
-        slave.append(Point(x: 10, y: -10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[10]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -503,42 +332,23 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v0.masterMileStone.index, 1)
         XCTAssertEqual(path.v1.masterMileStone.index, 3)
         
-        
         XCTAssertEqual(path.v0.slaveMileStone.index, 3)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 3)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: 10, y: -10), Point(x: -10, y: -10), pt0])
+        XCTAssertEqual(points, [Point(x: 10, y: -5), Point(x: 10, y: -10), Point(x: -10, y: -10), Point(x: -10, y: -5)])
     }
     
     
     func test_11() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 5, y: -10)
-        let pt1 = Point(x: 5, y: 10)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: 10, y: -10))
-        slave.append(Point(x: 10, y: 10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[11]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -549,43 +359,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 0)
         XCTAssertEqual(path.v1.masterMileStone.index, 2)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 3)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 3)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: 10, y: 10), Point(x: 10, y: -10), pt0])
+        XCTAssertEqual(points, [Point(x: 5, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10), Point(x: 5, y: -10)])
     }
     
     
     func test_12() {
-        
-        var master = [Point]()
-        
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 10, y: 0)
-        let pt1 = Point(x: 0, y: 10)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: 10, y: 10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[12]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -596,42 +387,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 0)
         XCTAssertEqual(path.v1.masterMileStone.index, 1)
-        
-        
+                
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 2)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: 10, y: 10), pt0])
+        XCTAssertEqual(points, [Point(x: 0, y: 10), Point(x: 10, y: 10), Point(x: 10, y: 0)])
     }
     
     
     func test_13() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 0, y: 10)
-        let pt1 = Point(x: -10, y: 0)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: -10, y: 10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[13]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -642,42 +415,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 3)
         XCTAssertEqual(path.v1.masterMileStone.index, 0)
-        
-        
+                
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 2)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: -10, y: 10), pt0])
+        XCTAssertEqual(points, [Point(x: -10, y: 0), Point(x: -10, y: 10), Point(x: 0, y: 10)])
     }
     
     
     func test_14() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: -10, y: 0)
-        let pt1 = Point(x: 0, y: -10)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: -10, y: -10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[14]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -688,42 +443,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 2)
         XCTAssertEqual(path.v1.masterMileStone.index, 3)
-        
-        
+                
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 2)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: -10, y: -10), pt0])
+        XCTAssertEqual(points, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 0)])
     }
     
     
     func test_15() {
-        
-        var master = [Point]()
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 0, y: -10)
-        let pt1 = Point(x: 10, y: 0)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: 10, y: -10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[15]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -734,45 +471,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 1)
         XCTAssertEqual(path.v1.masterMileStone.index, 2)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 2)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 2)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, [pt1, Point(x: 10, y: -10), pt0])
+        XCTAssertEqual(points, [Point(x: 10, y: 0), Point(x: 10, y: -10), Point(x: 0, y: -10)])
     }
     
     
     func test_16() {
-        
-        var master = [Point]()
-        
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 0, y: 10)
-        let pt1 = Point(x: 10, y: 0)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: -10, y: 10))
-        slave.append(Point(x: -10, y: -10))
-        slave.append(Point(x: 10, y: -10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[16]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let sequence = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -783,45 +499,24 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 1)
         XCTAssertEqual(path.v1.masterMileStone.index, 0)
-        
-        
+                
         XCTAssertEqual(path.v0.slaveMileStone.index, 4)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 4)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, slave.reversed())
+        XCTAssertEqual(points, [Point(x: 10, y: 0), Point(x: 10, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: 0, y: 10)])
     }
     
     
     func test_17() {
-        
-        var master = [Point]()
-        
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: -10, y: 0)
-        let pt1 = Point(x: 0, y: 10)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: -10, y: -10))
-        slave.append(Point(x: 10, y: -10))
-        slave.append(Point(x: 10, y: 10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[17]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -833,44 +528,23 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v0.masterMileStone.index, 0)
         XCTAssertEqual(path.v1.masterMileStone.index, 3)
         
-        
         XCTAssertEqual(path.v0.slaveMileStone.index, 4)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 4)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, slave.reversed())
+        XCTAssertEqual(points, [Point(x: 0, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 0)])
     }
     
     
     func test_18() {
-        
-        var master = [Point]()
-        
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 0, y: -10)
-        let pt1 = Point(x: -10, y: 0)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: 10, y: -10))
-        slave.append(Point(x: 10, y: 10))
-        slave.append(Point(x: -10, y: 10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[18]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -882,44 +556,23 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v0.masterMileStone.index, 3)
         XCTAssertEqual(path.v1.masterMileStone.index, 2)
         
-        
         XCTAssertEqual(path.v0.slaveMileStone.index, 4)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 4)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, slave.reversed())
+        XCTAssertEqual(points, [Point(x: -10, y: 0), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: -10), Point(x: 0, y: -10)])
     }
     
     
     func test_19() {
-        
-        var master = [Point]()
-        
-        master.append(Point(x: -10, y: 10))
-        master.append(Point(x: 10, y: 10))
-        master.append(Point(x: 10, y: -10))
-        master.append(Point(x: -10, y: -10))
-        
-        let iMaster = iGeom.int(points: master)
-        
-        let pt0 = Point(x: 10, y: 0)
-        let pt1 = Point(x: 0, y: -10)
-        
-        var slave = [Point]()
-        slave.append(pt0)
-        slave.append(Point(x: 10, y: 10))
-        slave.append(Point(x: -10, y: 10))
-        slave.append(Point(x: -10, y: -10))
-        slave.append(pt1)
-        let iSlave = iGeom.int(points: slave)
+        let data = PinTestData.data[19]
+        let iMaster = iGeom.int(points: data[0])
+        let iSlave = iGeom.int(points: data[1])
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
@@ -927,25 +580,20 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(result.pinPointArray.count, 0)
         
         let path = result.pinPathArray[0]
-        
-        
+
         XCTAssertEqual(path.v0.masterMileStone.index, 2)
         XCTAssertEqual(path.v1.masterMileStone.index, 1)
-        
         
         XCTAssertEqual(path.v0.slaveMileStone.index, 4)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
         XCTAssertEqual(path.v1.slaveMileStone.index, 0)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
-        
-        
-        XCTAssertEqual(path.v0.point, iGeom.int(point: pt1))
-        XCTAssertEqual(path.v1.point, iGeom.int(point: pt0))
+
         XCTAssertEqual(path.getTestLength(count: iMaster.count), 4)
         
         let points = iGeom.float(points: path.extract(points: iMaster))
-        XCTAssertEqual(points, slave.reversed())
+        XCTAssertEqual(points, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10), Point(x: 10, y: 10), Point(x: 10, y: 0)])
     }
     
     
