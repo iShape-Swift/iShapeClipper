@@ -12,6 +12,10 @@ struct PinPath {
     let v0: PinPoint
     let v1: PinPoint
 
+    var isClosed: Bool {
+        return v0 == v1
+    }
+    
     init(edge: PinEdge) {
         let type = edge.type
         self.v0 = PinPoint(pin: edge.v0, type: type)

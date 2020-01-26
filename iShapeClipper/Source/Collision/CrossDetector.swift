@@ -9,13 +9,6 @@ import iGeometry
 
 struct CrossDetector {
     
-    private struct PinInfo {
-        let index: Int
-        let masterIndex: Int
-        let slaveIndex: Int
-        let cross: CrossType
-    }
-    
     internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: PinPoint.PinType) -> PinNavigator {
         let posMatrix = CrossDetector.createPossibilityMatrix(master: iMaster, slave: iSlave)
         
@@ -23,7 +16,6 @@ struct CrossDetector {
         let slaveIndices = posMatrix.slaveIndices
         
         var pinPoints = [PinPoint]()
-        var pinInfoList = [PinInfo]()
 
         let masterCount = iMaster.count
         let slaveCount = iSlave.count
@@ -76,8 +68,7 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildSimple(def: pinPointDef)
-                    
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
+
                     pinPoints.append(pinPoint)
                 case .end_a0:
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
@@ -97,7 +88,6 @@ struct CrossDetector {
                     )
 
                     let pinPoint = PinPoint.buildOnSlave(def: pinPointDef, iGeom: iGeom)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1:
@@ -118,7 +108,6 @@ struct CrossDetector {
                     )
 
                     let pinPoint = PinPoint.buildOnSlave(def: pinPointDef, iGeom: iGeom)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b0:
@@ -139,7 +128,6 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b1:
@@ -160,7 +148,6 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b0:
@@ -181,7 +168,6 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b1:
@@ -202,7 +188,6 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b0:
@@ -223,7 +208,6 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b1:
@@ -244,7 +228,6 @@ struct CrossDetector {
                     )
                     
                     let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
-                    pinInfoList.append(PinInfo(index: pinPoints.count, masterIndex: msIx0, slaveIndex: slIx0, cross: crossType))
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 }
@@ -257,13 +240,14 @@ struct CrossDetector {
         var hasExclusion = false
         if endsCount > 0 {
             pinPaths = CrossDetector.organize(pinPoints: &pinPoints, masterCount: masterCount, slaveCount: slaveCount)
-            
             if !pinPaths.isEmpty {
+                
+                // test for same shapes
+                if pinPaths.count == 1 && iMaster.count == iSlave.count && pinPaths[0].isClosed {
+                    return PinNavigator()
+                }
+                
                 hasExclusion = CrossDetector.removeExclusion(pinPaths: &pinPaths, exclusion: exclusionPinType)
-            }
-            
-            if iMaster.count == iSlave.count && iMaster.count == pinPaths.count && iMaster == iSlave {
-                return PinNavigator()
             }
         } else {
             pinPaths = []
