@@ -52,10 +52,16 @@ public struct Solver {
         let cursor = filterNavigator.first()
     
         guard cursor.isNotEmpty else {
-            if master.isContain(hole: slave, isClockWise: false) {
+            let isSlaveHole = master.isContain(hole: slave, isClockWise: false)
+            if isSlaveHole {
                 return SubtractSolution(pathList: .empty, nature: .hole)
             } else {
-                return SubtractSolution(pathList: .empty, nature: .notOverlap)
+                let isMasterHole = slave.isContain(hole: master, isClockWise: true)
+                if isMasterHole {
+                    return SubtractSolution(pathList: .empty, nature: .empty)
+                } else {
+                    return SubtractSolution(pathList: .empty, nature: .notOverlap)
+                }
             }
         }
         
