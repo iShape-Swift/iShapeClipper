@@ -240,8 +240,7 @@ final class PinPathTests: XCTestCase {
         let points = iGeom.float(points: path.extract(points: iMaster))
         XCTAssertEqual(points.count, 2)
     }
-    
-    /*
+
     func test_05() {
         
         var master = [Point]()
@@ -250,8 +249,7 @@ final class PinPathTests: XCTestCase {
         master.append(Point(x: 10, y: -10))
         master.append(Point(x: -10, y: -10))
         let iMaster = iGeom.int(points: master)
-        
-        
+
         let pt0 = Point(x: -10, y: 10)
         let pt1 = Point(x: -10, y: -10)
         
@@ -287,7 +285,6 @@ final class PinPathTests: XCTestCase {
         let points = iGeom.float(points: path.extract(points: iMaster))
         XCTAssertEqual(points.count, 2)
     }
-    */
     
     func test_06() {
         
@@ -995,7 +992,6 @@ final class PinPathTests: XCTestCase {
     
     
     func test_21() {
-        
         var master = [Point]()
         
         master.append(Point(x: -10, y: 10))
@@ -1045,11 +1041,9 @@ final class PinPathTests: XCTestCase {
         let points_3 = iGeom.float(points: path[3].extract(points: iMaster))
         XCTAssertEqual(points_3, [Point(x: -10, y: 5), Point(x: -10, y: 10), Point(x: -5, y: 10)])
     }
-    
-    
+
     
     func test_22() {
-        
         var master = [Point]()
         
         master.append(Point(x: -10, y: -10))
@@ -1093,7 +1087,6 @@ final class PinPathTests: XCTestCase {
     
     
     func test_23() {
-        
         var master = [Point]()
         
         master.append(Point(x: -10, y: 10))
@@ -1120,7 +1113,7 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(points_0, [Point(x: 0, y: -10), Point(x: -10, y: -10), Point(x: -10, y: 10)])
     }
 
-    /*
+
     func test_24() {
         let iMaster = [
             IntPoint(x: -2, y: 2),
@@ -1137,12 +1130,11 @@ final class PinPathTests: XCTestCase {
         ]
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
-
         
-        XCTAssertEqual(result.pinPathArray.count, 0)
-        XCTAssertEqual(result.pinPointArray.count, 1)
-        let point = result.pinPointArray[0].point
-        XCTAssertEqual(point, IntPoint(x: 2, y: 2))
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        let path = result.pinPathArray[0]
+        XCTAssertEqual(path.v0.point, IntPoint(x: 2, y: 2))
+        XCTAssertEqual(path.v1.point, IntPoint(x: 2, y: 0))
     }
     
     
@@ -1163,10 +1155,10 @@ final class PinPathTests: XCTestCase {
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
 
-        XCTAssertEqual(result.pinPathArray.count, 0)
-        XCTAssertEqual(result.pinPointArray.count, 1)
-        let point = result.pinPointArray[0].point
-        XCTAssertEqual(point, IntPoint(x: 2, y: -2))
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        let path = result.pinPathArray[0]
+        XCTAssertEqual(path.v0.point, IntPoint(x: 2, y: 0))
+        XCTAssertEqual(path.v1.point, IntPoint(x: 2, y: -2))
     }
  
     
@@ -1187,12 +1179,13 @@ final class PinPathTests: XCTestCase {
         
         let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         
-        XCTAssertEqual(result.pinPathArray.count, 0)
-        XCTAssertEqual(result.pinPointArray.count, 1)
-        let point = result.pinPointArray[0].point
-        XCTAssertEqual(point, IntPoint(x: 2, y: 2))
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        let path = result.pinPathArray[0]
+        XCTAssertEqual(path.v0.point, IntPoint(x: 2, y: 2))
+        XCTAssertEqual(path.v1.point, IntPoint(x: 2, y: 0))
     }
- */
+
+    
     func test_27() {
         let iMaster = [
             IntPoint(x: -2, y: 2),
@@ -1220,6 +1213,7 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(IntPoint(x: 2, y: 2), points[0].point)
         XCTAssertEqual(PinPoint.PinType.in_out, points[0].type)
     }
+    
     
     func test_28() {
         let iMaster = [

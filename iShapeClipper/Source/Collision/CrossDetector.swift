@@ -354,15 +354,8 @@ struct CrossDetector {
         
         var isPrevEdge = false
         
-        var i: Int
-        var j: Int
-        if n > 2 {
-            i = 0
-            j = n - 1
-        } else {
-            i = 1
-            j = 0
-        }
+        var i: Int = 0
+        var j: Int = n - 1
 
         var a = pinPoints[j]
         var removeMark = Array<Bool>.init(repeating: false, count: n)
@@ -375,14 +368,16 @@ struct CrossDetector {
 
             let isSameMaster = aMi == bMi || (b.masterMileStone.offset == 0 && (aMi + 1) % masterCount == bMi)
             
-            if isSameMaster && CrossDetector.same(a: a.slaveMileStone, b: b.slaveMileStone, module: slaveCount) {
+            if isSameMaster &&
+                CrossDetector.isDirect(a: a.masterMileStone, b: b.masterMileStone, module: masterCount) &&
+                CrossDetector.same(a: a.slaveMileStone, b: b.slaveMileStone, module: slaveCount) {
                 if isPrevEdge {
                     var prevEdge = edges[edges.count - 1]
                     prevEdge.v1 = b
                     edges[edges.count - 1] = prevEdge
                 } else {
-                    let isDirect = CrossDetector.isDirect(a: a.slaveMileStone, b: b.slaveMileStone, module: slaveCount)
-                    edges.append(PinEdge(v0: a, v1: b, isDirect: isDirect))
+                    let isDirectSlave = CrossDetector.isDirect(a: a.slaveMileStone, b: b.slaveMileStone, module: slaveCount)
+                    edges.append(PinEdge(v0: a, v1: b, isDirect: isDirectSlave))
                 }
                 removeMark[i] = true
                 removeMark[j] = true
