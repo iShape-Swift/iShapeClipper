@@ -303,67 +303,7 @@ struct PinTestData {
                 Point(x: 0, y: -10)
             ]
         ],
-        // 0
-        [
-            [
-                Point(x: -10, y: 10),
-                Point(x: 10, y: 10),
-                Point(x: 10, y: -10),
-                Point(x: -10, y: -10)
-            ],
-            [
-                Point(x: 5, y: -15),
-                Point(x: 5, y: 0),
-                Point(x: -5, y: 0),
-                Point(x: -5, y: -15)
-            ]
-        ],
-        // 1
-        [
-            [
-                Point(x: -10, y: 10),
-                Point(x: 10, y: 10),
-                Point(x: 10, y: -10),
-                Point(x: -10, y: -10)
-            ],
-            [
-                Point(x: -5, y: -15),
-                Point(x: 15, y: -15),
-                Point(x: 15, y: 15),
-                Point(x: -5, y: 15)
-            ]
-        ],
-        // 2
-        [
-            [
-                Point(x: -10, y: 10),
-                Point(x: 10, y: 10),
-                Point(x: 10, y: -10),
-                Point(x: -10, y: -10)
-            ],
-            [
-                Point(x: 5, y: 0),
-                Point(x: 5, y: 10),
-                Point(x: -5, y: 10),
-                Point(x: -5, y: 0)
-            ]
-        ],
-        // 3
-        [
-            [
-                Point(x: -10, y: 10),
-                Point(x: 10, y: 10),
-                Point(x: 10, y: -10),
-                Point(x: -10, y: -10)
-            ],
-            [
-                Point(x: 5, y: 10),
-                Point(x: 5, y: 20),
-                Point(x: -5, y: 20),
-                Point(x: -5, y: 10)
-            ]
-        ],
-        // 4
+        // 20
         [
             [
                 Point(x: -10, y: 10),
@@ -378,7 +318,7 @@ struct PinTestData {
                 Point(x: -15, y: 10)
             ]
         ],
-        // 5
+        // 21
         [
             [
                 Point(x: -10, y: 10),
@@ -393,7 +333,7 @@ struct PinTestData {
                 Point(x: -15, y: 0)
             ]
         ],
-        // 6
+        // 22
         [
             [
                 Point(x: -10, y: 10),
@@ -408,7 +348,7 @@ struct PinTestData {
                 Point(x: 15, y: 10)
             ]
         ],
-        // 7
+        // 23
         [
             [
                 Point(x: -10, y: 10),
@@ -423,22 +363,7 @@ struct PinTestData {
                 Point(x: 15, y: 0)
             ]
         ],
-        // 8
-        [
-            [
-                Point(x: -10, y: 10),
-                Point(x: 10, y: 10),
-                Point(x: 10, y: -10),
-                Point(x: -10, y: -10)
-            ],
-            [
-                Point(x: 10, y: 0),
-                Point(x: 10, y: 10),
-                Point(x: -10, y: 10),
-                Point(x: -10, y: 0)
-            ]
-        ],
-        // 9
+        // 24
         [
             [
                 Point(x: -10, y: 10),
@@ -453,7 +378,7 @@ struct PinTestData {
                 Point(x: -10, y: 10)
             ]
         ],
-        // 10
+        // 25
         [
             [
                 Point(x: -10, y: 10),
@@ -468,22 +393,7 @@ struct PinTestData {
                 Point(x: -5, y: -10)
             ]
         ],
-        // 11
-        [
-            [
-                Point(x: -10, y: 10),
-                Point(x: 10, y: 10),
-                Point(x: 10, y: -10),
-                Point(x: -10, y: -10)
-            ],
-            [
-                Point(x: 5, y: -10),
-                Point(x: 5, y: 10),
-                Point(x: -10, y: 10),
-                Point(x: -10, y: -10)
-            ]
-        ],
-        // 12
+        // 26
         [
             [
                 Point(x: -10, y: 10),
@@ -498,7 +408,7 @@ struct PinTestData {
                 Point(x: -20, y: 0)
             ]
         ],
-        // 100
+        // 27
         [
             [
                 Point(x: -10, y: 10),
@@ -513,7 +423,7 @@ struct PinTestData {
                 Point(x: 10 + IntGeom.defGeom.float(int: 1), y: -30)
             ]
         ],
-        // 101
+        // 28
         [
             [
                 Point(x: -10, y: 10),
