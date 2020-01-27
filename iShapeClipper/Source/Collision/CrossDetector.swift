@@ -258,11 +258,7 @@ struct CrossDetector {
             hasExclusion = pinExclusion || hasExclusion
         }
 
-        // combine pin points and paths
-        var sequence = PinSequence(pinPointArray: pinPoints, pinPathArray: pinPaths, masterCount: iMaster.count)
-        
-        // order data
-        let navigator = sequence.convert(hasExclusion: hasExclusion)
+        let navigator = PinNavigatorBuilder.build(pinPointArray: &pinPoints, pinPathArray: &pinPaths, masterCount: iMaster.count, hasExclusion: hasExclusion)
         
         return navigator
     }
