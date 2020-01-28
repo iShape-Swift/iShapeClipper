@@ -20,7 +20,6 @@ struct CutTestData {
     static let data: [TestData] = [
         
         // hole case
-        
         // 0
         TestData(
             shape: PlainShape(
@@ -219,6 +218,26 @@ struct CutTestData {
             shape: PlainShape(
                 iShape: IntShape(
                     hull: [
+                        Point(x: -10, y: -10),
+                        Point(x: -10, y: 10),
+                        Point(x: 10, y: 10),
+                        Point(x: 10, y: -10)
+                    ].int,
+                    holes: []
+                )
+            ),
+            path: [
+                Point(x: -5, y: 15),
+                Point(x: -5, y: -5),
+                Point(x: 5, y: -5),
+                Point(x: 5, y: 15)
+            ].int
+        ),
+        // 6
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
                         Point(x: 10.0, y: -15.0),
                         Point(x: -5.0, y: -15.0),
                         Point(x: -5.0, y: 10.0),
@@ -241,7 +260,7 @@ struct CutTestData {
                 Point(x: 0.0, y: 0.0)
             ].int
         ),
-        // 6
+        // 7
         TestData(
             shape: PlainShape(
                 iShape: IntShape(

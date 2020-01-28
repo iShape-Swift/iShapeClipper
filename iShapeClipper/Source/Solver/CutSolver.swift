@@ -188,72 +188,80 @@ public extension PlainShape {
         let n = self.layouts.count
 
         var islands = cutHullSolution.restPathList
+        guard n > 1 else {
+            let result = PlainShapeList(plainShape: islands)
+
+            //  пока не правильный
+            let bitList = PlainShapeList(plainShape: PlainShape(points: []))
+            
+            return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
+        }
+
         var result = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count,
          minimumSegmentsCapacity: islands.layouts.count)
         
-        if n > 1 {
-            var holes = Array<Int>(repeating: 0, count: n - 1)
-            for i in 1..<n {
-                holes[i - 1] = i
+        var holes = Array<Int>(repeating: 0, count: n - 1)
+        for i in 1..<n {
+            holes[i - 1] = i
+        }
+    
+        var i = 0
+        nextIsland:
+        while i < islands.layouts.count {
+            var island = islands.get(index: i)
+            var usedHoles = [Int]()
+            for j in 0..<holes.count {
+                let holeIndex = holes[j]
+                let hole = self.get(index: holeIndex)
+                let diff = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
+                switch diff.nature {
+                case .empty:
+                    // остров совпал с дыркой
+                    islands.remove(index: i)
+                    continue nextIsland
+                case .notOverlap:
+                    continue
+                case .overlap:
+                    var islandsCount: Int = 0
+                    for layout in diff.pathList.layouts where layout.isClockWise {
+                        islandsCount += 1
+                    }
+                    if islandsCount == 1 {
+                        island = diff.pathList.get(index: 0)
+                    } else {
+                        islands.remove(index: i)
+                        for layout in diff.pathList.layouts where layout.isClockWise {
+                            let newIsland = diff.pathList.get(layout: layout)
+                            islands.add(path: newIsland, isClockWise: true)
+                        }
+                        continue nextIsland
+                    }
+                case .hole:
+                    usedHoles.append(j)
+                }
             }
-        
-            var i = 0
-            nextIsland:
-            while i < islands.layouts.count {
-                var island = islands.get(index: i)
-                var usedHoles = [Int]()
-                for j in 0..<holes.count {
+            
+            var islandShape = PlainShape(points: island)
+            
+            if !usedHoles.isEmpty {
+                for j in usedHoles {
                     let holeIndex = holes[j]
                     let hole = self.get(index: holeIndex)
-                    let diff = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
-                    switch diff.nature {
-                    case .empty:
-                        // остров совпал с дыркой
-                        islands.remove(index: i)
-                        continue nextIsland
-                    case .notOverlap:
-                        continue
-                    case .overlap:
-                        var islandsCount: Int = 0
-                        for layout in diff.pathList.layouts where layout.isClockWise {
-                            islandsCount += 1
-                        }
-                        if islandsCount == 1 {
-                            island = diff.pathList.get(index: 0)
-                        } else {
-                            islands.remove(index: i)
-                            for layout in diff.pathList.layouts where layout.isClockWise {
-                                let newIsland = diff.pathList.get(layout: layout)
-                                islands.add(path: newIsland, isClockWise: true)
-                            }
-                            continue nextIsland
-                        }
-                    case .hole:
-                        usedHoles.append(j)
-                    }
+                    islandShape.add(hole: hole)
                 }
                 
-                var islandShape = PlainShape(points: island)
-                
-                if !usedHoles.isEmpty {
-                    for j in usedHoles {
-                        let holeIndex = holes[j]
-                        let hole = self.get(index: holeIndex)
-                        islandShape.add(hole: hole)
-                    }
-                    
-                    var j = usedHoles.count - 1
-                    while j > 0 {
-                        holes.remove(at: usedHoles[j])
-                        j -= 1
-                    }
+                var j = usedHoles.count - 1
+                while j > 0 {
+                    holes.remove(at: usedHoles[j])
+                    j -= 1
                 }
-                
-                result.add(plainShape: islandShape)
-
-                i += 1
             }
+            
+            result.add(plainShape: islandShape)
+
+            i += 1
         }
+        
 
         //  пока не правильный
         let bitList = PlainShapeList(plainShape: PlainShape(points: []))
