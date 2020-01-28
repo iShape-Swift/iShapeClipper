@@ -58,6 +58,15 @@ struct Colors {
         NSColor.brown
     ]
     
+    enum cutTest {
+        static let shapeFill = NSColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
+        static let shapeStroke = NSColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0).cgColor
+        static let pathFill = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
+        static let pathStroke = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+        static let solutionFill = NSColor(red: 1.0, green: 0.9, blue: 0.8, alpha: 1.0).cgColor
+        static let solutionStroke = NSColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 1.0).cgColor
+    }
+    
     static func getColor(index: Int) -> NSColor {
         let i = index % Colors.shapeColors.count
         

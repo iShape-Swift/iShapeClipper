@@ -16,8 +16,7 @@ struct CutTestData {
         let path: [IntPoint]
         
     }
-    
-    
+
     static let data: [TestData] = [
         
         // hole case

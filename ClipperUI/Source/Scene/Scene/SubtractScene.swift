@@ -90,7 +90,6 @@ final class SubtractScene: CoordinateSystemScene {
             self.addSublayer(shape)
         }
 
-        
         for pin in points {
             self.addSublayer(ShapePinDot(pin: pin, radius: 0.7))
         }

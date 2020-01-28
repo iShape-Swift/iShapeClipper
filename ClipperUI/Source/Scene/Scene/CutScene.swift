@@ -67,7 +67,7 @@ final class CutScene: CoordinateSystemScene {
         if solution.isInteract && !solution.mainList.segments.isEmpty {
             for i in 0..<solution.mainList.segments.count {
                 let shape = solution.mainList.get(index: i)
-                let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.solution_third, strokeColor: Colors.solution_third_border, lineWidth: 0.25)
+                let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.solutionFill, strokeColor: Colors.cutTest.solutionStroke, lineWidth: 0.25)
                 self.addSublayer(layer)
             }
         }
@@ -75,15 +75,13 @@ final class CutScene: CoordinateSystemScene {
 
     private func addShape() {
         let plainShape = PlainShape(points: self.shapePoints, layouts: self.shapeLayouts)
-        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.gray, strokeColor: Colors.darkGray, lineWidth: 0.25)
-        layer.opacity = 0.4
+        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.shapeFill, strokeColor: Colors.cutTest.shapeStroke, lineWidth: 0.125)
         self.addSublayer(layer)
     }
     
     private func addSlave() {
         let plainShape = PlainShape(points: self.path)
-        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.red, strokeColor: Colors.darkRed, lineWidth: 0.25)
-        layer.opacity = 0.3
+        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.pathFill, strokeColor: Colors.cutTest.pathStroke, lineWidth: 0.125)
         self.addSublayer(layer)
     }
 
