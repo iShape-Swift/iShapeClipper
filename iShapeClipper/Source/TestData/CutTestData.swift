@@ -18,9 +18,35 @@ struct CutTestData {
     }
 
     static let data: [TestData] = [
-        
         // hole case
         // 0
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -15, y: -15),
+                        Point(x: -15, y: 15),
+                        Point(x: 15, y: 15),
+                        Point(x: 15, y: -15)
+                    ].int,
+                    holes: [
+                        [
+                            Point(x: -10, y: 10),
+                            Point(x: -10, y: -10),
+                            Point(x: 10, y: -10),
+                            Point(x: 10, y: 10)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: -5, y: 5),
+                Point(x: -5, y: -5),
+                Point(x: 5, y: -5),
+                Point(x: 5, y: 5)
+            ].int
+        ),
+        // 1
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -40,7 +66,7 @@ struct CutTestData {
                 Point(x: 5, y: 5)
             ].int
         ),
-        // 1
+        // 2
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -67,7 +93,7 @@ struct CutTestData {
                 Point(x: 10, y: 5)
             ].int
         ),
-        // 2
+        // 3
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -100,7 +126,7 @@ struct CutTestData {
                 Point(x: 5, y: 5)
             ].int
         ),
-        // 3
+        // 4
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -155,7 +181,7 @@ struct CutTestData {
                 Point(x: 20, y: 25),
             ].int
         ),
-        // 4
+        // 5
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -212,8 +238,47 @@ struct CutTestData {
         ),
         
         // overlap case
-
-        // 5
+        // 6
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -10, y: -10),
+                        Point(x: -10, y: 10),
+                        Point(x: 10, y: 10),
+                        Point(x: 10, y: -10)
+                    ].int,
+                    holes: []
+                )
+            ),
+            path: [
+                Point(x: -15, y: 15),
+                Point(x: -15, y: -15),
+                Point(x: 15, y: -15),
+                Point(x: 15, y: 15)
+            ].int
+        ),
+        // 7
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -10, y: -10),
+                        Point(x: -10, y: 10),
+                        Point(x: 10, y: 10),
+                        Point(x: 10, y: -10)
+                    ].int,
+                    holes: []
+                )
+            ),
+            path: [
+                Point(x: -10, y: 10),
+                Point(x: -10, y: -10),
+                Point(x: 10, y: -10),
+                Point(x: 10, y: 10)
+            ].int
+        ),
+        // 8
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -233,7 +298,7 @@ struct CutTestData {
                 Point(x: 5, y: 15)
             ].int
         ),
-        // 6
+        // 9
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -260,7 +325,7 @@ struct CutTestData {
                 Point(x: 0.0, y: 0.0)
             ].int
         ),
-        // 7
+        // 10
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
