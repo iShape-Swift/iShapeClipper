@@ -394,8 +394,8 @@ struct CutTestData {
                             Point(x: 5, y: -15)
                         ].int
                     ]
-            )
-        ),
+                )
+            ),
             path: [
                 Point(x: 10, y: 20),
                 Point(x: 10, y: -15),
@@ -445,8 +445,8 @@ struct CutTestData {
                             Point(x: 5, y: -15)
                         ].int
                     ]
-            )
-        ),
+                )
+            ),
             path: [
                 Point(x: -25, y: 10),
                 Point(x: -25, y: -10),
