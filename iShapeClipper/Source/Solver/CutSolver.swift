@@ -61,7 +61,7 @@ public extension PlainShape {
         var notInteractedHoles = [Int]()
 
         // островки полигона которые оказались внутри новой дыры
-        var islands = PlainShape.empty
+        var shapeIslands = PlainShape.empty
 
         // попытаемся объединить другие дыры с новой
         for i in 1..<n {
@@ -81,14 +81,14 @@ public extension PlainShape {
                     } else {
                         var island = uShape.get(index: j)
                         island.invert()
-                        islands.add(path: island, isClockWise: false)
+                        shapeIslands.add(path: island, isClockWise: false)
                     }
                 }
 
             }
         }
         
-        guard !islands.layouts.isEmpty else {
+        guard !shapeIslands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
             mainShape.add(hole: superHole)
             for j in 0..<notInteractedHoles.count {
@@ -103,8 +103,8 @@ public extension PlainShape {
 
         // вычитаем из внутрениних островков дыры, которые не пересеклись
         
-        var result = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count,
-         minimumSegmentsCapacity: islands.layouts.count)
+        var result = PlainShapeList(minimumPointsCapacity: shapeIslands.points.count, minimumLayoutsCapacity: 2 * shapeIslands.layouts.count,
+         minimumSegmentsCapacity: shapeIslands.layouts.count)
 
         // ведем учет дыр которые не участвуют в образовнии островов
         var usedHoles = Array<Bool>(repeating: false, count: notInteractedHoles.count)
@@ -114,7 +114,7 @@ public extension PlainShape {
         nextIsland:
         repeat {
             // должны быть перечисленны по часовой стрелке
-            var island = islands.get(index: j)
+            var island = shapeIslands.get(index: j)
             var islandHoles = PlainShape.empty
             for k in 0..<notInteractedHoles.count {
                 let index = notInteractedHoles[k]
@@ -138,10 +138,10 @@ public extension PlainShape {
                         island = diffSolution.pathList.get(index: 0)
                     } else {
                         // остров разбился на несколько частей
-                        islands.remove(index: j)
+                        shapeIslands.remove(index: j)
                         for s in 0..<diffSolution.pathList.layouts.count {
                             let part = diffSolution.pathList.get(index: s)
-                            islands.add(path: part, isClockWise: true)
+                            shapeIslands.add(path: part, isClockWise: true)
                         }
                         continue nextIsland
                     }
@@ -162,7 +162,7 @@ public extension PlainShape {
             result.add(plainShape: islandShape)
 
             j += 1
-        } while j < islands.layouts.count
+        } while j < shapeIslands.layouts.count
         
         
         var mainShape = PlainShape(points: self.get(index: 0))
@@ -190,10 +190,8 @@ public extension PlainShape {
         var islands = cutHullSolution.restPathList
         guard n > 1 else {
             let result = PlainShapeList(plainShape: islands)
-
-            //  пока не правильный
-            let bitList = PlainShapeList(plainShape: PlainShape(points: []))
-            
+            let bitPath: [IntPoint] = cutHullSolution.bitePathList.get(index: 0).reversed()
+            let bitList = PlainShapeList(plainShape: PlainShape(points: bitPath))
             return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
         }
 
