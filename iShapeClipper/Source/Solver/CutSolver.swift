@@ -290,18 +290,17 @@ public extension PlainShape {
                     var isFirstSubPath = true
                     for k in 0..<solution.pathList.layouts.count {
                         if solution.pathList.layouts[k].isClockWise {
-                            let subPath = solution.pathList.get(index: j)
+                            let subPath = solution.pathList.get(index: k)
                             if isFirstSubPath {
                                 subPaths.remove(index: j)
                                 isFirstSubPath = false
                             }
                             subPaths.add(path: subPath, isClockWise: true)
                         } else {
-                            let holePath = solution.pathList.get(index: j)
+                            let holePath = solution.pathList.get(index: k)
                             holes.add(path: holePath, isClockWise: false)
                         }
                     }
-                    break
                 case .empty:
                     subPaths.remove(index: j)
                 case .hole:
