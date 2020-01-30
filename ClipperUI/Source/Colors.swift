@@ -59,12 +59,14 @@ struct Colors {
     ]
     
     enum cutTest {
-        static let shapeFill = NSColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
-        static let shapeStroke = NSColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0).cgColor
-        static let pathFill = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
-        static let pathStroke = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
-        static let solutionFill = NSColor(red: 1.0, green: 0.9, blue: 0.8, alpha: 1.0).cgColor
-        static let solutionStroke = NSColor(red: 0.4, green: 0.2, blue: 0.0, alpha: 1.0).cgColor
+        static let masterFill = NSColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
+        static let masterStroke = NSColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0).cgColor
+        static let slaveFill = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
+        static let slaveStroke = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+        static let shapeFill = NSColor(red: 212 / 255, green: 239 / 255, blue: 223 / 255, alpha: 1.0).cgColor
+        static let shapeStroke = NSColor(red: 30 / 255, green: 132 / 255, blue: 73 / 255, alpha: 1.0).cgColor
+        static let bitFill = NSColor(red: 245 / 255, green: 183 / 255, blue: 177 / 255, alpha: 1.0).cgColor
+        static let bitStroke = NSColor(red: 169 / 255, green: 50 / 255, blue: 38 / 255, alpha: 1.0).cgColor
     }
     
     static func getColor(index: Int) -> NSColor {

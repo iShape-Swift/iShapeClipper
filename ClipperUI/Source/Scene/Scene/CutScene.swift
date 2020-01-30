@@ -64,24 +64,33 @@ final class CutScene: CoordinateSystemScene {
         let iSlave = self.path
         let solution = plainShape.cut(path: iSlave, iGeom: IntGeom.defGeom)
 
-        if solution.isInteract && !solution.mainList.segments.isEmpty {
-            for i in 0..<solution.mainList.segments.count {
-                let shape = solution.mainList.get(index: i)
-                let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.solutionFill, strokeColor: Colors.cutTest.solutionStroke, lineWidth: 0.25)
-                self.addSublayer(layer)
+        if solution.isInteract {
+            if !solution.mainList.segments.isEmpty {
+                for i in 0..<solution.mainList.segments.count {
+                    let shape = solution.mainList.get(index: i)
+                    let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.shapeFill, strokeColor: Colors.cutTest.shapeStroke, lineWidth: 0.25)
+                    self.addSublayer(layer)
+                }
+            }
+            if !solution.bitList.segments.isEmpty {
+                for i in 0..<solution.bitList.segments.count {
+                    let shape = solution.bitList.get(index: i)
+                    let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.bitFill, strokeColor: Colors.cutTest.bitStroke, lineWidth: 0.25)
+                    self.addSublayer(layer)
+                }
             }
         }
     }
 
     private func addShape() {
         let plainShape = PlainShape(points: self.shapePoints, layouts: self.shapeLayouts)
-        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.shapeFill, strokeColor: Colors.cutTest.shapeStroke, lineWidth: 0.125)
+        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.masterFill, strokeColor: Colors.cutTest.masterStroke, lineWidth: 0.125)
         self.addSublayer(layer)
     }
     
     private func addSlave() {
         let plainShape = PlainShape(points: self.path)
-        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.pathFill, strokeColor: Colors.cutTest.pathStroke, lineWidth: 0.125)
+        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.slaveFill, strokeColor: Colors.cutTest.slaveStroke, lineWidth: 0.125)
         self.addSublayer(layer)
     }
 
