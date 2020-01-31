@@ -23,7 +23,6 @@ final class CutScene: CoordinateSystemScene {
     private var activeIndex: Int?
     private var isPath: Bool = false
     
-    
     override init() {
         super.init()
         self.showPage(index: pageIndex)

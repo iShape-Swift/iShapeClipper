@@ -51,8 +51,8 @@ public extension PlainShape {
             return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
         }
         
-        let bitPaths = self.holeCaseBitList(cutPath: cutPath, iGeom: iGeom)
         let shapePaths = self.holeCaseShapeList(cutPath: cutPath, iGeom: iGeom)
+        let bitPaths = self.holeCaseBitList(cutPath: cutPath, iGeom: iGeom)
         
         return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitPaths)
     }
@@ -61,16 +61,16 @@ public extension PlainShape {
         let n = self.layouts.count
 
         guard n > 1 else {
-            let result = PlainShapeList(plainShape: cutHullSolution.restPathList)
+            let shapePaths = PlainShapeList(plainShape: cutHullSolution.restPathList)
             let bitPath: [IntPoint] = cutHullSolution.bitePathList.get(index: 0).reversed()
             let bitList = PlainShapeList(plainShape: PlainShape(points: bitPath))
-            return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
+            return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitList)
         }
 
-        let result = self.overlapCaseShapeList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
+        let shapePaths = self.overlapCaseShapeList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
         let bitList = self.overlapCaseBitList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
         
-        return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
+        return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitList)
     }
     
     private func overlapCaseShapeList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
@@ -293,6 +293,8 @@ public extension PlainShape {
         
         var holes = PlainShape.empty
         
+//        var skipHoles = Array<Bool>(repeating: false, count: n)
+        
         for i in 1..<n {
             let nextHole = self.get(index: i)
             
@@ -302,28 +304,33 @@ public extension PlainShape {
                 let solution = Solver.subtract(master: bitPath, slave: nextHole, iGeom: iGeom)
                 switch solution.nature {
                 case .notOverlap:
-                    break
+                    j += 1
                 case .overlap:
-                    var isFirstSubPath = true
+                    var newSubPathCount = 0
                     for k in 0..<solution.pathList.layouts.count {
                         if solution.pathList.layouts[k].isClockWise {
                             let subPath = solution.pathList.get(index: k)
-                            if isFirstSubPath {
+                            if newSubPathCount == 0 {
                                 subPaths.remove(index: j)
-                                isFirstSubPath = false
                             }
                             subPaths.add(path: subPath, isClockWise: true)
+                            newSubPathCount += 1
                         } else {
                             let holePath = solution.pathList.get(index: k)
                             holes.add(path: holePath, isClockWise: false)
                         }
                     }
+                    if newSubPathCount > 1 {
+                        j += newSubPathCount
+                    } else {
+                        j += 1
+                    }
                 case .empty:
                     subPaths.remove(index: j)
                 case .hole:
                     holes.add(path: nextHole, isClockWise: false)
+                    j += 1
                 }
-                j += 1
             }
         }
         
