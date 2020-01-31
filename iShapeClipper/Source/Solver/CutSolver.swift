@@ -51,8 +51,8 @@ public extension PlainShape {
             return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
         }
         
-        let bitPaths = self.holeCaseBitSolution(cutPath: cutPath, iGeom: iGeom)
-        let shapePaths = self.holeCaseShapeSolution(cutPath: cutPath, iGeom: iGeom)
+        let bitPaths = self.holeCaseBitList(cutPath: cutPath, iGeom: iGeom)
+        let shapePaths = self.holeCaseShapeList(cutPath: cutPath, iGeom: iGeom)
         
         return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitPaths)
     }
@@ -60,16 +60,24 @@ public extension PlainShape {
     private func overlapCase(cutHullSolution: CutSolution, iGeom: IntGeom) -> SolutionResult {
         let n = self.layouts.count
 
-        var islands = cutHullSolution.restPathList
         guard n > 1 else {
-            let result = PlainShapeList(plainShape: islands)
+            let result = PlainShapeList(plainShape: cutHullSolution.restPathList)
             let bitPath: [IntPoint] = cutHullSolution.bitePathList.get(index: 0).reversed()
             let bitList = PlainShapeList(plainShape: PlainShape(points: bitPath))
             return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
         }
 
-        var result = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count,
-         minimumSegmentsCapacity: islands.layouts.count)
+        let result = self.overlapCaseShapeList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
+        let bitList = self.overlapCaseBitList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
+        
+        return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
+    }
+    
+    private func overlapCaseShapeList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
+        let n = self.layouts.count
+        
+        var islands = restPathList
+        var result = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count, minimumSegmentsCapacity: islands.layouts.count)
         
         var holes = Array<Int>(repeating: 0, count: n - 1)
         for i in 1..<n {
@@ -132,16 +140,21 @@ public extension PlainShape {
 
             i += 1
         }
-        
-
-        //  пока не правильный
-        let bitList = PlainShapeList(plainShape: PlainShape(points: []))
-        
-        return SolutionResult(isInteract: true, mainList: result, bitList: bitList)
+            
+        return result
+    }
+    
+    private func overlapCaseBitList(bitePathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
+        var subPaths = PlainShape(pointsCapacity: bitePathList.points.count, layoutsCapacity: bitePathList.layouts.count)
+        for i in 0..<bitePathList.layouts.count {
+            let subPath: [IntPoint] = bitePathList.get(index: i).reversed()
+            subPaths.add(path: subPath, isClockWise: true)
+        }
+        return self.bitList(subPaths: &subPaths, iGeom: iGeom)
     }
     
     
-    private func holeCaseShapeSolution(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+    private func holeCaseShapeList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
         let n = self.layouts.count
         
         // новая дыра
@@ -268,11 +281,15 @@ public extension PlainShape {
         return shapePart
     }
     
-    private func holeCaseBitSolution(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+    private func holeCaseBitList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+        var subPaths = PlainShape(points: cutPath.reversed())
+        return self.bitList(subPaths: &subPaths, iGeom: iGeom)
+    }
+    
+    private func bitList(subPaths: inout PlainShape, iGeom: IntGeom) -> PlainShapeList {
         // откусим от новой дыры все имеющиеся дыры полигона
     
         let n = self.layouts.count
-        var subPaths = PlainShape(points: cutPath.reversed())
         
         var holes = PlainShape.empty
         
