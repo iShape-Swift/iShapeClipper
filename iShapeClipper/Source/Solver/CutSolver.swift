@@ -62,8 +62,7 @@ public extension PlainShape {
 
         guard n > 1 else {
             let shapePaths = PlainShapeList(plainShape: cutHullSolution.restPathList)
-            let bitPath: [IntPoint] = cutHullSolution.bitePathList.get(index: 0).reversed()
-            let bitList = PlainShapeList(plainShape: PlainShape(points: bitPath))
+            let bitList = self.overlapCaseBitList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
             return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitList)
         }
 
@@ -292,9 +291,7 @@ public extension PlainShape {
         let n = self.layouts.count
         
         var holes = PlainShape.empty
-        
-//        var skipHoles = Array<Bool>(repeating: false, count: n)
-        
+
         for i in 1..<n {
             let nextHole = self.get(index: i)
             
@@ -311,9 +308,10 @@ public extension PlainShape {
                         if solution.pathList.layouts[k].isClockWise {
                             let subPath = solution.pathList.get(index: k)
                             if newSubPathCount == 0 {
-                                subPaths.remove(index: j)
+                                subPaths.replace(index: j, path: subPath)
+                            } else {
+                                subPaths.add(path: subPath, isClockWise: true)
                             }
-                            subPaths.add(path: subPath, isClockWise: true)
                             newSubPathCount += 1
                         } else {
                             let holePath = solution.pathList.get(index: k)
