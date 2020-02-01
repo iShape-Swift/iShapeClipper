@@ -683,7 +683,7 @@ final class CutTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 9, isClockWise: true),
             PlainShape.Layout(begin: 9, length: 3, isClockWise: true)
         ])
-        solution.bitList.points.printIntMySelf()
+
         XCTAssertEqual(solution.bitList.points, [
             IntPoint(x: 150000, y: -92623),
             IntPoint(x: 150000, y: -50000),
@@ -790,7 +790,6 @@ final class CutTests: XCTestCase {
             Point(x: 10, y: 5)
             ].int
         )
-        solution.mainList.points.printMySelf()
         
         XCTAssertEqual(solution.bitList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
@@ -807,7 +806,6 @@ final class CutTests: XCTestCase {
             Point(x: 0, y: 10)
             ].int
         )
-        solution.bitList.points.printMySelf()
     }
     
     func test_17() {
