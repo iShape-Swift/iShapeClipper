@@ -164,7 +164,7 @@ public extension PlainShape {
         var notInteractedHoles = [Int]()
 
         // островки полигона которые оказались внутри новой дыры
-        var shapeIslands = PlainShape.empty
+        var islands = PlainShape.empty
         
         // попытаемся объединить другие дыры с новой
         for i in 1..<n {
@@ -174,9 +174,9 @@ public extension PlainShape {
             let unionSolution = Solver.union(master: superHole, slave: nextHole, iGeom: iGeom)
             
             switch unionSolution.nature {
-            case .notOverlap:
+            case .notOverlap, .masterIncludeSlave:
                 notInteractedHoles.append(i)
-            case .overlap:
+            case .overlap, .slaveIncludeMaster:
                 let uShape = unionSolution.pathList
                 for j in 0..<uShape.layouts.count {
                     if uShape.layouts[j].isClockWise {
@@ -184,14 +184,14 @@ public extension PlainShape {
                     } else {
                         var island = uShape.get(index: j)
                         island.invert()
-                        shapeIslands.add(path: island, isClockWise: false)
+                        islands.add(path: island, isClockWise: true)
                     }
                 }
                 
             }
         }
         
-        guard !shapeIslands.layouts.isEmpty else {
+        guard !islands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
             mainShape.add(hole: superHole)
             for j in 0..<notInteractedHoles.count {
@@ -204,7 +204,7 @@ public extension PlainShape {
 
         // вычитаем из внутрениних островков дыры, которые не пересеклись
         
-        var shapePart = PlainShapeList(minimumPointsCapacity: shapeIslands.points.count, minimumLayoutsCapacity: 2 * shapeIslands.layouts.count, minimumSegmentsCapacity: shapeIslands.layouts.count)
+        var shapeParts = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count, minimumSegmentsCapacity: islands.layouts.count)
 
         // ведем учет дыр которые не участвуют в образовнии островов
         var usedHoles = Array<Bool>(repeating: false, count: notInteractedHoles.count)
@@ -214,7 +214,7 @@ public extension PlainShape {
         nextIsland:
         repeat {
             // должны быть перечисленны по часовой стрелке
-            var island = shapeIslands.get(index: j)
+            var island = islands.get(index: j)
             var islandHoles = PlainShape.empty
             for k in 0..<notInteractedHoles.count {
                 let index = notInteractedHoles[k]
@@ -234,16 +234,13 @@ public extension PlainShape {
                 case .overlap:
                     usedHoles[k] = true
                     usedHolesCount += 1
-                    if diffSolution.pathList.layouts.count == 1 {
-                        island = diffSolution.pathList.get(index: 0)
-                    } else {
-                        // остров разбился на несколько частей
-                        shapeIslands.remove(index: j)
-                        for s in 0..<diffSolution.pathList.layouts.count {
+                    
+                    island = diffSolution.pathList.get(index: 0)
+                    if diffSolution.pathList.layouts.count > 1 {
+                        for s in 1..<diffSolution.pathList.layouts.count {
                             let part = diffSolution.pathList.get(index: s)
-                            shapeIslands.add(path: part, isClockWise: true)
+                            islands.add(path: part, isClockWise: true)
                         }
-                        continue nextIsland
                     }
                 case .hole:
                     usedHoles[k] = true
@@ -259,10 +256,10 @@ public extension PlainShape {
                 }
             }
             
-            shapePart.add(plainShape: islandShape)
+            shapeParts.add(plainShape: islandShape)
 
             j += 1
-        } while j < shapeIslands.layouts.count
+        } while j < islands.layouts.count
         
         
         var mainShape = PlainShape(points: self.get(index: 0))
@@ -275,9 +272,9 @@ public extension PlainShape {
                 mainShape.add(hole: hole)
             }
         }
-        shapePart.add(plainShape: mainShape)
+        shapeParts.add(plainShape: mainShape)
         
-        return shapePart
+        return shapeParts
     }
     
     private func holeCaseBitList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {

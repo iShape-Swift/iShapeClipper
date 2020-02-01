@@ -12,6 +12,8 @@ public struct UnionSolution {
     public enum Nature {
         case notOverlap
         case overlap
+        case masterIncludeSlave
+        case slaveIncludeMaster
     }
 
     public let pathList: PlainShape

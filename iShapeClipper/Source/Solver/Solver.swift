@@ -116,20 +116,20 @@ public struct Solver {
             if navigator.hasContacts {
                 if master.isOverlap(points: slave) {
                     pathList.add(path: master, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .overlap)
+                    return UnionSolution(pathList: pathList, nature: .masterIncludeSlave)
                 } else if slave.isOverlap(points: slave) {
                     pathList.add(path: slave, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .overlap)
+                    return UnionSolution(pathList: pathList, nature: .slaveIncludeMaster)
                 } else {
                     return UnionSolution(pathList: pathList, nature: .notOverlap)
                 }
             } else {
                 if master.isContain(point: slave.any) {
                     pathList.add(path: master, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .overlap)
+                    return UnionSolution(pathList: pathList, nature: .masterIncludeSlave)
                 } else if slave.isContain(point: master.any) {
                     pathList.add(path: slave, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .overlap)
+                    return UnionSolution(pathList: pathList, nature: .slaveIncludeMaster)
                 } else {
                     return UnionSolution(pathList: pathList, nature: .notOverlap)
                 }
