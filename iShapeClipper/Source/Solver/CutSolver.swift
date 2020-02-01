@@ -27,7 +27,7 @@ public extension PlainShape {
         case .notOverlap:
             return SolutionResult(isInteract: false, mainList: .empty, bitList: .empty)
         case .empty:
-            return SolutionResult(isInteract: true, mainList: .empty, bitList: .empty)
+            return SolutionResult(isInteract: true, mainList: .empty, bitList: PlainShapeList(plainShape: self))
         case .hole:
             return self.holeCase(cutPath: path, iGeom: iGeom)
         case .overlap:

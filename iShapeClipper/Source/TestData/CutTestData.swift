@@ -288,6 +288,33 @@ struct CutTestData {
                         Point(x: 10, y: 10),
                         Point(x: 10, y: -10)
                     ].int,
+                    holes: [
+                        [
+                            Point(x: 5.0, y: 5.0),
+                            Point(x: -5.0, y: 5.0),
+                            Point(x: -5.0, y: -5.0),
+                            Point(x: 5.0, y: -5.0)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: -15, y: 15),
+                Point(x: -15, y: -15),
+                Point(x: 15, y: -15),
+                Point(x: 15, y: 15)
+            ].int
+        ),
+        // 9
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -10, y: -10),
+                        Point(x: -10, y: 10),
+                        Point(x: 10, y: 10),
+                        Point(x: 10, y: -10)
+                    ].int,
                     holes: []
                 )
             ),
@@ -298,7 +325,7 @@ struct CutTestData {
                 Point(x: 5, y: 15)
             ].int
         ),
-        // 9
+        // 10
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -325,7 +352,7 @@ struct CutTestData {
                 Point(x: 0.0, y: 0.0)
             ].int
         ),
-        // 10
+        // 11
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -352,7 +379,7 @@ struct CutTestData {
                 Point(x: 15.0, y: 0.0)
             ].int
         ),
-        // 11
+        // 12
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -403,7 +430,7 @@ struct CutTestData {
                 Point(x: 25, y: 20),
             ].int
         ),
-        // 12
+        // 13
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -454,7 +481,7 @@ struct CutTestData {
                 Point(x: 25, y: 10),
             ].int
         ),
-        // 13
+        // 14
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -486,7 +513,7 @@ struct CutTestData {
                 Point(x: 25, y: 20),
             ].int
         ),
-        // 14
+        // 15
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -518,7 +545,7 @@ struct CutTestData {
                 Point(x: 0, y: 5)
             ].int
         ),
-        // 15
+        // 16
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -542,7 +569,7 @@ struct CutTestData {
                 Point(x: 5, y: 15)
             ].int
         ),
-        // 16
+        // 17
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
@@ -566,7 +593,7 @@ struct CutTestData {
                 Point(x: 5, y: 15)
             ].int
         ),
-        // 17
+        // 18
         TestData(
             shape: PlainShape(
                 iShape: IntShape(
