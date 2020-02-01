@@ -226,7 +226,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -248,7 +248,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -270,7 +270,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -316,7 +316,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -363,7 +363,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -561,7 +561,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -584,7 +584,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -756,7 +756,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -1365,7 +1365,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
@@ -1387,7 +1387,7 @@ final class UnionTests: XCTestCase {
         
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.nature, .slaveIncludeMaster)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
         
         let path = iGeom.float(points: solution.pathList.pathes[0])
