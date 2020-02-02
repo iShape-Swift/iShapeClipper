@@ -1279,4 +1279,83 @@ final class CutTests: XCTestCase {
             ].int
         )
     }
+    
+    func test_24() {
+        let data = CutTestData.data[24]
+
+        let solution = data.shape.cut(path: data.path, iGeom: IntGeom.defGeom)
+
+        XCTAssertEqual(solution.isInteract, true)
+        
+        XCTAssertEqual(solution.mainList.layouts, [
+            PlainShape.Layout(begin: 0, length: 12, isClockWise: true),
+            PlainShape.Layout(begin: 12, length: 4, isClockWise: false),
+            PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
+            PlainShape.Layout(begin: 4, length: 16, isClockWise: false)
+        ])
+        XCTAssertEqual(solution.mainList.points, [
+            Point(x: 5, y: -10),
+            Point(x: 5, y: -7.5),
+            Point(x: -5, y: -7.5),
+            Point(x: -5, y: -10),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: -5),
+            Point(x: -5, y: -5),
+            Point(x: -5, y: 0),
+            Point(x: -10, y: 0),
+            Point(x: -10, y: 5),
+            Point(x: 10, y: 5),
+            Point(x: 10, y: -10),
+            Point(x: 0, y: 0),
+            Point(x: 0, y: -5),
+            Point(x: 5, y: -5),
+            Point(x: 5, y: 0),
+            Point(x: -25, y: 20),
+            Point(x: 25, y: 20),
+            Point(x: 25, y: -20),
+            Point(x: -25, y: -20),
+            Point(x: 15, y: -15),
+            Point(x: 15, y: 5),
+            Point(x: 20, y: 5),
+            Point(x: 20, y: 15),
+            Point(x: -20, y: 15),
+            Point(x: -20, y: 5),
+            Point(x: -15, y: 5),
+            Point(x: -15, y: 0),
+            Point(x: -20, y: 0),
+            Point(x: -20, y: -5),
+            Point(x: -15, y: -5),
+            Point(x: -15, y: -15),
+            Point(x: -5, y: -15),
+            Point(x: -5, y: -17.5),
+            Point(x: 5, y: -17.5),
+            Point(x: 5, y: -15)
+            ].int
+        )
+        
+        XCTAssertEqual(solution.bitList.layouts, [
+            PlainShape.Layout(begin: 0, length: 6, isClockWise: true),
+            PlainShape.Layout(begin: 6, length: 4, isClockWise: true),
+            PlainShape.Layout(begin: 10, length: 6, isClockWise: true)
+        ])
+        XCTAssertEqual(solution.bitList.points, [
+            Point(x: -5, y: -10),
+            Point(x: -5, y: -15),
+            Point(x: -15, y: -15),
+            Point(x: -15, y: -5),
+            Point(x: -10, y: -5),
+            Point(x: -10, y: -10),
+            Point(x: -10, y: 0),
+            Point(x: -15, y: 0),
+            Point(x: -15, y: 5),
+            Point(x: -10, y: 5),
+            Point(x: 5, y: -15),
+            Point(x: 5, y: -10),
+            Point(x: 10, y: -10),
+            Point(x: 10, y: 5),
+            Point(x: 15, y: 5),
+            Point(x: 15, y: -15)
+            ].int
+        )
+    }
 }

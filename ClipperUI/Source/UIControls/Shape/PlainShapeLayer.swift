@@ -31,6 +31,7 @@ final class PlainShapeLayer: CAShapeLayer {
             }
         }
 
+        self.lineCap = .round
         self.path = path
         self.fillRule = .evenOdd
         self.fillColor = fillColor

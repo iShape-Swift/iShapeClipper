@@ -152,12 +152,12 @@ public extension PlainShape {
         let n = self.layouts.count
         
         // новая дыра
-        var superHole = cutPath
-        superHole.invert()
+        var rootHole = cutPath
+        rootHole.invert()
         
         // дыры которые не пересекаются с новой дырой
         var notInteractedHoles = [Int]()
-        var insideHoles = [Int]()
+        var iteractedHoles = [Int]()
 
         // островки полигона которые оказались внутри новой дыры
         var islands = PlainShape.empty
@@ -167,74 +167,81 @@ public extension PlainShape {
             var nextHole = self.get(index: i)
             nextHole.invert()
             
-            let unionSolution = Solver.union(master: superHole, slave: nextHole, iGeom: iGeom)
+            let unionSolution = Solver.union(master: rootHole, slave: nextHole, iGeom: iGeom)
             
             switch unionSolution.nature {
             case .notOverlap:
                 notInteractedHoles.append(i)
             case .masterIncludeSlave:
-                insideHoles.append(i)
+                iteractedHoles.append(i)
             case .overlap, .slaveIncludeMaster:
+                iteractedHoles.append(i)
                 let uShape = unionSolution.pathList
-                for j in 0..<uShape.layouts.count {
-                    if uShape.layouts[j].isClockWise {
-                        superHole = uShape.get(index: j)
+                for i in 0..<uShape.layouts.count {
+                    if uShape.layouts[i].isClockWise {
+                        rootHole = uShape.get(index: i)
                     } else {
-                        var island = uShape.get(index: j)
+                        var island = uShape.get(index: i)
                         island.invert()
                         islands.add(path: island, isClockWise: true)
                     }
                 }
-                
             }
         }
         
+        if !notInteractedHoles.isEmpty {
+            // часть из этих дыр в итоге могло оказаться внутри rooh hole
+            var i = notInteractedHoles.count - 1
+            while i >= 0 {
+                let index = notInteractedHoles[i]
+                let nextHole = self.get(index: index)
+                if rootHole.isContain(hole: nextHole, isClockWise: false) {
+                    notInteractedHoles.remove(at: i)
+                    iteractedHoles.append(index)
+                }
+                i -= 1
+            }
+        }
+        
+        
+        
+        
+        
         guard !islands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
-            mainShape.add(hole: superHole)
-            for j in 0..<notInteractedHoles.count {
-                let index = notInteractedHoles[j]
+            mainShape.add(hole: rootHole)
+            for i in 0..<notInteractedHoles.count {
+                let index = notInteractedHoles[i]
                 let hole = self.get(index: index)
                 mainShape.add(hole: hole)
             }
             return PlainShapeList(plainShape: mainShape)
         }
-        
-        notInteractedHoles.append(contentsOf: insideHoles)
 
-        // вычитаем из внутрениних островков дыры, которые не пересеклись
+        // вычитаем из внутрениних островков дыры, которые внутри или соприкосались с главной дырой
         
         var shapeParts = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count, minimumSegmentsCapacity: islands.layouts.count)
 
-        // ведем учет дыр которые не участвуют в образовнии островов
-        var usedHoles = Array<Bool>(repeating: false, count: notInteractedHoles.count)
-        var usedHolesCount: Int = 0
-        
-        var j = 0
+        var i = 0
         nextIsland:
         repeat {
             // должны быть перечисленны по часовой стрелке
-            var island = islands.get(index: j)
-            var islandHoles = PlainShape.empty
-            for k in 0..<notInteractedHoles.count {
-                let index = notInteractedHoles[k]
+            var island = islands.get(index: i)
+            var islandHoles = [Int]()
+            for j in 0..<iteractedHoles.count {
+                let index = iteractedHoles[j]
                 let hole = self.get(index: index)
                 
                 let diffSolution = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
                 switch diffSolution.nature {
                 case .empty:
                     // остров совпал с дыркой
-                    j += 1
-                    usedHoles[k] = true
-                    usedHolesCount += 1
+                    i += 1
                     continue nextIsland
                 case .notOverlap:
                     // нет пересечений
                     break
                 case .overlap:
-                    usedHoles[k] = true
-                    usedHolesCount += 1
-                    
                     island = diffSolution.pathList.get(index: 0)
                     if diffSolution.pathList.layouts.count > 1 {
                         for s in 1..<diffSolution.pathList.layouts.count {
@@ -243,38 +250,35 @@ public extension PlainShape {
                         }
                     }
                 case .hole:
-                    usedHoles[k] = true
-                    usedHolesCount += 1
-                    islandHoles.add(hole: hole)
+                    islandHoles.append(index)
                 }
             }
             var islandShape = PlainShape(points: island)
-            if islandHoles.layouts.count > 0 {
-                for s in 0..<islandHoles.layouts.count {
-                    let hole = islandHoles.get(index: s)
+            if !islandHoles.isEmpty {
+                for k in 0..<islandHoles.count {
+                    let index = islandHoles[k]
+                    let hole = self.get(index: index)
                     islandShape.add(path: hole, isClockWise: false)
                 }
             }
             
             shapeParts.add(plainShape: islandShape)
 
-            j += 1
-        } while j < islands.layouts.count
-        
-        
-        var mainShape = PlainShape(points: self.get(index: 0))
-        superHole.invert()
-        mainShape.add(hole: superHole)
+            i += 1
+        } while i < islands.layouts.count
 
-        if usedHolesCount != usedHoles.count {
-            let excludeInsideHolesIndices = notInteractedHoles.count - insideHoles.count
-            for k in 0..<usedHoles.count where k < excludeInsideHolesIndices && !usedHoles[k] {
-                let index = notInteractedHoles[k]
+        var rootShape = PlainShape(points: self.get(index: 0))
+        rootHole.invert()
+        rootShape.add(hole: rootHole)
+
+        if !notInteractedHoles.isEmpty {
+            for i in 0..<notInteractedHoles.count {
+                let index = notInteractedHoles[i]
                 let hole = self.get(index: index)
-                mainShape.add(hole: hole)
+                rootShape.add(hole: hole)
             }
         }
-        shapeParts.add(plainShape: mainShape)
+        shapeParts.add(plainShape: rootShape)
         
         return shapeParts
     }
