@@ -806,15 +806,96 @@ struct CutTestData {
                 Point(x: -10, y: -10),
                 Point(x: -10, y: 10)
             ].int
-        )
+        ),
+        // 23
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -25, y: 30),
+                        Point(x: 25, y: 30),
+                        Point(x: 25, y: -30),
+                        Point(x: -25, y: -30)
+                    ].int,
+                    holes: [
+                        [
+                            Point(x: -20, y: 5),
+                            Point(x: -20, y: -5),
+                            Point(x: 20, y: -5),
+                            Point(x: 20, y: 5)
+                        ].int,
+                        [
+                            Point(x: -5, y: -10),
+                            Point(x: -5, y: -15),
+                            Point(x: 5, y: -15),
+                            Point(x: 5, y: -10)
+                        ].int,
+                        [
+                            Point(x: -5, y: -20),
+                            Point(x: -5, y: -25),
+                            Point(x: 5, y: -25),
+                            Point(x: 5, y: -20)
+                        ].int,
+                        [
+                            Point(x: -15, y: -20),
+                            Point(x: -15, y: -25),
+                            Point(x: -10, y: -25),
+                            Point(x: -10, y: -20)
+                        ].int,
+                        [
+                            Point(x: 10, y: -10),
+                            Point(x: 10, y: -15),
+                            Point(x: 20, y: -15),
+                            Point(x: 20, y: -10)
+                        ].int,
+                        [
+                            Point(x: -5, y: 15),
+                            Point(x: -5, y: 10),
+                            Point(x: 5, y: 10),
+                            Point(x: 5, y: 15)
+                        ].int,
+                        [
+                            Point(x: -5, y: 25),
+                            Point(x: -5, y: 20),
+                            Point(x: 5, y: 20),
+                            Point(x: 5, y: 25)
+                        ].int,
+                        [
+                            Point(x: 10, y: 25),
+                            Point(x: 10, y: 20),
+                            Point(x: 15, y: 20),
+                            Point(x: 15, y: 25)
+                        ].int,
+                        [
+                            Point(x: -20, y: 15),
+                            Point(x: -20, y: 10),
+                            Point(x: -10, y: 10),
+                            Point(x: -10, y: 15)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: 15, y: 5),
+                Point(x: 15, y: 25),
+                Point(x: -15, y: 25),
+                Point(x: -15, y: -25),
+                Point(x: 15, y: -25),
+                Point(x: 15, y: -5),
+                Point(x: 10, y: -5),
+                Point(x: 10, y: -20),
+                Point(x: -10, y: -20),
+                Point(x: -10, y: 20),
+                Point(x: 10, y: 20),
+                Point(x: 10, y: 5),
+            ].int
+        ),
     ]
 }
 
 extension Array where Element == Point {
-    
     var int: [IntPoint] {
         return IntGeom.defGeom.int(points: self)
     }
-    
 }
 
