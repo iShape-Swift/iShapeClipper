@@ -157,6 +157,7 @@ public extension PlainShape {
         
         // дыры которые не пересекаются с новой дырой
         var notInteractedHoles = [Int]()
+        var insideHoles = [Int]()
 
         // островки полигона которые оказались внутри новой дыры
         var islands = PlainShape.empty
@@ -169,8 +170,10 @@ public extension PlainShape {
             let unionSolution = Solver.union(master: superHole, slave: nextHole, iGeom: iGeom)
             
             switch unionSolution.nature {
-            case .notOverlap, .masterIncludeSlave:
+            case .notOverlap:
                 notInteractedHoles.append(i)
+            case .masterIncludeSlave:
+                insideHoles.append(i)
             case .overlap, .slaveIncludeMaster:
                 let uShape = unionSolution.pathList
                 for j in 0..<uShape.layouts.count {
@@ -196,6 +199,8 @@ public extension PlainShape {
             }
             return PlainShapeList(plainShape: mainShape)
         }
+        
+        notInteractedHoles.append(contentsOf: insideHoles)
 
         // вычитаем из внутрениних островков дыры, которые не пересеклись
         
@@ -260,8 +265,10 @@ public extension PlainShape {
         var mainShape = PlainShape(points: self.get(index: 0))
         superHole.invert()
         mainShape.add(hole: superHole)
+
         if usedHolesCount != usedHoles.count {
-            for k in 0..<usedHoles.count where !usedHoles[k] {
+            let excludeInsideHolesIndices = notInteractedHoles.count - insideHoles.count
+            for k in 0..<usedHoles.count where k < excludeInsideHolesIndices && !usedHoles[k] {
                 let index = notInteractedHoles[k]
                 let hole = self.get(index: index)
                 mainShape.add(hole: hole)
