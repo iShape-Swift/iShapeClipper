@@ -58,14 +58,6 @@ public extension PlainShape {
     }
     
     private func overlapCase(cutHullSolution: CutSolution, iGeom: IntGeom) -> SolutionResult {
-        let n = self.layouts.count
-
-        guard n > 1 else {
-            let shapePaths = PlainShapeList(plainShape: cutHullSolution.restPathList)
-            let bitList = self.overlapCaseBitList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
-            return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitList)
-        }
-
         let shapePaths = self.overlapCaseShapeList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
         let bitList = self.overlapCaseBitList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
         
@@ -74,9 +66,12 @@ public extension PlainShape {
     
     private func overlapCaseShapeList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
         let n = self.layouts.count
-        
-        var islands = restPathList
-        var result = PlainShapeList(minimumPointsCapacity: islands.points.count, minimumLayoutsCapacity: 2 * islands.layouts.count, minimumSegmentsCapacity: islands.layouts.count)
+        guard n > 1 else {
+            return PlainShapeList(plainShape: restPathList)
+        }
+
+        var shapePaths = restPathList
+        var result = PlainShapeList(minimumPointsCapacity: shapePaths.points.count, minimumLayoutsCapacity: 2 * shapePaths.layouts.count, minimumSegmentsCapacity: shapePaths.layouts.count)
         
         var holes = Array<Int>(repeating: 0, count: n - 1)
         for i in 1..<n {
@@ -85,8 +80,8 @@ public extension PlainShape {
     
         var i = 0
         nextIsland:
-        while i < islands.layouts.count {
-            var island = islands.get(index: i)
+        while i < shapePaths.layouts.count {
+            var island = shapePaths.get(index: i)
             var usedHoles = [Int]()
             for j in 0..<holes.count {
                 let holeIndex = holes[j]
@@ -95,7 +90,7 @@ public extension PlainShape {
                 switch diff.nature {
                 case .empty:
                     // остров совпал с дыркой
-                    islands.remove(index: i)
+                    shapePaths.remove(index: i)
                     continue nextIsland
                 case .notOverlap:
                     continue
@@ -107,10 +102,10 @@ public extension PlainShape {
                     if islandsCount == 1 {
                         island = diff.pathList.get(index: 0)
                     } else {
-                        islands.remove(index: i)
+                        shapePaths.remove(index: i)
                         for layout in diff.pathList.layouts where layout.isClockWise {
                             let newIsland = diff.pathList.get(layout: layout)
-                            islands.add(path: newIsland, isClockWise: true)
+                            shapePaths.add(path: newIsland, isClockWise: true)
                         }
                         continue nextIsland
                     }
