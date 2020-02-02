@@ -710,6 +710,102 @@ struct CutTestData {
                 Point(x: 10, y: 20),
                 Point(x: 10, y: 5),
             ].int
+        ),
+        // 21
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -15, y: 10),
+                        Point(x: 15, y: 10),
+                        Point(x: 15, y: -10),
+                        Point(x: -15, y: -10)
+                    ].int,
+                    holes: [
+                        [
+                            Point(x: -5, y: 5),
+                            Point(x: -5, y: -5),
+                            Point(x: 5, y: -5),
+                            Point(x: 5, y: 5)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: -10, y: 5),
+                Point(x: -10, y: -5),
+                Point(x: 10, y: -5),
+                Point(x: 10, y: 5)
+            ].int
+        ),
+        // 22
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: -25, y: 20),
+                        Point(x: 25, y: 20),
+                        Point(x: 25, y: -20),
+                        Point(x: -25, y: -20)
+                    ].int,
+                    holes: [
+
+                        [
+                            Point(x: 10, y: 0),
+                            Point(x: 10, y: -5),
+                            Point(x: 20, y: -5),
+                            Point(x: 20, y: 0)
+                        ].int,
+                        [
+                            Point(x: 10, y: -10),
+                            Point(x: 10, y: -15),
+                            Point(x: 20, y: -15),
+                            Point(x: 20, y: -10)
+                        ].int,
+                        
+                        [
+                            Point(x: -20, y: 15),
+                            Point(x: -20, y: 5),
+                            Point(x: 20, y: 5),
+                            Point(x: 20, y: 15)
+                        ].int,
+                        [
+                            Point(x: -5, y: 0),
+                            Point(x: -5, y: -5),
+                            Point(x: 5, y: -5),
+                            Point(x: 5, y: 0)
+                        ].int,
+                        [
+                            Point(x: -20, y: 0),
+                            Point(x: -20, y: -5),
+                            Point(x: -10, y: -5),
+                            Point(x: -10, y: 0)
+                        ].int,
+                        [
+                            Point(x: -20, y: -10),
+                            Point(x: -20, y: -15),
+                            Point(x: -10, y: -15),
+                            Point(x: -10, y: -10)
+                        ].int,
+                        [
+                            Point(x: -5, y: -10),
+                            Point(x: -5, y: -15),
+                            Point(x: 5, y: -15),
+                            Point(x: 5, y: -10)
+                        ].int
+                    ]
+                )
+            ),
+            path: [
+                Point(x: -15, y: 10),
+                Point(x: -15, y: -15),
+                Point(x: 15, y: -15),
+                Point(x: 15, y: 10),
+                Point(x: 10, y: 10),
+                Point(x: 10, y: -10),
+                Point(x: -10, y: -10),
+                Point(x: -10, y: 10)
+            ].int
         )
     ]
 }
