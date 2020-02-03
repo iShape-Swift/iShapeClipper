@@ -465,7 +465,7 @@ struct CrossDetector {
         return result
     }
     
-    /// Build  Nvigator section
+    /// Build  Navigator section
     
     private static func buildNavigator(pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath], masterCount: Int, hasExclusion: Bool) -> PinNavigator {
         var handlerArray = [PinHandler]()
