@@ -303,6 +303,9 @@ struct CrossDetector {
     }
 
     private static func organize(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinPath] {
+        
+        // TODO
+        
         pinPoints.sort(by: { a, b in
             if a.masterMileStone.index != b.masterMileStone.index {
                 return a.masterMileStone.index < b.masterMileStone.index
@@ -495,7 +498,11 @@ struct CrossDetector {
         }
 
         handlerArray.sort(by: { a, b in
-            PathMileStone.compare(a: b.masterSortFactor, b: a.masterSortFactor)
+            if a.masterSortFactor.index != b.masterSortFactor.index {
+                return a.masterSortFactor.index < b.masterSortFactor.index
+            }
+
+            return a.masterSortFactor.offset < b.masterSortFactor.offset
         })
         
         if pinPathArray.count > 0 {
@@ -538,7 +545,7 @@ struct CrossDetector {
         let n = handlerArray.count
         for i in 0..<n {
             let pinHandler = handlerArray[i]
-            if pinHandler.marker == 0 {
+            if pinHandler.marker {
                 let index = pinHandler.index
                 if pinHandler.isPinPath {
                     let path = pinPathArray[index]
@@ -582,6 +589,8 @@ struct CrossDetector {
 
         var m = n
 
+        // TODO
+        
         repeat {
             isNotSorted = false
             var a = iStones[0]
@@ -603,6 +612,7 @@ struct CrossDetector {
             iStones[m] = a
         } while isNotSorted
 
+        
         var indexArray = Array<Int>(repeating: 0, count: n)
 
         for j in 0..<n {

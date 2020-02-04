@@ -15,18 +15,18 @@ struct PinHandler: Equatable {
     let index: Int                      // index in outside array
     let type: PinPoint.PinType          // PinType
 
-    var marker: Int                     // 0 - present, 1 - removed
+    var marker: Bool                     // 0 - present, 1 - removed
 
     init(sortFactor: PathMileStone, index: Int, isPinPath: Bool, type: PinPoint.PinType) {
         self.index = index
         self.isPinPath = isPinPath
         self.masterSortFactor = sortFactor
         self.type = type
-        self.marker = 0
+        self.marker = true
     }
 
 
-    init(sortFactor: PathMileStone, index: Int, isPinPath: Bool, marker: Int, type: PinPoint.PinType) {
+    init(sortFactor: PathMileStone, index: Int, isPinPath: Bool, marker: Bool, type: PinPoint.PinType) {
         self.index = index
         self.isPinPath = isPinPath
         self.masterSortFactor = sortFactor
@@ -39,7 +39,7 @@ struct PinHandler: Equatable {
         self.isPinPath = false
         self.type = pinPoint.type
         self.masterSortFactor = pinPoint.masterMileStone
-        self.marker = 0
+        self.marker = true
     }
 
     public static func == (lhs: PinHandler, rhs: PinHandler) -> Bool {

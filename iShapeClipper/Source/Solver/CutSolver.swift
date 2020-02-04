@@ -202,11 +202,7 @@ public extension PlainShape {
                 i -= 1
             }
         }
-        
-        
-        
-        
-        
+
         guard !islands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
             mainShape.add(hole: rootHole)
