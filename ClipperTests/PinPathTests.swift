@@ -161,7 +161,6 @@ final class PinPathTests: XCTestCase {
         XCTAssertEqual(path.v1.slaveMileStone.index, 1)
         XCTAssertEqual(path.v1.slaveMileStone.offset, 0)
         
-        
         XCTAssertEqual(path.v0.point, iSlave[2])
         XCTAssertEqual(path.v1.point, iSlave[1])
         
@@ -300,8 +299,7 @@ final class PinPathTests: XCTestCase {
         
         XCTAssertEqual(path.v0.masterMileStone.index, 2)
         XCTAssertEqual(path.v1.masterMileStone.index, 0)
-        
-        
+
         XCTAssertEqual(path.v0.slaveMileStone.index, 3)
         XCTAssertEqual(path.v0.slaveMileStone.offset, 0)
         
