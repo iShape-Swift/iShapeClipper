@@ -41,15 +41,6 @@ struct PathMileStone: Equatable {
         return lhs.offset >= rhs.offset
     }
     
-/*
-    static func moreOrEqual(a: PathMileStone, b: PathMileStone) -> Bool {
-        if a.index != b.index {
-            return a.index > b.index
-        }
-
-        return a.offset >= b.offset
-    }
-  */
     public static func == (lhs: PathMileStone, rhs: PathMileStone) -> Bool {
         return lhs.index == rhs.index && lhs.offset == rhs.offset
     }
