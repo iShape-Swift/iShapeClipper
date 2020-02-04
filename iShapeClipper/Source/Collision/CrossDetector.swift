@@ -303,15 +303,8 @@ struct CrossDetector {
     }
 
     private static func organize(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinPath] {
-        
-        // TODO
-        
         pinPoints.sort(by: { a, b in
-            if a.masterMileStone.index != b.masterMileStone.index {
-                return a.masterMileStone.index < b.masterMileStone.index
-            }
-
-            return a.masterMileStone.offset < b.masterMileStone.offset
+            a.masterMileStone < b.masterMileStone
         })
         
         CrossDetector.removeDoubles(pinPoints: &pinPoints)
@@ -496,14 +489,6 @@ struct CrossDetector {
         if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
-
-        handlerArray.sort(by: { a, b in
-            if a.masterSortFactor.index != b.masterSortFactor.index {
-                return a.masterSortFactor.index < b.masterSortFactor.index
-            }
-
-            return a.masterSortFactor.offset < b.masterSortFactor.offset
-        })
         
         if pinPathArray.count > 0 {
             CrossDetector.compact(handlerArray: &handlerArray, pinPointArray: &pinPointArray, pinPathArray: &pinPathArray)
@@ -512,8 +497,8 @@ struct CrossDetector {
         if handlerArray.isEmpty {
             return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
         }
-
-        let slavePath = CrossDetector.buildSlavePath(handlerArray: handlerArray, pinPointArray: pinPointArray, pinPathArray: pinPathArray)
+        
+        let slavePath = CrossDetector.streamline(handlerArray: &handlerArray, pinPointArray: pinPointArray, pinPathArray: pinPathArray)
 
         let n = slavePath.count
 
@@ -568,9 +553,13 @@ struct CrossDetector {
         handlerArray = handlers
     }
 
-    private static func buildSlavePath(handlerArray: [PinHandler], pinPointArray: [PinPoint], pinPathArray: [PinPath]) -> [Int] {
+    private static func streamline(handlerArray: inout [PinHandler], pinPointArray: [PinPoint], pinPathArray: [PinPath]) -> [Int] {
         let n = handlerArray.count
 
+        handlerArray.sort(by: { a, b in
+            a.masterSortFactor < b.masterSortFactor
+        })
+        
         var iStones = Array<IndexMileStone>(repeating: IndexMileStone(index: 0, stone: .zero), count: n)
 
         for j in 0..<n {
@@ -585,34 +574,10 @@ struct CrossDetector {
             }
         }
 
-        var isNotSorted: Bool
+        iStones.sort() { a, b in
+            a.stone < b.stone
+        }
 
-        var m = n
-
-        // TODO
-        
-        repeat {
-            isNotSorted = false
-            var a = iStones[0]
-            var i = 1
-            while i < m {
-                let b = iStones[i]
-                if PathMileStone.compare(a: a.stone, b: b.stone) {
-                    iStones[i - 1] = b
-                    isNotSorted = true
-                } else {
-                    iStones[i - 1] = a
-                    a = b
-                }
-
-                i += 1
-            }
-
-            m -= 1
-            iStones[m] = a
-        } while isNotSorted
-
-        
         var indexArray = Array<Int>(repeating: 0, count: n)
 
         for j in 0..<n {

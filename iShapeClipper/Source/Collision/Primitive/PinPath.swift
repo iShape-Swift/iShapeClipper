@@ -32,7 +32,7 @@ struct PinPath {
         let a = v0.masterMileStone
         let b = v1.masterMileStone
         var length = 0
-        if PathMileStone.compare(a: a, b: b) {
+        if a > b {
             length = count
         }
 

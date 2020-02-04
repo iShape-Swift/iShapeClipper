@@ -63,7 +63,7 @@ extension Solver {
                     }
                 }
                 
-                if PathMileStone.moreOrEqual(a: inSlaveStart, b: outSlaveEnd) {
+                if inSlaveStart >= outSlaveEnd {
                     // a > b
                     if isInSlaveNotOverflow {
                         let sliceA = slave[inSlaveIndex...slaveLastIndex]
@@ -118,7 +118,7 @@ extension Solver {
                     }
                 }
                 
-                if PathMileStone.moreOrEqual(a: outMasterEnd, b: inMasterStart) {
+                if outMasterEnd >= inMasterStart {
                     // a > b
                     if isOutMasterNotOverflow {
                         let sliceA = master[outMasterIndex...masterLastIndex]
