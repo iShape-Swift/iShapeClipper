@@ -14,8 +14,7 @@ struct PinHandler: Equatable {
     let isPinPath: Bool
     let index: Int                      // index in outside array
     let type: PinPoint.PinType          // PinType
-
-    var marker: Bool                     // 0 - present, 1 - removed
+    let marker: Bool                    // true - present, false - removed
 
     init(sortFactor: PathMileStone, index: Int, isPinPath: Bool, type: PinPoint.PinType) {
         self.index = index
