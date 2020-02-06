@@ -7,17 +7,17 @@
 
 import iGeometry
 
-public struct SolutionResult {
+public struct BiteSolution {
     
     let isInteract: Bool
     let mainList: PlainShapeList
-    let bitList: PlainShapeList
+    let biteList: PlainShapeList
     
 }
 
 public extension PlainShape {
 
-    func cut(path: [IntPoint], iGeom: IntGeom) -> SolutionResult {
+    func cut(path: [IntPoint], iGeom: IntGeom) -> BiteSolution {
         let hull = self.get(index: 0)
         
         let cutHullSolution = Solver.cut(master: hull, slave: path, iGeom: iGeom)
@@ -25,46 +25,41 @@ public extension PlainShape {
         switch cutHullSolution.nature {
  
         case .notOverlap:
-            return SolutionResult(isInteract: false, mainList: .empty, bitList: .empty)
+            return BiteSolution(isInteract: false, mainList: .empty, biteList: .empty)
         case .empty:
-            return SolutionResult(isInteract: true, mainList: .empty, bitList: PlainShapeList(plainShape: self))
+            return BiteSolution(isInteract: true, mainList: .empty, biteList: PlainShapeList(plainShape: self))
         case .hole:
             return self.holeCase(cutPath: path, iGeom: iGeom)
         case .overlap:
             return self.overlapCase(cutHullSolution: cutHullSolution, iGeom: iGeom)
         }
     }
-    
-    private struct Pair {
-        let index: Int
-        let shpaeIndex: Int
-    }
-    
+
     // если дыра находится внутри полигона
-    private func holeCase(cutPath: [IntPoint], iGeom: IntGeom) -> SolutionResult {
+    private func holeCase(cutPath: [IntPoint], iGeom: IntGeom) -> BiteSolution {
         let n = self.layouts.count
         guard n > 1 else {
             // у исходного полигона нету других дыр
-            var mainShape = self
-            mainShape.add(hole: cutPath)
-            let bitList = PlainShapeList(plainShape: PlainShape(points: cutPath))
-            return SolutionResult(isInteract: true, mainList: PlainShapeList(plainShape: mainShape), bitList: bitList)
+            var main = self
+            main.add(hole: cutPath)
+            let biteList = PlainShapeList(plainShape: PlainShape(points: cutPath))
+            return BiteSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), biteList: biteList)
         }
         
-        let shapePaths = self.holeCaseShapeList(cutPath: cutPath, iGeom: iGeom)
-        let bitPaths = self.holeCaseBitList(cutPath: cutPath, iGeom: iGeom)
+        let mainList = self.holeCaseMainList(cutPath: cutPath, iGeom: iGeom)
+        let biteList = self.holeCaseBiteList(cutPath: cutPath, iGeom: iGeom)
         
-        return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitPaths)
+        return BiteSolution(isInteract: true, mainList: mainList, biteList: biteList)
     }
     
-    private func overlapCase(cutHullSolution: CutSolution, iGeom: IntGeom) -> SolutionResult {
-        let shapePaths = self.overlapCaseShapeList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
-        let bitList = self.overlapCaseBitList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
+    private func overlapCase(cutHullSolution: CutSolution, iGeom: IntGeom) -> BiteSolution {
+        let shapePaths = self.overlapCaseMainList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
+        let bitList = self.overlapCaseBiteList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
         
-        return SolutionResult(isInteract: true, mainList: shapePaths, bitList: bitList)
+        return BiteSolution(isInteract: true, mainList: shapePaths, biteList: bitList)
     }
     
-    private func overlapCaseShapeList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
+    private func overlapCaseMainList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
         let n = self.layouts.count
         guard n > 1 else {
             return PlainShapeList(plainShape: restPathList)
@@ -138,17 +133,17 @@ public extension PlainShape {
         return result
     }
     
-    private func overlapCaseBitList(bitePathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
+    private func overlapCaseBiteList(bitePathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
         var subPaths = PlainShape(pointsCapacity: bitePathList.points.count, layoutsCapacity: bitePathList.layouts.count)
         for i in 0..<bitePathList.layouts.count {
             let subPath: [IntPoint] = bitePathList.get(index: i).reversed()
             subPaths.add(path: subPath, isClockWise: true)
         }
-        return self.bitList(subPaths: &subPaths, iGeom: iGeom)
+        return self.biteList(subPaths: &subPaths, iGeom: iGeom)
     }
     
     
-    private func holeCaseShapeList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+    private func holeCaseMainList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
         let n = self.layouts.count
         
         // новая дыра
@@ -279,12 +274,12 @@ public extension PlainShape {
         return shapeParts
     }
     
-    private func holeCaseBitList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+    private func holeCaseBiteList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
         var subPaths = PlainShape(points: cutPath.reversed())
-        return self.bitList(subPaths: &subPaths, iGeom: iGeom)
+        return self.biteList(subPaths: &subPaths, iGeom: iGeom)
     }
     
-    private func bitList(subPaths: inout PlainShape, iGeom: IntGeom) -> PlainShapeList {
+    private func biteList(subPaths: inout PlainShape, iGeom: IntGeom) -> PlainShapeList {
         // откусим от новой дыры все имеющиеся дыры полигона
     
         let n = self.layouts.count
@@ -339,7 +334,7 @@ public extension PlainShape {
             return PlainShapeList(plainShape: subPaths)
         }
 
-        var bitPaths = PlainShapeList.empty
+        var biteList = PlainShapeList.empty
         
         for i in 0..<subPaths.layouts.count {
             let subPath = subPaths.get(index: i)
@@ -350,10 +345,10 @@ public extension PlainShape {
                     subShape.add(hole: hole)
                 }
             }
-            bitPaths.add(plainShape: subShape)
+            biteList.add(plainShape: subShape)
         }
         
-        return bitPaths
+        return biteList
     }
     
 }

@@ -26,8 +26,6 @@ public struct Solver {
             } else {
                 return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
             }
-            
-            
         }
 
         let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)

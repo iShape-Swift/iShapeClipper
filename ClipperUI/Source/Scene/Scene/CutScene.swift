@@ -71,9 +71,9 @@ final class CutScene: CoordinateSystemScene {
                     self.addSublayer(layer)
                 }
             }
-            if !solution.bitList.segments.isEmpty {
-                for i in 0..<solution.bitList.segments.count {
-                    let shape = solution.bitList.get(index: i)
+            if !solution.biteList.segments.isEmpty {
+                for i in 0..<solution.biteList.segments.count {
+                    let shape = solution.biteList.get(index: i)
                     let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.bitFill, strokeColor: Colors.cutTest.bitStroke, lineWidth: 0.25)
                     self.addSublayer(layer)
                 }

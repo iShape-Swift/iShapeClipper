@@ -37,8 +37,8 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [])
-        XCTAssertEqual(solution.bitList.points, [])
+        XCTAssertEqual(solution.biteList.layouts, [])
+        XCTAssertEqual(solution.biteList.points, [])
     }
     
     func test_01() {
@@ -64,10 +64,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -5, y: 5),
             Point(x: -5, y: -5),
             Point(x: 5, y: -5),
@@ -103,10 +103,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -5, y: -5),
             Point(x: 5, y: -5),
             Point(x: 5, y: 5),
@@ -146,11 +146,11 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 5, y: 0),
             Point(x: 0, y: 0),
             Point(x: 0, y: 5),
@@ -215,10 +215,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 24, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -10, y: -15),
             Point(x: -15, y: -15),
             Point(x: -15, y: -20),
@@ -296,10 +296,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 36, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 0, y: -30),
             Point(x: 5, y: -30),
             Point(x: 5, y: -25),
@@ -350,10 +350,10 @@ final class CutTests: XCTestCase {
         XCTAssertEqual(solution.mainList.layouts, [])
         XCTAssertEqual(solution.mainList.points, [])
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
             Point(x: 10, y: 10),
@@ -372,11 +372,11 @@ final class CutTests: XCTestCase {
         XCTAssertEqual(solution.mainList.layouts, [])
         XCTAssertEqual(solution.mainList.points, [])
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
             Point(x: 10, y: 10),
@@ -395,11 +395,11 @@ final class CutTests: XCTestCase {
         XCTAssertEqual(solution.mainList.layouts, [])
         XCTAssertEqual(solution.mainList.points, [])
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
             Point(x: 10, y: 10),
@@ -434,10 +434,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 5, y: 10),
             Point(x: 5, y: -5),
             Point(x: -5, y: -5),
@@ -473,10 +473,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -5, y: 5),
             Point(x: 0, y: 5),
             Point(x: 0, y: 0),
@@ -513,10 +513,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -5, y: 5),
             Point(x: 10, y: 5),
             Point(x: 10, y: 0),
@@ -570,10 +570,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 12, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 10, y: -10),
             Point(x: 15, y: -10),
             Point(x: 15, y: -5),
@@ -627,11 +627,11 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true),
             PlainShape.Layout(begin: 8, length: 4, isClockWise: false)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 15, y: -10),
             Point(x: 15, y: -5),
             Point(x: -15, y: -5),
@@ -679,12 +679,12 @@ final class CutTests: XCTestCase {
             IntPoint(x: -11428, y: 0)
             ]
         )
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 9, isClockWise: true),
             PlainShape.Layout(begin: 9, length: 3, isClockWise: true)
         ])
 
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             IntPoint(x: 150000, y: -92623),
             IntPoint(x: 150000, y: -50000),
             IntPoint(x: 75715, y: -50000),
@@ -737,12 +737,12 @@ final class CutTests: XCTestCase {
             ]
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 5, isClockWise: true),
             PlainShape.Layout(begin: 5, length: 3, isClockWise: true),
             PlainShape.Layout(begin: 8, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             IntPoint(x: 125000, y: -50000),
             IntPoint(x: 75715, y: -50000),
             IntPoint(x: -11428, y: 0),
@@ -791,11 +791,11 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 5, y: -5),
             Point(x: 5, y: -10),
             Point(x: 0, y: -10),
@@ -838,11 +838,11 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 5, y: -5),
             Point(x: 5, y: -15),
             Point(x: 0, y: -15),
@@ -889,12 +889,12 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false),
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [Point(x: 15, y: -5),
+        XCTAssertEqual(solution.biteList.points, [Point(x: 15, y: -5),
             Point(x: 15, y: -20),
             Point(x: 0, y: -20),
             Point(x: 0, y: -5),
@@ -951,10 +951,10 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 10, y: 5),
             Point(x: 15, y: 5),
             Point(x: 15, y: -15),
@@ -1018,11 +1018,11 @@ final class CutTests: XCTestCase {
              ].int
          )
          
-         XCTAssertEqual(solution.bitList.layouts, [
+         XCTAssertEqual(solution.biteList.layouts, [
              PlainShape.Layout(begin: 0, length: 8, isClockWise: true),
              PlainShape.Layout(begin: 8, length: 8, isClockWise: true)
          ])
-         XCTAssertEqual(solution.bitList.points, [
+         XCTAssertEqual(solution.biteList.points, [
              Point(x: -10, y: 5),
              Point(x: -15, y: 5),
              Point(x: -15, y: 25),
@@ -1066,11 +1066,11 @@ final class CutTests: XCTestCase {
             ].int
         )
 
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [Point(x: 5, y: -5),
+        XCTAssertEqual(solution.biteList.points, [Point(x: 5, y: -5),
             Point(x: 5, y: 5),
             Point(x: 10, y: 5),
             Point(x: 10, y: -5),
@@ -1133,7 +1133,7 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 8, length: 4, isClockWise: true),
@@ -1141,7 +1141,7 @@ final class CutTests: XCTestCase {
             PlainShape.Layout(begin: 16, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 20, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: 10, y: 5),
             Point(x: 15, y: 5),
             Point(x: 15, y: 0),
@@ -1229,7 +1229,7 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 8, length: 4, isClockWise: true),
@@ -1239,7 +1239,7 @@ final class CutTests: XCTestCase {
             PlainShape.Layout(begin: 26, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 30, length: 6, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -15, y: 10),
             Point(x: -10, y: 10),
             Point(x: -10, y: 5),
@@ -1333,12 +1333,12 @@ final class CutTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.bitList.layouts, [
+        XCTAssertEqual(solution.biteList.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true),
             PlainShape.Layout(begin: 6, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 10, length: 6, isClockWise: true)
         ])
-        XCTAssertEqual(solution.bitList.points, [
+        XCTAssertEqual(solution.biteList.points, [
             Point(x: -5, y: -10),
             Point(x: -5, y: -15),
             Point(x: -15, y: -15),
