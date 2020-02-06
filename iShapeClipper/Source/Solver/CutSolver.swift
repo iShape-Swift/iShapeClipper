@@ -117,12 +117,6 @@ public extension PlainShape {
                     let hole = self.get(index: holeIndex)
                     islandShape.add(hole: hole)
                 }
-                
-                var j = usedHoles.count - 1
-                while j > 0 {
-                    holes.remove(at: usedHoles[j])
-                    j -= 1
-                }
             }
             
             result.add(plainShape: islandShape)
