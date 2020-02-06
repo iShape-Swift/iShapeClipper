@@ -17,7 +17,7 @@ public struct BiteSolution {
 
 public extension PlainShape {
 
-    func cut(path: [IntPoint], iGeom: IntGeom) -> BiteSolution {
+    func bit(path: [IntPoint], iGeom: IntGeom) -> BiteSolution {
         let hull = self.get(index: 0)
         
         let cutHullSolution = Solver.cut(master: hull, slave: path, iGeom: iGeom)
