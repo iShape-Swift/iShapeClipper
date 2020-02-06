@@ -166,11 +166,11 @@ public extension PlainShape {
             case .overlap, .slaveIncludeMaster:
                 iteractedHoles.append(i)
                 let uShape = unionSolution.pathList
-                for i in 0..<uShape.layouts.count {
-                    if uShape.layouts[i].isClockWise {
-                        rootHole = uShape.get(index: i)
+                for j in 0..<uShape.layouts.count {
+                    if uShape.layouts[j].isClockWise {
+                        rootHole = uShape.get(index: j)
                     } else {
-                        var island = uShape.get(index: i)
+                        var island = uShape.get(index: j)
                         island.invert()
                         islands.add(path: island, isClockWise: true)
                     }
