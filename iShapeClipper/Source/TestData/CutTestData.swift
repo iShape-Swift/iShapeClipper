@@ -177,7 +177,7 @@ struct CutTestData {
                 Point(x: 10, y: 20),
                 Point(x: 10, y: -25),
                 Point(x: 20, y: -25),
-                Point(x: 20, y: 25),
+                Point(x: 20, y: 25)
             ].int
         ),
         // 5
@@ -232,7 +232,7 @@ struct CutTestData {
                 Point(x: 0, y: 20),
                 Point(x: 0, y: -35),
                 Point(x: 20, y: -35),
-                Point(x: 20, y: 25),
+                Point(x: 20, y: 25)
             ].int
         ),
         // 6
@@ -424,7 +424,7 @@ struct CutTestData {
                 Point(x: 10, y: 20),
                 Point(x: 10, y: -15),
                 Point(x: 25, y: -15),
-                Point(x: 25, y: 20),
+                Point(x: 25, y: 20)
             ].int
         ),
         // 13
@@ -475,7 +475,7 @@ struct CutTestData {
                 Point(x: -25, y: 10),
                 Point(x: -25, y: -10),
                 Point(x: 25, y: -10),
-                Point(x: 25, y: 10),
+                Point(x: 25, y: 10)
             ].int
         ),
         // 14
@@ -507,7 +507,7 @@ struct CutTestData {
             path: [
                 Point(x: -5.5, y: 2.5),
                 Point(x: 25, y: -15),
-                Point(x: 25, y: 20),
+                Point(x: 25, y: 20)
             ].int
         ),
         // 15
@@ -708,7 +708,7 @@ struct CutTestData {
                 Point(x: -10, y: -20),
                 Point(x: -10, y: 20),
                 Point(x: 10, y: 20),
-                Point(x: 10, y: 5),
+                Point(x: 10, y: 5)
             ].int
         ),
         // 21
@@ -749,7 +749,6 @@ struct CutTestData {
                         Point(x: -25, y: -20)
                     ].int,
                     holes: [
-
                         [
                             Point(x: 10, y: 0),
                             Point(x: 10, y: -5),
@@ -762,7 +761,6 @@ struct CutTestData {
                             Point(x: 20, y: -15),
                             Point(x: 20, y: -10)
                         ].int,
-                        
                         [
                             Point(x: -20, y: 15),
                             Point(x: -20, y: 5),
@@ -887,7 +885,7 @@ struct CutTestData {
                 Point(x: -10, y: -20),
                 Point(x: -10, y: 20),
                 Point(x: 10, y: 20),
-                Point(x: 10, y: 5),
+                Point(x: 10, y: 5)
             ].int
         ),
         // 24
