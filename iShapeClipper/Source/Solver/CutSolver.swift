@@ -146,7 +146,7 @@ public extension PlainShape {
         
         // дыры которые не пересекаются с новой дырой
         var notInteractedHoles = [Int]()
-        var iteractedHoles = [Int]()
+        var interactedHoles = [Int]()
 
         // островки полигона которые оказались внутри новой дыры
         var islands = PlainShape.empty
@@ -162,9 +162,9 @@ public extension PlainShape {
             case .notOverlap:
                 notInteractedHoles.append(i)
             case .masterIncludeSlave:
-                iteractedHoles.append(i)
+                interactedHoles.append(i)
             case .overlap, .slaveIncludeMaster:
-                iteractedHoles.append(i)
+                interactedHoles.append(i)
                 let uShape = unionSolution.pathList
                 for j in 0..<uShape.layouts.count {
                     if uShape.layouts[j].isClockWise {
@@ -186,7 +186,7 @@ public extension PlainShape {
                 let nextHole = self.get(index: index)
                 if rootHole.isContain(hole: nextHole, isClockWise: false) {
                     notInteractedHoles.remove(at: i)
-                    iteractedHoles.append(index)
+                    interactedHoles.append(index)
                 }
                 i -= 1
             }
@@ -213,8 +213,8 @@ public extension PlainShape {
             // должны быть перечисленны по часовой стрелке
             var island = islands.get(index: i)
             var islandHoles = [Int]()
-            for j in 0..<iteractedHoles.count {
-                let index = iteractedHoles[j]
+            for j in 0..<interactedHoles.count {
+                let index = interactedHoles[j]
                 let hole = self.get(index: index)
                 
                 let diffSolution = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
