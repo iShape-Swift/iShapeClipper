@@ -41,7 +41,7 @@ public extension PlainShape {
         guard n > 1 else {
             // у исходного полигона нету других дыр
             var main = self
-            main.add(hole: cutPath)
+            main.add(path: cutPath, isClockWise: false)
             let biteList = PlainShapeList(plainShape: PlainShape(points: cutPath))
             return BiteSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), biteList: biteList)
         }
@@ -115,7 +115,7 @@ public extension PlainShape {
                 for j in usedHoles {
                     let holeIndex = holes[j]
                     let hole = self.get(index: holeIndex)
-                    islandShape.add(hole: hole)
+                    islandShape.add(path: hole, isClockWise: false)
                 }
             }
             
@@ -194,11 +194,11 @@ public extension PlainShape {
 
         guard !islands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
-            mainShape.add(hole: rootHole)
+            mainShape.add(path: rootHole, isClockWise: false)
             for i in 0..<notInteractedHoles.count {
                 let index = notInteractedHoles[i]
                 let hole = self.get(index: index)
-                mainShape.add(hole: hole)
+                mainShape.add(path: hole, isClockWise: false)
             }
             return PlainShapeList(plainShape: mainShape)
         }
@@ -254,13 +254,13 @@ public extension PlainShape {
 
         var rootShape = PlainShape(points: self.get(index: 0))
         rootHole.invert()
-        rootShape.add(hole: rootHole)
+        rootShape.add(path: rootHole, isClockWise: false)
 
         if !notInteractedHoles.isEmpty {
             for i in 0..<notInteractedHoles.count {
                 let index = notInteractedHoles[i]
                 let hole = self.get(index: index)
-                rootShape.add(hole: hole)
+                rootShape.add(path: hole, isClockWise: false)
             }
         }
         shapeParts.add(plainShape: rootShape)
@@ -336,7 +336,7 @@ public extension PlainShape {
             for j in 0..<holes.layouts.count {
                 let hole = holes.get(index: j)
                 if subPath.isContain(hole: hole, isClockWise: false) {
-                    subShape.add(hole: hole)
+                    subShape.add(path: hole, isClockWise: false)
                 }
             }
             biteList.add(plainShape: subShape)

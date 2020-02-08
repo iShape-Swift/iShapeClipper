@@ -1,5 +1,5 @@
 //
-//  CutTests.swift
+//  BiteTests.swift
 //  ClipperTests
 //
 //  Created by Nail Sharipov on 31.01.2020.
@@ -10,7 +10,7 @@ import XCTest
 import iGeometry
 @testable import iShapeClipper
 
-final class CutTests: XCTestCase {
+final class BiteTests: XCTestCase {
     
     private let iGeom = IntGeom.defGeom
     
