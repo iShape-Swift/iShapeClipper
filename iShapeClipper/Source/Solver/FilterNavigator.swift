@@ -15,10 +15,10 @@ struct FilterNavigator {
     
     init(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) {
         self.navigator = navigator
-        self.nextCursors = FilterNavigator.nextCursors(navigator: navigator, primary: primary, secondary: secondary)
+        self.nextCursors = FilterNavigator.getCursors(navigator: navigator, primary: primary, secondary: secondary)
     }
     
-    private static func nextCursors(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) -> [Cursor] {
+    private static func getCursors(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) -> [Cursor] {
         let n = navigator.nodeArray.count
         var cursors = Array<Cursor>()
         cursors.reserveCapacity(n)

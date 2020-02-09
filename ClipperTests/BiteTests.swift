@@ -17,7 +17,7 @@ final class BiteTests: XCTestCase {
     func test_00() {
         let data = CutTestData.data[0]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -44,7 +44,7 @@ final class BiteTests: XCTestCase {
     func test_01() {
         let data = CutTestData.data[1]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -79,7 +79,7 @@ final class BiteTests: XCTestCase {
     func test_02() {
         let data = CutTestData.data[2]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -120,7 +120,7 @@ final class BiteTests: XCTestCase {
     func test_03() {
         let data = CutTestData.data[3]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -166,7 +166,7 @@ final class BiteTests: XCTestCase {
     func test_04() {
         let data = CutTestData.data[4]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -250,7 +250,7 @@ final class BiteTests: XCTestCase {
     func test_05() {
         let data = CutTestData.data[5]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -343,7 +343,7 @@ final class BiteTests: XCTestCase {
     func test_06() {
         let data = CutTestData.data[6]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -365,7 +365,7 @@ final class BiteTests: XCTestCase {
     func test_07() {
         let data = CutTestData.data[7]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -388,7 +388,7 @@ final class BiteTests: XCTestCase {
     func test_08() {
         let data = CutTestData.data[8]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -415,7 +415,7 @@ final class BiteTests: XCTestCase {
     func test_09() {
         let data = CutTestData.data[9]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -449,7 +449,7 @@ final class BiteTests: XCTestCase {
     func test_10() {
         let data = CutTestData.data[10]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -488,7 +488,7 @@ final class BiteTests: XCTestCase {
     func test_11() {
         let data = CutTestData.data[11]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -528,7 +528,7 @@ final class BiteTests: XCTestCase {
     func test_12() {
         let data = CutTestData.data[12]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -593,7 +593,7 @@ final class BiteTests: XCTestCase {
     func test_13() {
         let data = CutTestData.data[13]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -651,7 +651,7 @@ final class BiteTests: XCTestCase {
     func test_14() {
         let data = CutTestData.data[14]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -704,7 +704,7 @@ final class BiteTests: XCTestCase {
     func test_15() {
         let data = CutTestData.data[15]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -762,7 +762,7 @@ final class BiteTests: XCTestCase {
     func test_16() {
         let data = CutTestData.data[16]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -811,7 +811,7 @@ final class BiteTests: XCTestCase {
     func test_17() {
         let data = CutTestData.data[17]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -858,7 +858,7 @@ final class BiteTests: XCTestCase {
     func test_18() {
         let data = CutTestData.data[18]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -917,7 +917,7 @@ final class BiteTests: XCTestCase {
     func test_19() {
         let data = CutTestData.data[19]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -970,7 +970,7 @@ final class BiteTests: XCTestCase {
      func test_20() {
          let data = CutTestData.data[20]
 
-         let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+         let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
          XCTAssertEqual(solution.isInteract, true)
          
@@ -1046,7 +1046,7 @@ final class BiteTests: XCTestCase {
     func test_21() {
         let data = CutTestData.data[21]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1085,7 +1085,7 @@ final class BiteTests: XCTestCase {
     func test_22() {
         let data = CutTestData.data[22]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1173,7 +1173,7 @@ final class BiteTests: XCTestCase {
     func test_23() {
         let data = CutTestData.data[23]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1283,7 +1283,7 @@ final class BiteTests: XCTestCase {
     func test_24() {
         let data = CutTestData.data[24]
 
-        let solution = data.shape.bit(path: data.path, iGeom: IntGeom.defGeom)
+        let solution = data.shape.bite(path: data.path, iGeom: IntGeom.defGeom)
 
         XCTAssertEqual(solution.isInteract, true)
         
