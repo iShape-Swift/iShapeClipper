@@ -894,7 +894,8 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false),
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
-        XCTAssertEqual(solution.biteList.points, [Point(x: 15, y: -5),
+        XCTAssertEqual(solution.biteList.points, [
+            Point(x: 15, y: -5),
             Point(x: 15, y: -20),
             Point(x: 0, y: -20),
             Point(x: 0, y: -5),
