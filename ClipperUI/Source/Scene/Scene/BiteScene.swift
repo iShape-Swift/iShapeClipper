@@ -1,5 +1,5 @@
 //
-//  CutScene.swift
+//  BiteScene.swift
 //  ClipperUI
 //
 //  Created by Nail Sharipov on 24.12.2019.
@@ -10,15 +10,15 @@ import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class CutScene: CoordinateSystemScene {
+final class BiteScene: CoordinateSystemScene {
 
-    private static let indexKey = String(describing: CutScene.self)
+    private static let indexKey = String(describing: BiteScene.self)
     
     private var shapePoints: [IntPoint] = []
     private var shapeLayouts: [PlainShape.Layout] = []
     private var path: [IntPoint] = []
     
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: CutScene.indexKey)
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: BiteScene.indexKey)
     
     private var activeIndex: Int?
     private var isPath: Bool = false
@@ -104,7 +104,7 @@ final class CutScene: CoordinateSystemScene {
 }
 
 
-extension CutScene: MouseCompatible {
+extension BiteScene: MouseCompatible {
     
     private func findNearest(point: IntPoint, points: [IntPoint]) -> Int? {
         var i = 0
@@ -174,19 +174,19 @@ extension CutScene: MouseCompatible {
     }
 }
 
-extension CutScene: SceneNavigation {
+extension BiteScene: SceneNavigation {
     
     func next() {
         let n = CutTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: CutScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: BiteScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = CutTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: CutScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: BiteScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
