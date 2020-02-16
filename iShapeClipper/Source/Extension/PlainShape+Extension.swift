@@ -1,14 +1,13 @@
 //
 //  PlainShape+Extension.swift
-//  ClipperUI
+//  iGeometry
 //
-//  Created by Nail Sharipov on 10.02.2020.
-//  Copyright © 2020 iShape. All rights reserved.
+//  Created by Nail Sharipov on 16.02.2020.
 //
 
 import iGeometry
 
-extension PlainShape {
+public extension PlainShape {
 
     var pathes: [[IntPoint]] {
         let n = layouts.count
