@@ -62,7 +62,17 @@ public extension PlainShape {
     private func overlapCaseMainList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
         let n = self.layouts.count
         guard n > 1 else {
-            return PlainShapeList(plainShape: restPathList)
+            let count = restPathList.layouts.count
+            let points = restPathList.points
+            var layouts = [PlainShape.Layout](repeating: .init(begin: 0, length: 0, isClockWise: true), count: count)
+            var segments = [PlainShapeList.Segment](repeating: .init(begin: 0, length: 1), count: count)
+            for j in 0..<count {
+                let length = restPathList.layouts[j].length
+                layouts[j] = PlainShape.Layout(begin: 0, length: length, isClockWise: true)
+                segments[j] = PlainShapeList.Segment(begin: j, length: 1)
+            }
+
+            return PlainShapeList(points: points, layouts: layouts, segments: segments)
         }
 
         var shapePaths = restPathList

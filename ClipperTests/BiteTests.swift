@@ -766,10 +766,16 @@ final class BiteTests: XCTestCase {
 
         XCTAssertEqual(solution.isInteract, true)
         
+        XCTAssertEqual(solution.mainList.segments, [
+            PlainShapeList.Segment(begin: 0, length: 1),
+            PlainShapeList.Segment(begin: 1, length: 1),
+            PlainShapeList.Segment(begin: 2, length: 1)
+        ])
+        
         XCTAssertEqual(solution.mainList.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true),
-            PlainShape.Layout(begin: 8, length: 4, isClockWise: true),
-            PlainShape.Layout(begin: 12, length: 4, isClockWise: true)
+            PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
+            PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         XCTAssertEqual(solution.mainList.points, [
             Point(x: 0, y: -5),
