@@ -23,8 +23,10 @@ public struct Solver {
         guard cursor.isNotEmpty else {
             if master.isContain(hole: slave, isClockWise: false) {
                 return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .hole)
-            } else {
+            } else if slave.isContain(hole: master, isClockWise: true) {
                 return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
+            } else {
+                return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .notOverlap)
             }
         }
 
