@@ -42,7 +42,7 @@ public extension PlainShape {
             // у исходного полигона нету других дыр
             var main = self
             main.add(path: cutPath, isClockWise: false)
-            let biteList = PlainShapeList(plainShape: PlainShape(points: cutPath))
+            let biteList = PlainShapeList(plainShape: PlainShape(points: cutPath.reversed()))
             return BiteSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), biteList: biteList)
         }
         
