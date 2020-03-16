@@ -204,6 +204,7 @@ public extension PlainShape {
 
         guard !islands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
+            // TODO reversed
             mainShape.add(path: rootHole, isClockWise: false)
             for i in 0..<notInteractedHoles.count {
                 let index = notInteractedHoles[i]

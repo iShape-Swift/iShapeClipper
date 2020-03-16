@@ -25,6 +25,11 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
         ])
+        
+        let plainShape = solution.mainList.get(index: 0)
+        XCTAssertEqual(plainShape.isClockWise(index: 0), true)
+        XCTAssertEqual(plainShape.isClockWise(index: 1), false)
+        
         XCTAssertEqual(solution.mainList.points, [
             Point(x: -15, y: -15),
             Point(x: -15, y: 15),
@@ -52,6 +57,11 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
         ])
+        
+        let plainShape = solution.mainList.get(index: 0)
+        XCTAssertEqual(plainShape.isClockWise(index: 0), true)
+        XCTAssertEqual(plainShape.isClockWise(index: 1), false)
+        
         XCTAssertEqual(solution.mainList.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
@@ -87,6 +97,11 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 8, isClockWise: false)
         ])
+        
+        let plainShape = solution.mainList.get(index: 0)
+        XCTAssertEqual(plainShape.isClockWise(index: 0), true)
+        XCTAssertEqual(plainShape.isClockWise(index: 1), false)
+        
         XCTAssertEqual(solution.mainList.points, [
             Point(x: -15, y: 15),
             Point(x: 15, y: 15),
@@ -128,6 +143,11 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 10, isClockWise: false)
         ])
+        
+        let plainShape = solution.mainList.get(index: 0)
+        XCTAssertEqual(plainShape.isClockWise(index: 0), true)
+        XCTAssertEqual(plainShape.isClockWise(index: 1), false)
+        
         XCTAssertEqual(solution.mainList.points, [
             Point(x: -15, y: 10),
             Point(x: 15, y: 10),
