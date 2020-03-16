@@ -204,8 +204,7 @@ public extension PlainShape {
 
         guard !islands.layouts.isEmpty else {
             var mainShape = PlainShape(points: self.get(index: 0))
-            // TODO reversed
-            mainShape.add(path: rootHole, isClockWise: false)
+            mainShape.add(path: rootHole.reversed(), isClockWise: false)
             for i in 0..<notInteractedHoles.count {
                 let index = notInteractedHoles[i]
                 let hole = self.get(index: index)
@@ -331,15 +330,21 @@ public extension PlainShape {
             }
         }
         
-        guard subPaths.layouts.count > 0 else {
-            return PlainShapeList.empty
-        }
+        var biteList = PlainShapeList.empty
         
-        guard holes.layouts.count > 0 else {
-            return PlainShapeList(plainShape: subPaths)
+        guard subPaths.layouts.count > 0 else {
+            return biteList
         }
 
-        var biteList = PlainShapeList.empty
+        guard holes.layouts.count > 0 else {
+            for i in 0..<subPaths.layouts.count {
+                let subPath = subPaths.get(index: i)
+                let subShape = PlainShape(points: subPath)
+                biteList.add(plainShape: subShape)
+            }
+
+            return biteList
+        }
         
         for i in 0..<subPaths.layouts.count {
             let subPath = subPaths.get(index: i)
