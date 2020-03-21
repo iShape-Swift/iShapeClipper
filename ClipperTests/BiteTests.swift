@@ -81,6 +81,8 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.points, [
             Point(x: 5, y: 5),
@@ -89,8 +91,6 @@ final class BiteTests: XCTestCase {
             Point(x: -5, y: 5)
             ].int
         )
-        
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
     }
     
     func test_02() {
@@ -132,6 +132,8 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
         
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: -5, y: -5),
             Point(x: 5, y: -5),
@@ -141,8 +143,6 @@ final class BiteTests: XCTestCase {
             Point(x: -5, y: -10)
             ].int
         )
-        
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
     }
     
     func test_03() {
@@ -192,6 +192,9 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
 
         XCTAssertEqual(biteShape0.points, [
             Point(x: 5, y: 0),
@@ -298,6 +301,9 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 24, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: -10, y: -15),
             Point(x: -15, y: -15),
@@ -411,6 +417,8 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 36, isClockWise: true)
         ])
         
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: 0, y: -30),
             Point(x: 5, y: -30),
@@ -463,11 +471,13 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(solution.mainList.points, [])
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
@@ -488,11 +498,12 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(solution.mainList.points, [])
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.points, [
             Point(x: -10, y: -10),
@@ -514,13 +525,15 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(solution.mainList.points, [])
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape.isClockWise(index: 1), false)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape.isClockWise(index: 1), false)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
@@ -562,11 +575,12 @@ final class BiteTests: XCTestCase {
         )
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.points, [
             Point(x: 5, y: 10),
@@ -611,11 +625,13 @@ final class BiteTests: XCTestCase {
         )
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: -5, y: 5),
             Point(x: 0, y: 5),
@@ -669,11 +685,13 @@ final class BiteTests: XCTestCase {
         )
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+
         XCTAssertEqual(biteShape.points, [
             Point(x: -5, y: 5),
             Point(x: 10, y: 5),
@@ -734,11 +752,13 @@ final class BiteTests: XCTestCase {
         )
         
         let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape.layouts, [
             PlainShape.Layout(begin: 0, length: 12, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape.points, [
             Point(x: 10, y: -10),
             Point(x: 15, y: -10),
@@ -967,6 +987,10 @@ final class BiteTests: XCTestCase {
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
+        
         XCTAssertEqual(biteShape0.points, [
             IntPoint(x: 125000, y: -50000),
             IntPoint(x: 75715, y: -50000),
@@ -1057,8 +1081,6 @@ final class BiteTests: XCTestCase {
         
         let biteShape0 = solution.biteList.get(index: 0)
         let biteShape1 = solution.biteList.get(index: 1)
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
@@ -1067,6 +1089,9 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.points, [
             Point(x: 5, y: -5),
@@ -1122,8 +1147,6 @@ final class BiteTests: XCTestCase {
         
         let biteShape0 = solution.biteList.get(index: 0)
         let biteShape1 = solution.biteList.get(index: 1)
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
@@ -1131,6 +1154,9 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.points, [
             Point(x: 5, y: -5),
@@ -1204,7 +1230,6 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
-        
         
         XCTAssertEqual(biteShape0.points, [
             Point(x: 15, y: -5),
@@ -1318,15 +1343,6 @@ final class BiteTests: XCTestCase {
         let mainShape1 = solution.mainList.get(index: 1)
         let mainShape2 = solution.mainList.get(index: 2)
         
-        XCTAssertEqual(mainShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(mainShape0.isClockWise(index: 1), false)
-        
-        XCTAssertEqual(mainShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(mainShape1.isClockWise(index: 1), false)
-        
-        XCTAssertEqual(mainShape2.isClockWise(index: 0), true)
-        XCTAssertEqual(mainShape2.isClockWise(index: 1), false)
-        
         XCTAssertEqual(mainShape0.layouts, [
              PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
              PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
@@ -1341,6 +1357,15 @@ final class BiteTests: XCTestCase {
              PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
              PlainShape.Layout(begin: 4, length: 12, isClockWise: false)
         ])
+        
+        XCTAssertEqual(mainShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(mainShape0.isClockWise(index: 1), false)
+        
+        XCTAssertEqual(mainShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(mainShape1.isClockWise(index: 1), false)
+        
+        XCTAssertEqual(mainShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(mainShape2.isClockWise(index: 1), false)
         
         XCTAssertEqual(mainShape0.points, [
             Point(x: -10, y: 20),
@@ -1389,9 +1414,6 @@ final class BiteTests: XCTestCase {
         let biteShape0 = solution.biteList.get(index: 0)
         let biteShape1 = solution.biteList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
@@ -1399,6 +1421,9 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.points, [
             Point(x: -10, y: 5),
@@ -1456,16 +1481,15 @@ final class BiteTests: XCTestCase {
         let biteShape0 = solution.biteList.get(index: 0)
         let biteShape1 = solution.biteList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        
         XCTAssertEqual(biteShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.points, [
             Point(x: 5, y: -5),
@@ -1561,14 +1585,6 @@ final class BiteTests: XCTestCase {
         let biteShape4 = solution.biteList.get(index: 4)
         let biteShape5 = solution.biteList.get(index: 5)
         
-        
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape3.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape4.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape5.isClockWise(index: 0), true)
-        
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
@@ -1592,6 +1608,13 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape5.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape3.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape4.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape5.isClockWise(index: 0), true)
 
         XCTAssertEqual(biteShape0.points, [
             Point(x: 10, y: 5),
@@ -1741,15 +1764,6 @@ final class BiteTests: XCTestCase {
         let biteShape6 = solution.biteList.get(index: 6)
         let biteShape7 = solution.biteList.get(index: 7)
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape3.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape4.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape5.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape6.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape7.isClockWise(index: 0), true)
-        
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
@@ -1782,6 +1796,15 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape7.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape3.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape4.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape5.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape6.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape7.isClockWise(index: 0), true)
 
         XCTAssertEqual(biteShape0.points, [
             Point(x: -15, y: 10),
@@ -1931,10 +1954,6 @@ final class BiteTests: XCTestCase {
         let biteShape1 = solution.biteList.get(index: 1)
         let biteShape2 = solution.biteList.get(index: 2)
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
-        
         XCTAssertEqual(biteShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
@@ -1944,6 +1963,10 @@ final class BiteTests: XCTestCase {
         XCTAssertEqual(biteShape2.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
+        
+        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
         
         XCTAssertEqual(biteShape0.points, [
             Point(x: -5, y: -10),
