@@ -1443,4 +1443,88 @@ final class UnionTests: XCTestCase {
 
         XCTAssertEqual(path1, sample1)
     }
+    
+    func test_44() {
+        let data = UnionTestData.data[44]
+        
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+        
+        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .overlap)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        
+        let pathes = solution.pathList.pathes
+        
+        let path = iGeom.float(points: pathes[0])
+        
+        let sample = [
+            Point(x: 5.0, y: -9.848499),
+            Point(x: 5.0, y: -15.0),
+            Point(x: -5.0, y: -15.0),
+            Point(x: -5.0, y: -9.5455),
+            Point(x: -6.5, y: -9.5),
+            Point(x: -3.3332999, y: 0.0),
+            Point(x: -10.0, y: 0.0),
+            Point(x: -10.0, y: 10.0),
+            Point(x: 10.0, y: 10.0),
+            Point(x: 10.0, y: -10.0)
+        ]
+        
+        XCTAssertEqual(path, sample)
+
+    }
+    
+    func test_45() {
+        let data = UnionTestData.data[45]
+        
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+        
+        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .slaveIncludeMaster)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        
+        let pathes = solution.pathList.pathes
+        
+        let path = iGeom.float(points: pathes[0])
+        
+        let sample = [
+            Point(x: -10.0, y: 10.0),
+            Point(x: 10.0, y: 10.0),
+            Point(x: 10.0, y: -10.0),
+            Point(x: -10.0, y: -10.0)
+        ]
+        
+        XCTAssertEqual(path, sample)
+
+    }
+    
+    func test_46() {
+        let data = UnionTestData.data[46]
+        
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+        
+        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .slaveIncludeMaster)
+        XCTAssertEqual(solution.pathList.layouts.count, 1)
+        
+        let pathes = solution.pathList.pathes
+        
+        let path = iGeom.float(points: pathes[0])
+        
+        let sample = [
+            Point(x: -10.0, y: 10.0),
+            Point(x: 10.0, y: 10.0),
+            Point(x: 10.0, y: -10.0),
+            Point(x: -10.0, y: -10.0)
+        ]
+        
+        XCTAssertEqual(path, sample)
+
+    }
 }

@@ -936,6 +936,33 @@ struct CutTestData {
                 Point(x: -10, y: -10),
                 Point(x: -10, y: 10)
             ].int
+        ),
+        // 25
+        TestData(
+            shape: PlainShape(
+                iShape: IntShape(
+                    hull: [
+                        Point(x: 20, y: -20),
+                        Point(x: -20, y: -20),
+                        Point(x: -20, y: 20),
+                        Point(x: 20, y: 20)
+                    ].int,
+                    holes: [
+                        [
+                            Point(x: -10, y: -10),
+                            Point(x: 10, y: -10),
+                            Point(x: 10, y: 10),
+                            Point(x: -10, y: 10)
+                        ].int,
+                    ]
+                )
+            ),
+            path: [
+                Point(x: -5, y: 5),
+                Point(x: -5, y: -5),
+                Point(x: 5, y: -10),
+                Point(x: 5, y: 5)
+            ].int
         )
     ]
 }

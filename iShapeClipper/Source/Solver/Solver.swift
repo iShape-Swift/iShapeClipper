@@ -110,30 +110,23 @@ public struct Solver {
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .outside, secondary: .in_out)
         
         let cursor = filterNavigator.first()
-
+        
         guard cursor.isNotEmpty else {
-            var pathList = PlainShape.empty
             if navigator.hasContacts {
-                if master.isOverlap(points: slave) {
-                    pathList.add(path: master, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .masterIncludeSlave)
-                } else if slave.isOverlap(points: slave) {
-                    pathList.add(path: slave, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .slaveIncludeMaster)
-                } else {
-                    return UnionSolution(pathList: pathList, nature: .notOverlap)
+                if master.isContain(point: slave.anyInside(isClockWise: true)) {
+                    return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
                 }
-            } else {
-                if master.isContain(point: slave.any) {
-                    pathList.add(path: master, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .masterIncludeSlave)
-                } else if slave.isContain(point: master.any) {
-                    pathList.add(path: slave, isClockWise: true)
-                    return UnionSolution(pathList: pathList, nature: .slaveIncludeMaster)
-                } else {
-                    return UnionSolution(pathList: pathList, nature: .notOverlap)
-                }
+            } else if master.isContain(point: slave.any) {
+                return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
+            } else if slave.isContain(point: master.any) {
+                return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
             }
+            
+            return UnionSolution(pathList: PlainShape.empty, nature: .notOverlap)
+        }
+        
+        if cursor.type == .in_out && slave.isContain(point: master.anyInside(isClockWise: true)) {
+            return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
         }
         
         let pathList = Solver.union(navigator: filterNavigator, master: master, slave: slave)
