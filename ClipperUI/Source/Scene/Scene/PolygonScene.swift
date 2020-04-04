@@ -12,30 +12,15 @@ import iGeometry
 
 final class PolygonScene: CoordinateSystemScene {
     
-    /*
-    private var points: [Point] = [
-        Point(x: -10, y: -10),        // A
-        Point(x: 10, y: -10),         // B
-        Point(x: 10, y: 10),          // C
-        Point(x: -10, y: 10),         // D
-        Point(x: 0, y: 0)             // P
-    ]
-    */
-    
-    private var points: [Point] = [
-        Point(x: 0, y: -10),         // A
-        Point(x: -10, y: 0),         // B
-        Point(x: 0, y: 10),          // C
-        Point(x: 10, y: 0),          // D
-        Point(x: 0, y: -15)            // P
-    ]
-    
+    private static let indexKey = String(describing: PolygonScene.self)
+
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: PolygonScene.indexKey)
     private var activeIndex: Int?
-    
+    private var points: [Point] = []
     
     override init() {
         super.init()
-        self.addShapes()
+        self.showPage(index: pageIndex)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,6 +29,11 @@ final class PolygonScene: CoordinateSystemScene {
     
     override init(layer: Any) {
         super.init(layer: layer)
+    }
+    
+    func showPage(index: Int) {
+        self.points = PolygonPointTestData.data[index].points
+        self.update()
     }
     
     private func update() {
@@ -144,14 +134,20 @@ extension PolygonScene: MouseCompatible {
 
 extension PolygonScene: SceneNavigation {
     func next() {
-        
+        let n = PolygonPointTestData.data.count
+        self.pageIndex = (self.pageIndex + 1) % n
+        UserDefaults.standard.set(pageIndex, forKey: PolygonScene.indexKey)
+        self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        
+        let n = PolygonPointTestData.data.count
+        self.pageIndex = (self.pageIndex - 1 + n) % n
+        UserDefaults.standard.set(pageIndex, forKey: PolygonScene.indexKey)
+        self.showPage(index: self.pageIndex)
     }
     
     func getName() -> String {
-        return "test 0"
+        return "test \(self.pageIndex)"
     }
 }

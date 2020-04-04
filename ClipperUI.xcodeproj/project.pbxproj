@@ -42,6 +42,7 @@
 		54AE702D23B291C4008F837E /* BiteScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE702C23B291C4008F837E /* BiteScene.swift */; };
 		54B5EBBC23B7130300B2CC95 /* InnerPointScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B5EBBB23B7130300B2CC95 /* InnerPointScene.swift */; };
 		54B5EBBE23B77F7900B2CC95 /* HoleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B5EBBD23B77F7900B2CC95 /* HoleScene.swift */; };
+		54D3584C243797230088C4AC /* PolygonPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3584B243797230088C4AC /* PolygonPointTests.swift */; };
 		54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D643AC2347DBA5007BD72A /* SubtractTests.swift */; };
 		54DA470A236D91C6007FB21A /* UnionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA4709236D91C6007FB21A /* UnionScene.swift */; };
 		54DA471823708982007FB21A /* PolygonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA471723708982007FB21A /* PolygonScene.swift */; };
@@ -103,6 +104,7 @@
 		54AE702C23B291C4008F837E /* BiteScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiteScene.swift; sourceTree = "<group>"; };
 		54B5EBBB23B7130300B2CC95 /* InnerPointScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerPointScene.swift; sourceTree = "<group>"; };
 		54B5EBBD23B77F7900B2CC95 /* HoleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleScene.swift; sourceTree = "<group>"; };
+		54D3584B243797230088C4AC /* PolygonPointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonPointTests.swift; sourceTree = "<group>"; };
 		54D643992347CF74007BD72A /* ClipperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D6439D2347CF74007BD72A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54D643AC2347DBA5007BD72A /* SubtractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractTests.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				54DA471B237201AB007FB21A /* UnionTests.swift */,
 				545B581023840CFB00918A8D /* IntersectTests.swift */,
 				547E843E23E4B50700113528 /* BiteTests.swift */,
+				54D3584B243797230088C4AC /* PolygonPointTests.swift */,
 			);
 			path = ClipperTests;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D3584C243797230088C4AC /* PolygonPointTests.swift in Sources */,
 				547E843F23E4B50700113528 /* BiteTests.swift in Sources */,
 				545B581123840CFB00918A8D /* IntersectTests.swift in Sources */,
 				54187D0F2348F06D0080AF79 /* PinPathTests.swift in Sources */,

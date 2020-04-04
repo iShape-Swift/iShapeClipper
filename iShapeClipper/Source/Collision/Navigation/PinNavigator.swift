@@ -20,6 +20,8 @@ struct PinNavigator {
 
     let isEqual: Bool
     let hasContacts: Bool
+    let anySlave: Int
+    let anyMaster: Int
     
     // for s in slavePath { nodeArray[s] }  iterate all pins in counter clockwise order by slave path
     private let slavePath: [Int]
@@ -37,11 +39,14 @@ struct PinNavigator {
     private var nodeArray: [PinNode]
 #endif
     
-    init(slavePath: [Int], pinPathArray: [PinPath], pinPointArray: [PinPoint], nodeArray: [PinNode], hasContacts: Bool) {
+    
+    init(slavePath: [Int], pinPathArray: [PinPath], pinPointArray: [PinPoint], nodeArray: [PinNode], hasContacts: Bool, anyMaster: Int, anySlave: Int) {
         self.slavePath = slavePath
         self.pinPathArray = pinPathArray
         self.pinPointArray = pinPointArray
         self.nodeArray = nodeArray
+        self.anyMaster = anyMaster
+        self.anySlave = anySlave
         self.isEqual = false
         self.hasContacts = hasContacts
     }
@@ -52,6 +57,8 @@ struct PinNavigator {
         self.pinPointArray = []
         self.nodeArray = []
         self.isEqual = true
+        self.anyMaster = -1
+        self.anySlave = -1
         self.hasContacts = false
     }
 

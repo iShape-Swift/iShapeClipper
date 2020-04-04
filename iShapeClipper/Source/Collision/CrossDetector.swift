@@ -22,11 +22,15 @@ struct CrossDetector {
         
         let n = masterIndices.count
         var i = 0
-        
+
         let msLastIx = iMaster.count - 1
         let slLastIx = iSlave.count - 1
 
         var endsCount = 0
+
+        // mark indices which are on the common path
+        var masterIndexMark = [Bool](repeating: false, count: iMaster.count)
+        var slaveIndexMark = [Bool](repeating: false, count: iSlave.count)
         
         while i < n {
             let msIx0 = masterIndices[i]
@@ -56,7 +60,7 @@ struct CrossDetector {
                     continue
                 case .pure:
                     // simple intersection and most common case
-                    
+                   
                     let pinPointDef = PinPoint.Def(
                         pt: point,
                         ms0: ms0,
@@ -71,6 +75,8 @@ struct CrossDetector {
 
                     pinPoints.append(pinPoint)
                 case .end_a0:
+                    masterIndexMark[msIx0] = true
+                    
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
                     
@@ -91,6 +97,8 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1:
+                    masterIndexMark[msIx1] = true
+                    
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
                     
@@ -111,6 +119,8 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b0:
+                    slaveIndexMark[slIx0] = true
+                    
                     let prevMs = msIx0
                     let nextMs = msIx1
                     
@@ -131,6 +141,8 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b1:
+                    slaveIndexMark[slIx1] = true
+                    
                     let prevMs = msIx0
                     let nextMs = msIx1
                     
@@ -151,6 +163,9 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b0:
+                    masterIndexMark[msIx0] = true
+                    slaveIndexMark[slIx0] = true
+                    
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
 
@@ -171,6 +186,9 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b1:
+                    masterIndexMark[msIx0] = true
+                    slaveIndexMark[slIx1] = true
+                    
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
 
@@ -191,6 +209,9 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b0:
+                    masterIndexMark[msIx1] = true
+                    slaveIndexMark[slIx0] = true
+                    
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
 
@@ -211,6 +232,9 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b1:
+                    masterIndexMark[msIx1] = true
+                    slaveIndexMark[slIx1] = true
+                    
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
 
@@ -236,6 +260,9 @@ struct CrossDetector {
             i = j
         }
         
+        let anyMaster = masterIndexMark.firstIndex(of: false) ?? -1
+        let anySlave = slaveIndexMark.firstIndex(of: false) ?? -1
+        
         var pinPaths: [PinPath]
         var hasExclusion = false
         if endsCount > 0 {
@@ -258,7 +285,14 @@ struct CrossDetector {
             hasExclusion = pinExclusion || hasExclusion
         }
 
-        let navigator = CrossDetector.buildNavigator(pinPointArray: &pinPoints, pinPathArray: &pinPaths, masterCount: iMaster.count, hasExclusion: hasExclusion)
+        let navigator = CrossDetector.buildNavigator(
+            pinPointArray: &pinPoints,
+            pinPathArray: &pinPaths,
+            masterCount: iMaster.count,
+            hasExclusion: hasExclusion,
+            anyMaster: anyMaster,
+            anySlave: anySlave
+        )
         
         return navigator
     }
@@ -463,7 +497,7 @@ struct CrossDetector {
     
     /// Build  Navigator section
     
-    private static func buildNavigator(pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath], masterCount: Int, hasExclusion: Bool) -> PinNavigator {
+    private static func buildNavigator(pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath], masterCount: Int, hasExclusion: Bool, anyMaster: Int, anySlave: Int) -> PinNavigator {
         var handlerArray = [PinHandler]()
         handlerArray.reserveCapacity(pinPathArray.count + pinPointArray.count)
 
@@ -487,7 +521,7 @@ struct CrossDetector {
         let hasContacts = hasExclusion || !handlerArray.isEmpty
 
         if handlerArray.isEmpty {
-            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
+            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts, anyMaster: anyMaster, anySlave: anySlave)
         }
         
         if pinPathArray.count > 0 {
@@ -495,7 +529,7 @@ struct CrossDetector {
         }
 
         if handlerArray.isEmpty {
-            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts)
+            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts, anyMaster: anyMaster, anySlave: anySlave)
         }
         
         let slavePath = CrossDetector.streamline(handlerArray: &handlerArray, pinPointArray: pinPointArray, pinPathArray: pinPathArray)
@@ -517,7 +551,7 @@ struct CrossDetector {
             nodes[slaveIndex] = node
         }
 
-        return PinNavigator(slavePath: slavePath, pinPathArray: pinPathArray, pinPointArray: pinPointArray, nodeArray: nodes, hasContacts: hasContacts)
+        return PinNavigator(slavePath: slavePath, pinPathArray: pinPathArray, pinPointArray: pinPointArray, nodeArray: nodes, hasContacts: hasContacts, anyMaster: anyMaster, anySlave: anySlave)
     }
 
     private static func compact(handlerArray: inout [PinHandler], pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath]) {

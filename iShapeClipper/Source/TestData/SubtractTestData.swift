@@ -895,6 +895,76 @@ struct SubtractTestData {
                 Point(x: -1, y: 0),
                 Point(x: 0, y: -1)
             ]
+        ],
+        // 46
+        [
+            [
+                IntPoint(x: -2, y: 2),
+                IntPoint(x: 2, y: 2),
+                IntPoint(x: 2, y: 0),
+                IntPoint(x: -2, y: 0)
+            ].points(scale: 40000),
+            [
+                IntPoint(x: -4, y: 7),
+                IntPoint(x: -4, y: -7),
+                IntPoint(x: 3, y: -7),
+                IntPoint(x: 1, y: 7)
+            ].points(scale: 40000)
+        ],
+        // 47
+        [
+            [
+                IntPoint(x: 20173, y: -7262),
+                IntPoint(x: 19201, y: -7433),
+                IntPoint(x: 17047, y: -10000),
+                IntPoint(x: -30000, y: -10000),
+                IntPoint(x: -30000, y: 40000),
+                IntPoint(x: 30000, y: 40000),
+                IntPoint(x: 30000, y: -5388),
+                IntPoint(x: 23624, y: -6512),
+                IntPoint(x: 23617, y: -6520),
+                IntPoint(x: 23317, y: -6573),
+                IntPoint(x: 23299, y: -6595),
+                IntPoint(x: 23071, y: -6635),
+                IntPoint(x: 23054, y: -6656),
+                IntPoint(x: 22826, y: -6696),
+                IntPoint(x: 22798, y: -6729),
+                IntPoint(x: 22641, y: -6757),
+                IntPoint(x: 22602, y: -6804),
+                IntPoint(x: 22518, y: -6819),
+                IntPoint(x: 20430, y: -7187),
+                IntPoint(x: 20412, y: -7209),
+                IntPoint(x: 20184, y: -7249)
+            ].points(scale: 1),
+            [
+                IntPoint(x: 34140, y: -16093),
+                IntPoint(x: 31800, y: -9665),
+                IntPoint(x: 25877, y: -6245),
+                IntPoint(x: 19140, y: -7433),
+                IntPoint(x: 14743, y: -12673),
+                IntPoint(x: 14743, y: -19514),
+                IntPoint(x: 19140, y: -24754),
+                IntPoint(x: 25877, y: -25941),
+                IntPoint(x: 31800, y: -22521)
+            ].points(scale: 1)
         ]
+        
     ]
+}
+
+
+private extension Array where Element == IntPoint {
+    
+    func points(scale: Int64) -> [Point] {
+        var result = [Point](repeating: .zero, count: self.count)
+        let geom = IntGeom.defGeom
+        for i in 0..<self.count {
+            let p = self[i]
+            let x = geom.float(int: p.x * scale)
+            let y = geom.float(int: p.y * scale)
+            result[i] = Point(x: x, y: y)
+        }
+        return result
+    }
+    
 }

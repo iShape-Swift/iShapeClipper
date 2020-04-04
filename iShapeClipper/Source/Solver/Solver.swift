@@ -21,9 +21,21 @@ public struct Solver {
         let cursor = filterNavigator.first()
         
         guard cursor.isNotEmpty else {
-            if master.isContain(hole: slave, isClockWise: false) {
-                return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .hole)
-            } else if slave.isContain(hole: master, isClockWise: true) {
+            if navigator.anySlave > -1 {
+                let isMasterContain = master.isContain(point: slave[navigator.anySlave])
+                if isMasterContain {
+                    return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .hole)
+                }
+            }
+            
+            let isSlaveContain: Bool
+            if navigator.anyMaster > -1 {
+                isSlaveContain = slave.isContain(point: master[navigator.anyMaster])
+            } else {
+                isSlaveContain = slave.isContain(hole: master, isClockWise: true)
+            }
+            
+            if isSlaveContain {
                 return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
             } else {
                 return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .notOverlap)
@@ -52,16 +64,24 @@ public struct Solver {
         let cursor = filterNavigator.first()
     
         guard cursor.isNotEmpty else {
-            let isSlaveHole = master.isContain(hole: slave, isClockWise: false)
-            if isSlaveHole {
-                return SubtractSolution(pathList: .empty, nature: .hole)
-            } else {
-                let isMasterHole = slave.isContain(hole: master, isClockWise: true)
-                if isMasterHole {
-                    return SubtractSolution(pathList: .empty, nature: .empty)
-                } else {
-                    return SubtractSolution(pathList: .empty, nature: .notOverlap)
+            if navigator.anySlave > -1 {
+                let isMasterContain = master.isContain(point: slave[navigator.anySlave])
+                if isMasterContain {
+                    return SubtractSolution(pathList: .empty, nature: .hole)
                 }
+            }
+            
+            let isSlaveContain: Bool
+            if navigator.anyMaster > -1 {
+                isSlaveContain = slave.isContain(point: master[navigator.anyMaster])
+            } else {
+                isSlaveContain = slave.isContain(hole: master, isClockWise: true)
+            }
+            
+            if isSlaveContain {
+                return SubtractSolution(pathList: .empty, nature: .empty)
+            } else {
+                return SubtractSolution(pathList: .empty, nature: .notOverlap)
             }
         }
         
@@ -112,19 +132,35 @@ public struct Solver {
         let cursor = filterNavigator.first()
         
         guard cursor.isNotEmpty else {
+            if navigator.anySlave > -1 {
+                let isMasterContain = master.isContain(point: slave[navigator.anySlave])
+                if isMasterContain {
+                    return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
+                }
+            }
+            
             if navigator.hasContacts {
                 if master.isContain(point: slave.anyInside(isClockWise: true)) {
                     return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
                 }
             } else if master.isContain(point: slave.any) {
                 return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
-            } else if slave.isContain(point: master.any) {
-                return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
+            } else {
+                let isSlaveContain: Bool
+                if navigator.anyMaster > -1 {
+                    isSlaveContain = slave.isContain(point: master[navigator.anyMaster])
+                } else {
+                    isSlaveContain = slave.isContain(hole: master, isClockWise: true)
+                }
+                
+                if isSlaveContain {
+                    return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
+                }
             }
             
             return UnionSolution(pathList: PlainShape.empty, nature: .notOverlap)
         }
-        
+
         if cursor.type == .in_out && slave.isContain(point: master.anyInside(isClockWise: true)) {
             return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
         }

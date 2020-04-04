@@ -46,7 +46,7 @@ public extension Array where Element == IntPoint {
         
         return IntPoint(x: cx + n0x, y: cy + n0y)
     }
-    
+
     func isContain(point p: IntPoint) -> Bool {
         let n = self.count
         var isContain = false
@@ -125,7 +125,7 @@ public extension Array where Element == IntPoint {
         guard !hole.isEmpty else {
             return false
         }
-        
+
         let p = hole.anyInside(isClockWise: isClockWise)
         
         let n = self.count
@@ -147,6 +147,44 @@ public extension Array where Element == IntPoint {
         }
 
         return isContain
+    }
+    
+    func isContain(hole: [IntPoint], probeCount: Int = 5) -> Bool {
+        guard !hole.isEmpty else {
+            return false
+        }
+        let count = hole.count > probeCount ? probeCount : hole.count
+        let step = hole.count / count
+        var j = 0
+        for _ in 0..<count {
+            let p = hole[j]
+            
+            let n = self.count
+            var isContain = false
+            var b = self[n - 1]
+            for i in 0..<n {
+                let a = self[i]
+                
+                let isInRange = (a.y > p.y) != (b.y > p.y)
+                if isInRange {
+                    let dx = b.x - a.x
+                    let dy = b.y - a.y
+                    let sx = (p.y - a.y) * dx / dy + a.x
+                    if p.x < sx {
+                        isContain = !isContain
+                    }
+                }
+                b = a
+            }
+            
+            if !isContain {
+                return false
+            }
+
+            j += step
+        }
+
+        return true
     }
     
     func isContain(hole: [IntPoint], isClockWise: Bool, outPoint: inout IntPoint) -> Bool {
