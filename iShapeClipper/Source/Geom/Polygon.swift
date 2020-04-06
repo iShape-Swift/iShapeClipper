@@ -174,6 +174,12 @@ public extension Array where Element == IntPoint {
                         isContain = !isContain
                     }
                 }
+                
+                if Edge.isContain(a: a, b: b, p: p) {
+                    isContain = true
+                    break
+                }
+
                 b = a
             }
             
@@ -220,4 +226,5 @@ public extension Array where Element == IntPoint {
 
         return isContain
     }
+
 }

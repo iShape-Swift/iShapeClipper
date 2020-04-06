@@ -899,17 +899,17 @@ struct SubtractTestData {
         // 46
         [
             [
-                IntPoint(x: -2, y: 2),
-                IntPoint(x: 2, y: 2),
-                IntPoint(x: 2, y: 0),
-                IntPoint(x: -2, y: 0)
-            ].points(scale: 40000),
+                Point(x: 10, y: -10),
+                Point(x: -10, y: -10),
+                Point(x: -10, y: 5),
+                Point(x: 10, y:  5)
+            ],
             [
-                IntPoint(x: -4, y: 7),
-                IntPoint(x: -4, y: -7),
-                IntPoint(x: 3, y: -7),
-                IntPoint(x: 1, y: 7)
-            ].points(scale: 40000)
+                Point(x: -20, y: 15),
+                Point(x: -20, y: 5),
+                Point(x: 20, y: 5),
+                Point(x: 20, y:  15)
+            ]
         ],
         // 47
         [

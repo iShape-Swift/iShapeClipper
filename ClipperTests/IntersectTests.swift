@@ -1130,7 +1130,7 @@ final class IntersectTests: XCTestCase {
 
         let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
 
-        XCTAssertEqual(solution.nature, .empty)
+        XCTAssertEqual(solution.nature, .equal)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     

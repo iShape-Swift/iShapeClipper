@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		541CED8323471A5800DB43C5 /* iShapeClipper.h in Headers */ = {isa = PBXBuildFile; fileRef = 541CED8123471A5800DB43C5 /* iShapeClipper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		54CD7DBB243AF5A400DDEE37 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CD7DBA243AF5A400DDEE37 /* Edge.swift */; };
 		54D3582D2437941A0088C4AC /* UnionTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3580B2437941A0088C4AC /* UnionTestData.swift */; };
 		54D3582E2437941A0088C4AC /* PinTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3580C2437941A0088C4AC /* PinTestData.swift */; };
 		54D3582F2437941A0088C4AC /* SubtractTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D3580D2437941A0088C4AC /* SubtractTestData.swift */; };
@@ -43,6 +44,7 @@
 		541CED7E23471A5800DB43C5 /* iShapeClipper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iShapeClipper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		541CED8123471A5800DB43C5 /* iShapeClipper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iShapeClipper.h; sourceTree = "<group>"; };
 		541CED8223471A5800DB43C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54CD7DBA243AF5A400DDEE37 /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		54D3580B2437941A0088C4AC /* UnionTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnionTestData.swift; sourceTree = "<group>"; };
 		54D3580C2437941A0088C4AC /* PinTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinTestData.swift; sourceTree = "<group>"; };
 		54D3580D2437941A0088C4AC /* SubtractTestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtractTestData.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				54D3581B2437941A0088C4AC /* Rect.swift */,
 				54D3581C2437941A0088C4AC /* Corner.swift */,
 				54D3581D2437941A0088C4AC /* Polygon.swift */,
+				54CD7DBA243AF5A400DDEE37 /* Edge.swift */,
 			);
 			path = Geom;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				54D358342437941A0088C4AC /* CutSolver.swift in Sources */,
 				54D358482437941A0088C4AC /* CrossDetector.swift in Sources */,
 				54D3583D2437941A0088C4AC /* AdjacencyMatrix.swift in Sources */,
+				54CD7DBB243AF5A400DDEE37 /* Edge.swift in Sources */,
 				54D358462437941A0088C4AC /* PinNavigator.swift in Sources */,
 				54D358352437941A0088C4AC /* Solver.swift in Sources */,
 				54D358452437941A0088C4AC /* PinHandler.swift in Sources */,

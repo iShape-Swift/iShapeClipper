@@ -20,18 +20,18 @@ public extension PlainShape {
     func bite(path: [IntPoint], iGeom: IntGeom) -> BiteSolution {
         let hull = self.get(index: 0)
         
-        let cutHullSolution = Solver.cut(master: hull, slave: path, iGeom: iGeom)
+        let solution = Solver.cut(master: hull, slave: path, iGeom: iGeom)
 
-        switch cutHullSolution.nature {
+        switch solution.nature {
  
         case .notOverlap:
             return BiteSolution(isInteract: false, mainList: .empty, biteList: .empty)
-        case .empty:
+        case .slaveIncludeMaster, .equal:
             return BiteSolution(isInteract: true, mainList: .empty, biteList: PlainShapeList(plainShape: self))
-        case .hole:
+        case .masterIncludeSlave:
             return self.holeCase(cutPath: path, iGeom: iGeom)
         case .overlap:
-            return self.overlapCase(cutHullSolution: cutHullSolution, iGeom: iGeom)
+            return self.overlapCase(solution: solution, iGeom: iGeom)
         }
     }
 
@@ -52,9 +52,9 @@ public extension PlainShape {
         return BiteSolution(isInteract: true, mainList: mainList, biteList: biteList)
     }
     
-    private func overlapCase(cutHullSolution: CutSolution, iGeom: IntGeom) -> BiteSolution {
-        let shapePaths = self.overlapCaseMainList(restPathList: cutHullSolution.restPathList, iGeom: iGeom)
-        let bitList = self.overlapCaseBiteList(bitePathList: cutHullSolution.bitePathList, iGeom: iGeom)
+    private func overlapCase(solution: ComplexSolution, iGeom: IntGeom) -> BiteSolution {
+        let shapePaths = self.overlapCaseMainList(restPathList: solution.restPathList, iGeom: iGeom)
+        let bitList = self.overlapCaseBiteList(bitePathList: solution.bitePathList, iGeom: iGeom)
         
         return BiteSolution(isInteract: true, mainList: shapePaths, biteList: bitList)
     }
@@ -93,7 +93,7 @@ public extension PlainShape {
                 let hole = self.get(index: holeIndex)
                 let diff = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
                 switch diff.nature {
-                case .empty:
+                case .slaveIncludeMaster, .equal:
                     // остров совпал с дыркой
                     shapePaths.remove(index: i)
                     continue nextIsland
@@ -114,7 +114,7 @@ public extension PlainShape {
                         }
                         continue nextIsland
                     }
-                case .hole:
+                case .masterIncludeSlave:
                     usedHoles.append(j)
                 }
             }
@@ -171,7 +171,7 @@ public extension PlainShape {
             switch unionSolution.nature {
             case .notOverlap:
                 notInteractedHoles.append(i)
-            case .masterIncludeSlave:
+            case .masterIncludeSlave, .equal:
                 interactedHoles.append(i)
             case .overlap, .slaveIncludeMaster:
                 interactedHoles.append(i)
@@ -229,7 +229,7 @@ public extension PlainShape {
                 
                 let diffSolution = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
                 switch diffSolution.nature {
-                case .empty:
+                case .slaveIncludeMaster, .equal:
                     // остров совпал с дыркой
                     i += 1
                     continue nextIsland
@@ -244,7 +244,7 @@ public extension PlainShape {
                             islands.add(path: part, isClockWise: true)
                         }
                     }
-                case .hole:
+                case .masterIncludeSlave:
                     islandHoles.append(index)
                 }
             }
@@ -321,9 +321,9 @@ public extension PlainShape {
                     } else {
                         j += 1
                     }
-                case .empty:
+                case .slaveIncludeMaster, .equal:
                     subPaths.remove(index: j)
-                case .hole:
+                case .masterIncludeSlave:
                     holes.add(path: nextHole, isClockWise: false)
                     j += 1
                 }

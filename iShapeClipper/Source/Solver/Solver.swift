@@ -9,168 +9,95 @@ import iGeometry
 
 public struct Solver {
     
-    public static func cut(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> CutSolution {
+    public static func cut(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> ComplexSolution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
-        
-        guard !navigator.isEqual else {
-            return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
-        }
-
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
+        let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
-        let cursor = filterNavigator.first()
-        
-        guard cursor.isNotEmpty else {
-            if navigator.anySlave > -1 {
-                let isMasterContain = master.isContain(point: slave[navigator.anySlave])
-                if isMasterContain {
-                    return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .hole)
-                }
-            }
-            
-            let isSlaveContain: Bool
-            if navigator.anyMaster > -1 {
-                isSlaveContain = slave.isContain(point: master[navigator.anyMaster])
-            } else {
-                isSlaveContain = slave.isContain(hole: master, isClockWise: true)
-            }
-            
-            if isSlaveContain {
-                return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .empty)
-            } else {
-                return CutSolution(restPathList: .empty, bitePathList: .empty, nature: .notOverlap)
-            }
-        }
+        switch nature {
+        case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
+            return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: nature)
+        case .overlap:
+            let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
+            let bitePathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
 
-        let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
-        let bitePathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
-
-        if restPathList.layouts.count > 0 {
-            return CutSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
-        } else {
-            return CutSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .notOverlap)
+            if restPathList.layouts.count > 0 {
+                return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
+            } else {
+                return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .notOverlap)
+            }
         }
     }
     
-    public static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
+    public static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
-    
-        guard !navigator.isEqual else {
-            return SubtractSolution(pathList: .empty, nature: .empty)
-        }
-    
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
+        let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
-        let cursor = filterNavigator.first()
-    
-        guard cursor.isNotEmpty else {
-            if navigator.anySlave > -1 {
-                let isMasterContain = master.isContain(point: slave[navigator.anySlave])
-                if isMasterContain {
-                    return SubtractSolution(pathList: .empty, nature: .hole)
-                }
-            }
+        switch nature {
+        case .notOverlap, .masterIncludeSlave, .slaveIncludeMaster, .equal:
+            return Solution(pathList: PlainShape.empty, nature: nature)
+        case .overlap:
+            let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
             
-            let isSlaveContain: Bool
-            if navigator.anyMaster > -1 {
-                isSlaveContain = slave.isContain(point: master[navigator.anyMaster])
+            if pathList.layouts.count > 0 {
+                return Solution(pathList: pathList, nature: .overlap)
             } else {
-                isSlaveContain = slave.isContain(hole: master, isClockWise: true)
+                return Solution(pathList: pathList, nature: .notOverlap)
             }
-            
-            if isSlaveContain {
-                return SubtractSolution(pathList: .empty, nature: .empty)
-            } else {
-                return SubtractSolution(pathList: .empty, nature: .notOverlap)
-            }
-        }
-        
-        let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
-        
-        if pathList.layouts.count > 0 {
-            return SubtractSolution(pathList: pathList, nature: .overlap)
-        } else {
-            return SubtractSolution(pathList: pathList, nature: .notOverlap)
         }
     }
     
-    public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> SubtractSolution {
+    public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
-    
-        guard !navigator.isEqual else {
-            return SubtractSolution(pathList: .empty, nature: .empty)
-        }
-    
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
+        let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
-        let cursor = filterNavigator.first()
-    
-        guard cursor.isNotEmpty else {
-            return SubtractSolution(pathList: .empty, nature: .notOverlap)
-        }
-        
-        let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
-        
-        if pathList.layouts.count > 0 {
-            return SubtractSolution(pathList: pathList, nature: .overlap)
-        } else {
-            return SubtractSolution(pathList: pathList, nature: .notOverlap)
+        switch nature {
+        case .notOverlap, .masterIncludeSlave, .slaveIncludeMaster, .equal:
+            return Solution(pathList: PlainShape.empty, nature: nature)
+        case .overlap:
+            let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
+            
+            if pathList.layouts.count > 0 {
+                return Solution(pathList: pathList, nature: .overlap)
+            } else {
+                return Solution(pathList: pathList, nature: .notOverlap)
+            }
         }
     }
 
-    public static func union(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> UnionSolution {
+    public static func union(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
-
-        guard !navigator.isEqual else {
-            var pathList = PlainShape.empty
-            pathList.add(path: master, isClockWise: true)
-            return UnionSolution(pathList: pathList, nature: .overlap)
-        }
-        
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .outside, secondary: .in_out)
+        let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: true)
         
-        let cursor = filterNavigator.first()
-        
-        guard cursor.isNotEmpty else {
-            if navigator.anySlave > -1 {
-                let isMasterContain = master.isContain(point: slave[navigator.anySlave])
-                if isMasterContain {
-                    return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
+        switch nature {
+        case .notOverlap, .equal:
+            return Solution(pathList: PlainShape.empty, nature: nature)
+        case .masterIncludeSlave:
+            return Solution(pathList: PlainShape(points: master), nature: nature)
+        case .slaveIncludeMaster:
+            return Solution(pathList: PlainShape(points: slave), nature: nature)
+        case .overlap:
+            let cursor = filterNavigator.first()
+
+            if cursor.type == .in_out {
+                if master.isContain(hole: slave) {
+                    return Solution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
+                }
+                if slave.isContain(hole: master) {
+                    return Solution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
                 }
             }
-            
-            if navigator.hasContacts {
-                if master.isContain(point: slave.anyInside(isClockWise: true)) {
-                    return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
-                }
-            } else if master.isContain(point: slave.any) {
-                return UnionSolution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
+
+            let pathList = Solver.union(navigator: filterNavigator, master: master, slave: slave)
+
+            if pathList.layouts.count > 0 {
+                return Solution(pathList: pathList, nature: .overlap)
             } else {
-                let isSlaveContain: Bool
-                if navigator.anyMaster > -1 {
-                    isSlaveContain = slave.isContain(point: master[navigator.anyMaster])
-                } else {
-                    isSlaveContain = slave.isContain(hole: master, isClockWise: true)
-                }
-                
-                if isSlaveContain {
-                    return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
-                }
+                return Solution(pathList: .empty, nature: .notOverlap)
             }
-            
-            return UnionSolution(pathList: PlainShape.empty, nature: .notOverlap)
-        }
-
-        if cursor.type == .in_out && slave.isContain(point: master.anyInside(isClockWise: true)) {
-            return UnionSolution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
-        }
-        
-        let pathList = Solver.union(navigator: filterNavigator, master: master, slave: slave)
-
-        if pathList.layouts.count > 0 {
-            return UnionSolution(pathList: pathList, nature: .overlap)
-        } else {
-            return UnionSolution(pathList: .empty, nature: .notOverlap)
         }
     }
     

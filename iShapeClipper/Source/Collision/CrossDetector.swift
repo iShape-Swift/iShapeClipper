@@ -28,10 +28,6 @@ struct CrossDetector {
 
         var endsCount = 0
 
-        // mark indices which are on the common path
-        var masterIndexMark = [Bool](repeating: false, count: iMaster.count)
-        var slaveIndexMark = [Bool](repeating: false, count: iSlave.count)
-        
         while i < n {
             let msIx0 = masterIndices[i]
             let msIx1 = msIx0 < msLastIx ? msIx0 + 1 : 0
@@ -75,8 +71,6 @@ struct CrossDetector {
 
                     pinPoints.append(pinPoint)
                 case .end_a0:
-                    masterIndexMark[msIx0] = true
-                    
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
                     
@@ -97,8 +91,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1:
-                    masterIndexMark[msIx1] = true
-                    
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
                     
@@ -119,8 +111,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b0:
-                    slaveIndexMark[slIx0] = true
-                    
                     let prevMs = msIx0
                     let nextMs = msIx1
                     
@@ -141,8 +131,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b1:
-                    slaveIndexMark[slIx1] = true
-                    
                     let prevMs = msIx0
                     let nextMs = msIx1
                     
@@ -163,9 +151,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b0:
-                    masterIndexMark[msIx0] = true
-                    slaveIndexMark[slIx0] = true
-                    
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
 
@@ -186,9 +171,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b1:
-                    masterIndexMark[msIx0] = true
-                    slaveIndexMark[slIx1] = true
-                    
                     let prevMs = (msIx0 - 1 + masterCount) % masterCount
                     let nextMs = msIx1
 
@@ -209,9 +191,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b0:
-                    masterIndexMark[msIx1] = true
-                    slaveIndexMark[slIx0] = true
-                    
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
 
@@ -232,9 +211,6 @@ struct CrossDetector {
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b1:
-                    masterIndexMark[msIx1] = true
-                    slaveIndexMark[slIx1] = true
-                    
                     let prevMs = msIx0
                     let nextMs = (msIx1 + 1) % masterCount
 
@@ -259,9 +235,6 @@ struct CrossDetector {
             
             i = j
         }
-        
-        let anyMaster = masterIndexMark.firstIndex(of: false) ?? -1
-        let anySlave = slaveIndexMark.firstIndex(of: false) ?? -1
         
         var pinPaths: [PinPath]
         var hasExclusion = false
@@ -290,15 +263,16 @@ struct CrossDetector {
             pinPathArray: &pinPaths,
             masterCount: iMaster.count,
             hasExclusion: hasExclusion,
-            anyMaster: anyMaster,
-            anySlave: anySlave
+            masterBox: posMatrix.masterBox,
+            slaveBox: posMatrix.slaveBox
         )
         
         return navigator
     }
 
     private static func createPossibilityMatrix(master: [IntPoint], slave: [IntPoint]) -> AdjacencyMatrix {
-        var slaveBoxArea = Rect.empty
+        var slaveBox = Rect.empty
+        var masterBox = Rect.empty
         
         var slaveSegmentsBoxAreas = [Rect]()
         slaveSegmentsBoxAreas.reserveCapacity(16)
@@ -309,31 +283,34 @@ struct CrossDetector {
             let a = slave[i]
             let b = slave[i != lastSlaveIndex ? i + 1 : 0]
             
-            slaveBoxArea.assimilate(p: a)
+            slaveBox.assimilate(p: a)
             slaveSegmentsBoxAreas.append(Rect(a: a, b: b))
         }
-        
-        var posMatrix = AdjacencyMatrix(size: 0)
-        
+
         let lastMasterIndex = master.count - 1
+        
+        var masterIndices = [Int]()
+        var slaveIndices = [Int]()
         
         for i in 0...lastMasterIndex {
             let master_0 = master[i]
             let master_1 = master[i != lastMasterIndex ? i + 1 : 0]
+            masterBox.assimilate(p: master_0)
 
-            if !slaveBoxArea.isNotIntersecting(a: master_0, b: master_1) {
+            if !slaveBox.isNotIntersecting(a: master_0, b: master_1) {
                 let segmentRect = Rect(a: master_0, b: master_1)
                 for j in 0...lastSlaveIndex {
                     let isIntersectionPossible = slaveSegmentsBoxAreas[j].isIntersecting(rect: segmentRect)
                     
                     if isIntersectionPossible {
-                        posMatrix.addMate(master: i, slave: j)
+                        masterIndices.append(i)
+                        slaveIndices.append(j)
                     }
                 }
             }
         }
-        
-        return posMatrix
+
+        return AdjacencyMatrix(masterBox: masterBox, slaveBox: slaveBox, masterIndices: masterIndices, slaveIndices: slaveIndices)
     }
 
     private static func organize(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinPath] {
@@ -497,7 +474,7 @@ struct CrossDetector {
     
     /// Build  Navigator section
     
-    private static func buildNavigator(pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath], masterCount: Int, hasExclusion: Bool, anyMaster: Int, anySlave: Int) -> PinNavigator {
+    private static func buildNavigator(pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath], masterCount: Int, hasExclusion: Bool, masterBox: Rect, slaveBox: Rect) -> PinNavigator {
         var handlerArray = [PinHandler]()
         handlerArray.reserveCapacity(pinPathArray.count + pinPointArray.count)
 
@@ -521,7 +498,7 @@ struct CrossDetector {
         let hasContacts = hasExclusion || !handlerArray.isEmpty
 
         if handlerArray.isEmpty {
-            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts, anyMaster: anyMaster, anySlave: anySlave)
+            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts, masterBox: masterBox, slaveBox: slaveBox)
         }
         
         if pinPathArray.count > 0 {
@@ -529,7 +506,7 @@ struct CrossDetector {
         }
 
         if handlerArray.isEmpty {
-            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts, anyMaster: anyMaster, anySlave: anySlave)
+            return PinNavigator(slavePath: [], pinPathArray: [], pinPointArray: [], nodeArray: [], hasContacts: hasContacts, masterBox: masterBox, slaveBox: slaveBox)
         }
         
         let slavePath = CrossDetector.streamline(handlerArray: &handlerArray, pinPointArray: pinPointArray, pinPathArray: pinPathArray)
@@ -551,7 +528,7 @@ struct CrossDetector {
             nodes[slaveIndex] = node
         }
 
-        return PinNavigator(slavePath: slavePath, pinPathArray: pinPathArray, pinPointArray: pinPointArray, nodeArray: nodes, hasContacts: hasContacts, anyMaster: anyMaster, anySlave: anySlave)
+        return PinNavigator(slavePath: slavePath, pinPathArray: pinPathArray, pinPointArray: pinPointArray, nodeArray: nodes, hasContacts: hasContacts, masterBox: masterBox, slaveBox: slaveBox)
     }
 
     private static func compact(handlerArray: inout [PinHandler], pinPointArray: inout [PinPoint], pinPathArray: inout [PinPath]) {

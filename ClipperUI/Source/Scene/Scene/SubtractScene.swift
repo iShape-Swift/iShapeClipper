@@ -75,6 +75,21 @@ final class SubtractScene: CoordinateSystemScene {
                 self.addSublayer(ShapeArea(points: points, color: Colors.master_second))
             }
         }
+        
+        switch solution.nature {
+        case .overlap:
+            for points in solution.pathList.pathes {
+                let points = iGeom.float(points: points).toCGPoints()
+                self.addSublayer(ShapeArea(points: points, color: Colors.solution_second))
+            }
+        case .masterIncludeSlave:
+            break
+        case .slaveIncludeMaster, .equal:
+            self.addSublayer(ShapeArea(points: master.toCGPoints(), color: Colors.solution_second))
+        case .notOverlap:
+            let points = master.toCGPoints()
+            self.addSublayer(ShapeArea(points: points, color: Colors.master_second))
+        }
     }
     
     private func addPins() {

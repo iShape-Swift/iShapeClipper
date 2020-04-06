@@ -7,11 +7,12 @@
 
 import iGeometry
 
-public struct UnionSolution {
+public struct Solution {
     
     public enum Nature {
         case notOverlap
         case overlap
+        case equal
         case masterIncludeSlave
         case slaveIncludeMaster
     }
@@ -43,13 +44,31 @@ public struct SubtractSolution {
     }
 }
 
-public struct CutSolution {
+public struct IntersectSolution {
+    
+    public enum Nature {
+        case notOverlap
+        case overlap
+    }
+
+    public let pathList: PlainShape
+    public let nature: Nature
+
+    init(pathList: PlainShape, nature: Nature) {
+        self.pathList = pathList
+        self.nature = nature
+    }
+}
+
+
+
+public struct ComplexSolution {
 
     public let restPathList: PlainShape
     public let bitePathList: PlainShape
-    public let nature: SubtractSolution.Nature
+    public let nature: Solution.Nature
 
-    init(restPathList: PlainShape, bitePathList: PlainShape, nature: SubtractSolution.Nature) {
+    init(restPathList: PlainShape, bitePathList: PlainShape, nature: Solution.Nature) {
         self.restPathList = restPathList
         self.bitePathList = bitePathList
         self.nature = nature

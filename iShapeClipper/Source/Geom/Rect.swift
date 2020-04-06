@@ -66,6 +66,10 @@ struct Rect {
     func isIntersecting(rect: Rect) -> Bool {
         return !(maxX < rect.minX || minX > rect.maxX || maxY < rect.minY || minY > rect.maxY)
     }
+    
+    func isInside(rect: Rect) -> Bool {
+        return maxX >= rect.maxX && minX <= rect.minX && maxY >= rect.maxY && minY <= rect.minY
+    }
    
 }
 

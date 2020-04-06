@@ -1191,7 +1191,7 @@ final class SubtractTests: XCTestCase {
 
         let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
 
-        XCTAssertEqual(solution.nature, .empty)
+        XCTAssertEqual(solution.nature, .equal)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     
@@ -1313,6 +1313,27 @@ final class SubtractTests: XCTestCase {
         XCTAssertEqual(path, sample)
     }
 
+    
+    func test_46() {
+        let data = SubtractTestData.data[46]
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .notOverlap)
+    }
+    
+    func test_47() {
+        let data = SubtractTestData.data[47]
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+
+        let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
+        
+        XCTAssertEqual(solution.nature, .notOverlap)
+    }
+    
     func test_100() {
         let master = [
             IntPoint(x: -2, y: 2),
@@ -1330,7 +1351,7 @@ final class SubtractTests: XCTestCase {
 
         let solution = Solver.subtract(master: master, slave: slave, iGeom: iGeom)
         
-        XCTAssertEqual(solution.nature, .empty)
+        XCTAssertEqual(solution.nature, .slaveIncludeMaster)
     }
 
 }

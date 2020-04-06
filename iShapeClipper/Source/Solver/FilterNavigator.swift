@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import iGeometry
 
 struct FilterNavigator {
     
@@ -65,4 +66,27 @@ struct FilterNavigator {
         return .empty
     }
     
+    func nature(master: [IntPoint], slave: [IntPoint], isSlaveClockWise: Bool) -> Solution.Nature {
+        guard !navigator.isEqual else {
+            return .equal
+        }
+        let cursor = self.first()
+        if cursor.isNotEmpty {
+            return .overlap
+        } else if self.navigator.hasContacts {
+            if self.navigator.masterBox.isInside(rect: self.navigator.slaveBox) && master.isContain(hole: slave, isClockWise: isSlaveClockWise) {
+                return .masterIncludeSlave
+            }
+            if self.navigator.slaveBox.isInside(rect: self.navigator.masterBox) && slave.isContain(hole: master, isClockWise: true) {
+                return .slaveIncludeMaster
+            }
+            return .notOverlap
+        } else if master.isContain(point: slave[0]) {
+            return .masterIncludeSlave
+        } else if slave.isContain(point: master[0]) {
+            return .slaveIncludeMaster
+        } else {
+            return .notOverlap
+        }
+    }
 }

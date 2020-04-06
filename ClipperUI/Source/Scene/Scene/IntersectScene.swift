@@ -67,11 +67,15 @@ final class IntersectScene: CoordinateSystemScene {
         let solution = Solver.intersect(master: iMaster, slave: iSlave, iGeom: iGeom)
 
         switch solution.nature {
-        case .overlap, .hole, .empty:
+        case .overlap:
             for points in solution.pathList.pathes {
                 let points = iGeom.float(points: points).toCGPoints()
                 self.addSublayer(ShapeArea(points: points, color: Colors.solution_second))
             }
+        case .masterIncludeSlave, .equal:
+            self.addSublayer(ShapeArea(points: master.toCGPoints(), color: Colors.solution_second))
+        case .slaveIncludeMaster:
+            self.addSublayer(ShapeArea(points: slave.toCGPoints(), color: Colors.solution_second))
         case .notOverlap:
             break
         }
