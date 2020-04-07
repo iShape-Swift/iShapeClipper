@@ -24,6 +24,20 @@ public struct Solver {
             return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
         }
     }
+
+    public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
+        let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
+        
+        switch nature {
+        case .notOverlap, .masterIncludeSlave, .slaveIncludeMaster, .equal:
+            return Solution(pathList: PlainShape.empty, nature: nature)
+        case .overlap:
+            let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
+            return Solution(pathList: pathList, nature: .overlap)
+        }
+    }
     
     public static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
@@ -35,20 +49,6 @@ public struct Solver {
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
             let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
-            return Solution(pathList: pathList, nature: .overlap)
-        }
-    }
-    
-    public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
-        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
-        let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
-        let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
-        
-        switch nature {
-        case .notOverlap, .masterIncludeSlave, .slaveIncludeMaster, .equal:
-            return Solution(pathList: PlainShape.empty, nature: nature)
-        case .overlap:
-            let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
             return Solution(pathList: pathList, nature: .overlap)
         }
     }
