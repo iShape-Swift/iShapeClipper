@@ -26,42 +26,6 @@ public struct Solution {
     }
 }
 
-public struct SubtractSolution {
-    
-    public enum Nature {
-        case notOverlap
-        case overlap
-        case empty
-        case hole
-    }
-
-    public let pathList: PlainShape
-    public let nature: Nature
-
-    init(pathList: PlainShape, nature: Nature) {
-        self.pathList = pathList
-        self.nature = nature
-    }
-}
-
-public struct IntersectSolution {
-    
-    public enum Nature {
-        case notOverlap
-        case overlap
-    }
-
-    public let pathList: PlainShape
-    public let nature: Nature
-
-    init(pathList: PlainShape, nature: Nature) {
-        self.pathList = pathList
-        self.nature = nature
-    }
-}
-
-
-
 public struct ComplexSolution {
 
     public let restPathList: PlainShape

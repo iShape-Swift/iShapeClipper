@@ -76,9 +76,9 @@ public struct Solver {
         case .notOverlap, .equal:
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .masterIncludeSlave:
-            return Solution(pathList: PlainShape(points: master), nature: nature)
+            return Solution(pathList: PlainShape.empty, nature: nature)
         case .slaveIncludeMaster:
-            return Solution(pathList: PlainShape(points: slave), nature: nature)
+            return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
             let cursor = filterNavigator.first()
 

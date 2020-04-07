@@ -45,10 +45,10 @@ struct PinNavigator {
         self.pinPathArray = pinPathArray
         self.pinPointArray = pinPointArray
         self.nodeArray = nodeArray
-        self.masterBox = masterBox
-        self.slaveBox = slaveBox
         self.isEqual = false
         self.hasContacts = hasContacts
+        self.masterBox = masterBox
+        self.slaveBox = slaveBox
     }
     
     init() {

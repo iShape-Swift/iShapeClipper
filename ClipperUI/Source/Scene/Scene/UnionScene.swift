@@ -70,6 +70,10 @@ final class UnionScene: CoordinateSystemScene {
         case .notOverlap:
             self.addSublayer(ShapeArea(points: master.toCGPoints(), color: Colors.alphaBlue))
             self.addSublayer(ShapeArea(points: slave.toCGPoints(), color: Colors.alphaBlue))
+        case .masterIncludeSlave:
+            self.addSublayer(ShapeArea(points: master.toCGPoints(), color: Colors.solution))
+        case .slaveIncludeMaster:
+            self.addSublayer(ShapeArea(points: slave.toCGPoints(), color: Colors.solution))
         default:
             for layout in solution.pathList.layouts {
                 if layout.isClockWise {

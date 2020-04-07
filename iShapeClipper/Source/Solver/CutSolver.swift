@@ -173,7 +173,10 @@ public extension PlainShape {
                 notInteractedHoles.append(i)
             case .masterIncludeSlave, .equal:
                 interactedHoles.append(i)
-            case .overlap, .slaveIncludeMaster:
+            case .slaveIncludeMaster:
+                interactedHoles.append(i)
+                rootHole = nextHole
+            case .overlap:
                 interactedHoles.append(i)
                 let uShape = unionSolution.pathList
                 for j in 0..<uShape.layouts.count {
