@@ -73,21 +73,19 @@ public struct Solver {
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: true)
         
         switch nature {
-        case .notOverlap, .equal:
-            return Solution(pathList: PlainShape.empty, nature: nature)
-        case .masterIncludeSlave:
-            return Solution(pathList: PlainShape.empty, nature: nature)
-        case .slaveIncludeMaster:
+        case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
             let cursor = filterNavigator.first()
 
             if cursor.type == .in_out {
                 if master.isContain(hole: slave) {
-                    return Solution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
+                    return Solution(pathList: PlainShape.empty, nature: .masterIncludeSlave)
+//                    return Solution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
                 }
                 if slave.isContain(hole: master) {
-                    return Solution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
+                    return Solution(pathList: PlainShape.empty, nature: .slaveIncludeMaster)
+//                    return Solution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
                 }
             }
 

@@ -1383,21 +1383,7 @@ final class UnionTests: XCTestCase {
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .slaveIncludeMaster)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
-        
-        let pathes = solution.pathList.pathes
-        
-        let path = iGeom.float(points: pathes[0])
-        
-        let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
-        ]
-        
-        XCTAssertEqual(path, sample)
-
+        XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     
     func test_46() {
@@ -1409,20 +1395,5 @@ final class UnionTests: XCTestCase {
         let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
         
         XCTAssertEqual(solution.nature, .slaveIncludeMaster)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
-        
-        let pathes = solution.pathList.pathes
-        
-        let path = iGeom.float(points: pathes[0])
-        
-        let sample = [
-            Point(x: -10.0, y: 10.0),
-            Point(x: 10.0, y: 10.0),
-            Point(x: 10.0, y: -10.0),
-            Point(x: -10.0, y: -10.0)
-        ]
-        
-        XCTAssertEqual(path, sample)
-
     }
 }
