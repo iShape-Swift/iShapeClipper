@@ -8,17 +8,7 @@
 import iGeometry
 
 public extension Array where Element == IntPoint {
-    
-    var any: IntPoint {
-        if self.count > 1 {
-            let a = self[0]
-            let b = self[1]
-            return IntPoint(x: (a.x + b.x) >> 1, y: (a.y + b.y) >> 1)
-        } else {
-            return self[0]
-        }
-    }
-    
+
     func anyInside(isClockWise: Bool) -> IntPoint {
         let n = self.count
         guard n > 1 else {
@@ -68,59 +58,7 @@ public extension Array where Element == IntPoint {
 
         return isContain
     }
-    
-    func isOverlap(points: [IntPoint]) -> Bool {
-        let n = points.count
-        var a = points[n - 1]
-        for i in 0..<n {
-            let b = points[i]
-            let c = IntPoint(x: (a.x + b.x) >> 1, y: (a.y + b.y) >> 1)
-            if self.isContain(point: c) {
-                return true
-            }
-            a = b
-        }
 
-        return false
-    }
-    
-    
-    /// Is current path is contain the other one
-    /// - Parameter path: test path
-    /// - Parameter isClockWise: clock-wise order of hole
-    /// - Parameter outFactor: if the path is a hole, it's hole factor value
-    func isContain(hole: [IntPoint], isClockWise: Bool, outFactor: inout Int64) -> Bool {
-        guard !hole.isEmpty else {
-            return false
-        }
-        outFactor = Int64.min
-        
-        let p = hole.anyInside(isClockWise: isClockWise)
-        
-        let n = self.count
-        var isContain = false
-        var b = self[n - 1]
-        for i in 0..<n {
-            let a = self[i]
-            
-            let isInRange = (a.y > p.y) != (b.y > p.y)
-            if isInRange {
-                let dx = b.x - a.x
-                let dy = b.y - a.y
-                let sx = (p.y - a.y) * dx / dy + a.x
-                if p.x < sx {
-                    isContain = !isContain
-                    if outFactor < sx {
-                       outFactor = sx
-                    }
-                }
-            }
-            b = a
-        }
-
-        return isContain
-    }
-    
     func isContain(hole: [IntPoint], isClockWise: Bool) -> Bool {
         guard !hole.isEmpty else {
             return false
@@ -149,15 +87,16 @@ public extension Array where Element == IntPoint {
         return isContain
     }
     
-    func isContain(hole: [IntPoint], probeCount: Int = 5) -> Bool {
-        guard !hole.isEmpty else {
+    func isContain(path: [IntPoint], probeCount: Int = 5) -> Bool {
+        let length = path.count
+        guard length != 0 else {
             return false
         }
-        let count = hole.count > probeCount ? probeCount : hole.count
-        let step = hole.count / count
+        let count = length > probeCount ? probeCount : length
+        let step = length / count
         var j = 0
-        for _ in 0..<count {
-            let p = hole[j]
+        repeat {
+            let p = path[j]
             
             let n = self.count
             var isContain = false
@@ -188,7 +127,7 @@ public extension Array where Element == IntPoint {
             }
 
             j += step
-        }
+        } while j < length
 
         return true
     }
@@ -226,5 +165,5 @@ public extension Array where Element == IntPoint {
 
         return isContain
     }
-
+    
 }

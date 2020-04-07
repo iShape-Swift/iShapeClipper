@@ -21,11 +21,7 @@ public struct Solver {
             let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
             let bitePathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
 
-            if restPathList.layouts.count > 0 {
-                return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
-            } else {
-                return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .notOverlap)
-            }
+            return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
         }
     }
     
@@ -35,16 +31,11 @@ public struct Solver {
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
         switch nature {
-        case .notOverlap, .masterIncludeSlave, .slaveIncludeMaster, .equal:
+        case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
             let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
-            
-            if pathList.layouts.count > 0 {
-                return Solution(pathList: pathList, nature: .overlap)
-            } else {
-                return Solution(pathList: pathList, nature: .notOverlap)
-            }
+            return Solution(pathList: pathList, nature: .overlap)
         }
     }
     
@@ -58,12 +49,7 @@ public struct Solver {
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
             let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
-            
-            if pathList.layouts.count > 0 {
-                return Solution(pathList: pathList, nature: .overlap)
-            } else {
-                return Solution(pathList: pathList, nature: .notOverlap)
-            }
+            return Solution(pathList: pathList, nature: .overlap)
         }
     }
 
@@ -79,23 +65,16 @@ public struct Solver {
             let cursor = filterNavigator.first()
 
             if cursor.type == .in_out {
-                if master.isContain(hole: slave) {
+                if master.isContain(path: slave) {
                     return Solution(pathList: PlainShape.empty, nature: .masterIncludeSlave)
-//                    return Solution(pathList: PlainShape(points: master), nature: .masterIncludeSlave)
                 }
-                if slave.isContain(hole: master) {
+                if slave.isContain(path: master) {
                     return Solution(pathList: PlainShape.empty, nature: .slaveIncludeMaster)
-//                    return Solution(pathList: PlainShape(points: slave), nature: .slaveIncludeMaster)
                 }
             }
 
             let pathList = Solver.union(navigator: filterNavigator, master: master, slave: slave)
-
-            if pathList.layouts.count > 0 {
-                return Solution(pathList: pathList, nature: .overlap)
-            } else {
-                return Solution(pathList: .empty, nature: .notOverlap)
-            }
+            return Solution(pathList: pathList, nature: .overlap)
         }
     }
     
