@@ -91,8 +91,8 @@ public extension PlainShape {
             for j in 0..<holes.count {
                 let holeIndex = holes[j]
                 let hole = self.get(index: holeIndex)
-                let diff = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
-                switch diff.nature {
+                let subtract = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
+                switch subtract.nature {
                 case .slaveIncludeMaster, .equal:
                     // остров совпал с дыркой
                     shapePaths.remove(index: i)
@@ -101,15 +101,15 @@ public extension PlainShape {
                     continue
                 case .overlap:
                     var islandsCount: Int = 0
-                    for layout in diff.pathList.layouts where layout.isClockWise {
+                    for layout in subtract.pathList.layouts where layout.isClockWise {
                         islandsCount += 1
                     }
                     if islandsCount == 1 {
-                        island = diff.pathList.get(index: 0)
+                        island = subtract.pathList.get(index: 0)
                     } else {
                         shapePaths.remove(index: i)
-                        for layout in diff.pathList.layouts where layout.isClockWise {
-                            let newIsland = diff.pathList.get(layout: layout)
+                        for layout in subtract.pathList.layouts where layout.isClockWise {
+                            let newIsland = subtract.pathList.get(layout: layout)
                             shapePaths.add(path: newIsland, isClockWise: true)
                         }
                         continue nextIsland
@@ -166,9 +166,9 @@ public extension PlainShape {
             var nextHole = self.get(index: i)
             nextHole.invert()
             
-            let unionSolution = Solver.union(master: rootHole, slave: nextHole, iGeom: iGeom)
+            let union = Solver.union(master: rootHole, slave: nextHole, iGeom: iGeom)
             
-            switch unionSolution.nature {
+            switch union.nature {
             case .notOverlap:
                 notInteractedHoles.append(i)
             case .masterIncludeSlave, .equal:
@@ -178,7 +178,7 @@ public extension PlainShape {
                 rootHole = nextHole
             case .overlap:
                 interactedHoles.append(i)
-                let uShape = unionSolution.pathList
+                let uShape = union.pathList
                 for j in 0..<uShape.layouts.count {
                     if uShape.layouts[j].isClockWise {
                         rootHole = uShape.get(index: j)
@@ -230,8 +230,8 @@ public extension PlainShape {
                 let index = interactedHoles[j]
                 let hole = self.get(index: index)
                 
-                let diffSolution = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
-                switch diffSolution.nature {
+                let subtract = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
+                switch subtract.nature {
                 case .slaveIncludeMaster, .equal:
                     // остров совпал с дыркой
                     i += 1
@@ -240,10 +240,10 @@ public extension PlainShape {
                     // нет пересечений
                     break
                 case .overlap:
-                    island = diffSolution.pathList.get(index: 0)
-                    if diffSolution.pathList.layouts.count > 1 {
-                        for s in 1..<diffSolution.pathList.layouts.count {
-                            let part = diffSolution.pathList.get(index: s)
+                    island = subtract.pathList.get(index: 0)
+                    if subtract.pathList.layouts.count > 1 {
+                        for s in 1..<subtract.pathList.layouts.count {
+                            let part = subtract.pathList.get(index: s)
                             islands.add(path: part, isClockWise: true)
                         }
                     }
@@ -299,15 +299,15 @@ public extension PlainShape {
             var j = 0
             while j < subPaths.layouts.count {
                 let bitPath = subPaths.get(index: j)
-                let solution = Solver.subtract(master: bitPath, slave: nextHole, iGeom: iGeom)
-                switch solution.nature {
+                let subtract = Solver.subtract(master: bitPath, slave: nextHole, iGeom: iGeom)
+                switch subtract.nature {
                 case .notOverlap:
                     j += 1
                 case .overlap:
                     var newSubPathCount = 0
-                    for k in 0..<solution.pathList.layouts.count {
-                        if solution.pathList.layouts[k].isClockWise {
-                            let subPath = solution.pathList.get(index: k)
+                    for k in 0..<subtract.pathList.layouts.count {
+                        if subtract.pathList.layouts[k].isClockWise {
+                            let subPath = subtract.pathList.get(index: k)
                             if newSubPathCount == 0 {
                                 subPaths.replace(index: j, path: subPath)
                             } else {
@@ -315,7 +315,7 @@ public extension PlainShape {
                             }
                             newSubPathCount += 1
                         } else {
-                            let holePath = solution.pathList.get(index: k)
+                            let holePath = subtract.pathList.get(index: k)
                             holes.add(path: holePath, isClockWise: false)
                         }
                     }
