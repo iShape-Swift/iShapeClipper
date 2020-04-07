@@ -9,6 +9,15 @@ import iGeometry
 
 struct CrossDetector {
     
+    private struct AdjacencyMatrix {
+
+        let masterBox: Rect
+        let slaveBox: Rect
+        let masterIndices: [Int]
+        let slaveIndices: [Int]
+
+    }
+    
     internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: PinPoint.PinType) -> PinNavigator {
         let posMatrix = CrossDetector.createPossibilityMatrix(master: iMaster, slave: iSlave)
         
