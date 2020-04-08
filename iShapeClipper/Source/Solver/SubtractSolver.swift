@@ -87,7 +87,7 @@ extension Solver {
                 
                 cursor = subNavigator.navigator.nextMaster(cursor: outCursor)
                 subNavigator.navigator.mark(cursor: cursor)
-                
+
                 // out-in master path
                 
                 let outMasterEnd = subNavigator.navigator.masterEndStone(cursor: outCursor)

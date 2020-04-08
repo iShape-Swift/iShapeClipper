@@ -68,8 +68,15 @@ public struct PolygonPointTestData {
         )
     ]
 }
-
 private extension Array where Element == IntPoint {
+    func scale(value: Int64) -> [IntPoint] {
+        var result = Array(repeating: .zero, count: self.count)
+        for i in 0..<self.count {
+            let p = self[i]
+            result[i] = IntPoint(x: p.x * value, y: p.y * value)
+        }
+        return result
+    }
     
     func points(scale: Int64 = 1) -> [Point] {
         var result = [Point](repeating: .zero, count: self.count)
@@ -82,5 +89,10 @@ private extension Array where Element == IntPoint {
         }
         return result
     }
-    
+}
+
+private extension Array where Element == Point {
+    var int: [IntPoint] {
+        return IntGeom.defGeom.int(points: self)
+    }
 }

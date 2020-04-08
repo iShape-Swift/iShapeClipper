@@ -13,8 +13,8 @@ import iGeometry
 final class PinScene: CoordinateSystemScene {
 
     private static let indexKey = String(describing: PinScene.self)
-    private var master: [Point] = []
-    private var slave: [Point] = []
+    private var master: [IntPoint] = []
+    private var slave: [IntPoint] = []
     
 
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: PinScene.indexKey)
@@ -60,8 +60,8 @@ final class PinScene: CoordinateSystemScene {
 
     private func addPins() {
         let iGeom = IntGeom.defGeom
-        let iMaster = iGeom.int(points: master)
-        let iSlave = iGeom.int(points: slave)
+        let iMaster = master
+        let iSlave = slave
         let result = CrossDetector.getPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: .null)
         let points = result.points
         let paths = result.path
@@ -85,7 +85,7 @@ final class PinScene: CoordinateSystemScene {
             data[i] = String(i)
         }
         
-        let points = master.toCGPoints()
+        let points = IntGeom.defGeom.float(points: master).toCGPoints()
 
         self.addSublayer(ShapeVectorPolygon(points: points, shift: 0, tip: 1, lineWidth: 0.25, color: Colors.master, indexShift: -2, data: data))
     }
@@ -98,7 +98,7 @@ final class PinScene: CoordinateSystemScene {
             data[i] = String(i)
         }
         
-        let points = slave.toCGPoints()
+        let points = IntGeom.defGeom.float(points: slave).toCGPoints()
 
         self.addSublayer(ShapeVectorPolygon(points: points, shift: 0, tip: 1, lineWidth: 0.25, color: Colors.slave, indexShift: 2, data: data))
     }
@@ -134,13 +134,13 @@ extension PinScene: MouseCompatible {
     
     
     func mouseDown(point: CGPoint) {
-        if let index = findNearest(point: point.point, points: slave) {
+        if let index = findNearest(point: point.point, points: IntGeom.defGeom.float(points: slave)) {
             self.activeIndex = index
             self.isSlave = true
             return
         }
         
-        if let index = findNearest(point: point.point, points: master) {
+        if let index = findNearest(point: point.point, points: IntGeom.defGeom.float(points: master)) {
             self.activeIndex = index
             self.isSlave = false
             return
@@ -160,10 +160,10 @@ extension PinScene: MouseCompatible {
             return
         }
 
-        let x = Float(Int(point.x * 2)) / 2
-        let y = Float(Int(point.y * 2)) / 2
-        
-        let point = Point(x: x, y: y)
+        let x = IntGeom.defGeom.int(float: Float(Int(point.x * 2)) / 2)
+        let y = IntGeom.defGeom.int(float: Float(Int(point.y * 2)) / 2)
+
+        let point = IntPoint(x: x, y: y)
         if isSlave {
             let prevPoint = self.slave[index]
             if point != prevPoint {

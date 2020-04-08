@@ -1997,3 +1997,9 @@ final class BiteTests: XCTestCase {
         )
     }
 }
+
+private extension Array where Element == Point {
+    var int: [IntPoint] {
+        return IntGeom.defGeom.int(points: self)
+    }
+}

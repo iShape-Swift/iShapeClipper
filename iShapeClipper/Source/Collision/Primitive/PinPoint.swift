@@ -93,10 +93,10 @@ public struct PinPoint {
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
-    static func buildOnSlave(def: Def, iGeom: IntGeom) -> PinPoint {
+    static func buildOnSlave(def: Def) -> PinPoint {
         // TODO try to find more simple implementation, like buildOnMaster
         
-        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1, iGeom: iGeom)
+        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1)
 
         let isSl0 = corner.isBetween(p: def.sl0, clockwise: true)
         let isSl1 = corner.isBetween(p: def.sl1, clockwise: true)
@@ -113,8 +113,8 @@ public struct PinPoint {
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
-    static func buildOnCross(def: Def, iGeom: IntGeom) -> PinPoint {
-        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1, iGeom: iGeom)
+    static func buildOnCross(def: Def) -> PinPoint {
+        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1)
 
         let isSl0 = corner.isBetween(p: def.sl0, clockwise: true)
         let isSl1 = corner.isBetween(p: def.sl1, clockwise: true)

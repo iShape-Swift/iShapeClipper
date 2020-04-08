@@ -48,7 +48,7 @@ struct IntersectorResult {
 extension CrossDetector {
     
     static func getPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: PinPoint.PinType) -> IntersectorResult {
-        let navigator = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, iGeom: iGeom, exclusionPinType: exclusionPinType)
+        let navigator = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: exclusionPinType)
         
         var borders = [EdgePath]()
         var points = [Pin]()

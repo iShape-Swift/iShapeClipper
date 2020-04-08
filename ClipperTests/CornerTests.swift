@@ -20,8 +20,7 @@ final class CornerTests: XCTestCase {
         let corner = Corner(
             o: iGeom.int(point: Point(x: 0, y: 0)),
             a: iGeom.int(point: Point(x: 0, y: 10)),
-            b: iGeom.int(point: Point(x: 10, y: 0)),
-            iGeom: iGeom
+            b: iGeom.int(point: Point(x: 10, y: 0))
         )
         
         XCTAssertEqual(corner.isBetween(p: iGeom.int(point: Point(x: 5, y: 5))), false)
@@ -37,8 +36,7 @@ final class CornerTests: XCTestCase {
         let corner = Corner(
             o: iGeom.int(point: Point(x: 0, y: 0)),
             a: iGeom.int(point: Point(x: -10, y: 0)),
-            b: iGeom.int(point: Point(x: 10, y: 0)),
-            iGeom: iGeom
+            b: iGeom.int(point: Point(x: 10, y: 0))
         )
         
         XCTAssertEqual(corner.isBetween(p: iGeom.int(point: Point(x: 0, y: 5))), false)
@@ -55,8 +53,7 @@ final class CornerTests: XCTestCase {
         let corner = Corner(
             o: iGeom.int(point: Point(x: 0, y: 0)),
             a: iGeom.int(point: Point(x: -10, y: -10)),
-            b: iGeom.int(point: Point(x: 10, y: -10)),
-            iGeom: iGeom
+            b: iGeom.int(point: Point(x: 10, y: -10))
         )
         
         XCTAssertEqual(corner.isBetween(p: iGeom.int(point: Point(x: 10, y: 0))), false)
@@ -73,8 +70,7 @@ final class CornerTests: XCTestCase {
         let corner = Corner(
             o: iGeom.int(point: Point(x: 0, y: 0)),
             a: iGeom.int(point: Point(x: -10, y: 0)),
-            b: iGeom.int(point: Point(x: 0, y: -10)),
-            iGeom: iGeom
+            b: iGeom.int(point: Point(x: 0, y: -10))
         )
         
         XCTAssertEqual(corner.isBetween(p: iGeom.int(point: Point(x: -5, y: -5))), true)
@@ -94,8 +90,7 @@ final class CornerTests: XCTestCase {
         let corner = Corner(
             o: iGeom.int(point: Point(x: 10, y: 10)),
             a: iGeom.int(point: Point(x: 10, y: 20)),
-            b: iGeom.int(point: Point(x: 20, y: 10)),
-            iGeom: iGeom
+            b: iGeom.int(point: Point(x: 20, y: 10))
         )
         
         XCTAssertEqual(corner.isBetween(p: iGeom.int(point: Point(x: 15, y: 15))), false)

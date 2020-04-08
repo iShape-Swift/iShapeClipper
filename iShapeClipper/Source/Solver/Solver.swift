@@ -10,7 +10,7 @@ import iGeometry
 public struct Solver {
     
     public static func cut(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> ComplexSolution {
-        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, exclusionPinType: PinPoint.PinType.in_out)
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
@@ -26,7 +26,7 @@ public struct Solver {
     }
 
     public static func intersect(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
-        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, exclusionPinType: PinPoint.PinType.in_out)
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
@@ -40,7 +40,7 @@ public struct Solver {
     }
     
     public static func subtract(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
-        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.in_out)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, exclusionPinType: PinPoint.PinType.in_out)
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
@@ -54,7 +54,7 @@ public struct Solver {
     }
 
     public static func union(master: [IntPoint], slave: [IntPoint], iGeom: IntGeom) -> Solution {
-        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, iGeom: iGeom, exclusionPinType: PinPoint.PinType.out_in)
+        let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, exclusionPinType: PinPoint.PinType.out_in)
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .outside, secondary: .in_out)
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: true)
         

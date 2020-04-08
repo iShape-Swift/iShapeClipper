@@ -18,12 +18,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: 5, y: 10),
                 Point(x: -5, y: 10)
-            ]
+            ].int
         ],
         // 1
         [
@@ -32,12 +32,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: -10, y: 5),
                 Point(x: -10, y: -5)
-            ]
+            ].int
         ],
         // 2
         [
@@ -46,12 +46,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: 5, y: -10),
                 Point(x: -5, y: -10)
-            ]
+            ].int
         ],
         // 3
         [
@@ -60,12 +60,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: 10, y: -5),
                 Point(x: 10, y: 5)
-            ]
+            ].int
         ],
         // 4
         [
@@ -74,12 +74,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: 10, y: 10),
                 Point(x: -10, y: 10)
-            ]
+            ].int
         ],
         // 5
         [
@@ -88,12 +88,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: -10)
-            ]
+            ].int
         ],
         // 6
         [
@@ -102,12 +102,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ]
+            ].int
         ],
         // 7
         [
@@ -116,12 +116,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 0),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: 10)
-            ]
+            ].int
         ],
         // 8
         [
@@ -130,13 +130,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 10, y: 5),
                 Point(x: 10, y: 10),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: 5)
-            ]
+            ].int
         ],
         // 9
         [
@@ -145,13 +145,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -5, y: 10),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: -10),
                 Point(x: -5, y: -10)
-            ]
+            ].int
         ],
         // 10
         [
@@ -160,13 +160,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -10, y: -5),
                 Point(x: -10, y: -10),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: -5)
-            ]
+            ].int
         ],
         // 11
         [
@@ -175,13 +175,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 5, y: -10),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: 10),
                 Point(x: 5, y: 10)
-            ]
+            ].int
         ],
         // 12
         [
@@ -190,12 +190,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 10, y: 0),
                 Point(x: 10, y: 10),
                 Point(x: 0, y: 10)
-            ]
+            ].int
         ],
         // 13
         [
@@ -204,12 +204,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 10),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: 0)
-            ]
+            ].int
         ],
         // 14
         [
@@ -218,12 +218,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -10, y: 0),
                 Point(x: -10, y: -10),
                 Point(x: 0, y: -10)
-            ]
+            ].int
         ],
         // 15
         [
@@ -232,12 +232,12 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: -10),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: 0)
-            ]
+            ].int
         ],
         // 16
         [
@@ -246,14 +246,14 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: 10),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: -10),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: 0)
-            ]
+            ].int
         ],
         // 17
         [
@@ -262,14 +262,14 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -10, y: 0),
                 Point(x: -10, y: -10),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: 10),
                 Point(x: 0, y: 10)
-            ]
+            ].int
         ],
         // 18
         [
@@ -278,14 +278,14 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 0, y: -10),
                 Point(x: 10, y: -10),
                 Point(x: 10, y: 10),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: 0)
-            ]
+            ].int
         ],
         // 19
         [
@@ -294,14 +294,14 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 10, y: 0),
                 Point(x: 10, y: 10),
                 Point(x: -10, y: 10),
                 Point(x: -10, y: -10),
                 Point(x: 0, y: -10)
-            ]
+            ].int
         ],
         // 20
         [
@@ -310,13 +310,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -5, y: 10),
                 Point(x: -5, y: 20),
                 Point(x: -15, y: 20),
                 Point(x: -15, y: 10)
-            ]
+            ].int
         ],
         // 21
         [
@@ -325,13 +325,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -5, y: 0),
                 Point(x: -5, y: 10),
                 Point(x: -15, y: 10),
                 Point(x: -15, y: 0)
-            ]
+            ].int
         ],
         // 22
         [
@@ -340,13 +340,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 5, y: 10),
                 Point(x: 5, y: 20),
                 Point(x: 15, y: 20),
                 Point(x: 15, y: 10)
-            ]
+            ].int
         ],
         // 23
         [
@@ -355,13 +355,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 5, y: 0),
                 Point(x: 5, y: 10),
                 Point(x: 15, y: 10),
                 Point(x: 15, y: 0)
-            ]
+            ].int
         ],
         // 24
         [
@@ -370,13 +370,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 10, y: 10),
                 Point(x: 10, y: 20),
                 Point(x: -10, y: 20),
                 Point(x: -10, y: 10)
-            ]
+            ].int
         ],
         // 25
         [
@@ -385,13 +385,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: 5, y: -10),
                 Point(x: 5, y: 10),
                 Point(x: -5, y: 10),
                 Point(x: -5, y: -10)
-            ]
+            ].int
         ],
         // 26
         [
@@ -400,13 +400,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -10, y: 0),
                 Point(x: -10, y: 10),
                 Point(x: -20, y: 10),
                 Point(x: -20, y: 0)
-            ]
+            ].int
         ],
         // 27
         [
@@ -415,13 +415,13 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: 0),
                 Point(x: -10, y: 0)
-            ],
+            ].int,
             [
                 Point(x: -15, y: -30),
                 Point(x: -15, y: 30),
                 Point(x: 10 - IntGeom.defGeom.float(int: 1), y: 30),
                 Point(x: 10 + IntGeom.defGeom.float(int: 1), y: -30)
-            ]
+            ].int
         ],
         // 28
         [
@@ -430,13 +430,59 @@ struct PinTestData {
                 Point(x: 10, y: 10),
                 Point(x: 10, y: -10),
                 Point(x: -10, y: -10)
-            ],
+            ].int,
             [
                 Point(x: -15, y: -30),
                 Point(x: -15, y: 30),
                 Point(x: 10 - IntGeom.defGeom.float(int: 1), y: 30),
                 Point(x: 10 + IntGeom.defGeom.float(int: 1), y: -30)
-            ]
+            ].int
+        ],
+        // 29
+        [
+            [
+                IntPoint(x: 4410, y: 2200),
+                IntPoint(x: 4638, y: 2160),
+                IntPoint(x: 12909, y: 0),
+
+                IntPoint(x: -10000, y: 0),
+                IntPoint(x: -10000, y: 10000),
+                IntPoint(x: 4410, y: 10000),
+            ].scale(value: 1),
+            [
+                IntPoint(x: 6970, y: 15000),
+                IntPoint(x: 0, y: 15000),
+                IntPoint(x: 233, y: 2937),
+                IntPoint(x: 6970, y: 1749),
+            ].scale(value: 1)
         ]
     ]
+}
+private extension Array where Element == IntPoint {
+    func scale(value: Int64) -> [IntPoint] {
+        var result = Array(repeating: .zero, count: self.count)
+        for i in 0..<self.count {
+            let p = self[i]
+            result[i] = IntPoint(x: p.x * value, y: p.y * value)
+        }
+        return result
+    }
+    
+    func points(scale: Int64 = 1) -> [Point] {
+        var result = [Point](repeating: .zero, count: self.count)
+        let geom = IntGeom.defGeom
+        for i in 0..<self.count {
+            let p = self[i]
+            let x = geom.float(int: p.x * scale)
+            let y = geom.float(int: p.y * scale)
+            result[i] = Point(x: x, y: y)
+        }
+        return result
+    }
+}
+
+private extension Array where Element == Point {
+    var int: [IntPoint] {
+        return IntGeom.defGeom.int(points: self)
+    }
 }

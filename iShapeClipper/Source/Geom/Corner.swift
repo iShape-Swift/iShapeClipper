@@ -10,66 +10,51 @@ import Foundation
 import iGeometry
 
 struct Corner {
-    
-    private let basis: IntPoint
+
     private let a: IntPoint
     private let b: IntPoint
     private let o: IntPoint
-    private let projection: Int64
-    private let isCWS: Bool
-    private let iGeom: IntGeom
+    private let isInnerCornerCW: Bool
     
-    init(o: IntPoint, a: IntPoint, b: IntPoint, iGeom: IntGeom) {
+    init(o: IntPoint, a: IntPoint, b: IntPoint) {
         self.o = o
         self.a = a
         self.b = b
-        
-        self.basis = IntPoint(x: o.x - a.x, y: o.y - a.y).normal(iGeom: iGeom)
-        let satellite = IntPoint(x: o.x - b.x, y: o.y - b.y).normal(iGeom: iGeom)
-        
-        self.projection = basis.scalarMultiply(point: satellite)
-        self.isCWS = Corner.isCCWDirection(a: a, b: o, c: b)
-        self.iGeom = iGeom
+        self.isInnerCornerCW = Corner.isClockWise(a: a, b: o, c: b) == 1
     }
 
     func isBetween(p: IntPoint, clockwise: Bool = false) -> Bool {
-        let target = IntPoint(x: o.x - p.x, y: o.y - p.y).normal(iGeom: iGeom)
-        let targetProjection = basis.scalarMultiply(point: target)
-        let isTragetCWS = Corner.isCCWDirection(a: a, b: o, c: p)
-
-        let result: Bool
-        
-        if self.isCWS && isTragetCWS {
-            result = targetProjection > self.projection
-        } else if (!self.isCWS && !isTragetCWS) {
-            result = targetProjection < self.projection
-        } else {
-            result = !self.isCWS
+        let aop = Corner.isClockWise(a: a, b: o, c: p)
+        let bop = Corner.isClockWise(a: b, b: o, c: p)
+        guard aop != 0 && bop != 0 else {
+            return clockwise != self.isInnerCornerCW
         }
+        let isClockWiseAOP = aop == 1
+        let isClockWiseBOP = bop == 1
+        
+        
+        let isInner = isClockWiseAOP != isClockWiseBOP && self.isInnerCornerCW == isClockWiseAOP
 
-        return result != clockwise
+        if isInnerCornerCW == clockwise {
+            return isInner
+        } else {
+            return !isInner
+        }
     }
-    
-    func isOnBorder(p: IntPoint) -> Bool {
-        let dir = p - o
-        let testA = Corner.isSameDirection(a: a - o, b: dir)
-        let testB = Corner.isSameDirection(a: b - o, b: dir)
 
-        return testA || testB
-    }
-    
-    private static func isSameDirection(a: IntPoint, b: IntPoint) -> Bool {
-        let isSameLine = a.x * b.y == a.y * b.x
-        let isSameDirection = a.x * b.x >= 0 && a.y * b.y >= 0
-        return isSameLine && isSameDirection
-    }
-    
-    
-    private static func isCCWDirection(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
+    private static func isClockWise(a: IntPoint, b: IntPoint, c: IntPoint) -> Int {
         let m0 = (c.y - a.y) * (b.x - a.x)
         let m1 = (b.y - a.y) * (c.x - a.x)
+
+        if m0 < m1 {
+            return -1
+        }
         
-        return m0 < m1
+        if m0 > m1 {
+            return 1
+        }
+
+        return 0
     }
 
 }

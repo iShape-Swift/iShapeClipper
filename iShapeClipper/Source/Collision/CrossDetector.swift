@@ -18,7 +18,7 @@ struct CrossDetector {
 
     }
     
-    internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], iGeom: IntGeom, exclusionPinType: PinPoint.PinType) -> PinNavigator {
+    internal static func findPins(iMaster: [IntPoint], iSlave: [IntPoint], exclusionPinType: PinPoint.PinType) -> PinNavigator {
         let posMatrix = CrossDetector.createPossibilityMatrix(master: iMaster, slave: iSlave)
         
         let masterIndices = posMatrix.masterIndices
@@ -96,7 +96,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0, offset: sl0.sqrDistance(point: point))
                     )
 
-                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef, iGeom: iGeom)
+                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1:
@@ -116,7 +116,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0, offset: sl0.sqrDistance(point: point))
                     )
 
-                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef, iGeom: iGeom)
+                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b0:
@@ -176,7 +176,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
+                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b1:
@@ -196,7 +196,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx1)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
+                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b0:
@@ -216,7 +216,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
+                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b1:
@@ -236,7 +236,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx1)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef, iGeom: iGeom)
+                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 }

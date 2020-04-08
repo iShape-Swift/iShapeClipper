@@ -18,7 +18,8 @@ final class BiteScene: CoordinateSystemScene {
     private var shapeLayouts: [PlainShape.Layout] = []
     private var path: [IntPoint] = []
     
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: BiteScene.indexKey)
+//    private var pageIndex: Int = UserDefaults.standard.integer(forKey: BiteScene.indexKey)
+    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
     private var isPath: Bool = false
