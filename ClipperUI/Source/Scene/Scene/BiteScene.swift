@@ -62,7 +62,7 @@ final class BiteScene: CoordinateSystemScene {
     private func addSolution() {
         let plainShape = PlainShape(points: self.shapePoints, layouts: self.shapeLayouts)
         let iSlave = self.path
-        let solution = plainShape.bite(path: iSlave, iGeom: IntGeom.defGeom)
+        let solution = plainShape.bite(path: iSlave)
 
         if solution.isInteract {
             if !solution.mainList.segments.isEmpty {

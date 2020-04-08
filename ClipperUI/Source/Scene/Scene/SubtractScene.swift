@@ -63,7 +63,7 @@ final class SubtractScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let solution = Solver.subtract(master: iMaster, slave: iSlave, iGeom: iGeom)
+        let solution = Solver.subtract(master: iMaster, slave: iSlave)
 
         switch solution.nature {
         case .notOverlap:

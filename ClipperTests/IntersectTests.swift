@@ -20,7 +20,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -41,7 +41,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -63,7 +63,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -85,7 +85,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -108,7 +108,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -131,7 +131,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -155,7 +155,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -180,7 +180,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -204,7 +204,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -227,7 +227,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -249,7 +249,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -271,7 +271,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -294,7 +294,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -316,7 +316,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .notOverlap)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -329,7 +329,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -355,7 +355,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -377,7 +377,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .notOverlap)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -390,7 +390,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -423,7 +423,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -456,7 +456,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -478,7 +478,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -500,7 +500,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -522,7 +522,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -545,7 +545,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -569,7 +569,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -592,7 +592,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -615,7 +615,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -638,7 +638,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -670,7 +670,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -703,7 +703,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -734,7 +734,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -767,7 +767,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -802,7 +802,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 3)
@@ -844,7 +844,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 3)
@@ -893,7 +893,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 4)
@@ -949,7 +949,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -981,7 +981,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1013,7 +1013,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 3)
@@ -1052,7 +1052,7 @@ final class IntersectTests: XCTestCase {
         let slave = iGeom.int(points: data[1])
         
         
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 4)
@@ -1105,7 +1105,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1128,7 +1128,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
 
         XCTAssertEqual(solution.nature, .equal)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -1139,7 +1139,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1161,7 +1161,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1183,7 +1183,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1203,7 +1203,7 @@ final class IntersectTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
 
-        let solution = Solver.intersect(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.intersect(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)

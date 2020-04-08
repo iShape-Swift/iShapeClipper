@@ -64,7 +64,7 @@ final class UnionScene: CoordinateSystemScene {
         let iGeom = IntGeom.defGeom
         let iMaster = iGeom.int(points: master)
         let iSlave = iGeom.int(points: slave)
-        let solution = Solver.union(master: iMaster, slave: iSlave, iGeom: iGeom)
+        let solution = Solver.union(master: iMaster, slave: iSlave)
 
         switch solution.nature {
         case .notOverlap:

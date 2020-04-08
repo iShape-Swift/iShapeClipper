@@ -21,7 +21,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -47,7 +47,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -73,7 +73,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -98,7 +98,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -122,7 +122,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -145,7 +145,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -169,7 +169,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -196,7 +196,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -224,7 +224,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -236,7 +236,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -248,7 +248,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -260,7 +260,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -284,7 +284,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -296,7 +296,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -321,7 +321,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -333,7 +333,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -358,7 +358,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -394,7 +394,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -453,7 +453,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -509,7 +509,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -522,7 +522,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -535,7 +535,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -560,7 +560,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -601,7 +601,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -629,7 +629,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -655,7 +655,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -684,7 +684,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -696,7 +696,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -722,7 +722,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -769,7 +769,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -813,7 +813,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -856,7 +856,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -890,7 +890,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -924,7 +924,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -965,7 +965,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 3)
@@ -1015,7 +1015,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 3)
@@ -1074,7 +1074,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1103,7 +1103,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1141,7 +1141,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 5)
@@ -1216,7 +1216,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1255,7 +1255,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1281,7 +1281,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .masterIncludeSlave)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -1293,7 +1293,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .slaveIncludeMaster)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -1305,7 +1305,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 2)
@@ -1348,7 +1348,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
         XCTAssertEqual(solution.pathList.layouts.count, 1)
@@ -1380,7 +1380,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .slaveIncludeMaster)
         XCTAssertEqual(solution.pathList.layouts.count, 0)
@@ -1392,7 +1392,7 @@ final class UnionTests: XCTestCase {
         let master = iGeom.int(points: data[0])
         let slave = iGeom.int(points: data[1])
         
-        let solution = Solver.union(master: master, slave: slave, iGeom: iGeom)
+        let solution = Solver.union(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .slaveIncludeMaster)
     }

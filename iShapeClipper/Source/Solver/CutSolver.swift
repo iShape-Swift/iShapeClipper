@@ -17,10 +17,10 @@ public struct BiteSolution {
 
 public extension PlainShape {
 
-    func bite(path: [IntPoint], iGeom: IntGeom) -> BiteSolution {
+    func bite(path: [IntPoint]) -> BiteSolution {
         let hull = self.get(index: 0)
         
-        let solution = Solver.cut(master: hull, slave: path, iGeom: iGeom)
+        let solution = Solver.cut(master: hull, slave: path)
 
         switch solution.nature {
  
@@ -29,14 +29,14 @@ public extension PlainShape {
         case .slaveIncludeMaster, .equal:
             return BiteSolution(isInteract: true, mainList: .empty, biteList: PlainShapeList(plainShape: self))
         case .masterIncludeSlave:
-            return self.holeCase(cutPath: path, iGeom: iGeom)
+            return self.holeCase(cutPath: path)
         case .overlap:
-            return self.overlapCase(solution: solution, iGeom: iGeom)
+            return self.overlapCase(solution: solution)
         }
     }
 
     // если дыра находится внутри полигона
-    private func holeCase(cutPath: [IntPoint], iGeom: IntGeom) -> BiteSolution {
+    private func holeCase(cutPath: [IntPoint]) -> BiteSolution {
         let n = self.layouts.count
         guard n > 1 else {
             // у исходного полигона нету других дыр
@@ -46,20 +46,20 @@ public extension PlainShape {
             return BiteSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), biteList: biteList)
         }
         
-        let mainList = self.holeCaseMainList(cutPath: cutPath, iGeom: iGeom)
-        let biteList = self.holeCaseBiteList(cutPath: cutPath, iGeom: iGeom)
+        let mainList = self.holeCaseMainList(cutPath: cutPath)
+        let biteList = self.holeCaseBiteList(cutPath: cutPath)
         
         return BiteSolution(isInteract: true, mainList: mainList, biteList: biteList)
     }
     
-    private func overlapCase(solution: ComplexSolution, iGeom: IntGeom) -> BiteSolution {
-        let shapePaths = self.overlapCaseMainList(restPathList: solution.restPathList, iGeom: iGeom)
-        let bitList = self.overlapCaseBiteList(bitePathList: solution.bitePathList, iGeom: iGeom)
+    private func overlapCase(solution: ComplexSolution) -> BiteSolution {
+        let shapePaths = self.overlapCaseMainList(restPathList: solution.restPathList)
+        let bitList = self.overlapCaseBiteList(bitePathList: solution.bitePathList)
         
         return BiteSolution(isInteract: true, mainList: shapePaths, biteList: bitList)
     }
     
-    private func overlapCaseMainList(restPathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
+    private func overlapCaseMainList(restPathList: PlainShape) -> PlainShapeList {
         let n = self.layouts.count
         guard n > 1 else {
             let count = restPathList.layouts.count
@@ -91,7 +91,7 @@ public extension PlainShape {
             for j in 0..<holes.count {
                 let holeIndex = holes[j]
                 let hole = self.get(index: holeIndex)
-                let subtract = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
+                let subtract = Solver.subtract(master: island, slave: hole)
                 switch subtract.nature {
                 case .slaveIncludeMaster, .equal:
                     // остров совпал с дыркой
@@ -137,17 +137,17 @@ public extension PlainShape {
         return result
     }
     
-    private func overlapCaseBiteList(bitePathList: PlainShape, iGeom: IntGeom) -> PlainShapeList {
+    private func overlapCaseBiteList(bitePathList: PlainShape) -> PlainShapeList {
         var subPaths = PlainShape(pointsCapacity: bitePathList.points.count, layoutsCapacity: bitePathList.layouts.count)
         for i in 0..<bitePathList.layouts.count {
             let subPath: [IntPoint] = bitePathList.get(index: i).reversed()
             subPaths.add(path: subPath, isClockWise: true)
         }
-        return self.biteList(subPaths: &subPaths, iGeom: iGeom)
+        return self.biteList(subPaths: &subPaths)
     }
     
     
-    private func holeCaseMainList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+    private func holeCaseMainList(cutPath: [IntPoint]) -> PlainShapeList {
         let n = self.layouts.count
         
         // новая дыра
@@ -166,7 +166,7 @@ public extension PlainShape {
             var nextHole = self.get(index: i)
             nextHole.invert()
             
-            let union = Solver.union(master: rootHole, slave: nextHole, iGeom: iGeom)
+            let union = Solver.union(master: rootHole, slave: nextHole)
             
             switch union.nature {
             case .notOverlap:
@@ -230,7 +230,7 @@ public extension PlainShape {
                 let index = interactedHoles[j]
                 let hole = self.get(index: index)
                 
-                let subtract = Solver.subtract(master: island, slave: hole, iGeom: iGeom)
+                let subtract = Solver.subtract(master: island, slave: hole)
                 switch subtract.nature {
                 case .slaveIncludeMaster, .equal:
                     // остров совпал с дыркой
@@ -281,12 +281,12 @@ public extension PlainShape {
         return shapeParts
     }
     
-    private func holeCaseBiteList(cutPath: [IntPoint], iGeom: IntGeom) -> PlainShapeList {
+    private func holeCaseBiteList(cutPath: [IntPoint]) -> PlainShapeList {
         var subPaths = PlainShape(points: cutPath.reversed())
-        return self.biteList(subPaths: &subPaths, iGeom: iGeom)
+        return self.biteList(subPaths: &subPaths)
     }
     
-    private func biteList(subPaths: inout PlainShape, iGeom: IntGeom) -> PlainShapeList {
+    private func biteList(subPaths: inout PlainShape) -> PlainShapeList {
         // откусим от новой дыры все имеющиеся дыры полигона
     
         let n = self.layouts.count
@@ -299,7 +299,7 @@ public extension PlainShape {
             var j = 0
             while j < subPaths.layouts.count {
                 let bitPath = subPaths.get(index: j)
-                let subtract = Solver.subtract(master: bitPath, slave: nextHole, iGeom: iGeom)
+                let subtract = Solver.subtract(master: bitPath, slave: nextHole)
                 switch subtract.nature {
                 case .notOverlap:
                     j += 1
