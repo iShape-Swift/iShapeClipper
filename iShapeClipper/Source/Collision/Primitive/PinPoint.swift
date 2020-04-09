@@ -10,7 +10,8 @@ import iGeometry
 public struct PinPoint {
     
     struct Def {
-        
+
+        let dp: DPoint
         let pt: IntPoint
         let ms0: IntPoint
         let ms1: IntPoint
@@ -20,6 +21,7 @@ public struct PinPoint {
         let slaveMileStone: PathMileStone
 
         init(
+            dp: DPoint,
             pt: IntPoint,
             ms0: IntPoint,
             ms1: IntPoint,
@@ -28,6 +30,7 @@ public struct PinPoint {
             masterMileStone: PathMileStone,
             slaveMileStone: PathMileStone
         ) {
+            self.dp = dp
             self.pt = pt
             self.ms0 = ms0
             self.ms1 = ms1
@@ -96,10 +99,10 @@ public struct PinPoint {
     static func buildOnSlave(def: Def) -> PinPoint {
         // TODO try to find more simple implementation, like buildOnMaster
         
-        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1)
+        let corner = Corner(d0: def.dp, o: def.pt, a: def.ms0, b: def.ms1)
 
-        let isSl0 = corner.isBetween(p: def.sl0, clockwise: true)
-        let isSl1 = corner.isBetween(p: def.sl1, clockwise: true)
+        let isSl0 = corner.isBetweenDoubleVersion(p: def.sl0, clockwise: true)
+        let isSl1 = corner.isBetweenDoubleVersion(p: def.sl1, clockwise: true)
 
         let type: PinType
         if isSl0 && isSl1 {
@@ -114,10 +117,10 @@ public struct PinPoint {
     }
 
     static func buildOnCross(def: Def) -> PinPoint {
-        let corner = Corner(o: def.pt, a: def.ms0, b: def.ms1)
+        let corner = Corner(d0: def.dp, o: def.pt, a: def.ms0, b: def.ms1)
 
-        let isSl0 = corner.isBetween(p: def.sl0, clockwise: true)
-        let isSl1 = corner.isBetween(p: def.sl1, clockwise: true)
+        let isSl0 = corner.isBetweenIntVersion(p: def.sl0, clockwise: true)
+        let isSl1 = corner.isBetweenIntVersion(p: def.sl1, clockwise: true)
 
         let type: PinType
         if isSl0 && isSl1 {

@@ -447,13 +447,50 @@ struct PinTestData {
 
                 IntPoint(x: -10000, y: 0),
                 IntPoint(x: -10000, y: 10000),
-                IntPoint(x: 4410, y: 10000),
+                IntPoint(x: 4410, y: 10000)
             ].scale(value: 1),
             [
                 IntPoint(x: 6970, y: 15000),
                 IntPoint(x: 0, y: 15000),
                 IntPoint(x: 233, y: 2937),
                 IntPoint(x: 6970, y: 1749),
+            ].scale(value: 1)
+        ],
+        // 30
+        [
+            [
+                IntPoint(x: 100000, y: 50000),
+                IntPoint(x: 100000, y: 200000),
+                IntPoint(x: -100000, y: 200000),
+                IntPoint(x: -100000, y: -200000),
+                IntPoint(x: 100000, y: -200000),
+                IntPoint(x: 100000, y: -50000),
+                IntPoint(x: 150000, y: -50000),
+                IntPoint(x: 150000, y: -250000),
+                IntPoint(x: -150000, y: -250000),
+                IntPoint(x: -150000, y: 250000),
+                IntPoint(x: 150000, y: 250000),
+                IntPoint(x: 150000, y: 50000)
+            ].scale(value: 1),
+            [
+                IntPoint(x: -200000, y: 50000),
+                IntPoint(x: -200000, y: -50000),
+                IntPoint(x: 200000, y: -50000),
+                IntPoint(x: 200000, y: 50000)
+            ].scale(value: 1)
+        ],
+        // 31
+        [
+            [
+                IntPoint(x: 0, y: 100000),
+                IntPoint(x: 200000, y: 100000),
+                IntPoint(x: 200000, y: -100000),
+                IntPoint(x: 0, y: -100000)
+            ].scale(value: 1),
+            [
+                IntPoint(x: -200000, y: -100000),
+                IntPoint(x: 100000, y: -100000),
+                IntPoint(x: 200000, y: 100000)
             ].scale(value: 1)
         ]
     ]

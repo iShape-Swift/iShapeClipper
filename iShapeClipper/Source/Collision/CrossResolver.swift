@@ -38,7 +38,7 @@ struct CrossResolver {
         return 0
     }
     
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint) -> IntPoint {
+    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, dp: inout DPoint) -> IntPoint {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
         let dyA = a0.y - a1.y
@@ -53,14 +53,16 @@ struct CrossResolver {
         
         let x = xyA * Double(b0.x - b1.x) - Double(a0.x - a1.x) * xyB
         let y = xyA * Double(b0.y - b1.y) - Double(a0.y - a1.y) * xyB
+
+        let cx = x * invert_divider
+        let cy = y * invert_divider
         
-        let cx = round(x * invert_divider)
-        let cy = round(y * invert_divider)
-        
-        return IntPoint(x: Int64(cx), y: Int64(cy))
+        dp = DPoint(x: cx, y: cy)
+
+        return IntPoint(x: Int64(round(cx)), y: Int64(round(cy)))
     }
 
-    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint) -> CrossType {
+    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint, dp: inout DPoint) -> CrossType {
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
         let d2 = CrossResolver.isCCW(a: a0, b: a1, c: b0)
@@ -72,6 +74,7 @@ struct CrossResolver {
             }
             if d0 == 0 {
                 cross = a0
+                dp = DPoint(iPoint: a0)
                 if d2 == 0 || d3 == 0 {
                     if d2 == 0 {
                         return .end_a0_b0
@@ -86,6 +89,7 @@ struct CrossResolver {
             }
             if d1 == 0 {
                 cross = a1
+                dp = DPoint(iPoint: a1)
                 if d2 == 0 || d3 == 0 {
                     if d2 == 0 {
                         return .end_a1_b0
@@ -101,16 +105,18 @@ struct CrossResolver {
             if d0 != d1 {
                 if d2 == 0 {
                     cross = b0
+                    dp = DPoint(iPoint: b0)
                     return .end_b0
                 } else {
                     cross = b1
+                    dp = DPoint(iPoint: b1)
                     return .end_b1
                 }
             } else {
                 return .not_cross
             }
         } else if d0 != d1 && d2 != d3 {
-            cross = CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1)
+            cross = CrossResolver.cross(a0: a0, a1: a1, b0: b0, b1: b1, dp: &dp)
             // still can be ends (watch case union 44)
             let isA0 = a0 == cross
             let isA1 = a1 == cross

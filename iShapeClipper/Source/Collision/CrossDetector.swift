@@ -54,7 +54,8 @@ struct CrossDetector {
                 let sl1 = iSlave[slIx1]
                 
                 var point: IntPoint = .zero
-                let crossType = CrossResolver.defineType(a0: ms0, a1: ms1, b0: sl0, b1: sl1, cross: &point)
+                var dp: DPoint = .zero
+                let crossType = CrossResolver.defineType(a0: ms0, a1: ms1, b0: sl0, b1: sl1, cross: &point, dp: &dp)
                 
                 // .not_cross, .pure are the most possible cases (more then 99%)
                 
@@ -67,6 +68,7 @@ struct CrossDetector {
                     // simple intersection and most common case
                    
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: ms0,
                         ms1: ms1,
@@ -87,6 +89,7 @@ struct CrossDetector {
                     let nextSl = slIx1
 
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -107,6 +110,7 @@ struct CrossDetector {
                     let nextSl = slIx1
 
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -127,6 +131,7 @@ struct CrossDetector {
                     let nextSl = slIx1
 
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -147,6 +152,7 @@ struct CrossDetector {
                     let nextSl = (slIx1 + 1) % slaveCount
 
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -167,6 +173,7 @@ struct CrossDetector {
                     let nextSl = slIx1
                     
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -187,6 +194,7 @@ struct CrossDetector {
                     let nextSl = (slIx1 + 1) % slaveCount
                     
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -207,6 +215,7 @@ struct CrossDetector {
                     let nextSl = slIx1
                     
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],
@@ -227,6 +236,7 @@ struct CrossDetector {
                     let nextSl = (slIx1 + 1) % slaveCount
                     
                     let pinPointDef = PinPoint.Def(
+                        dp: dp,
                         pt: point,
                         ms0: iMaster[prevMs],
                         ms1: iMaster[nextMs],

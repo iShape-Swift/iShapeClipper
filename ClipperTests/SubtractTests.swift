@@ -1311,6 +1311,7 @@ final class SubtractTests: XCTestCase {
         ]
         
         XCTAssertEqual(path, sample)
+        
     }
 
     
@@ -1331,7 +1332,7 @@ final class SubtractTests: XCTestCase {
 
         let solution = Solver.subtract(master: master, slave: slave)
         
-        XCTAssertEqual(solution.nature, .notOverlap)
+        XCTAssertEqual(solution.nature, .overlap)
     }
     
     func test_100() {
