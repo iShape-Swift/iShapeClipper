@@ -83,6 +83,7 @@ public struct PinPoint {
 
 
     static func buildOnMaster(def: Def) -> PinPoint {
+        /*
         let isCCW0 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl0)
         let isCCW1 = PinPoint.isCCW(a: def.pt, b: def.ms1, c: def.sl1)
 
@@ -94,33 +95,96 @@ public struct PinPoint {
         }
 
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
+        */
+        
+        let corner = Corner(d0: def.dp, o: def.pt, a: def.ms0, b: def.ms1)
+        
+        let s0 = corner.isBetweenDoubleVersion(p: def.sl0, clockwise: true)
+        let s1 = corner.isBetweenDoubleVersion(p: def.sl1, clockwise: true)
+        
+        let type: PinType
+        
+        if s0 == .onBoarder || s1 == .onBoarder {
+            if s0 == .onBoarder && s1 == .onBoarder {
+                type = .null
+            } else if s0 != .onBoarder {
+                type = s0 == .contain ? .inside : .outside
+            } else {
+                type = s1 == .contain ? .outside : .inside
+            }
+        } else {
+            let isSl0 = s0 == .contain
+            let isSl1 = s1 == .contain
+
+            
+            if isSl0 && isSl1 {
+                type = .in_out
+            } else if !isSl0 && !isSl1 {
+                type = .out_in
+            } else {
+                type = isSl0 ? .inside : .outside
+            }
+        }
+
+        return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
     static func buildOnSlave(def: Def) -> PinPoint {
         // TODO try to find more simple implementation, like buildOnMaster
         
+//        let corner = Corner(d0: def.dp, o: def.pt, a: def.ms0, b: def.ms1)
+//
+//        let isSl0 = corner.isBetweenDoubleVersion(p: def.sl0, clockwise: true) == .inner
+//        let isSl1 = corner.isBetweenDoubleVersion(p: def.sl1, clockwise: true) == .inner
+//
+//        let type: PinType
+//        if isSl0 && isSl1 {
+//            type = .in_out
+//        } else if !isSl0 && !isSl1 {
+//            type = .out_in
+//        } else {
+//            type = isSl0 ? .inside : .outside
+//        }
+//
+//        return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
+        
         let corner = Corner(d0: def.dp, o: def.pt, a: def.ms0, b: def.ms1)
-
-        let isSl0 = corner.isBetweenDoubleVersion(p: def.sl0, clockwise: true)
-        let isSl1 = corner.isBetweenDoubleVersion(p: def.sl1, clockwise: true)
-
+        
+        let s0 = corner.isBetweenDoubleVersion(p: def.sl0, clockwise: true)
+        let s1 = corner.isBetweenDoubleVersion(p: def.sl1, clockwise: true)
+        
         let type: PinType
-        if isSl0 && isSl1 {
-            type = .in_out
-        } else if !isSl0 && !isSl1 {
-            type = .out_in
+        
+        if s0 == .onBoarder || s1 == .onBoarder {
+            if s0 == .onBoarder && s1 == .onBoarder {
+                type = .null
+            } else if s0 != .onBoarder {
+                type = s0 == .contain ? .inside : .outside
+            } else {
+                type = s1 == .contain ? .outside : .inside
+            }
         } else {
-            type = isSl0 ? .inside : .outside
-        }
+            let isSl0 = s0 == .contain
+            let isSl1 = s1 == .contain
 
+            
+            if isSl0 && isSl1 {
+                type = .in_out
+            } else if !isSl0 && !isSl1 {
+                type = .out_in
+            } else {
+                type = isSl0 ? .inside : .outside
+            }
+        }
+        
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
     static func buildOnCross(def: Def) -> PinPoint {
         let corner = Corner(d0: def.dp, o: def.pt, a: def.ms0, b: def.ms1)
 
-        let isSl0 = corner.isBetweenIntVersion(p: def.sl0, clockwise: true)
-        let isSl1 = corner.isBetweenIntVersion(p: def.sl1, clockwise: true)
+        let isSl0 = corner.isBetweenIntVersion(p: def.sl0, clockwise: true) == .contain
+        let isSl1 = corner.isBetweenIntVersion(p: def.sl1, clockwise: true) == .contain
 
         let type: PinType
         if isSl0 && isSl1 {

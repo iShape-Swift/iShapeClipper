@@ -492,6 +492,34 @@ struct PinTestData {
                 IntPoint(x: 100000, y: -100000),
                 IntPoint(x: 200000, y: 100000)
             ].scale(value: 1)
+        ],
+        // 32
+        [
+            [
+                IntPoint(x: -18, y: -7),
+                IntPoint(x: -18, y: -6848),
+                IntPoint(x: -10000, y: -6848),
+                IntPoint(x: -10000, y: 10000),
+                IntPoint(x: 5000, y: 10000),
+//
+//                IntPoint(x: 4629, y: 25547),
+                IntPoint(x: 4450, y: 5515),
+                IntPoint(x: 53, y: 275),
+                IntPoint(x: 53, y: 219),
+                IntPoint(x: -18, y: 134)
+            ].scale(value: 20),
+            [
+                IntPoint(x: 19379, y: -3004),
+                IntPoint(x: 17040, y: 3424),
+                IntPoint(x: 11116, y: 6844),
+                IntPoint(x: 4379, y: 5656),
+
+                IntPoint(x: -18, y: 416),
+                IntPoint(x: -18, y: -6424),
+                IntPoint(x: 4379, y: -11664),
+                IntPoint(x: 11116, y: -12852),
+                IntPoint(x: 17040, y: -9432)
+            ].scale(value: 20)
         ]
     ]
 }

@@ -10,6 +10,12 @@ import iGeometry
 
 struct Corner {
 
+    enum Result {
+        case onBoarder
+        case contain
+        case absent
+    }
+    
     private let o: IntPoint
     private let a: IntPoint
     private let b: IntPoint
@@ -32,30 +38,72 @@ struct Corner {
         self.isInnerCornerCW = Corner.isClockWise(a: self.a, b: self.o, c: self.b) == 1
     }
 
-    func isBetweenIntVersion(p: IntPoint, clockwise: Bool = false) -> Bool {
+    func isBetweenIntVersion(p: IntPoint, clockwise: Bool) -> Result {
         let aop = Corner.isClockWise(a: a, b: o, c: p)
         let bop = Corner.isClockWise(a: b, b: o, c: p)
         guard aop != 0 && bop != 0 else {
-            return clockwise != self.isInnerCornerCW
+            if aop == 0 && bop == 0 {
+                return .onBoarder
+            }
+            let dotProduct: Int64
+            if aop == 0 {
+                let ao = a - o
+                let po = p - o
+                dotProduct = ao.x * po.x + ao.y * po.y
+            } else {
+                let bo = b - o
+                let po = p - o
+                dotProduct = bo.x * po.x + bo.y * po.y
+            }
+            if dotProduct > 0 {
+                return .onBoarder
+            } else if clockwise == self.isInnerCornerCW {
+                return .absent
+            } else {
+                return .contain
+            }
         }
         
         let isClockWiseAOP = aop == 1
         let isClockWiseBOP = bop == 1
 
-        let isInner = isClockWiseAOP != isClockWiseBOP && self.isInnerCornerCW == isClockWiseAOP
+        var isInner = isClockWiseAOP != isClockWiseBOP && self.isInnerCornerCW == isClockWiseAOP
 
-        if isInnerCornerCW == clockwise {
-            return isInner
+        if isInnerCornerCW != clockwise {
+            isInner = !isInner
+        }
+        
+        if isInner {
+            return .contain
         } else {
-            return !isInner
+            return .absent
         }
     }
     
-    func isBetweenDoubleVersion(p: IntPoint, clockwise: Bool = false) -> Bool {
+    func isBetweenDoubleVersion(p: IntPoint, clockwise: Bool = false) -> Result {
         let aop = Corner.isClockWise(a: a, b: o, c: p)
         let bop = Corner.isClockWise(a: b, b: o, c: p)
         guard aop != 0 && bop != 0 else {
-            return clockwise != self.isInnerCornerCW
+            if aop == 0 && bop == 0 {
+                return .onBoarder
+            }
+            let dotProduct: Int64
+            if aop == 0 {
+                let ao = a - o
+                let po = p - o
+                dotProduct = ao.x * po.x + ao.y * po.y
+            } else {
+                let bo = b - o
+                let po = p - o
+                dotProduct = bo.x * po.x + bo.y * po.y
+            }
+            if dotProduct > 0 {
+                return .onBoarder
+            } else if clockwise == self.isInnerCornerCW {
+                return .absent
+            } else {
+                return .contain
+            }
         }
         let dp = DPoint(iPoint: p)
 
@@ -65,12 +113,16 @@ struct Corner {
         let isClockWiseAOP = dAOP == 1
         let isClockWiseBOP = dBOP == 1
 
-        let isInner = isClockWiseAOP != isClockWiseBOP && self.isInnerCornerCW == isClockWiseAOP
+        var isInner = isClockWiseAOP != isClockWiseBOP && self.isInnerCornerCW == isClockWiseAOP
 
-        if isInnerCornerCW == clockwise {
-            return isInner
+        if isInnerCornerCW != clockwise {
+            isInner = !isInner
+        }
+        
+        if isInner {
+            return .contain
         } else {
-            return !isInner
+            return .absent
         }
     }
 
