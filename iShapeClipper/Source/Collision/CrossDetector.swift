@@ -54,7 +54,7 @@ struct CrossDetector {
                 let sl1 = iSlave[slIx1]
                 
                 var point: IntPoint = .zero
-                var dp: DPoint = .zero
+                var dp: DBPoint = .zero
                 let crossType = CrossResolver.defineType(a0: ms0, a1: ms1, b0: sl0, b1: sl1, cross: &point, dp: &dp)
                 
                 // .not_cross, .pure are the most possible cases (more then 99%)
@@ -62,8 +62,38 @@ struct CrossDetector {
                 j += 1
                 
                 switch crossType {
-                case .not_cross, .same_line:
+                case .not_cross:
                     continue
+                    
+                case .same_line:
+                    if sl1 == ms0 {
+                        let pinPoint = PinPoint(
+                            point: ms0,
+                            type: .null,
+                            masterMileStone: PathMileStone(index: msIx0),
+                            slaveMileStone:  PathMileStone(index: slIx1)
+                        )
+                        pinPoints.append(pinPoint)
+                    } else {
+                        if Edge.isInRect(a: ms0, b: ms1, p: sl1) {
+                            let pinPoint = PinPoint(
+                                point: sl1,
+                                type: .null,
+                                masterMileStone: PathMileStone(index: msIx0, offset: ms0.sqrDistance(point: sl1)),
+                                slaveMileStone:  PathMileStone(index: slIx1)
+                            )
+                            pinPoints.append(pinPoint)
+                        }
+                        if Edge.isInRect(a: sl0, b: sl1, p: ms0) {
+                            let pinPoint = PinPoint(
+                                point: ms0,
+                                type: .null,
+                                masterMileStone: PathMileStone(index: msIx0),
+                                slaveMileStone:  PathMileStone(index: slIx0, offset: sl0.sqrDistance(point: ms0))
+                            )
+                            pinPoints.append(pinPoint)
+                        }
+                    }
                 case .pure:
                     // simple intersection and most common case
                    
@@ -334,7 +364,11 @@ struct CrossDetector {
 
     private static func organize(pinPoints: inout [PinPoint], masterCount: Int, slaveCount: Int) -> [PinPath] {
         pinPoints.sort(by: { a, b in
-            a.masterMileStone < b.masterMileStone
+            if a.masterMileStone != b.masterMileStone {
+                return a.masterMileStone < b.masterMileStone
+            } else {
+                return a.type != .null
+            }
         })
         
         CrossDetector.removeDoubles(pinPoints: &pinPoints)

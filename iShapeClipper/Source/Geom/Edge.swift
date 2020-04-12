@@ -20,5 +20,11 @@ public struct Edge {
         }
         return false
     }
+    
+    public static func isInRect(a: IntPoint, b: IntPoint, p: IntPoint) -> Bool {
+        let xTest = a.x > b.x && a.x > p.x && p.x > b.x || a.x < b.x && b.x > p.x && p.x > a.x
+        let yTest = a.y > b.y && a.y > p.y && p.y > b.y || a.y < b.y && b.y > p.y && p.y > a.y
+        return xTest && yTest || (a.x == b.x && p.x == a.x && yTest) || (a.y == b.y && p.y == a.y && xTest)
+    }
   
 }

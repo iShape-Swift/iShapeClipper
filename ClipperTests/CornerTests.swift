@@ -18,7 +18,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: 0, y: 10).int,
             b: Point(x: 10, y: 0).int
@@ -53,7 +53,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: -10, y: 0).int,
             b: Point(x: 10, y: 0).int
@@ -88,7 +88,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: -10, y: -10).int,
             b: Point(x: 10, y: -10).int
@@ -123,7 +123,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: -10, y: 0).int,
             b: Point(x: 0, y: -10).int
@@ -158,7 +158,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 10, y: 10).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: 10, y: 20).int,
             b: Point(x: 20, y: 10).int
@@ -193,7 +193,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: 0, y: 10).int,
             b: Point(x: 10, y: 0).int
@@ -228,7 +228,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: -10, y: 0).int,
             b: Point(x: 10, y: 0).int
@@ -263,7 +263,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: -10, y: -10).int,
             b: Point(x: 10, y: -10).int
@@ -298,7 +298,7 @@ final class CornerTests: XCTestCase {
         let o = Point(x: 0, y: 0).int
         
         let corner = Corner(
-            d0: DPoint(iPoint: o),
+            d0: DBPoint(iPoint: o),
             o: o,
             a: Point(x: -10, y: 0).int,
             b: Point(x: 0, y: -10).int

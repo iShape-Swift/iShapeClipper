@@ -62,7 +62,7 @@ final class SegmentScene: CoordinateSystemScene {
         let iPoints = IntGeom.defGeom.int(points: points)
         
         var iCross = IntPoint.zero
-        var dp = DPoint.zero
+        var dp = DBPoint.zero
         let crossType = CrossResolver.defineType(a0: iPoints[0], a1: iPoints[1], b0: iPoints[2], b1: iPoints[3], cross: &iCross, dp: &dp)
         
         

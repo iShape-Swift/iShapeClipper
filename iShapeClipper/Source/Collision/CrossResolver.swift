@@ -38,7 +38,7 @@ struct CrossResolver {
         return 0
     }
     
-    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, dp: inout DPoint) -> IntPoint {
+    private static func cross(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, dp: inout DBPoint) -> IntPoint {
         let dxA = a0.x - a1.x
         let dyB = b0.y - b1.y
         let dyA = a0.y - a1.y
@@ -57,12 +57,12 @@ struct CrossResolver {
         let cx = x * invert_divider
         let cy = y * invert_divider
         
-        dp = DPoint(x: cx, y: cy)
+        dp = DBPoint(x: cx, y: cy)
 
         return IntPoint(x: Int64(round(cx)), y: Int64(round(cy)))
     }
 
-    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint, dp: inout DPoint) -> CrossType {
+    static func defineType(a0: IntPoint, a1: IntPoint, b0: IntPoint, b1: IntPoint, cross: inout IntPoint, dp: inout DBPoint) -> CrossType {
         let d0 = CrossResolver.isCCW(a: a0, b: b0, c: b1)
         let d1 = CrossResolver.isCCW(a: a1, b: b0, c: b1)
         let d2 = CrossResolver.isCCW(a: a0, b: a1, c: b0)
@@ -74,7 +74,7 @@ struct CrossResolver {
             }
             if d0 == 0 {
                 cross = a0
-                dp = DPoint(iPoint: a0)
+                dp = DBPoint(iPoint: a0)
                 if d2 == 0 || d3 == 0 {
                     if d2 == 0 {
                         return .end_a0_b0
@@ -89,7 +89,7 @@ struct CrossResolver {
             }
             if d1 == 0 {
                 cross = a1
-                dp = DPoint(iPoint: a1)
+                dp = DBPoint(iPoint: a1)
                 if d2 == 0 || d3 == 0 {
                     if d2 == 0 {
                         return .end_a1_b0
@@ -105,11 +105,11 @@ struct CrossResolver {
             if d0 != d1 {
                 if d2 == 0 {
                     cross = b0
-                    dp = DPoint(iPoint: b0)
+                    dp = DBPoint(iPoint: b0)
                     return .end_b0
                 } else {
                     cross = b1
-                    dp = DPoint(iPoint: b1)
+                    dp = DBPoint(iPoint: b1)
                     return .end_b1
                 }
             } else {

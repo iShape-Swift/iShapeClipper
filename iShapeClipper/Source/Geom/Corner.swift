@@ -20,17 +20,17 @@ struct Corner {
     private let a: IntPoint
     private let b: IntPoint
 
-    private let d0: DPoint
-    private let da: DPoint
-    private let db: DPoint
+    private let d0: DBPoint
+    private let da: DBPoint
+    private let db: DBPoint
     
     private let isInnerCornerCW: Bool
     
     
-    init(d0: DPoint, o: IntPoint, a: IntPoint, b: IntPoint) {
+    init(d0: DBPoint, o: IntPoint, a: IntPoint, b: IntPoint) {
         self.d0 = d0
-        self.da = DPoint(iPoint: a)
-        self.db = DPoint(iPoint: b)
+        self.da = DBPoint(iPoint: a)
+        self.db = DBPoint(iPoint: b)
         self.o = o
         self.a = a
         self.b = b
@@ -105,7 +105,7 @@ struct Corner {
                 return .contain
             }
         }
-        let dp = DPoint(iPoint: p)
+        let dp = DBPoint(iPoint: p)
 
         let dAOP = Corner.isClockWise(a: da, b: d0, c: dp)
         let dBOP = Corner.isClockWise(a: db, b: d0, c: dp)
@@ -126,7 +126,7 @@ struct Corner {
         }
     }
 
-    private static func isClockWise(a: DPoint, b: DPoint, c: DPoint) -> Int {
+    private static func isClockWise(a: DBPoint, b: DBPoint, c: DBPoint) -> Int {
         let m0 = (c.y - a.y) * (b.x - a.x)
         let m1 = (b.y - a.y) * (c.x - a.x)
 
