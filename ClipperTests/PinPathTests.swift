@@ -740,6 +740,123 @@ final class PinPathTests: XCTestCase {
         let points = iGeom.float(points: path.extract(points: iMaster))
         XCTAssertEqual(points, [Point(x: 10, y: 10), Point(x: 10, y: 0)])
     }
+    
+    func test_29() {
+        let data = PinTestData.data[29]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+        
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        
+        let path = result.pinPathArray[0]
+        XCTAssertEqual(path.v0.type, .in_out)
+        XCTAssertEqual(path.v1.type, .in_out)
+    }
+    
+    func test_30() {
+        let data = PinTestData.data[30]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+        
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        
+        let path = result.pinPathArray[0]
+        XCTAssertEqual(path.v0.type, .out_in)
+        XCTAssertEqual(path.v1.type, .out_in)
+    }
+    
+    func test_31() {
+        let data = PinTestData.data[31]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+        
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        
+        let path = result.pinPathArray[0]
+        XCTAssertEqual(path.v0.type, .out_in)
+        XCTAssertEqual(path.v1.type, .out_in)
+    }
+    
+    func test_32() {
+        let data = PinTestData.data[32]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+
+        XCTAssertEqual(result.pinPointArray.count, 2)
+        
+        let p0 = result.pinPointArray[0]
+        let p1 = result.pinPointArray[1]
+
+        XCTAssertEqual(p0.type, .outside)
+        XCTAssertEqual(p1.type, .inside)
+    }
+    
+    func test_33() {
+        let data = PinTestData.data[33]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+
+        XCTAssertEqual(result.pinPointArray.count, 4)
+        XCTAssertEqual(result.pinPathArray.count, 2)
+        
+        let path0 = result.pinPathArray[0]
+        let path1 = result.pinPathArray[1]
+
+        XCTAssertEqual(path0.v0.type, .in_out)
+        XCTAssertEqual(path1.v0.type, .in_out)
+    }
+    
+    
+    func test_34() {
+        let data = PinTestData.data[34]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+
+        XCTAssertEqual(result.pinPointArray.count, 2)
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        
+        let p0 = result.pinPointArray[0]
+        let p1 = result.pinPointArray[1]
+
+        XCTAssertEqual(p0.type, .out_in)
+        XCTAssertEqual(p1.type, .outside)
+        
+        let path = result.pinPathArray[0]
+
+        XCTAssertEqual(path.v0.type, .inside)
+    }
+    
+    func test_35() {
+        let data = PinTestData.data[35]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+
+        XCTAssertEqual(result.pinPointArray.count, 1)
+        XCTAssertEqual(result.pinPathArray.count, 1)
+        
+        let p = result.pinPointArray[0]
+
+        XCTAssertEqual(p.type, .inside)
+        
+        let path = result.pinPathArray[0]
+
+        XCTAssertEqual(path.v0.type, .outside)
+    }
+
 
     func test_100() {
         let iMaster = [

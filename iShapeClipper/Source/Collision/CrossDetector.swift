@@ -129,7 +129,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0, offset: sl0.sqrDistance(point: point))
                     )
 
-                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1:
@@ -150,7 +150,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0, offset: sl0.sqrDistance(point: point))
                     )
 
-                    let pinPoint = PinPoint.buildOnSlave(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b0:
@@ -171,7 +171,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0)
                     )
                     
-                    let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_b1:
@@ -192,7 +192,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx1)
                     )
                     
-                    let pinPoint = PinPoint.buildOnMaster(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b0:
@@ -213,7 +213,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a0_b1:
@@ -234,7 +234,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx1)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b0:
@@ -255,7 +255,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx0)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 case .end_a1_b1:
@@ -276,7 +276,7 @@ struct CrossDetector {
                         slaveMileStone: PathMileStone(index: slIx1)
                     )
                     
-                    let pinPoint = PinPoint.buildOnCross(def: pinPointDef)
+                    let pinPoint = PinPoint.buildOnSide(def: pinPointDef)
                     pinPoints.append(pinPoint)
                     endsCount += 1
                 }
