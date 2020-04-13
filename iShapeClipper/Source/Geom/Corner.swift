@@ -37,6 +37,17 @@ struct Corner {
 
         self.isInnerCornerCW = Corner.isClockWise(a: self.a, b: self.o, c: self.b) == 1
     }
+    
+    init(o: IntPoint, a: IntPoint, b: IntPoint) {
+        self.d0 = DBPoint(iPoint: o)
+        self.da = DBPoint(iPoint: a)
+        self.db = DBPoint(iPoint: b)
+        self.o = o
+        self.a = a
+        self.b = b
+
+        self.isInnerCornerCW = Corner.isClockWise(a: self.a, b: self.o, c: self.b) == 1
+    }
 
     func isBetweenIntVersion(p: IntPoint, clockwise: Bool) -> Result {
         let aop = Corner.isClockWise(a: a, b: o, c: p)
