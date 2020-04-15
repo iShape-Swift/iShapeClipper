@@ -25,6 +25,9 @@ final class PinScene: CoordinateSystemScene {
     
     override init() {
         super.init()
+        if PinTestData.data.count >= pageIndex {
+            pageIndex = 0
+        }
         self.showPage(index: pageIndex)
     }
     

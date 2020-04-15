@@ -76,7 +76,7 @@ public struct PinPoint {
     }
     
     static func buildSimple(def: Def) -> PinPoint {
-        let isCCW = PinPoint.isCCW(a: def.ms1, b: def.pt, c: def.sl1)
+        let isCCW = PinPoint.isCCW(a: def.ms1, b: def.dp, c: def.sl1)
         let type: PinType = isCCW ? .outside : .inside
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
@@ -113,7 +113,9 @@ public struct PinPoint {
         return PinPoint(point: def.pt, type: type, masterMileStone: def.masterMileStone, slaveMileStone: def.slaveMileStone)
     }
 
-    private static func isCCW(a: IntPoint, b: IntPoint, c: IntPoint) -> Bool {
+    private static func isCCW(a ia: IntPoint, b: DBPoint, c ic: IntPoint) -> Bool {
+        let a = DBPoint(iPoint: ia)
+        let c = DBPoint(iPoint: ic)
         let m0 = (c.y - a.y) * (b.x - a.x)
         let m1 = (b.y - a.y) * (c.x - a.x)
 

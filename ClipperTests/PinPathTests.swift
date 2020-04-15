@@ -856,6 +856,22 @@ final class PinPathTests: XCTestCase {
 
         XCTAssertEqual(path.v0.type, .outside)
     }
+    
+    func test_36() {
+        let data = PinTestData.data[36]
+        let iMaster = data[0]
+        let iSlave = data[1]
+        
+        let result = CrossDetector.findPins(iMaster: iMaster, iSlave: iSlave, exclusionPinType: .null)
+
+        XCTAssertEqual(result.pinPointArray.count, 2)
+        
+        let p0 = result.pinPointArray[0]
+        let p1 = result.pinPointArray[1]
+
+        XCTAssertEqual(p0.type, .outside)
+        XCTAssertEqual(p1.type, .inside)
+    }
 
 
     func test_100() {
