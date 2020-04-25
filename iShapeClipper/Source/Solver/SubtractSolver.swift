@@ -137,6 +137,8 @@ extension Solver {
                 }
             } while cursor != start
             
+            path.simplify(isClockWise: true)
+            
             pathList.add(path: path, isClockWise: true)
             
             cursor = subNavigator.next()

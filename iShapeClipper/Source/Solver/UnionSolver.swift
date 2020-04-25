@@ -143,6 +143,7 @@ extension Solver {
             } while cursor != start
             
             let isClockWise = path.isClockWise
+            path.simplify(isClockWise: isClockWise)
             pathList.add(path: path, isClockWise: isClockWise)
             
             cursor = filterNavigator.next()

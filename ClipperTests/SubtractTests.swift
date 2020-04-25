@@ -223,29 +223,8 @@ final class SubtractTests: XCTestCase {
         
         let solution = Solver.subtract(master: master, slave: slave)
         
-        XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
-        
-        let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        let sample0 = [
-            Point(x: 0, y: 10),
-            Point(x: 0, y: 0),
-            Point(x: 10, y: 0),
-            Point(x: 10, y: -10),
-            Point(x: -10, y: -10),
-            Point(x: -10, y: 10)
-        ]
-        
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
-            Point(x: 10, y: 0),
-            Point(x: 0, y: 10),
-            Point(x: 10, y: 10)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
+        XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     
     
@@ -291,28 +270,8 @@ final class SubtractTests: XCTestCase {
         
         let solution = Solver.subtract(master: master, slave: slave)
         
-        XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 2)
-        
-        let path0 = iGeom.float(points: solution.pathList.pathes[0])
-        let sample0 = [
-            Point(x: 10, y: 10),
-            Point(x: -5, y: 5),
-            Point(x: 0, y: -10),
-            Point(x: -10, y: -10),
-            Point(x: -10, y: 10)
-        ]
-        
-        XCTAssertEqual(path0, sample0)
-        
-        let path1 = iGeom.float(points: solution.pathList.pathes[1])
-        let sample1 = [
-            Point(x: 0, y: -10),
-            Point(x: 10, y: 10),
-            Point(x: 10, y: -10)
-        ]
-        
-        XCTAssertEqual(path1, sample1)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
+        XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     
     
@@ -561,22 +520,8 @@ final class SubtractTests: XCTestCase {
         
         let solution = Solver.subtract(master: master, slave: slave)
         
-        XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
-        
-        let path = iGeom.float(points: solution.pathList.pathes[0])
-        let sample = [
-            Point(x: 10, y: 0),
-            Point(x: 0, y: 5),
-            Point(x: 0, y: -5),
-            Point(x: 10, y: 0),
-            Point(x: 10, y: -10),
-            Point(x: -10, y: -10),
-            Point(x: -10, y: 10),
-            Point(x: 10, y: 10)
-        ]
-        
-        XCTAssertEqual(path, sample)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
+        XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     
     
@@ -588,21 +533,8 @@ final class SubtractTests: XCTestCase {
         
         let solution = Solver.subtract(master: master, slave: slave)
         
-        XCTAssertEqual(solution.nature, .overlap)
-        XCTAssertEqual(solution.pathList.layouts.count, 1)
-        
-        let path = iGeom.float(points: solution.pathList.pathes[0])
-        let sample = [
-            Point(x: 10, y: 10),
-            Point(x: 0, y: 5),
-            Point(x: 5, y: 0),
-            Point(x: 10, y: 10),
-            Point(x: 10, y: -10),
-            Point(x: -10, y: -10),
-            Point(x: -10, y: 10)
-        ]
-        
-        XCTAssertEqual(path, sample)
+        XCTAssertEqual(solution.nature, .masterIncludeSlave)
+        XCTAssertEqual(solution.pathList.layouts.count, 0)
     }
     
     
@@ -1333,6 +1265,28 @@ final class SubtractTests: XCTestCase {
         let solution = Solver.subtract(master: master, slave: slave)
         
         XCTAssertEqual(solution.nature, .overlap)
+    }
+    
+    func test_48() {
+        let data = SubtractTestData.data[48]
+        let master = iGeom.int(points: data[0])
+        let slave = iGeom.int(points: data[1])
+
+        let solution = Solver.subtract(master: master, slave: slave)
+        
+        XCTAssertEqual(solution.nature, .overlap)
+        
+        let path = solution.pathList.pathes[0]
+        let sample = [
+            IntPoint(x: -1160, y: 3300),
+            IntPoint(x: -1160, y: 198),
+            IntPoint(x: 136, y: -30),
+            IntPoint(x: 136, y: -1700),
+            IntPoint(x: -9400, y: -1700),
+            IntPoint(x: -9400, y: 3300)
+        ]
+        
+        XCTAssertEqual(path, sample)
     }
     
     func test_100() {

@@ -143,6 +143,8 @@ extension Solver {
 
             } while cursor != start
             
+            path.simplify(isClockWise: false)
+            
             pathList.add(path: path, isClockWise: false)
             
             cursor = filterNavigator.next()

@@ -14,6 +14,18 @@ struct FilterNavigator {
     var nextCursors: [Cursor]
     private var nextIndex: Int = 0
     
+    var first: Cursor {
+        if nextCursors.count > 0 {
+            return self.nextCursors[0]
+        }
+        
+        return .empty
+    }
+    
+    var hasEdge: Bool {
+        return !navigator.pinPathArray.isEmpty
+    }
+    
     init(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) {
         self.navigator = navigator
         self.nextCursors = FilterNavigator.getCursors(navigator: navigator, primary: primary, secondary: secondary)
@@ -58,19 +70,11 @@ struct FilterNavigator {
         return .empty
     }
     
-    func first() -> Cursor {
-        if nextCursors.count > 0 {
-            return self.nextCursors[0]
-        }
-        
-        return .empty
-    }
-    
     func nature(master: [IntPoint], slave: [IntPoint], isSlaveClockWise: Bool) -> Solution.Nature {
         guard !navigator.isEqual else {
             return .equal
         }
-        let cursor = self.first()
+        let cursor = self.first
         if cursor.isNotEmpty {
             return .overlap
         } else if self.navigator.hasContacts {

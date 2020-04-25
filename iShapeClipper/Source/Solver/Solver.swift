@@ -18,6 +18,17 @@ public struct Solver {
         case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
             return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: nature)
         case .overlap:
+            let cursor = filterNavigator.first
+
+            if cursor.type == .out_in && !filterNavigator.hasEdge {
+                if master.isContain(path: slave) {
+                    return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: .masterIncludeSlave)
+                }
+                if slave.isContain(path: master) {
+                    return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: .slaveIncludeMaster)
+                }
+            }
+
             let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
             let bitePathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
 
@@ -34,6 +45,17 @@ public struct Solver {
         case .notOverlap, .masterIncludeSlave, .slaveIncludeMaster, .equal:
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
+            let cursor = filterNavigator.first
+
+            if cursor.type == .out_in && !filterNavigator.hasEdge {
+                if master.isContain(path: slave) {
+                    return Solution(pathList: PlainShape.empty, nature: .masterIncludeSlave)
+                }
+                if slave.isContain(path: master) {
+                    return Solution(pathList: PlainShape.empty, nature: .slaveIncludeMaster)
+                }
+            }
+
             let pathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
             return Solution(pathList: pathList, nature: .overlap)
         }
@@ -48,6 +70,17 @@ public struct Solver {
         case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
+            let cursor = filterNavigator.first
+
+            if cursor.type == .out_in && !filterNavigator.hasEdge {
+                if master.isContain(path: slave) {
+                    return Solution(pathList: PlainShape.empty, nature: .masterIncludeSlave)
+                }
+                if slave.isContain(path: master) {
+                    return Solution(pathList: PlainShape.empty, nature: .slaveIncludeMaster)
+                }
+            }
+
             let pathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
             return Solution(pathList: pathList, nature: .overlap)
         }
@@ -62,7 +95,7 @@ public struct Solver {
         case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
             return Solution(pathList: PlainShape.empty, nature: nature)
         case .overlap:
-            let cursor = filterNavigator.first()
+            let cursor = filterNavigator.first
 
             if cursor.type == .in_out {
                 if master.isContain(path: slave) {

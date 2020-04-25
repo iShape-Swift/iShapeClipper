@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		54187D0D2348EE040080AF79 /* CornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187D0C2348EE040080AF79 /* CornerTests.swift */; };
 		54187D0F2348F06D0080AF79 /* PinPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54187D0E2348F06D0080AF79 /* PinPathTests.swift */; };
+		54216953245333C300453863 /* SimplifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54216952245333C300453863 /* SimplifyTests.swift */; };
+		542752F3244C887A0066FA89 /* SimplifyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542752F2244C887A0066FA89 /* SimplifyScene.swift */; };
 		543DE04123471C6F0044AA8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 543DE04023471C6F0044AA8A /* Assets.xcassets */; };
 		54587ED923DB70AC009CC036 /* PinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54587ED823DB70AC009CC036 /* PinScene.swift */; };
 		545B581123840CFB00918A8D /* IntersectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545B581023840CFB00918A8D /* IntersectTests.swift */; };
@@ -69,6 +71,8 @@
 		3FF6001FC437565F702698A7 /* Pods_ClipperUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClipperUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54187D0C2348EE040080AF79 /* CornerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerTests.swift; sourceTree = "<group>"; };
 		54187D0E2348F06D0080AF79 /* PinPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPathTests.swift; sourceTree = "<group>"; };
+		54216952245333C300453863 /* SimplifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifyTests.swift; sourceTree = "<group>"; };
+		542752F2244C887A0066FA89 /* SimplifyScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifyScene.swift; sourceTree = "<group>"; };
 		543DE03923471C6E0044AA8A /* ClipperUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClipperUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		543DE04023471C6F0044AA8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		543DE04823471C6F0044AA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				54B5EBBD23B77F7900B2CC95 /* HoleScene.swift */,
 				5464856D23CE44DA00EE9D1C /* SegmentScene.swift */,
 				54587ED823DB70AC009CC036 /* PinScene.swift */,
+				542752F2244C887A0066FA89 /* SimplifyScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 				547E843E23E4B50700113528 /* BiteTests.swift */,
 				54D3584B243797230088C4AC /* PolygonPointTests.swift */,
 				54CD7DC0243B85D400DDEE37 /* EdgeTests.swift */,
+				54216952245333C300453863 /* SimplifyTests.swift */,
 			);
 			path = ClipperTests;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				5464856E23CE44DA00EE9D1C /* SegmentScene.swift in Sources */,
 				547B93AB23471E1A003CFA6C /* CanvasView.swift in Sources */,
 				547B93A523471E1A003CFA6C /* SceneNavigation.swift in Sources */,
+				542752F3244C887A0066FA89 /* SimplifyScene.swift in Sources */,
 				54EE5EB1234A0B1900090EA7 /* ShapePinDot.swift in Sources */,
 				547B93A023471E1A003CFA6C /* CGPoint.swift in Sources */,
 				547B93B823471E1A003CFA6C /* CoordinateSystemScene.swift in Sources */,
@@ -511,6 +518,7 @@
 				54D3584C243797230088C4AC /* PolygonPointTests.swift in Sources */,
 				547E843F23E4B50700113528 /* BiteTests.swift in Sources */,
 				54CD7DC1243B85D400DDEE37 /* EdgeTests.swift in Sources */,
+				54216953245333C300453863 /* SimplifyTests.swift in Sources */,
 				545B581123840CFB00918A8D /* IntersectTests.swift in Sources */,
 				54187D0F2348F06D0080AF79 /* PinPathTests.swift in Sources */,
 				54D643AD2347DBA5007BD72A /* SubtractTests.swift in Sources */,

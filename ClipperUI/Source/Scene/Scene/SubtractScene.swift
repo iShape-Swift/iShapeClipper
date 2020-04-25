@@ -18,6 +18,7 @@ final class SubtractScene: CoordinateSystemScene {
     private var slave: [Point] = []
     
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: SubtractScene.indexKey)
+//    private var pageIndex = 0
     
     private var activeIndex: Int?
     private var isSlave: Bool = false
