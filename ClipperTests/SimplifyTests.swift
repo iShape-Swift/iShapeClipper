@@ -151,5 +151,15 @@ final class SimplifyTests: XCTestCase {
         ])
     }
 
+    func test_11() {
+        // complex
+        let data = SimplifyTestData.data[11]
+        var points = data.points
+        points.simplify(isClockWise: data.isClockWise)
+        XCTAssertEqual(points, [
+            IntPoint(x: -100000, y: 0),
+            IntPoint(x: 50000, y: 0)
+        ])
+    }
     
 }

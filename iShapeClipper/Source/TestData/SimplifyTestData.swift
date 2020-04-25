@@ -104,6 +104,32 @@ struct SimplifyTestData {
             Point(x: 5, y: 0)
             ].int, isClockWise: true
         ),
+        // 11
+        Polygon(points: [
+            Point(x: -10, y: -15),
+            Point(x: -20, y: -15),
+            Point(x: -20, y: -10),
+            Point(x: -15, y: -10),
+            Point(x: -15, y: -5),
+            Point(x: -20, y: -5),
+            Point(x: -20, y: 0),
+            Point(x: -15, y: 0),
+            Point(x: -15, y: 5),
+            Point(x: -20, y: 5),
+            Point(x: -20, y: 15),
+            Point(x: 20, y: 15),
+            Point(x: 20, y: 5),
+            Point(x: 15, y: 5),
+            Point(x: 15, y: 0),
+            Point(x: 20, y: 0),
+            Point(x: 20, y: -5),
+            Point(x: 15, y: -5),
+            Point(x: 15, y: -10),
+            Point(x: 20, y: -10),
+            Point(x: 20, y: -15),
+            Point(x: 10, y: -15)
+            ].int, isClockWise: true
+        ),
         // 100
         Polygon(points: [
             Point(x: -10, y: 10),
