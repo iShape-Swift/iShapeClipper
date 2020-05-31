@@ -9,30 +9,30 @@ import iGeometry
 
 public struct Solver {
     
-    public static func cut(master: [IntPoint], slave: [IntPoint]) -> ComplexSolution {
+    public static func cut(master: [IntPoint], slave: [IntPoint]) -> CutSolution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, exclusionPinType: PinPoint.PinType.in_out)
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
         switch nature {
         case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
-            return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: nature)
+            return CutSolution(mainPathList: .empty, partPathList: .empty, nature: nature)
         case .overlap:
             let cursor = filterNavigator.first
 
             if cursor.type == .out_in && !filterNavigator.hasEdge {
                 if master.isContain(path: slave) {
-                    return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: .masterIncludeSlave)
+                    return CutSolution(mainPathList: .empty, partPathList: .empty, nature: .masterIncludeSlave)
                 }
                 if slave.isContain(path: master) {
-                    return ComplexSolution(restPathList: .empty, bitePathList: .empty, nature: .slaveIncludeMaster)
+                    return CutSolution(mainPathList: .empty, partPathList: .empty, nature: .slaveIncludeMaster)
                 }
             }
 
-            let restPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
-            let bitePathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
+            let mainPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
+            let partPathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
 
-            return ComplexSolution(restPathList: restPathList, bitePathList: bitePathList, nature: .overlap)
+            return CutSolution(mainPathList: mainPathList, partPathList: partPathList, nature: .overlap)
         }
     }
 

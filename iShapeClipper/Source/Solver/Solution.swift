@@ -26,15 +26,15 @@ public struct Solution {
     }
 }
 
-public struct ComplexSolution {
+public struct CutSolution {
 
-    public let restPathList: PlainShape
-    public let bitePathList: PlainShape
+    public let mainPathList: PlainShape
+    public let partPathList: PlainShape
     public let nature: Solution.Nature
 
-    init(restPathList: PlainShape, bitePathList: PlainShape, nature: Solution.Nature) {
-        self.restPathList = restPathList
-        self.bitePathList = bitePathList
+    init(mainPathList: PlainShape, partPathList: PlainShape, nature: Solution.Nature) {
+        self.mainPathList = mainPathList
+        self.partPathList = partPathList
         self.nature = nature
     }
 }

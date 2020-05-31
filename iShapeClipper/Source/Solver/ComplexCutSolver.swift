@@ -7,17 +7,17 @@
 
 import iGeometry
 
-public struct BiteSolution {
+public struct ComplexSolution {
     
     let isInteract: Bool
     let mainList: PlainShapeList
-    let biteList: PlainShapeList
+    let partList: PlainShapeList
     
 }
 
 public extension PlainShape {
 
-    func bite(path: [IntPoint]) -> BiteSolution {
+    func complexCut(path: [IntPoint]) -> ComplexSolution {
         let hull = self.get(index: 0)
         
         let solution = Solver.cut(master: hull, slave: path)
@@ -25,9 +25,9 @@ public extension PlainShape {
         switch solution.nature {
  
         case .notOverlap:
-            return BiteSolution(isInteract: false, mainList: .empty, biteList: .empty)
+            return ComplexSolution(isInteract: false, mainList: .empty, partList: .empty)
         case .slaveIncludeMaster, .equal:
-            return BiteSolution(isInteract: true, mainList: .empty, biteList: PlainShapeList(plainShape: self))
+            return ComplexSolution(isInteract: true, mainList: .empty, partList: PlainShapeList(plainShape: self))
         case .masterIncludeSlave:
             return self.holeCase(cutPath: path)
         case .overlap:
@@ -36,27 +36,27 @@ public extension PlainShape {
     }
 
     // если дыра находится внутри полигона
-    private func holeCase(cutPath: [IntPoint]) -> BiteSolution {
+    private func holeCase(cutPath: [IntPoint]) -> ComplexSolution {
         let n = self.layouts.count
         guard n > 1 else {
             // у исходного полигона нету других дыр
             var main = self
             main.add(path: cutPath, isClockWise: false)
             let biteList = PlainShapeList(plainShape: PlainShape(points: cutPath.reversed()))
-            return BiteSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), biteList: biteList)
+            return ComplexSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), partList: biteList)
         }
         
         let mainList = self.holeCaseMainList(cutPath: cutPath)
         let biteList = self.holeCaseBiteList(cutPath: cutPath)
         
-        return BiteSolution(isInteract: true, mainList: mainList, biteList: biteList)
+        return ComplexSolution(isInteract: true, mainList: mainList, partList: biteList)
     }
     
-    private func overlapCase(solution: ComplexSolution) -> BiteSolution {
-        let shapePaths = self.overlapCaseMainList(restPathList: solution.restPathList)
-        let bitList = self.overlapCaseBiteList(bitePathList: solution.bitePathList)
+    private func overlapCase(solution: CutSolution) -> ComplexSolution {
+        let shapePaths = self.overlapCaseMainList(restPathList: solution.mainPathList)
+        let bitList = self.overlapCaseBiteList(bitePathList: solution.partPathList)
         
-        return BiteSolution(isInteract: true, mainList: shapePaths, biteList: bitList)
+        return ComplexSolution(isInteract: true, mainList: shapePaths, partList: bitList)
     }
     
     private func overlapCaseMainList(restPathList: PlainShape) -> PlainShapeList {

@@ -1,5 +1,5 @@
 //
-//  BiteScene.swift
+//  ComplexCutScene.swift
 //  ClipperUI
 //
 //  Created by Nail Sharipov on 24.12.2019.
@@ -10,15 +10,15 @@ import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class BiteScene: CoordinateSystemScene {
+final class ComplexCutScene: CoordinateSystemScene {
 
-    private static let indexKey = String(describing: BiteScene.self)
+    private static let indexKey = String(describing: ComplexCutScene.self)
     
     private var shapePoints: [IntPoint] = []
     private var shapeLayouts: [PlainShape.Layout] = []
     private var path: [IntPoint] = []
     
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: BiteScene.indexKey)
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: ComplexCutScene.indexKey)
 //    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
@@ -62,7 +62,7 @@ final class BiteScene: CoordinateSystemScene {
     private func addSolution() {
         let plainShape = PlainShape(points: self.shapePoints, layouts: self.shapeLayouts)
         let iSlave = self.path
-        let solution = plainShape.bite(path: iSlave)
+        let solution = plainShape.complexCut(path: iSlave)
 
         if solution.isInteract {
             if !solution.mainList.segments.isEmpty {
@@ -72,9 +72,9 @@ final class BiteScene: CoordinateSystemScene {
                     self.addSublayer(layer)
                 }
             }
-            if !solution.biteList.segments.isEmpty {
-                for i in 0..<solution.biteList.segments.count {
-                    let shape = solution.biteList.get(index: i)
+            if !solution.partList.segments.isEmpty {
+                for i in 0..<solution.partList.segments.count {
+                    let shape = solution.partList.get(index: i)
                     let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.bitFill, strokeColor: Colors.cutTest.bitStroke, lineWidth: 0.25)
                     self.addSublayer(layer)
                 }
@@ -105,7 +105,7 @@ final class BiteScene: CoordinateSystemScene {
 }
 
 
-extension BiteScene: MouseCompatible {
+extension ComplexCutScene: MouseCompatible {
     
     private func findNearest(point: IntPoint, points: [IntPoint]) -> Int? {
         var i = 0
@@ -175,19 +175,19 @@ extension BiteScene: MouseCompatible {
     }
 }
 
-extension BiteScene: SceneNavigation {
+extension ComplexCutScene: SceneNavigation {
     
     func next() {
         let n = CutTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: BiteScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: ComplexCutScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
         let n = CutTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: BiteScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: ComplexCutScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
