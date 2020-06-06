@@ -9,30 +9,30 @@ import iGeometry
 
 public struct Solver {
     
-    public static func cut(master: [IntPoint], slave: [IntPoint]) -> CutSolution {
+    public static func cut(master: [IntPoint], slave: [IntPoint]) -> DualSolution {
         let navigator = CrossDetector.findPins(iMaster: master, iSlave: slave, exclusionPinType: PinPoint.PinType.in_out)
         let filterNavigator = FilterNavigator(navigator: navigator, primary: .inside, secondary: .out_in)
         let nature = filterNavigator.nature(master: master, slave: slave, isSlaveClockWise: false)
         
         switch nature {
         case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
-            return CutSolution(mainPathList: .empty, partPathList: .empty, nature: nature)
+            return DualSolution(mainPathList: .empty, partPathList: .empty, nature: nature)
         case .overlap:
             let cursor = filterNavigator.first
 
             if cursor.type == .out_in && !filterNavigator.hasEdge {
                 if master.isContain(path: slave) {
-                    return CutSolution(mainPathList: .empty, partPathList: .empty, nature: .masterIncludeSlave)
+                    return DualSolution(mainPathList: .empty, partPathList: .empty, nature: .masterIncludeSlave)
                 }
                 if slave.isContain(path: master) {
-                    return CutSolution(mainPathList: .empty, partPathList: .empty, nature: .slaveIncludeMaster)
+                    return DualSolution(mainPathList: .empty, partPathList: .empty, nature: .slaveIncludeMaster)
                 }
             }
 
             let mainPathList = Solver.subtract(navigator: filterNavigator, master: master, slave: slave)
             let partPathList = Solver.intersect(navigator: filterNavigator, master: master, slave: slave)
 
-            return CutSolution(mainPathList: mainPathList, partPathList: partPathList, nature: .overlap)
+            return DualSolution(mainPathList: mainPathList, partPathList: partPathList, nature: .overlap)
         }
     }
 

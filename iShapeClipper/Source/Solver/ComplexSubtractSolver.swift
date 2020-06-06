@@ -54,7 +54,7 @@ public extension PlainShape {
         }
     }
     
-    private func overlapCase(solution: CutSolution) -> ComplexSubtractSolution {
+    private func overlapCase(solution: DualSolution) -> ComplexSubtractSolution {
         let shapePaths = self.overlapCaseMainList(restPathList: solution.mainPathList)
         let bitList = self.overlapCaseBiteList(bitePathList: solution.partPathList)
         

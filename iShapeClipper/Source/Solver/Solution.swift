@@ -26,7 +26,7 @@ public struct Solution {
     }
 }
 
-public struct CutSolution {
+public struct DualSolution {
 
     public let mainPathList: PlainShape
     public let partPathList: PlainShape
