@@ -10,47 +10,22 @@ import XCTest
 import iGeometry
 @testable import iShapeClipper
 
-final class BiteTests: XCTestCase {
+final class ComplexSubtract: XCTestCase {
     
     private let iGeom = IntGeom.defGeom
     
     func test_00() {
-        let data = CutTestData.data[0]
+        let data = ComplexTestData.data[0]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
-        XCTAssertEqual(solution.isInteract, true)
-        
-        let mainShape = solution.mainList.get(index: 0)
-        
-        XCTAssertEqual(mainShape.layouts, [
-            PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
-            PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
-        ])
-        
-        XCTAssertEqual(mainShape.isClockWise(index: 0), true)
-        XCTAssertEqual(mainShape.isClockWise(index: 1), false)
-        
-        XCTAssertEqual(mainShape.points, [
-            Point(x: -15, y: -15),
-            Point(x: -15, y: 15),
-            Point(x: 15, y: 15),
-            Point(x: 15, y: -15),
-            Point(x: -10, y: 10),
-            Point(x: -10, y: -10),
-            Point(x: 10, y: -10),
-            Point(x: 10, y: 10)
-            ].int
-        )
-        
-        XCTAssertEqual(solution.biteList.layouts, [])
-        XCTAssertEqual(solution.biteList.points, [])
+        XCTAssertEqual(solution.isInteract, false)
     }
     
     func test_01() {
-        let data = CutTestData.data[1]
+        let data = ComplexTestData.data[1]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -76,15 +51,15 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
 
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: 5, y: 5),
             Point(x: 5, y: -5),
             Point(x: -5, y: -5),
@@ -94,9 +69,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_02() {
-        let data = CutTestData.data[2]
+        let data = ComplexTestData.data[2]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -126,15 +101,15 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -5, y: -5),
             Point(x: 5, y: -5),
             Point(x: 5, y: 5),
@@ -146,9 +121,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_03() {
-        let data = CutTestData.data[3]
+        let data = ComplexTestData.data[3]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -180,23 +155,23 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 2)
+        XCTAssertEqual(solution.partList.segments.count, 2)
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
 
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: 5, y: 0),
             Point(x: 0, y: 0),
             Point(x: 0, y: 5),
@@ -204,7 +179,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: 0, y: 0),
             Point(x: 0, y: -5),
             Point(x: -5, y: -5),
@@ -214,9 +189,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_04() {
-        let data = CutTestData.data[4]
+        let data = ComplexTestData.data[4]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -295,16 +270,16 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 1)
-        let biteShape = solution.biteList.get(index: 0)
+        XCTAssertEqual(solution.partList.segments.count, 1)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 24, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -10, y: -15),
             Point(x: -15, y: -15),
             Point(x: -15, y: -20),
@@ -334,9 +309,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_05() {
-        let data = CutTestData.data[5]
+        let data = ComplexTestData.data[5]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -410,16 +385,16 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        let partShape = solution.partList.get(index: 0)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 36, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: 0, y: -30),
             Point(x: 5, y: -30),
             Point(x: 5, y: -25),
@@ -461,24 +436,24 @@ final class BiteTests: XCTestCase {
     }
     
     func test_06() {
-        let data = CutTestData.data[6]
+        let data = ComplexTestData.data[6]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
         XCTAssertEqual(solution.mainList.layouts, [])
         XCTAssertEqual(solution.mainList.points, [])
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
             Point(x: 10, y: 10),
@@ -488,24 +463,24 @@ final class BiteTests: XCTestCase {
     }
     
     func test_07() {
-        let data = CutTestData.data[7]
+        let data = ComplexTestData.data[7]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
         
         XCTAssertEqual(solution.isInteract, true)
         
         XCTAssertEqual(solution.mainList.layouts, [])
         XCTAssertEqual(solution.mainList.points, [])
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
             Point(x: 10, y: 10),
@@ -515,26 +490,26 @@ final class BiteTests: XCTestCase {
     }
     
     func test_08() {
-        let data = CutTestData.data[8]
+        let data = ComplexTestData.data[8]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
         XCTAssertEqual(solution.mainList.layouts, [])
         XCTAssertEqual(solution.mainList.points, [])
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape.isClockWise(index: 1), false)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 1), false)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -10, y: -10),
             Point(x: -10, y: 10),
             Point(x: 10, y: 10),
@@ -548,9 +523,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_09() {
-        let data = CutTestData.data[9]
+        let data = ComplexTestData.data[9]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -574,15 +549,15 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: 5, y: 10),
             Point(x: 5, y: -5),
             Point(x: -5, y: -5),
@@ -592,9 +567,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_10() {
-        let data = CutTestData.data[10]
+        let data = ComplexTestData.data[10]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -624,15 +599,15 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -5, y: 5),
             Point(x: 0, y: 5),
             Point(x: 0, y: 0),
@@ -642,9 +617,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_11() {
-        let data = CutTestData.data[11]
+        let data = ComplexTestData.data[11]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
 
@@ -684,15 +659,15 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
 
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: -5, y: 5),
             Point(x: 10, y: 5),
             Point(x: 10, y: 0),
@@ -702,9 +677,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_12() {
-        let data = CutTestData.data[12]
+        let data = ComplexTestData.data[12]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -751,15 +726,15 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
+        let partShape = solution.partList.get(index: 0)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 12, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: 10, y: -10),
             Point(x: 15, y: -10),
             Point(x: 15, y: -5),
@@ -777,9 +752,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_13() {
-        let data = CutTestData.data[13]
+        let data = ComplexTestData.data[13]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
         
         XCTAssertEqual(solution.isInteract, true)
         
@@ -830,18 +805,18 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        let partShape = solution.partList.get(index: 0)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true),
             PlainShape.Layout(begin: 8, length: 4, isClockWise: false)
         ])
         
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape.isClockWise(index: 1), false)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape.isClockWise(index: 1), false)
         
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: 15, y: -10),
             Point(x: 15, y: -5),
             Point(x: -15, y: -5),
@@ -859,9 +834,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_14() {
-        let data = CutTestData.data[14]
+        let data = ComplexTestData.data[14]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -895,22 +870,22 @@ final class BiteTests: XCTestCase {
             ]
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 2)
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        XCTAssertEqual(solution.partList.segments.count, 2)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 9, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 3, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
 
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             IntPoint(x: 150000, y: -92623),
             IntPoint(x: 150000, y: -50000),
             IntPoint(x: 75715, y: -50000),
@@ -923,7 +898,7 @@ final class BiteTests: XCTestCase {
             ]
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             IntPoint(x: -50000, y: 27869),
             IntPoint(x: -50000, y: 22131),
             IntPoint(x: -55000, y: 25000)
@@ -932,9 +907,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_15() {
-        let data = CutTestData.data[15]
+        let data = ComplexTestData.data[15]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -970,28 +945,28 @@ final class BiteTests: XCTestCase {
             ]
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 3)
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
-        let biteShape2 = solution.biteList.get(index: 2)
+        XCTAssertEqual(solution.partList.segments.count, 3)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
+        let partShape2 = solution.partList.get(index: 2)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 5, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 3, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape2.layouts, [
+        XCTAssertEqual(partShape2.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape2.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             IntPoint(x: 125000, y: -50000),
             IntPoint(x: 75715, y: -50000),
             IntPoint(x: -11428, y: 0),
@@ -1000,14 +975,14 @@ final class BiteTests: XCTestCase {
             ]
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             IntPoint(x: -50000, y: 27273),
             IntPoint(x: -50000, y: 22131),
             IntPoint(x: -55000, y: 25000)
             ]
         )
         
-        XCTAssertEqual(biteShape2.points, [
+        XCTAssertEqual(partShape2.points, [
             IntPoint(x: 150000, y: -92623),
             IntPoint(x: 150000, y: -70000),
             IntPoint(x: 200000, y: -110000),
@@ -1017,9 +992,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_16() {
-        let data = CutTestData.data[16]
+        let data = ComplexTestData.data[16]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1077,23 +1052,23 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 2)
+        XCTAssertEqual(solution.partList.segments.count, 2)
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: 5, y: -5),
             Point(x: 5, y: -10),
             Point(x: 0, y: -10),
@@ -1101,7 +1076,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: 5, y: 10),
             Point(x: 5, y: 5),
             Point(x: 0, y: 5),
@@ -1111,9 +1086,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_17() {
-        let data = CutTestData.data[17]
+        let data = ComplexTestData.data[17]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1143,22 +1118,22 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 2)
+        XCTAssertEqual(solution.partList.segments.count, 2)
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: 5, y: -5),
             Point(x: 5, y: -15),
             Point(x: 0, y: -15),
@@ -1166,7 +1141,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: 0, y: 5),
             Point(x: 0, y: 15),
             Point(x: 5, y: 15),
@@ -1176,9 +1151,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_18() {
-        let data = CutTestData.data[18]
+        let data = ComplexTestData.data[18]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1212,26 +1187,26 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(solution.biteList.segments.count, 2)
+        XCTAssertEqual(solution.partList.segments.count, 2)
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape0.isClockWise(index: 1), false)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 1), false)
         
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
         
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 4, isClockWise: false)
         ])
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: 15, y: -5),
             Point(x: 15, y: -20),
             Point(x: 0, y: -20),
@@ -1243,7 +1218,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: 0, y: 10),
             Point(x: 10, y: 10),
             Point(x: 10, y: 15),
@@ -1257,9 +1232,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_19() {
-        let data = CutTestData.data[19]
+        let data = ComplexTestData.data[19]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1312,13 +1287,13 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape = solution.biteList.get(index: 0)
-        XCTAssertEqual(biteShape.isClockWise(index: 0), true)
+        let partShape = solution.partList.get(index: 0)
+        XCTAssertEqual(partShape.isClockWise(index: 0), true)
 
-        XCTAssertEqual(biteShape.layouts, [
+        XCTAssertEqual(partShape.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
-        XCTAssertEqual(biteShape.points, [
+        XCTAssertEqual(partShape.points, [
             Point(x: 10, y: 5),
             Point(x: 15, y: 5),
             Point(x: 15, y: -15),
@@ -1332,9 +1307,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_20() {
-        let data = CutTestData.data[20]
+        let data = ComplexTestData.data[20]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         XCTAssertEqual(solution.mainList.segments.count, 3)
@@ -1411,21 +1386,21 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: -10, y: 5),
             Point(x: -15, y: 5),
             Point(x: -15, y: 25),
@@ -1437,7 +1412,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: -15, y: -5),
             Point(x: -10, y: -5),
             Point(x: -10, y: -20),
@@ -1451,9 +1426,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_21() {
-        let data = CutTestData.data[21]
+        let data = ComplexTestData.data[21]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
 
@@ -1478,20 +1453,20 @@ final class BiteTests: XCTestCase {
             ].int
         )
 
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: 5, y: -5),
             Point(x: 5, y: 5),
             Point(x: 10, y: 5),
@@ -1499,7 +1474,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: -5, y: 5),
             Point(x: -5, y: -5),
             Point(x: -10, y: -5),
@@ -1509,9 +1484,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_22() {
-        let data = CutTestData.data[22]
+        let data = ComplexTestData.data[22]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
         
@@ -1578,45 +1553,45 @@ final class BiteTests: XCTestCase {
             ].int
         )
 
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
-        let biteShape2 = solution.biteList.get(index: 2)
-        let biteShape3 = solution.biteList.get(index: 3)
-        let biteShape4 = solution.biteList.get(index: 4)
-        let biteShape5 = solution.biteList.get(index: 5)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
+        let partShape2 = solution.partList.get(index: 2)
+        let partShape3 = solution.partList.get(index: 3)
+        let partShape4 = solution.partList.get(index: 4)
+        let partShape5 = solution.partList.get(index: 5)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape2.layouts, [
+        XCTAssertEqual(partShape2.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape3.layouts, [
+        XCTAssertEqual(partShape3.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape4.layouts, [
+        XCTAssertEqual(partShape4.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape5.layouts, [
+        XCTAssertEqual(partShape5.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape3.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape4.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape5.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape3.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape4.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape5.isClockWise(index: 0), true)
 
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: 10, y: 5),
             Point(x: 15, y: 5),
             Point(x: 15, y: 0),
@@ -1624,7 +1599,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: 15, y: -10),
             Point(x: 10, y: -10),
             Point(x: 10, y: -5),
@@ -1632,7 +1607,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape2.points, [
+        XCTAssertEqual(partShape2.points, [
             Point(x: -5, y: -10),
             Point(x: -5, y: -15),
             Point(x: -10, y: -15),
@@ -1640,7 +1615,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape3.points, [
+        XCTAssertEqual(partShape3.points, [
             Point(x: -10, y: 0),
             Point(x: -15, y: 0),
             Point(x: -15, y: 5),
@@ -1648,7 +1623,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape4.points, [
+        XCTAssertEqual(partShape4.points, [
             Point(x: -10, y: -10),
             Point(x: -15, y: -10),
             Point(x: -15, y: -5),
@@ -1656,7 +1631,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape5.points, [
+        XCTAssertEqual(partShape5.points, [
             Point(x: 5, y: -15),
             Point(x: 5, y: -10),
             Point(x: 10, y: -10),
@@ -1666,9 +1641,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_23() {
-        let data = CutTestData.data[23]
+        let data = ComplexTestData.data[23]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
 
@@ -1755,58 +1730,58 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
-        let biteShape2 = solution.biteList.get(index: 2)
-        let biteShape3 = solution.biteList.get(index: 3)
-        let biteShape4 = solution.biteList.get(index: 4)
-        let biteShape5 = solution.biteList.get(index: 5)
-        let biteShape6 = solution.biteList.get(index: 6)
-        let biteShape7 = solution.biteList.get(index: 7)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
+        let partShape2 = solution.partList.get(index: 2)
+        let partShape3 = solution.partList.get(index: 3)
+        let partShape4 = solution.partList.get(index: 4)
+        let partShape5 = solution.partList.get(index: 5)
+        let partShape6 = solution.partList.get(index: 6)
+        let partShape7 = solution.partList.get(index: 7)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape2.layouts, [
+        XCTAssertEqual(partShape2.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape3.layouts, [
+        XCTAssertEqual(partShape3.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape4.layouts, [
+        XCTAssertEqual(partShape4.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape5.layouts, [
+        XCTAssertEqual(partShape5.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
         
-        XCTAssertEqual(biteShape6.layouts, [
+        XCTAssertEqual(partShape6.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape7.layouts, [
+        XCTAssertEqual(partShape7.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape3.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape4.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape5.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape6.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape7.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape3.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape4.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape5.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape6.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape7.isClockWise(index: 0), true)
 
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: -15, y: 10),
             Point(x: -10, y: 10),
             Point(x: -10, y: 5),
@@ -1814,7 +1789,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: -10, y: -25),
             Point(x: -10, y: -20),
             Point(x: -5, y: -20),
@@ -1822,7 +1797,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape2.points, [
+        XCTAssertEqual(partShape2.points, [
             Point(x: 15, y: -10),
             Point(x: 10, y: -10),
             Point(x: 10, y: -5),
@@ -1830,7 +1805,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape3.points, [
+        XCTAssertEqual(partShape3.points, [
             Point(x: -10, y: -20),
             Point(x: -15, y: -20),
             Point(x: -15, y: -5),
@@ -1838,7 +1813,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape4.points, [
+        XCTAssertEqual(partShape4.points, [
             Point(x: 10, y: -15),
             Point(x: 15, y: -15),
             Point(x: 15, y: -25),
@@ -1848,7 +1823,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape5.points, [
+        XCTAssertEqual(partShape5.points, [
             Point(x: 10, y: 25),
             Point(x: 10, y: 20),
             Point(x: 5, y: 20),
@@ -1856,7 +1831,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape6.points, [
+        XCTAssertEqual(partShape6.points, [
             Point(x: 10, y: 20),
             Point(x: 15, y: 20),
             Point(x: 15, y: 5),
@@ -1864,7 +1839,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape7.points, [
+        XCTAssertEqual(partShape7.points, [
             Point(x: -10, y: 15),
             Point(x: -15, y: 15),
             Point(x: -15, y: 25),
@@ -1876,9 +1851,9 @@ final class BiteTests: XCTestCase {
     }
     
     func test_24() {
-        let data = CutTestData.data[24]
+        let data = ComplexTestData.data[24]
 
-        let solution = data.shape.bite(path: data.path)
+        let solution = data.shape.complexSubtract(path: data.path)
 
         XCTAssertEqual(solution.isInteract, true)
 
@@ -1950,25 +1925,25 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        let biteShape0 = solution.biteList.get(index: 0)
-        let biteShape1 = solution.biteList.get(index: 1)
-        let biteShape2 = solution.biteList.get(index: 2)
+        let partShape0 = solution.partList.get(index: 0)
+        let partShape1 = solution.partList.get(index: 1)
+        let partShape2 = solution.partList.get(index: 2)
         
-        XCTAssertEqual(biteShape0.layouts, [
+        XCTAssertEqual(partShape0.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
-        XCTAssertEqual(biteShape1.layouts, [
+        XCTAssertEqual(partShape1.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true)
         ])
-        XCTAssertEqual(biteShape2.layouts, [
+        XCTAssertEqual(partShape2.layouts, [
             PlainShape.Layout(begin: 0, length: 6, isClockWise: true)
         ])
         
-        XCTAssertEqual(biteShape0.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape1.isClockWise(index: 0), true)
-        XCTAssertEqual(biteShape2.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape0.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape1.isClockWise(index: 0), true)
+        XCTAssertEqual(partShape2.isClockWise(index: 0), true)
         
-        XCTAssertEqual(biteShape0.points, [
+        XCTAssertEqual(partShape0.points, [
             Point(x: -5, y: -10),
             Point(x: -5, y: -15),
             Point(x: -15, y: -15),
@@ -1978,7 +1953,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape1.points, [
+        XCTAssertEqual(partShape1.points, [
             Point(x: -10, y: 0),
             Point(x: -15, y: 0),
             Point(x: -15, y: 5),
@@ -1986,7 +1961,7 @@ final class BiteTests: XCTestCase {
             ].int
         )
         
-        XCTAssertEqual(biteShape2.points, [
+        XCTAssertEqual(partShape2.points, [
             Point(x: 5, y: -15),
             Point(x: 5, y: -10),
             Point(x: 10, y: -10),

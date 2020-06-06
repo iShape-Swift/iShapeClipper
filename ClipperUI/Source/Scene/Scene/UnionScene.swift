@@ -54,10 +54,10 @@ final class UnionScene: CoordinateSystemScene {
     }
     
     private func addShapes() {
-        self.addSolution()
         self.addMaster()
         self.addSlave()
         self.addPins()
+        self.addSolution()
     }
     
     private func addSolution() {
@@ -134,7 +134,6 @@ final class UnionScene: CoordinateSystemScene {
         
         let points = slave.toCGPoints()
 
-        //self.addSublayer(ShapeArea(points: points, color: Colors.slave_second))
         self.addSublayer(ShapeVectorPolygon(points: points, shift: 0, tip: 1, lineWidth: 0.25, color: Colors.slave, indexShift: 2, data: data))
     }
     

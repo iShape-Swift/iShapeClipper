@@ -1,24 +1,24 @@
 //
-//  ComplexCutScene.swift
+//  ComplexUnionScene.swift
 //  ClipperUI
 //
-//  Created by Nail Sharipov on 24.12.2019.
-//  Copyright © 2019 iShape. All rights reserved.
+//  Created by Nail Sharipov on 03.06.2020.
+//  Copyright © 2020 iShape. All rights reserved.
 //
 
 import Cocoa
 import iGeometry
 @testable import iShapeClipper
 
-final class ComplexCutScene: CoordinateSystemScene {
+final class ComplexUnionScene: CoordinateSystemScene {
 
-    private static let indexKey = String(describing: ComplexCutScene.self)
+    private static let indexKey = String(describing: ComplexUnionScene.self)
     
     private var shapePoints: [IntPoint] = []
     private var shapeLayouts: [PlainShape.Layout] = []
     private var path: [IntPoint] = []
     
-    private var pageIndex: Int = UserDefaults.standard.integer(forKey: ComplexCutScene.indexKey)
+    private var pageIndex: Int = UserDefaults.standard.integer(forKey: ComplexUnionScene.indexKey)
 //    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
@@ -54,48 +54,53 @@ final class ComplexCutScene: CoordinateSystemScene {
     }
     
     private func addShapes() {
-        self.addShape()
-        self.addSlave()
-        self.addSolution()
+        let isInteract = self.addSolution()
+        self.addShape(isInteract: isInteract)
+        self.addSlave(isInteract: isInteract)
     }
     
-    private func addSolution() {
+    private func addSolution() -> Bool {
         let plainShape = PlainShape(points: self.shapePoints, layouts: self.shapeLayouts)
-        let iSlave = self.path
-        let solution = plainShape.complexCut(path: iSlave)
+        var iSlave = self.path
+        iSlave.invert()
+        let solution = plainShape.complexUnion(path: iSlave)
 
-        if solution.isInteract {
-            if !solution.mainList.segments.isEmpty {
-                for i in 0..<solution.mainList.segments.count {
-                    let shape = solution.mainList.get(index: i)
-                    let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.shapeFill, strokeColor: Colors.cutTest.shapeStroke, lineWidth: 0.25)
-                    self.addSublayer(layer)
-                }
-            }
-            if !solution.partList.segments.isEmpty {
-                for i in 0..<solution.partList.segments.count {
-                    let shape = solution.partList.get(index: i)
-                    let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.cutTest.bitFill, strokeColor: Colors.cutTest.bitStroke, lineWidth: 0.25)
-                    self.addSublayer(layer)
-                }
-            }
+        switch solution.nature {
+        case .overlap:
+            let shape = solution.pathList
+            let layer = PlainShapeLayer(plainShape: shape, fillColor: Colors.complexTest.shapeFill, strokeColor: Colors.complexTest.shapeStroke, lineWidth: 0.25)
+            self.addSublayer(layer)
+            return true
+        case .masterIncludeSlave:
+            let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.complexTest.shapeFill, strokeColor: Colors.complexTest.shapeStroke, lineWidth: 0.25)
+            self.addSublayer(layer)
+            return true
+        case .slaveIncludeMaster:
+            let layer = PlainShapeLayer(plainShape: PlainShape(points: iSlave), fillColor: Colors.complexTest.shapeFill, strokeColor: Colors.complexTest.shapeStroke, lineWidth: 0.25)
+            self.addSublayer(layer)
+            return true
+        default:
+            return false
         }
+
     }
 
-    private func addShape() {
+    private func addShape(isInteract: Bool) {
         let plainShape = PlainShape(points: self.shapePoints, layouts: self.shapeLayouts)
-        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.masterFill, strokeColor: Colors.cutTest.masterStroke, lineWidth: 0.125)
+        let color = isInteract ? .clear : Colors.complexTest.masterFill
+        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: color, strokeColor: Colors.complexTest.masterStroke, lineWidth: 0.125, dots: isInteract)
         self.addSublayer(layer)
     }
     
-    private func addSlave() {
+    private func addSlave(isInteract: Bool) {
         let plainShape = PlainShape(points: self.path)
-        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: Colors.cutTest.slaveFill, strokeColor: Colors.cutTest.slaveStroke, lineWidth: 0.125)
+        let color = isInteract ? .clear : Colors.complexTest.slaveFill
+        let layer = PlainShapeLayer(plainShape: plainShape, fillColor: color, strokeColor: Colors.complexTest.slaveStroke, lineWidth: 0.125, dots: isInteract)
         self.addSublayer(layer)
     }
 
     func showPage(index: Int) {
-        let data = CutTestData.data[index]
+        let data = ComplexTestData.data[index]
         self.shapePoints = data.shape.points
         self.shapeLayouts = data.shape.layouts
         self.path = data.path
@@ -105,7 +110,7 @@ final class ComplexCutScene: CoordinateSystemScene {
 }
 
 
-extension ComplexCutScene: MouseCompatible {
+extension ComplexUnionScene: MouseCompatible {
     
     private func findNearest(point: IntPoint, points: [IntPoint]) -> Int? {
         var i = 0
@@ -175,19 +180,19 @@ extension ComplexCutScene: MouseCompatible {
     }
 }
 
-extension ComplexCutScene: SceneNavigation {
+extension ComplexUnionScene: SceneNavigation {
     
     func next() {
-        let n = CutTestData.data.count
+        let n = ComplexTestData.data.count
         self.pageIndex = (self.pageIndex + 1) % n
-        UserDefaults.standard.set(pageIndex, forKey: ComplexCutScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: ComplexUnionScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     
     func back() {
-        let n = CutTestData.data.count
+        let n = ComplexTestData.data.count
         self.pageIndex = (self.pageIndex - 1 + n) % n
-        UserDefaults.standard.set(pageIndex, forKey: ComplexCutScene.indexKey)
+        UserDefaults.standard.set(pageIndex, forKey: ComplexUnionScene.indexKey)
         self.showPage(index: self.pageIndex)
     }
     

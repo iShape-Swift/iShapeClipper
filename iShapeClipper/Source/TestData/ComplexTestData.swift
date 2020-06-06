@@ -1,5 +1,5 @@
 //
-//  CutTestData.swift
+//  ComplexTestData.swift
 //  iGeometry
 //
 //  Created by Nail Sharipov on 24.12.2019.
@@ -8,13 +8,18 @@
 import Foundation
 import iGeometry
 
-struct CutTestData {
+struct ComplexTestData {
     
     struct TestData {
         
         let shape: PlainShape
         let path: [IntPoint]
-        
+        var invertPath: [IntPoint] {
+            var path = self.path
+            path.invert()
+            return path
+        }
+
     }
 
     static let data: [TestData] = [

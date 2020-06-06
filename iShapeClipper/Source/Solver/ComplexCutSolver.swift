@@ -7,7 +7,7 @@
 
 import iGeometry
 
-public struct ComplexSolution {
+public struct ComplexSubtractSolution {
     
     let isInteract: Bool
     let mainList: PlainShapeList
@@ -17,7 +17,7 @@ public struct ComplexSolution {
 
 public extension PlainShape {
 
-    func complexCut(path: [IntPoint]) -> ComplexSolution {
+    func complexSubtract(path: [IntPoint]) -> ComplexSubtractSolution {
         let hull = self.get(index: 0)
         
         let solution = Solver.cut(master: hull, slave: path)
@@ -25,9 +25,9 @@ public extension PlainShape {
         switch solution.nature {
  
         case .notOverlap:
-            return ComplexSolution(isInteract: false, mainList: .empty, partList: .empty)
+            return ComplexSubtractSolution(isInteract: false, mainList: .empty, partList: .empty)
         case .slaveIncludeMaster, .equal:
-            return ComplexSolution(isInteract: true, mainList: .empty, partList: PlainShapeList(plainShape: self))
+            return ComplexSubtractSolution(isInteract: true, mainList: .empty, partList: PlainShapeList(plainShape: self))
         case .masterIncludeSlave:
             return self.holeCase(cutPath: path)
         case .overlap:
@@ -36,27 +36,29 @@ public extension PlainShape {
     }
 
     // если дыра находится внутри полигона
-    private func holeCase(cutPath: [IntPoint]) -> ComplexSolution {
+    private func holeCase(cutPath: [IntPoint]) -> ComplexSubtractSolution {
         let n = self.layouts.count
         guard n > 1 else {
             // у исходного полигона нету других дыр
             var main = self
             main.add(path: cutPath, isClockWise: false)
             let biteList = PlainShapeList(plainShape: PlainShape(points: cutPath.reversed()))
-            return ComplexSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), partList: biteList)
+            return ComplexSubtractSolution(isInteract: true, mainList: PlainShapeList(plainShape: main), partList: biteList)
         }
-        
-        let mainList = self.holeCaseMainList(cutPath: cutPath)
-        let biteList = self.holeCaseBiteList(cutPath: cutPath)
-        
-        return ComplexSolution(isInteract: true, mainList: mainList, partList: biteList)
+        var mainList: PlainShapeList = .empty
+        if self.holeCaseMainList(cutPath: cutPath, plainShapeList: &mainList) {
+            let biteList = self.holeCaseBiteList(cutPath: cutPath)
+            return ComplexSubtractSolution(isInteract: true, mainList: mainList, partList: biteList)
+        } else {
+            return ComplexSubtractSolution(isInteract: false, mainList: mainList, partList: .empty)
+        }
     }
     
-    private func overlapCase(solution: CutSolution) -> ComplexSolution {
+    private func overlapCase(solution: CutSolution) -> ComplexSubtractSolution {
         let shapePaths = self.overlapCaseMainList(restPathList: solution.mainPathList)
         let bitList = self.overlapCaseBiteList(bitePathList: solution.partPathList)
         
-        return ComplexSolution(isInteract: true, mainList: shapePaths, partList: bitList)
+        return ComplexSubtractSolution(isInteract: true, mainList: shapePaths, partList: bitList)
     }
     
     private func overlapCaseMainList(restPathList: PlainShape) -> PlainShapeList {
@@ -147,7 +149,7 @@ public extension PlainShape {
     }
     
     
-    private func holeCaseMainList(cutPath: [IntPoint]) -> PlainShapeList {
+    private func holeCaseMainList(cutPath: [IntPoint], plainShapeList: inout PlainShapeList) -> Bool {
         let n = self.layouts.count
         
         // новая дыра
@@ -174,8 +176,8 @@ public extension PlainShape {
             case .masterIncludeSlave, .equal:
                 interactedHoles.append(i)
             case .slaveIncludeMaster:
-                interactedHoles.append(i)
-                rootHole = nextHole
+                plainShapeList = .empty
+                return false
             case .overlap:
                 interactedHoles.append(i)
                 let uShape = union.pathList
@@ -213,7 +215,8 @@ public extension PlainShape {
                 let hole = self.get(index: index)
                 mainShape.add(path: hole, isClockWise: false)
             }
-            return PlainShapeList(plainShape: mainShape)
+            plainShapeList = PlainShapeList(plainShape: mainShape)
+            return true
         }
 
         // вычитаем из внутрениних островков дыры, которые внутри или соприкосались с главной дырой
@@ -278,7 +281,9 @@ public extension PlainShape {
         }
         shapeParts.add(plainShape: rootShape)
         
-        return shapeParts
+        plainShapeList = shapeParts
+        
+        return true
     }
     
     private func holeCaseBiteList(cutPath: [IntPoint]) -> PlainShapeList {

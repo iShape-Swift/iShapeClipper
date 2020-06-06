@@ -157,8 +157,28 @@ final class SimplifyTests: XCTestCase {
         var points = data.points
         points.simplify(isClockWise: data.isClockWise)
         XCTAssertEqual(points, [
-            IntPoint(x: -100000, y: 0),
-            IntPoint(x: 50000, y: 0)
+            IntPoint(x: -100000, y: -150000),
+            IntPoint(x: -200000, y: -150000),
+            IntPoint(x: -200000, y: -100000),
+            IntPoint(x: -150000, y: -100000),
+            IntPoint(x: -150000, y: -50000),
+            IntPoint(x: -200000, y: -50000),
+            IntPoint(x: -200000, y: 0),
+            IntPoint(x: -150000, y: 0),
+            IntPoint(x: -150000, y: 50000),
+            IntPoint(x: -200000, y: 50000),
+            IntPoint(x: -200000, y: 150000),
+            IntPoint(x: 200000, y: 150000),
+            IntPoint(x: 200000, y: 50000),
+            IntPoint(x: 150000, y: 50000),
+            IntPoint(x: 150000, y: 0),
+            IntPoint(x: 200000, y: 0),
+            IntPoint(x: 200000, y: -50000),
+            IntPoint(x: 150000, y: -50000),
+            IntPoint(x: 150000, y: -100000),
+            IntPoint(x: 200000, y: -100000),
+            IntPoint(x: 200000, y: -150000),
+            IntPoint(x: 100000, y: -150000)
         ])
     }
     

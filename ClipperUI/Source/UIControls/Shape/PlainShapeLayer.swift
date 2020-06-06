@@ -11,7 +11,7 @@ import iGeometry
 
 final class PlainShapeLayer: CAShapeLayer {
     
-    init(plainShape: PlainShape, fillColor: CGColor, strokeColor: CGColor, lineWidth: CGFloat) {
+    init(plainShape: PlainShape, fillColor: CGColor, strokeColor: CGColor, lineWidth: CGFloat, dots: Bool = false) {
         super.init()
         
         guard !plainShape.layouts.isEmpty else {
@@ -33,6 +33,9 @@ final class PlainShapeLayer: CAShapeLayer {
 
         self.lineCap = .round
         self.path = path
+        if dots {
+            self.lineDashPattern = [1, 2]
+        }
         self.fillRule = .evenOdd
         self.fillColor = fillColor
         self.strokeColor = strokeColor
