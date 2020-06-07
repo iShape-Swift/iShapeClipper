@@ -20,21 +20,8 @@ public extension PlainShape {
         case .masterIncludeSlave:
             return self.innerCase(unionPath: path)
         case .overlap:
-            for i in 0..<solution.pathList.layouts.count {
-                if solution.pathList.layouts[i].isClockWise {
-                    var plainShape = PlainShape(points: solution.pathList.get(index: i))
-                    for j in 0..<solution.pathList.layouts.count where j != i {
-                        plainShape.add(hole: solution.pathList.get(index: j))
-                    }
-            
-                    return self.overlapCase(plainShape: plainShape, unionPath: path)
-                }
-            }
-            
-            // imposible case
-            return Solution(pathList: .empty, nature: .notOverlap)
+            return self.overlapCase(plainShape: solution.pathList, unionPath: path)
         }
-
     }
 
     // если область находится внутри полигона

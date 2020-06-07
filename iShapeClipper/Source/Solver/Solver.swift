@@ -93,16 +93,16 @@ public struct Solver {
         
         switch nature {
         case .notOverlap, .equal, .masterIncludeSlave, .slaveIncludeMaster:
-            return Solution(pathList: PlainShape.empty, nature: nature)
+            return Solution(pathList: .empty, nature: nature)
         case .overlap:
             let cursor = filterNavigator.first
 
             if cursor.type == .in_out {
                 if master.isContain(path: slave) {
-                    return Solution(pathList: PlainShape.empty, nature: .masterIncludeSlave)
+                    return Solution(pathList: .empty, nature: .masterIncludeSlave)
                 }
                 if slave.isContain(path: master) {
-                    return Solution(pathList: PlainShape.empty, nature: .slaveIncludeMaster)
+                    return Solution(pathList: .empty, nature: .slaveIncludeMaster)
                 }
             }
 

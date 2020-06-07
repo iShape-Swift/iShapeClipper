@@ -12,6 +12,7 @@ extension Solver {
     static func union(navigator aNavigator: FilterNavigator, master: [IntPoint], slave: [IntPoint]) -> PlainShape {
         var filterNavigator = aNavigator
 
+        var holeList = PlainShape.empty
         var pathList = PlainShape.empty
         
         let masterCount = master.count
@@ -142,10 +143,25 @@ extension Solver {
                 }
             } while cursor != start
             
-            let isClockWise = path.isClockWise
-            path.simplify(isClockWise: isClockWise)
-            pathList.add(path: path, isClockWise: isClockWise)
-            
+            path.simplify()
+            if pathList.points.isEmpty {
+                let isClockWise = path.isClockWise
+                if isClockWise {
+                    pathList = PlainShape(points: path)
+                    if !holeList.layouts.isEmpty {
+                        for i in 0..<holeList.layouts.count {
+                            let hole = holeList.get(index: i)
+                            pathList.add(path: hole, isClockWise: false)
+                        }
+                    }
+                    holeList = .empty
+                } else {
+                    holeList.add(path: path, isClockWise: isClockWise)
+                }
+            } else {
+                // can be only one hull
+                pathList.add(path: path, isClockWise: false)
+            }
             cursor = filterNavigator.next()
         }
 

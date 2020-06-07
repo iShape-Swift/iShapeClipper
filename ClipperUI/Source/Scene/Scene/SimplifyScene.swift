@@ -66,7 +66,7 @@ final class SimplifyScene: CoordinateSystemScene {
         
         var simple = self.points
         
-        simple.simplify(isClockWise: true)
+        simple.simplify()
         
         let sPolygon = IntGeom.defGeom.float(points: simple)
         

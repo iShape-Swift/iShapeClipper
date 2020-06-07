@@ -10,7 +10,7 @@ import iGeometry
 extension Array where Element == IntPoint {
     
     
-    mutating func simplify(isClockWise: Bool) {
+    mutating func simplify() {
         var n = self.count
         guard n > 3 else {
             return

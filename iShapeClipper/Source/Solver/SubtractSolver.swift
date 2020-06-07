@@ -137,7 +137,7 @@ extension Solver {
                 }
             } while cursor != start
             
-            path.simplify(isClockWise: true)
+            path.simplify()
             
             pathList.add(path: path, isClockWise: true)
             
