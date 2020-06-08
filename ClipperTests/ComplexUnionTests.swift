@@ -58,7 +58,6 @@ final class ComplexUnionTests: XCTestCase {
             Point(x: -5.0, y: -5.0),
             Point(x: -5.0, y: 5.0),
             Point(x: 5.0, y: 5.0)
-
             ].int
         )
 
@@ -257,7 +256,6 @@ final class ComplexUnionTests: XCTestCase {
             Point(x: 10.0, y: -10.0),
             Point(x: -10.0, y: -10.0),
             Point(x: -10.0, y: 10.0)
-
             ].int
         )
     }
@@ -270,7 +268,7 @@ final class ComplexUnionTests: XCTestCase {
         XCTAssertEqual(solution.nature, .overlap)
         
         let mainShape = solution.pathList
-        
+                
         XCTAssertEqual(mainShape.layouts, [
             PlainShape.Layout(begin: 0, length: 8, isClockWise: true),
             PlainShape.Layout(begin: 8, length: 4, isClockWise: false)
@@ -549,7 +547,7 @@ final class ComplexUnionTests: XCTestCase {
         XCTAssertEqual(solution.nature, .overlap)
         
         let mainShape = solution.pathList
-
+        
         XCTAssertEqual(mainShape.layouts, [
             PlainShape.Layout(begin: 0, length: 16, isClockWise: true),
             PlainShape.Layout(begin: 16, length: 4, isClockWise: false)
@@ -665,7 +663,7 @@ final class ComplexUnionTests: XCTestCase {
         XCTAssertEqual(solution.nature, .overlap)
         
         let mainShape = solution.pathList
-        
+
         XCTAssertEqual(mainShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 12, isClockWise: false),
@@ -909,7 +907,7 @@ final class ComplexUnionTests: XCTestCase {
         XCTAssertEqual(solution.nature, .overlap)
         
         let mainShape = solution.pathList
-        
+
         XCTAssertEqual(mainShape.layouts, [
             PlainShape.Layout(begin: 0, length: 4, isClockWise: true),
             PlainShape.Layout(begin: 4, length: 12, isClockWise: false),
@@ -997,6 +995,30 @@ private extension PlainShape {
                 print("            IntPoint(x: \(p.x), y: \(p.y)),")
             } else {
                 print("            IntPoint(x: \(p.x), y: \(p.y))")
+            }
+        }
+        print("        ])")
+    }
+    
+    func vLog() {
+        for i in 0..<self.points.count {
+            let p = self.points[i]
+            if i + 1 != self.points.count {
+                print("                        new Vector2(\(p.X)f, \(p.Y)f),")
+            } else {
+                print("                        new Vector2(\(p.X)f, \(p.Y)f)")
+            }
+        }
+        print("        ])")
+    }
+    
+    func pLog() {
+        for i in 0..<self.points.count {
+            let p = self.points[i]
+            if i + 1 != self.points.count {
+                print("                        new IntVector(\(p.x), \(p.y)),")
+            } else {
+                print("                        new IntVector(\(p.x), \(p.y))")
             }
         }
         print("        ])")
