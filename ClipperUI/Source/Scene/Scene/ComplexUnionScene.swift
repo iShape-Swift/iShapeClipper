@@ -19,7 +19,6 @@ final class ComplexUnionScene: CoordinateSystemScene {
     private var path: [IntPoint] = []
     
     private var pageIndex: Int = UserDefaults.standard.integer(forKey: ComplexUnionScene.indexKey)
-//    private var pageIndex: Int = 0
     
     private var activeIndex: Int?
     private var isPath: Bool = false
