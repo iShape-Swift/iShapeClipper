@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name                       = 'iShapeClipper'
-  spec.version                    = '0.1.2'
+  spec.version                    = '0.1.3'
   spec.summary                    = 'Clipping polygons'
   spec.authors                    = 'Nail Sharipov'
   spec.source                     = { :git => 'https://github.com/NailxSharipov/iShapeClipper.git', :tag => spec.version.to_s }
