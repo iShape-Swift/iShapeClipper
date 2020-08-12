@@ -36,7 +36,7 @@ let package = Package(
         targets: [
             .target(
                 name: "[your target]",
-                dependencies: ["iShapeTriangulation"])
+                dependencies: ["iShapeClipper"])
         ]
     ]
 )
