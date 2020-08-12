@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name                       = 'iShapeClipper'
-  spec.version                    = '0.0.1'
+  spec.version                    = '0.1.0'
   spec.summary                    = 'Clipping polygons'
   spec.authors                    = 'Nail Sharipov'
   spec.source                     = { :git => 'https://github.com/NailxSharipov/iShapeClipper.git', :tag => spec.version.to_s }
@@ -14,11 +14,11 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target      = '9.0'
   spec.tvos.deployment_target     = '9.0'
+  spec.watchos.deployment_target  = '4.0'
   spec.osx.deployment_target      = '10.9'
 
-  spec.source_files               = 'iShapeClipper/Source/**/*.swift'
+  spec.source_files               = 'Sources/**/*.swift'
 
-
-  spec.dependency                 'iGeometry'
+  spec.dependency                 'iGeometry', '>= 1.7.0'
 
 end
