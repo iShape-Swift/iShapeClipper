@@ -34,7 +34,7 @@ struct PinNavigator {
     // supply array for nodeArray[i].index return PinPoint for this pin
     let pinPointArray: [PinPoint]
     // pinPathArray[nodeArray[i].index] return PinPath for this pin
-    private let pinPathArray: [PinPath]
+    let pinPathArray: [PinPath]
     
     init(slavePath: [Int], pinPathArray: [PinPath], pinPointArray: [PinPoint], nodeArray: [PinNode], hasContacts: Bool, masterBox: Rect, slaveBox: Rect) {
         self.slavePath = slavePath
