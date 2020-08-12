@@ -22,14 +22,18 @@ struct PinNavigator {
     let hasContacts: Bool
     let masterBox: Rect
     let slaveBox: Rect
+    var isEmpty: Bool {
+        self.pinPathArray.isEmpty
+    }
     
     // for s in slavePath { nodeArray[s] }  iterate all pins in counter clockwise order by slave path
     private let slavePath: [Int]
 
+    var nodeArray: [PinNode]
+    
 #if DEBUG
     let pinPathArray: [PinPath]
     let pinPointArray: [PinPoint]
-    var nodeArray: [PinNode]
 #else
     // pinPathArray[nodeArray[i].index] return PinPath for this pin
     private let pinPathArray: [PinPath]

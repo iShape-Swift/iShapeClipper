@@ -20,9 +20,9 @@ struct FilterNavigator {
         
         return .empty
     }
-    
+
     var hasEdge: Bool {
-        return !navigator.pinPathArray.isEmpty
+        return !navigator.isEmpty
     }
     
     init(navigator: PinNavigator, primary: PinPoint.PinType, secondary: PinPoint.PinType) {
