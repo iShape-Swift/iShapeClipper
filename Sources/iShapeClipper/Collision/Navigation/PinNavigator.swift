@@ -29,18 +29,16 @@ struct PinNavigator {
     // for s in slavePath { nodeArray[s] }  iterate all pins in counter clockwise order by slave path
     private let slavePath: [Int]
 
+    // keep info about each pin node, also for n in nodeArray iterate all pins in clockwise order by master path
     var nodeArray: [PinNode]
+    // supply array for nodeArray[i].index return PinPoint for this pin
+    let pinPointArray: [PinPoint]
     
 #if DEBUG
     let pinPathArray: [PinPath]
-    let pinPointArray: [PinPoint]
 #else
     // pinPathArray[nodeArray[i].index] return PinPath for this pin
     private let pinPathArray: [PinPath]
-    // supply array for nodeArray[i].index return PinPoint for this pin
-    private let pinPointArray: [PinPoint]
-    // keep info about each pin node, also for n in nodeArray iterate all pins in clockwise order by master path
-    private var nodeArray: [PinNode]
 #endif
     
     
