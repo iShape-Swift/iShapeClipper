@@ -11,29 +11,38 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-    var window: NSWindow!
-
-
+    
+    final class CustomWindow: NSWindow {
+        
+        var inputSystem: InputSystem?
+        
+        override func keyDown(with: NSEvent) {
+            if !(self.inputSystem?.onKeyDown(keyCode: with.keyCode) ?? false) {
+                super.keyDown(with: with)
+            }
+        }
+    }
+    
+    private var window: CustomWindow?
+    private let colorSchema = ColorSchema()
+    private let inputSystem = InputSystem()
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        
+        let contentView = ContentView().environmentObject(colorSchema).environmentObject(inputSystem)
 
-        // Create the window and set the content view. 
-        window = NSWindow(
+        // Create the window and set the content view.
+        let aWindow = CustomWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered, defer: false)
-        window.center()
-        window.setFrameAutosaveName("Main Window")
-        window.contentView = NSHostingView(rootView: contentView)
-        window.makeKeyAndOrderFront(nil)
+        aWindow.center()
+        aWindow.setFrameAutosaveName("Main Window")
+        aWindow.contentView = NSHostingView(rootView: contentView)
+        aWindow.makeKeyAndOrderFront(nil)
+        aWindow.inputSystem = inputSystem
+        
+        self.window = aWindow
     }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-
-
 }
 
