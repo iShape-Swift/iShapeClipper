@@ -36,7 +36,7 @@ struct MenuRowView: View {
 
 struct MenuRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuRowView(test: .plainMonotone, isSelected: false)
+        MenuRowView(test: .subtract, isSelected: false)
     }
 }
 

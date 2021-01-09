@@ -12,11 +12,13 @@ import iGeometry
 struct DirectedPathView: View {
 
     private struct Vector {
+        let index: Int
         let arrowColor: Color
         let strokeColor: Color
         let arrowPoints: [CGPoint]
         
-        init(start: CGPoint, end: CGPoint, tip: CGFloat, arrowColor: Color, strokeColor: Color) {
+        init(index: Int, start: CGPoint, end: CGPoint, tip: CGFloat, arrowColor: Color, strokeColor: Color) {
+            self.index = index
             self.arrowColor = arrowColor
             self.strokeColor = strokeColor
             
@@ -28,18 +30,12 @@ struct DirectedPathView: View {
             let rightPoint = end + CGPoint(radius: tip, angle: angleRight)
             
             self.arrowPoints = [leftPoint, end, rightPoint]
-            
-            let rightLine = ShapeLine(start: rightPoint, end: end, lineWidth: lineWidth, strokeColor: arrowColor)
-            rightLine.lineCap = .round
-            self.addSublayer(rightLine)
         }
     }
-    
     
     private let points: [CGPoint]
     private let stroke: Color
     private let lineWidth: CGFloat
-    private let index: Int
     private let shift: CGFloat
     private let tip: CGFloat
     private let indexShift: CGFloat
@@ -65,6 +61,9 @@ struct DirectedPathView: View {
         var normal = DirectedPathView.normal(a: screenPoints[n - 2], b: screenPoints[n - 1], c: screenPoints[0])
         var start = screenPoints[n - 1] + self.shift * normal
         
+        var vectors = [Vector]()
+        var indices = [ShapeTextView.Data]()
+        
         for i in 0..<n {
             let a = screenPoints[(i - 1 + n) % n]
             let b = screenPoints[i]
@@ -72,31 +71,25 @@ struct DirectedPathView: View {
             normal = DirectedPathView.normal(a: a, b: b, c: c)
             let end = b + self.shift * normal
             
-            self.addSublayer(ShapeVector(start: start, end: end, tip: tip, lineWidth: lineWidth, strokeColor: color, arrowColor: color))
+            vectors.append(Vector(index: i, start: start, end: end, tip: tip, arrowColor: stroke, strokeColor: stroke))
             start = end
             
             if let data = data {
                 let fontPoint = b + indexShift * normal
                 let text = data[i]
                 
-                let shapeText = ShapeText(text: text, font: font, position: fontPoint, pin: b, lineWidth: 0.1, color: NSColor.black.cgColor, strokeColor: Colors.lightGray)
-                
-                self.addSublayer(shapeText)
+//                let index = ShapeTextView.Data(text: text, font: font, position: fontPoint, pin: b, lineWidth: 0.1, color: .black, strokeColor: .gray)
+//                indices(index)
             }
         }
         
-        
-        
-        
-        
-        
-        
+
         return ZStack {
-            Path { path in
-                path.addLines(screenPoints)
-                path.closeSubpath()
-            }.strokedPath(.init(lineWidth: self.lineWidth)).foregroundColor(self.stroke)
-            Text("\(index)").foregroundColor(self.stroke).position(screenPoints.center)
+            ForEach(vectors, id: \.index) { vector in
+                Path { path in
+                    path.addLines(vector.arrowPoints)
+                }.strokedPath(.init(lineWidth: self.lineWidth)).foregroundColor(self.stroke)
+            }
         }
     }
     

@@ -47,12 +47,13 @@ struct MainView: View {
         self.sceneState.sceneSize = size
         
         let unionScene = UnionSceneView(sceneState: self.sceneState)
+        let subtractScene = SubtractSceneView(sceneState: self.sceneState)
         
         let scene: Scene
         
         switch self.contentState.current {
             case .subtract:
-                scene = unionScene.state
+                scene = subtractScene.state
             case .union:
                 scene = unionScene.state
         }
@@ -63,6 +64,7 @@ struct MainView: View {
         
         return ZStack {
             unionScene.isHidden(self.contentState.current != .union)
+            subtractScene.isHidden(self.contentState.current != .subtract)
         }
     }
     
